@@ -1,0 +1,7 @@
+﻿  Ball.cpp
+  GameManager.cpp
+C:\Users\kevin\source\repos\Mini-Golf\Mini-Golf\GameManager.cpp(6,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating Code...
+GameManager.obj : error LNK2019: unresolved external symbol "public: int __thiscall Ball::getX(void)" (?getX@Ball@@QAEHXZ) referenced in function "public: void __thiscall GameManager::Draw(void)" (?Draw@GameManager@@QAEXXZ)
+GameManager.obj : error LNK2019: unresolved external symbol "public: int __thiscall Ball::getY(void)" (?getY@Ball@@QAEHXZ) referenced in function "public: void __thiscall GameManager::Draw(void)" (?Draw@GameManager@@QAEXXZ)
+C:\Users\kevin\source\repos\Mini-Golf\Debug\Mini-Golf.exe : fatal error LNK1120: 2 unresolved externals
