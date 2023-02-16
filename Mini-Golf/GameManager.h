@@ -3,9 +3,12 @@
 #include <iostream>
 #include <time.h>
 #include <conio.h>
+#include <string>
 #include "Ball.h"
 #include "Hole.h"
 #include "Direction.h"
+
+const int MAX_STRENGTH = 10;
 
 class GameManager 
 {

@@ -12,6 +12,7 @@ int main()
 {
 	GameManager gm(30, 40);
 	gm.Draw();
+	gm.Input();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

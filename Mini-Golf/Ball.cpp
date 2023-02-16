@@ -6,6 +6,7 @@ Ball::Ball(int posX, int posY)
 	originalY = posY;
 	x = posX;
 	y = posY;
+    ball_Strength = 0;
 	direction = STOP;
 }
 void Ball::Reset()
@@ -26,43 +27,51 @@ int Ball::getY()
 {
 	return y;
 }
+int Ball::getBallStrength()
+{
+    return ball_Strength;
+}
+void Ball::setBallStrength(int newStrength)
+{
+    ball_Strength = newStrength;
+}
 inline eDir Ball::getDirection()
 {
 	return direction;
 }
-void Ball::Move(int force)
+void Ball::Move()
 {
 	switch (direction)
 	{
     case STOP:
         break;
     case LEFT:
-        x -= force;
+        x--;
         break;
     case RIGHT:
-        x += force;
+        x++;
         break;
     case UPLEFT:
-        x -= force; 
-        y -= force;
+        x--; 
+        y--;
         break;
     case DOWNLEFT:
-        x -= force; 
-        y += force;
+        x--; 
+        y++;
         break;
     case UPRIGHT:
-        x += force; 
-        y -= force;
+        x++; 
+        y--;
         break;
     case DOWNRIGHT:
-        x += force; 
-        y += force;
+        x++; 
+        y++;
         break;
     case UP:
-        y -= force;
+        y--;
         break;
     case DOWN:
-        y += force;
+        y++;
         break;
     default:
         break;
