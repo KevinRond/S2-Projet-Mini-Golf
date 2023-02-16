@@ -12,7 +12,6 @@ class GameManager
 private:
 	int width, height;
 	int stroke;
-	char up, down, left, right, up_right, down_right, up_left, down_left; 
 	bool quit;
 	Ball* ball;
 	Hole* hole;

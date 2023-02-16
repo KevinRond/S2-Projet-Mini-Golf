@@ -18,11 +18,11 @@ void Ball::changeDirection(eDir d)
 {
 	direction = d;
 }
-inline int Ball::getX()
+int Ball::getX()
 {
 	return x;
 }
-inline int Ball::getY()
+int Ball::getY()
 {
 	return y;
 }

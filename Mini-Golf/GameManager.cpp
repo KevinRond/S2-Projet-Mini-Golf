@@ -9,9 +9,6 @@ GameManager::GameManager(int w, int h)
 	width = w; height = h;
 	ball = new Ball(w / 2, h - 2);
 	hole = new Hole((w / 2) - 1, 5);
-	up = 'w'; down = 's'; left = 'a'; right = 'd';
-	up_left = 'q'; up_right = 'e'; 
-	down_left = 'z'; down_right = 'c'; 
 }
 
 GameManager::~GameManager()
@@ -26,38 +23,56 @@ void GameManager::StrokeUp()
 
 void GameManager::Draw()
 {
-	//system("cls");
+	system("cls");
 	for (int i = 0; i < width + 2; i++)
 	{
 		cout << "\xB2";
 	}
 	cout << endl;
-	for (int i = 0; i < width; i++)
+	for (int i = 0; i < height; i++)
 	{
-		for (int j = 0; j < height; j++)
+		for (int j = 0; j < width; j++)
 		{
 			int ballx = ball->getX();
 			int bally = ball->getY();
 			int holex = hole->getX();
 			int holey = hole->getY();
 
-			if (i == 0)
+			if (j == 0)
 			{
 				cout << "\xB2";
 			}
-			if (ballx == i && bally == j)
+			if (ballx == j && bally == i)
 			{
 				cout << "O";
 			}
-			else if (holex == i && holey == j)
+			else if (holey == i || holey + 3 == i)
 			{
-				hole->printHole();
+				if (j == holex + 1 || j == holex + 2)
+				{
+					cout << "#";
+				}
+				else
+				{
+					cout << " ";
+				}
+			}
+			else if (holey + 1 == i || holey + 2 == i)
+			{
+				if (j == holex || j == holex + 3)
+				{
+					cout << "#";
+				}
+				else
+				{
+					cout << " ";
+				}
 			}
 			else
 			{
 				cout << " ";
 			}
-			if (i == height - 1)
+			if (j == width - 1)
 			{
 				cout << "\xB2";
 			}

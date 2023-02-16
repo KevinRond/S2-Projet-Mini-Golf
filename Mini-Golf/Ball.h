@@ -13,8 +13,8 @@ public:
 	Ball(int posX, int posY);
 	void Reset();
 	void changeDirection(eDir d);
-	inline int getX();
-	inline int getY();
+	int getX();
+	int getY();
 	inline eDir getDirection();
 	void Move(int force);
 	friend std::ostream& operator << (std::ostream& o, Ball ball)
