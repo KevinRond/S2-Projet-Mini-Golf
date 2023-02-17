@@ -5,6 +5,7 @@ GameManager::GameManager(int w, int h)
 {
 	srand(time(NULL));
 	quit = false;
+	score = 0;
 	stroke = 0;
 	width = w; height = h;
 	ball = new Ball(w / 2, h - 2);
@@ -79,10 +80,10 @@ void GameManager::Draw()
 		}
 		cout << endl;
 	}
-	/*for (int i = 0; i < width + 2; i++)
+	for (int i = 0; i < width + 2; i++)
 	{
 		cout << "\xb2";
-	}*/
+	}
 	cout << endl;
 }
 
@@ -134,6 +135,11 @@ void GameManager::Input()
 			ball->changeDirection(DOWNRIGHT);
 			break;
 		}
+		else if (input == "quit")
+		{
+			quit = true;
+			break;
+		}
 		else
 		{
 			cout << "Direction input error, please try again" << endl;
@@ -163,10 +169,106 @@ void GameManager::Logic()
 	int bally = ball->getY();
 	int holex = hole->getX();
 	int holey = hole->getY();
+	ball->Move();
 
+	//Collision with left wall
+	if (ballx == 1)
+	{
+		if (ball->getDirection() == LEFT)
+		{
+			ball->changeDirection(RIGHT);
+		}
+		if (ball->getDirection() == UPLEFT)
+		{
+			ball->changeDirection(UPRIGHT);
+		}
+		if (ball->getDirection() == DOWNLEFT)
+		{
+			ball->changeDirection(DOWNRIGHT);
+		}
+	}
+
+	//Collision with right wall
+	if (ballx == width - 1)
+	{
+		if (ball->getDirection() == RIGHT)
+		{
+			ball->changeDirection(LEFT);
+		}
+		if (ball->getDirection() == UPRIGHT)
+		{
+			ball->changeDirection(UPLEFT);
+		}
+		if (ball->getDirection() == DOWNRIGHT)
+		{
+			ball->changeDirection(DOWNLEFT);
+		}
+	}
+
+	//Collision with top wall
+	if (bally == 1)
+	{
+		if (ball->getDirection() == UP)
+		{
+			ball->changeDirection(DOWN);
+		}
+		if (ball->getDirection() == UPRIGHT)
+		{
+			ball->changeDirection(DOWNRIGHT);
+		}
+		if (ball->getDirection() == UPLEFT)
+		{
+			ball->changeDirection(DOWNLEFT);
+		}
+	}
+
+	//Collision with bottom wall
+	if (bally == height - 1)
+	{
+		if (ball->getDirection() == DOWN)
+		{
+			ball->changeDirection(UP);
+		}
+		if (ball->getDirection() == DOWNLEFT)
+		{
+			ball->changeDirection(UPLEFT);
+		}
+		if (ball->getDirection() == DOWNRIGHT)
+		{
+			ball->changeDirection(UPRIGHT);
+		}
+	}
+
+	//Collision with hole
+	for (int i = 1; i <= 2; i++)
+	{
+		if (ballx == holex + 1 || ballx == holex+2)
+		{
+			if (bally == holey + i)
+			{
+				score++;
+				ball->Reset();
+			}
+		}
+	}
 	
 }
 
 void GameManager::Run()
 {
+	while (!quit)
+	{
+		if (ball->getBallStrength() == 0)
+		{
+			Draw();
+			Input();
+			Logic();
+		}
+		else if (ball->getBallStrength() > 0)
+		{
+			Draw();
+			Logic();
+			ball->setBallStrength(ball->getBallStrength() - 1);
+		}
+	}
 }

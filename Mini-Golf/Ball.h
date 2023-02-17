@@ -17,7 +17,7 @@ public:
 	int getY();
 	int getBallStrength();
 	void setBallStrength(int newStrength);
-	inline eDir getDirection();
+	eDir getDirection();
 	void Move();
 	friend std::ostream& operator << (std::ostream& o, Ball ball)
 	{

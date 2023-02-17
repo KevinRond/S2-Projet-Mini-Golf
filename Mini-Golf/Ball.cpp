@@ -35,7 +35,7 @@ void Ball::setBallStrength(int newStrength)
 {
     ball_Strength = newStrength;
 }
-inline eDir Ball::getDirection()
+eDir Ball::getDirection()
 {
 	return direction;
 }

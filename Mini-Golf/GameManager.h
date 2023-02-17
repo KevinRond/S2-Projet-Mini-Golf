@@ -8,13 +8,13 @@
 #include "Hole.h"
 #include "Direction.h"
 
-const int MAX_STRENGTH = 10;
+const int MAX_STRENGTH = 100;
 
 class GameManager 
 {
 private:
 	int width, height;
-	int stroke;
+	int stroke, score;
 	bool quit;
 	Ball* ball;
 	Hole* hole;
