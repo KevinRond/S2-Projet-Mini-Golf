@@ -22,6 +22,7 @@ public:
 	GameManager(int w, int h);
 	~GameManager();
 	void StrokeUp();
+	void StrokeReset();
 	void Draw();
 	void Input();
 	void Logic();

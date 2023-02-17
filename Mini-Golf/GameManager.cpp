@@ -22,6 +22,11 @@ void GameManager::StrokeUp()
 	stroke++;
 }
 
+void GameManager::StrokeReset()
+{
+	stroke = 0;
+}
+
 void GameManager::Draw()
 {
 	system("cls");
@@ -250,6 +255,7 @@ void GameManager::Logic()
 			{
 				score++;
 				ball->Reset();
+				StrokeReset();
 			}
 		}
 	}
