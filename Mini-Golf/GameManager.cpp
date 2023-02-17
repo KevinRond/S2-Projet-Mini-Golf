@@ -85,6 +85,8 @@ void GameManager::Draw()
 		cout << "\xb2";
 	}
 	cout << endl;
+
+	cout << "Nombre de coup: " << stroke << endl;
 }
 
 void GameManager::Input()
@@ -263,6 +265,7 @@ void GameManager::Run()
 			Draw();
 			Input();
 			Logic();
+			stroke++;
 		}
 		else if (ball->getBallStrength() > 0)
 		{
