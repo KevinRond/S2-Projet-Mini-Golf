@@ -12,7 +12,6 @@ public:
 	int getY();
 	void setX(int posX);
 	void setY(int posY);
-	void printHole();
 };
 
 #endif
