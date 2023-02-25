@@ -6,7 +6,7 @@
 #include <string>
 #include "Ball.h"
 #include "Hole.h"
-#include "Direction.h"
+//#include "Direction.h"
 
 const int MAX_STRENGTH = 100;
 

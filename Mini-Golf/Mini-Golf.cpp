@@ -10,7 +10,7 @@ using namespace std;
 
 int main()
 {
-	GameManager gm(20, 25);
+	GameManager gm(70, 100);
 	gm.Run();
 }
 

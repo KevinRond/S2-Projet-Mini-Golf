@@ -1,23 +1,26 @@
 #ifndef BALL_H
 #define BALL_H
 #include <iostream>
-#include "Direction.h"
+#include <cmath>
+//#include "Direction.h"
 
 class Ball
 {
 private:
-	int x, y, ball_Strength;
+	int x, y;
 	int originalX, originalY;
-	eDir direction;
+	double direction, strength; // direction in degree
 public:
 	Ball(int posX, int posY);
 	void Reset();
-	void changeDirection(eDir d);
+	void setDirection(double new_angle);
 	int getX();
 	int getY();
-	int getBallStrength();
-	void setBallStrength(int newStrength);
-	eDir getDirection();
+	double getStrength();
+	void setStrength(double newStrength);
+	double radToDeg(double rad);
+	double degToRad(double deg);
+	double getDirection();
 	void Move();
 	friend std::ostream& operator << (std::ostream& o, Ball ball)
 	{

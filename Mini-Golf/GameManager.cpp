@@ -96,55 +96,15 @@ void GameManager::Draw()
 
 void GameManager::Input()
 {
-	string input;
+	int input;
 	int strength = 0;
 	while (1)
 	{
-		cout << "Enter direction of shot: ";
+		cout << "Enter angle of shot: ";
 		cin >> input;
-		if (input == "left")
+		if (input >= 0 && input <=360)
 		{
-			ball->changeDirection(LEFT);
-			break;
-		}
-		else if (input == "right")
-		{
-			ball->changeDirection(RIGHT);
-			break;
-		}
-		else if (input == "up")
-		{
-			ball->changeDirection(UP);
-			break;
-		}
-		else if (input == "down")
-		{
-			ball->changeDirection(DOWN);
-			break;
-		}
-		else if (input == "up-left")
-		{
-			ball->changeDirection(UPLEFT);
-			break;
-		}
-		else if (input == "up-right")
-		{
-			ball->changeDirection(UPRIGHT);
-			break;
-		}
-		else if (input == "down-left")
-		{
-			ball->changeDirection(DOWNLEFT);
-			break;
-		}
-		else if (input == "down-right")
-		{
-			ball->changeDirection(DOWNRIGHT);
-			break;
-		}
-		else if (input == "quit")
-		{
-			quit = true;
+			ball->setDirection(input);
 			break;
 		}
 		else
@@ -163,7 +123,7 @@ void GameManager::Input()
 			cout << "Strength input error, please try again" << endl;
 		}
 
-		ball->setBallStrength(strength);
+		ball->setStrength(strength);
 	}
 
 	// cout << "Strength input is: " << strength << endl;
@@ -176,73 +136,44 @@ void GameManager::Logic()
 	int bally = ball->getY();
 	int holex = hole->getX();
 	int holey = hole->getY();
+	double currentAngle = ball->getDirection();
 	ball->Move();
 
 	//Collision with left wall
 	if (ballx == 1)
 	{
-		if (ball->getDirection() == LEFT)
-		{
-			ball->changeDirection(RIGHT);
-		}
-		if (ball->getDirection() == UPLEFT)
-		{
-			ball->changeDirection(UPRIGHT);
-		}
-		if (ball->getDirection() == DOWNLEFT)
-		{
-			ball->changeDirection(DOWNRIGHT);
-		}
+		ball->setDirection(180 - currentAngle);
 	}
 
 	//Collision with right wall
 	if (ballx == width - 1)
 	{
-		if (ball->getDirection() == RIGHT)
-		{
-			ball->changeDirection(LEFT);
-		}
-		if (ball->getDirection() == UPRIGHT)
-		{
-			ball->changeDirection(UPLEFT);
-		}
-		if (ball->getDirection() == DOWNRIGHT)
-		{
-			ball->changeDirection(DOWNLEFT);
-		}
+		ball->setDirection(180 - (90 + currentAngle));
 	}
 
 	//Collision with top wall
 	if (bally == 1)
 	{
-		if (ball->getDirection() == UP)
-		{
-			ball->changeDirection(DOWN);
+		if (currentAngle < 90)
+		{ 
+			ball->setDirection(360 - currentAngle);
 		}
-		if (ball->getDirection() == UPRIGHT)
+		else if (currentAngle > 90)
 		{
-			ball->changeDirection(DOWNRIGHT);
-		}
-		if (ball->getDirection() == UPLEFT)
-		{
-			ball->changeDirection(DOWNLEFT);
+			ball->setDirection(180 + (180 - currentAngle));
 		}
 	}
 
 	//Collision with bottom wall
 	if (bally == height - 1)
 	{
-		if (ball->getDirection() == DOWN)
+		if (currentAngle < 270)
 		{
-			ball->changeDirection(UP);
+			ball->setDirection(180 - (90 + currentAngle));
 		}
-		if (ball->getDirection() == DOWNLEFT)
+		else if (currentAngle > 270)
 		{
-			ball->changeDirection(UPLEFT);
-		}
-		if (ball->getDirection() == DOWNRIGHT)
-		{
-			ball->changeDirection(UPRIGHT);
+			ball->setDirection(180 - currentAngle);
 		}
 	}
 
@@ -266,18 +197,18 @@ void GameManager::Run()
 {
 	while (!quit)
 	{
-		if (ball->getBallStrength() == 0)
+		if (ball->getStrength() == 0)
 		{
 			Draw();
 			Input();
 			Logic();
 			stroke++;
 		}
-		else if (ball->getBallStrength() > 0)
+		else if (ball->getStrength() > 0)
 		{
 			Draw();
 			Logic();
-			ball->setBallStrength(ball->getBallStrength() - 1);
+			ball->setStrength(ball->getStrength() - 1);
 		}
 	}
 }

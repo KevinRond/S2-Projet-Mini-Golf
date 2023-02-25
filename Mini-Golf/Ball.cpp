@@ -6,18 +6,18 @@ Ball::Ball(int posX, int posY)
 	originalY = posY;
 	x = posX;
 	y = posY;
-    ball_Strength = 0;
-	direction = STOP;
+    strength = 0;
+	direction = 90;
 }
 void Ball::Reset()
 {
 	x = originalX;
 	y = originalY;
-	direction = STOP;
+	direction = 90;
 }
-void Ball::changeDirection(eDir d)
+void Ball::setDirection(double new_angle)
 {
-	direction = d;
+	direction = new_angle;
 }
 int Ball::getX()
 {
@@ -27,53 +27,38 @@ int Ball::getY()
 {
 	return y;
 }
-int Ball::getBallStrength()
+double Ball::getStrength()
 {
-    return ball_Strength;
+    return strength;
 }
-void Ball::setBallStrength(int newStrength)
+void Ball::setStrength(double newStrength)
 {
-    ball_Strength = newStrength;
+    strength = newStrength;
 }
-eDir Ball::getDirection()
+double Ball::radToDeg(double rad)
+{
+    double degree;
+    degree = rad * (180 / 3.14159);
+    return degree;
+}
+double Ball::degToRad(double deg)
+{
+	double rad;
+	rad = deg * 3.14159 / 180;
+	return rad;
+}
+double Ball::getDirection()
 {
 	return direction;
 }
 void Ball::Move()
 {
-	switch (direction)
-	{
-    case STOP:
-        break;
-    case LEFT:
-        x--;
-        break;
-    case RIGHT:
-        x++;
-        break;
-    case UPLEFT:
-        x--; 
-        y--;
-        break;
-    case DOWNLEFT:
-        x--; 
-        y++;
-        break;
-    case UPRIGHT:
-        x++; 
-        y--;
-        break;
-    case DOWNRIGHT:
-        x++; 
-        y++;
-        break;
-    case UP:
-        y--;
-        break;
-    case DOWN:
-        y++;
-        break;
-    default:
-        break;
-	}
+	double newX, newY;
+	newX = strength * cos(degToRad(direction));
+	newY = strength * sin(degToRad(direction));
+
+	x = originalX + round(newX);
+	y = originalY + round(newY);
+	originalX = x;
+	originalY = y;
 }
