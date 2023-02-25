@@ -10,8 +10,21 @@ using namespace std;
 
 int main()
 {
-	GameManager gm(70, 100);
+	GameManager gm(25, 30);
 	gm.Run();
+
+
+
+	//Test ball.Move()
+
+	/*Ball ball(0, 0);
+	cout << ball << endl;
+	ball.setStrength(5);
+	ball.Move();
+	cout << ball << endl;
+	ball.setDirection(45);
+	ball.Move();
+	cout << ball << endl;*/
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

@@ -52,13 +52,35 @@ double Ball::getDirection()
 	return direction;
 }
 void Ball::Move()
-{
-	double newX, newY;
-	newX = strength * cos(degToRad(direction));
-	newY = strength * sin(degToRad(direction));
+{	// Valeurs x, y du vecteur de frappe selon sa force et son angle
+	double hitX, hitY; 
+	hitX = strength * cos(degToRad(direction));
+	hitY = -(strength * sin(degToRad(direction)));
 
-	x = originalX + round(newX);
-	y = originalY + round(newY);
+	// Valeurs x, y futur de la balle selon sa position initiale et le coup frappe
+	double newX = originalX + round(hitX);
+	double newY = originalY + round(hitY);
+
+	while (x != newX || y != newY)
+	{
+		if (x < newX)
+		{
+			x++;
+		}
+		else if (x > newX)
+		{
+			x--;
+		}
+		if (y < newY)
+		{
+			y++;
+		}
+		else if (y > newY)
+		{
+			y--;
+		}
+	}
+
 	originalX = x;
 	originalY = y;
 }
