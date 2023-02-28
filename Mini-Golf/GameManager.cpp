@@ -143,12 +143,14 @@ void GameManager::Logic()
 	if (ballx == 1)
 	{
 		ball->setDirection(180 - currentAngle);
+		ball->setnewX(-(ball->getnewX() - ballx));
 	}
 
 	//Collision with right wall
 	if (ballx == width - 1)
 	{
 		ball->setDirection(180 - (90 + currentAngle));
+		ball->setnewX(ballx - (ball->getnewX() - ballx));
 	}
 
 	//Collision with top wall
@@ -162,6 +164,7 @@ void GameManager::Logic()
 		{
 			ball->setDirection(180 + (180 - currentAngle));
 		}
+		ball->setnewY(-(ball->getnewY() - bally));
 	}
 
 	//Collision with bottom wall
@@ -175,6 +178,7 @@ void GameManager::Logic()
 		{
 			ball->setDirection(180 - currentAngle);
 		}
+		ball->setnewY(bally-(ball->getnewY() - bally));
 	}
 
 	//Collision with hole

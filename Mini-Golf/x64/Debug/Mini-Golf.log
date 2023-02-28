@@ -1,2 +1,8 @@
-﻿  Mini-Golf.cpp
+﻿  Ball.cpp
+C:\Users\kevin\Documents\GitHub\S2-Projet-Mini-Golf\Mini-Golf\Ball.cpp(97,18): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\kevin\Documents\GitHub\S2-Projet-Mini-Golf\Mini-Golf\Ball.cpp(98,18): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  GameManager.cpp
+C:\Users\kevin\Documents\GitHub\S2-Projet-Mini-Golf\Mini-Golf\GameManager.cpp(6,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Mini-Golf.cpp
+  Generating Code...
   Mini-Golf.vcxproj -> C:\Users\kevin\Documents\GitHub\S2-Projet-Mini-Golf\x64\Debug\Mini-Golf.exe

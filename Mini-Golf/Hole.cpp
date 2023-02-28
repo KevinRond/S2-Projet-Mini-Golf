@@ -3,26 +3,26 @@ using namespace std;
 
 Hole::Hole(int posX, int posY)
 {
-	x = posX;
-	y = posY;
+	position.x = posX;
+	position.y = posY;
 }
 
 int Hole::getX()
 {
-	return x;
+	return position.x;
 }
 
 int Hole::getY()
 {
-	return y;
+	return position.y;
 }
 
 void Hole::setX(int posX)
 {
-	x = posX;
+	position.x = posX;
 }
 
 void Hole::setY(int posY)
 {
-	y = posY;
+	position.y = posY;
 }

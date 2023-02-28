@@ -2,17 +2,21 @@
 
 Ball::Ball(int posX, int posY)
 {
-	originalX = posX;
-	originalY = posY;
-	x = posX;
-	y = posY;
+	initialX = posX;
+	initialY = posY;
+	resetX = posX;
+	resetY = posY;
+	position.x = posX;
+	position.y = posY;
+	newX = 0;
+	newY = 0;
     strength = 0;
 	direction = 90;
 }
 void Ball::Reset()
 {
-	x = originalX;
-	y = originalY;
+	position.x = resetX;
+	position.y = resetY;
 	direction = 90;
 }
 void Ball::setDirection(double new_angle)
@@ -21,11 +25,35 @@ void Ball::setDirection(double new_angle)
 }
 int Ball::getX()
 {
-	return x;
+	return position.x;
 }
 int Ball::getY()
 {
-	return y;
+	return position.y;
+}
+void Ball::setX(int posX)
+{
+	position.x = posX;
+}
+void Ball::setY(int posY)
+{
+	position.y = posY;
+}
+int Ball::getnewX()
+{
+	return newX;
+}
+int Ball::getnewY()
+{
+	return newY;
+}
+void Ball::setnewX(int posX)
+{
+	newX = posX;
+}
+void Ball::setnewY(int posY)
+{
+	newY = posY;
 }
 double Ball::getStrength()
 {
@@ -47,6 +75,14 @@ double Ball::degToRad(double deg)
 	rad = deg * 3.14159 / 180;
 	return rad;
 }
+double Ball::calculateAdjacent()
+{
+	return strength * cos(degToRad(direction));
+}
+double Ball::calculateOpposite()
+{
+	return -(strength * sin(degToRad(direction)));
+}
 double Ball::getDirection()
 {
 	return direction;
@@ -54,33 +90,33 @@ double Ball::getDirection()
 void Ball::Move()
 {	// Valeurs x, y du vecteur de frappe selon sa force et son angle
 	double hitX, hitY; 
-	hitX = strength * cos(degToRad(direction));
-	hitY = -(strength * sin(degToRad(direction)));
+	hitX = calculateAdjacent();
+	hitY = calculateOpposite();
 
 	// Valeurs x, y futur de la balle selon sa position initiale et le coup frappe
-	double newX = originalX + round(hitX);
-	double newY = originalY + round(hitY);
+	newX = initialX + round(hitX);
+	newY = initialY + round(hitY);
 
-	while (x != newX || y != newY)
+	while (position.x != newX || position.y != newY)
 	{
-		if (x < newX)
+		if (position.x < newX)
 		{
-			x++;
+			position.x++;
 		}
-		else if (x > newX)
+		else if (position.x > newX)
 		{
-			x--;
+			position.x--;
 		}
-		if (y < newY)
+		if (position.y < newY)
 		{
-			y++;
+			position.y++;
 		}
-		else if (y > newY)
+		else if (position.y > newY)
 		{
-			y--;
+			position.y--;
 		}
 	}
 
-	originalX = x;
-	originalY = y;
+	initialX = position.x;
+	initialY = position.y;
 }
