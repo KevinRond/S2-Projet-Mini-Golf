@@ -1,11 +1,12 @@
 #ifndef HOLE_H
 #define HOLE_H
 #include <iostream>
+#include "Coordinates.h"
 
 class Hole
 {
 private: 
-	int x, y;
+	Coordinates position;
 public:
 	Hole(int posX, int posY);
 	int getX();

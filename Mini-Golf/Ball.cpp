@@ -97,7 +97,7 @@ void Ball::Move()
 	newX = initialX + round(hitX);
 	newY = initialY + round(hitY);
 
-	while (position.x != newX || position.y != newY)
+	//while (position.x != newX || position.y != newY)
 	{
 		if (position.x < newX)
 		{
@@ -116,6 +116,7 @@ void Ball::Move()
 			position.y--;
 		}
 	}
+	/*La fonction logic call move seulement une fois, donc meme si elle change */
 
 	initialX = position.x;
 	initialY = position.y;
