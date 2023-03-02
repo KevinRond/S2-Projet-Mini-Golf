@@ -5,13 +5,15 @@
 #include "GameManager.h"
 #include "Ball.h"
 #include "Hole.h"
+#include "Terrain.h"
 
 using namespace std;
 
 int main()
 {
-	GameManager gm(20, 25);
-	gm.Run();
+	//GameManager gm(20, 25);
+	//gm.Run();
+	Terrain Terrain1;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
