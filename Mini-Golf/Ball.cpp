@@ -39,6 +39,14 @@ void Ball::setY(int posY)
 {
 	position.y = posY;
 }
+void Ball::setinitialX(int posX)
+{
+	initialX = posX;
+}
+void Ball::setinitialY(int posY)
+{
+	initialY = posY;
+}
 int Ball::getnewX()
 {
 	return newX;

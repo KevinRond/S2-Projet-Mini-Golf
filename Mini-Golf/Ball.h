@@ -20,6 +20,8 @@ public:
 	int getY();
 	void setX(int posX);
 	void setY(int posY);
+	void setinitialX(int posX);
+	void setinitialY(int posY);
 	int getnewX();
 	int getnewY();
 	void setnewX(int posX);

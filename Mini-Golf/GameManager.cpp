@@ -32,7 +32,7 @@ void GameManager::Draw()
 	system("cls");
 	for (int i = 0; i < width + 2; i++)
 	{
-		cout << "\xB2";
+		cout << "|";
 	}
 	cout << endl;
 	for (int i = 0; i < height; i++)
@@ -46,7 +46,7 @@ void GameManager::Draw()
 
 			if (j == 0)
 			{
-				cout << "\xB2";
+				cout << "|";
 			}
 			if (ballx == j && bally == i)
 			{
@@ -80,14 +80,14 @@ void GameManager::Draw()
 			}
 			if (j == width - 1)
 			{
-				cout << "\xB2";
+				cout << "|";
 			}
 		}
 		cout << endl;
 	}
 	for (int i = 0; i < width + 2; i++)
 	{
-		cout << "\xb2";
+		cout << "|";
 	}
 	cout << endl;
 
@@ -132,37 +132,64 @@ void GameManager::Input()
 
 void GameManager::Logic()
 {
+	ball->Move();
 	int ballx = ball->getX();
 	int bally = ball->getY();
 	int holex = hole->getX();
 	int holey = hole->getY();
 	double currentAngle = ball->getDirection();
-	ball->Move();
+	
 
 	//Collision with left wall
 	if (ballx == 1)
 	{
-		ball->setDirection(180 - currentAngle);
+		if (currentAngle == 90)
+		{
+			ball->setDirection(270);
+		}
+		else if (currentAngle == 270)
+		{
+			ball->setDirection(90);
+		}
+		else
+		{
+			ball->setDirection(180 - currentAngle);
+		}
 		//ball->setnewX(-(ball->getnewX() - ballx));
 	}
 
 	//Collision with right wall
 	if (ballx == width - 1)
 	{
-		ball->setDirection(180 - (90 + currentAngle));
+		if (currentAngle == 90)
+		{
+			ball->setDirection(270);
+		}
+		else if (currentAngle == 270)
+		{
+			ball->setDirection(90);
+		}
+		else
+		{
+			ball->setDirection(180 - currentAngle);
+		}
 		//ball->setnewX(ballx - (ball->getnewX() - ballx));
 	}
 
 	//Collision with top wall
 	if (bally == 1)
 	{
-		if (currentAngle < 90)
-		{ 
-			ball->setDirection(360 - currentAngle);
-		}
-		else if (currentAngle > 90)
+		if (currentAngle == 90)
 		{
-			ball->setDirection(180 + (180 - currentAngle));
+			ball->setDirection(270);
+		}
+		else if (currentAngle == 270)
+		{
+			ball->setDirection(90);
+		}
+		else
+		{
+			ball->setDirection(180 - currentAngle);
 		}
 		//ball->setnewY(-(ball->getnewY() - bally));
 	}
@@ -170,11 +197,15 @@ void GameManager::Logic()
 	//Collision with bottom wall
 	if (bally == height - 1)
 	{
-		if (currentAngle < 270)
+		if (currentAngle == 90)
 		{
-			ball->setDirection(180 - (90 + currentAngle));
+			ball->setDirection(270);
 		}
-		else if (currentAngle > 270)
+		else if (currentAngle == 270)
+		{
+			ball->setDirection(90);
+		}
+		else
 		{
 			ball->setDirection(180 - currentAngle);
 		}
@@ -203,9 +234,10 @@ void GameManager::Run()
 	{
 		if (ball->getStrength() == 0)
 		{
+			//ball->setinitialX(ball->getX());
+			//ball->setinitialY(ball->getY());
 			Draw();
 			Input();
-			Logic();
 			stroke++;
 		}
 		else if (ball->getStrength() > 0)
