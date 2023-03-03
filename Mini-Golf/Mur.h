@@ -3,14 +3,18 @@
 #include "Terrain.h"
 #include "Ball.h"
 #include "Interraction.h"
+using namespace std;
 class Mur
 {
 private:
-	double Mur; //0:x, 1:y, 2:b, 3:dX, 4:fX, 5:dY, 6:fY
-				 //0,1,2`: Y=X+b   avec 3,4 début fin de sa composante X et 5,6 de sa composante Y
+	double pointsA[2];
+	double pointsB[2];
 public:
-
+	Mur(double AX, double AY, double BX, double BY);
+	~Mur();
 	Interraction VerrifierColision(Ball ball); //Recoit l'objet ball et détermine s'il y a une intéraction si non retour nul
+	Mur* Get();
+	void Display();
 };
 
 #endif

@@ -5,6 +5,7 @@
 #include "Hole.h"
 #include "Interraction.h"
 #include "Mur.h"
+
 /*
 LA classe Terrain possède un tableau qui contiendra les éléments du terrain comme les murs, les trous, le point de départ.
 Elle cherche dans un fichier txt les composantes qui constituront le terrain.
@@ -17,16 +18,18 @@ using namespace std;
 class Terrain
 {
 private:
-	int nbMur = 0;
-	Hole hole;				//Trou du terrain
-	Mur TableauMur;	//tableau pointeur des murs du terrain
+	int nbMur;
+	//Hole hole;				//Trou du terrain
+	Mur *TableauMur[50];	//tableau pointeur des murs du terrain
 
 public:
 	Terrain();
+	~Terrain();
+
 	bool OpenTerrain(); //charge le terrain via fichier
 	Interraction VerrifierColision(Ball ball); //Doit virifié l'intéraction avec son trou ou l'un de ses murs.
 	void Display(); //affiche le terrain
-	
+
 
 };
 
