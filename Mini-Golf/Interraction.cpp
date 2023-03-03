@@ -1,15 +1,10 @@
-#ifndef INTERRACTION_CPP
-#define INTERRACTION_CPP
 #include "Interraction.h"
 using namespace std;
 /*
-La classe intéraction caractérisera une intéraction entre 2 objets
+La classe interaction caracterisera une interaction entre 2 objets
 Ex: Ball avec Mur,Trou,Sable,glace
 On est dans un monde de mini-put, on peux faire s'quon veux...
 */
-
-
-#endif
 
 Interraction::Interraction()
 {
@@ -46,4 +41,3 @@ double Interraction::Module()
 {
 	return 0.0;
 }
-

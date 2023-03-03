@@ -31,12 +31,16 @@ Mur::~Mur()
 
 void Mur::Display()
 {
-	cout << "Mur Coor A: " << to_string(points[0]) << "," << to_string(points[1]) << endl;
-	cout << "Mur Coor B: " << to_string(points[2]) << "," << to_string(points[3]) << endl;
-
+	cout << "Mur Coor A: " << this->Get(0) << "," << this->Get(1) << endl;
+	cout << "Mur Coor B: " << this->Get(2) << "," << this->Get(3) << endl;
 }
 
 Mur *Mur::Get()
 {
 	return this;
+}
+
+double Mur::Get(int x)
+{
+	return points[x];
 }

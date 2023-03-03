@@ -1,10 +1,20 @@
 #include "Hole.h"
 using namespace std;
 
+Hole::Hole()
+{
+	x = 0.0;
+	y = 0.0;
+}
+
 Hole::Hole(int posX, int posY)
 {
 	x = posX;
 	y = posY;
+}
+
+Hole::~Hole()
+{
 }
 
 int Hole::getX()
@@ -17,12 +27,18 @@ int Hole::getY()
 	return y;
 }
 
-void Hole::setX(int posX)
+void Hole::setXY(double posX, double posY)
 {
 	x = posX;
+	y = posY;
 }
 
-void Hole::setY(int posY)
+Hole* Hole::get()
 {
-	y = posY;
+	return this;
+}
+
+void Hole::Display()
+{
+	cout << "Trou location : (" << x << "," << y << ")" << endl;
 }

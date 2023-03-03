@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Mini-Golf"
+    "\\deleted",
+    "\\Mini-Golf",
+    "\\x64"
   ],
-  "SelectedNode": "\\Mini-Golf\\Hole.h",
+  "SelectedNode": "\\Mini-Golf\\Mini-Golf.cpp",
   "PreviewInSolutionExplorer": false
 }

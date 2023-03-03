@@ -1,14 +1,15 @@
 #include <iostream>
 #include <fstream>
+#include <string>
 #include "Terrain.h"
 using namespace std;
 /*
-LA classe Terrain possède un tableau qui contiendra les éléments du terrain comme les murs, les trous, le point de départ.
+LA classe Terrain possede un tableau qui contiendra les elements du terrain comme les murs, les trous, le point de depart.
 Elle cherche dans un fichier txt les composantes qui constituront le terrain.
-Lors que la balle est en mouvement, cette classe ira trouver avec laquel de ses composantes (trou, mur) elle intéragit
+Lors que la balle est en mouvement, cette classe ira trouver avec laquel de ses composantes (trou, mur) elle interagit
 Celle-ci retourne un objet Interraction qui seront les nouvelles "instructions" que la la balle devra suivre.
-La classe retournera toujours un objet Interaction avec une coordonnée X,Y
-La classe Ball sera responsable de de savoir si elle atteint cette position dépendament de sa velossité
+La classe retournera toujours un objet Interaction avec une coordonnee X,Y
+La classe Ball sera responsable de de savoir si elle atteint cette position dependament de sa velossite
 */
 
 //	int nbMur = 0;
@@ -27,16 +28,26 @@ Terrain::~Terrain()
 }
 
 
-bool Terrain::OpenTerrain()
+Terrain *Terrain::OpenTerrain()
 {
+	/* POUR VOIR OU CA LECRIT (REPERTOIRE DE TRAVAIL)
+	ofstream outFile;
+	outFile.open("Terrain3.txt", ios_base::out);
+	if (outFile.is_open()) // check if open() succeeded
+	{
+		cout << "opened" << endl;
+		outFile.close();
+	}*/
+
+
 	ifstream myFile;
 	myFile.open("Terrain1.txt", ios_base::in);
-	bool Coor = false; //Opérateur qui détermine si X ou Y, si false c'est un X, si true c'est Y
-	string lineContents; //contenu de la ligne complète
-	char separatorXY = ','; //séparateur XY (X,Y)
-	char separatorCoor = ';'; //séparateur de point (X,Y);(X,Y)
+	bool Coor = false; //Operateur qui determine si X ou Y, si false c'est un X, si true c'est Y
+	string lineContents; //contenu de la ligne complete
+	char separatorXY = ','; //separateur XY (X,Y)
+	char separatorCoor = ';'; //separateur de point (X,Y);(X,Y)
 	int i = 0;
-	string ptt; //pour accumulation de carractère
+	string ptt; //pour accumulation de carractere
 	double Coor1[2];
 	double Coor2[2];
 	Coor2[0]=-1.0;
@@ -61,9 +72,10 @@ bool Terrain::OpenTerrain()
 					{
 						Mur *MurTemp = new Mur;
 						MurTemp->Set(Coor1[0], Coor1[1], Coor2[0], Coor2[1]);
-						TableauMur[nbMur] = MurTemp->Get();	//création d'objet mur
+						TableauMur[nbMur] = MurTemp->Get();	//creation d'objet mur
 						nbMur++;
 						MurTemp->Display();
+						cout << "Mur #" << nbMur << " ajoute" << endl;
 					}
 					Coor2[0] = Coor1[0];
 					Coor2[1] = Coor1[1];
@@ -73,12 +85,16 @@ bool Terrain::OpenTerrain()
 					Ball* BalleTemp = new Ball;
 					BalleTemp->setXY(Coor1[0], Coor1[1]);
 					balle1 = BalleTemp->get();
-					nbMur++;
 					BalleTemp->Display();
+					cout << "Depart de balle a " << BalleTemp->get() << " ajoute" << endl;
 				}
 				else if (lineContents[i] == 'T')
 				{
-				
+					Hole* HoleTemp = new Hole;
+					HoleTemp->setXY(Coor1[0], Coor1[1]);
+					hole1 = HoleTemp->get();
+					HoleTemp->Display();
+					cout << "Le trou du parcours est a " << HoleTemp->get() << " ajoute" << endl;
 				}
 				else
 				{
@@ -94,10 +110,10 @@ bool Terrain::OpenTerrain()
 		}
 
 		myFile.close();
-		return true;
+		return this;
 	}
 
-	return false;
+	return this;
 }
 
 
@@ -108,4 +124,10 @@ Interraction Terrain::VerrifierColision(Ball ball)
 
 void Terrain::Display()
 {
+	for (int i = 0; i < nbMur; i++) {
+		cout << "Mur # " << i+1 << "/" << nbMur << endl;
+		TableauMur[i]->Display();
+	}
+	balle1->Display();
+	hole1->Display();
 }

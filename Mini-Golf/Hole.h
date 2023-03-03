@@ -1,17 +1,20 @@
 #ifndef HOLE_H
 #define HOLE_H
 #include <iostream>
-#include "Terrain.h"
+
 class Hole
 {
 private: 
 	int x, y;
 public:
+	Hole();
 	Hole(int posX, int posY);
+	~Hole();
 	int getX();
 	int getY();
-	void setX(int posX);
-	void setY(int posY);
+	void setXY(double posX, double posY);
+	Hole* get();
+	void Display();
 };
 
 #endif
