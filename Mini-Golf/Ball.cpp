@@ -1,6 +1,16 @@
 #include "Ball.h"
-
-Ball::Ball(int posX, int posY)
+using namespace std;
+Ball::Ball()
+{
+    originalX = 0;
+    originalY = 0;
+    x = 0;
+    y = 0;
+    ball_Strength = 0;
+    direction = STOP;
+}
+Ball::~Ball(){}
+Ball::Ball(double posX, double posY)
 {
 	originalX = posX;
 	originalY = posY;
@@ -19,15 +29,28 @@ void Ball::changeDirection(eDir d)
 {
 	direction = d;
 }
-int Ball::getX()
+void Ball::setXY(double posX, double posY)
+{
+    originalX = posX;
+    originalY = posY;
+    x = posX;
+    y = posY;
+    ball_Strength = 0;
+    direction = STOP;
+}
+void Ball::get()
+{
+    //return this;
+}
+double Ball::getX()
 {
 	return x;
 }
-int Ball::getY()
+double Ball::getY()
 {
 	return y;
 }
-int Ball::getBallStrength()
+double Ball::getBallStrength()
 {
     return ball_Strength;
 }
@@ -40,7 +63,7 @@ eDir Ball::getDirection()
 	return direction;
 }
 void Ball::Move()
-{
+{/*
 	switch (direction)
 	{
     case STOP:
@@ -75,5 +98,12 @@ void Ball::Move()
         break;
     default:
         break;
-	}
+	}*/
+}
+
+void Ball::Display()
+{
+    cout << "Balle location : " << to_string(x) << "," << to_string(y) << endl;
+    cout << "Velocity : " << to_string(ball_Strength) << endl;
+
 }

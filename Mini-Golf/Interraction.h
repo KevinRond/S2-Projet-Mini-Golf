@@ -15,12 +15,12 @@ private:
 	double Fac = 1; //Facteur d'influence, peux être utilisé pour diminué ou augmenté la vitesse suite à une intéraction
 	
 public:
-	int Interaction(); //lors de sa construction l'objet doit déterminé sa location X,Y son angle d'incidence et déterminer un facteur
-
-	double InteractionX(); //Retourne le lieux X de l'intéraction
-	double InteractionY(); //Retourne le lieux Y de l'intéraction
-	double InteractionAngle(); //Retourne l'angle d'incidence
-	double InteractionFac(); //Retourne le facteur d'influence
+	Interraction(); //lors de sa construction l'objet doit déterminé sa location X,Y son angle d'incidence et déterminer un facteur
+	~Interraction();
+	double InterractionX(); //Retourne le lieux X de l'intéraction
+	double InterractionY(); //Retourne le lieux Y de l'intéraction
+	double InterractionAngle(); //Retourne l'angle d'incidence
+	double InterractionFac(); //Retourne le facteur d'influence
 	double Module(); //Retour la distance en les 2 objets en intéraction
 };
 

@@ -1,7 +1,7 @@
 #ifndef HOLE_H
 #define HOLE_H
 #include <iostream>
-
+#include "Terrain.h"
 class Hole
 {
 private: 

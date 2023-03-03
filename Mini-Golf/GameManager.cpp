@@ -1,4 +1,5 @@
 #include "GameManager.h"
+
 using namespace std;
 
 GameManager::GameManager(int w, int h)
@@ -8,13 +9,13 @@ GameManager::GameManager(int w, int h)
 	score = 0;
 	stroke = 0;
 	width = w; height = h;
-	ball = new Ball(w / 2, h - 2);
-	hole = new Hole((w / 2) - 1, 5);
+	//ball = new Ball(w / 2, h - 2);
+	//hole = new Hole((w / 2) - 1, 5);
 }
 
 GameManager::~GameManager()
 {
-	delete ball, hole;
+	//delete ball, hole;
 }
 
 void GameManager::StrokeUp()
@@ -28,7 +29,7 @@ void GameManager::StrokeReset()
 }
 
 void GameManager::Draw()
-{
+{/*
 	system("cls");
 	for (int i = 0; i < width + 2; i++)
 	{
@@ -39,11 +40,11 @@ void GameManager::Draw()
 	{
 		for (int j = 0; j < width; j++)
 		{
-			int ballx = ball->getX();
-			int bally = ball->getY();
-			int holex = hole->getX();
-			int holey = hole->getY();
-
+			double ballx = ball->getX();
+			double bally = ball->getY();
+			double holex = hole->getX();
+			double holey = hole->getY();
+			
 			if (j == 0)
 			{
 				cout << "\xB2";
@@ -91,11 +92,11 @@ void GameManager::Draw()
 	}
 	cout << endl;
 
-	cout << "Nombre de coup: " << stroke << endl;
+	cout << "Nombre de coup: " << stroke << endl;*/
 }
 
 void GameManager::Input()
-{
+{/*
 	string input;
 	int strength = 0;
 	while (1)
@@ -167,15 +168,15 @@ void GameManager::Input()
 	}
 
 	// cout << "Strength input is: " << strength << endl;
-
+	*/
 }
 
 void GameManager::Logic()
-{
-	int ballx = ball->getX();
-	int bally = ball->getY();
-	int holex = hole->getX();
-	int holey = hole->getY();
+{/*
+	double ballx = ball->getX();
+	double bally = ball->getY();
+	double holex = hole->getX();
+	double holey = hole->getY();
 	ball->Move();
 
 	//Collision with left wall
@@ -254,17 +255,17 @@ void GameManager::Logic()
 			if (bally == holey + i)
 			{
 				score++;
-				ball->Reset();
+				//ball->Reset();
 				StrokeReset();
 			}
 		}
-	}
+	}*/
 	
 }
 
 void GameManager::Run()
 {
-	while (!quit)
+	/*while (!quit)
 	{
 		if (ball->getBallStrength() == 0)
 		{
@@ -279,5 +280,5 @@ void GameManager::Run()
 			Logic();
 			ball->setBallStrength(ball->getBallStrength() - 1);
 		}
-	}
+	}*/
 }

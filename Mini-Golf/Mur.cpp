@@ -1,26 +1,38 @@
 #include "Mur.h"
+using namespace std;
+Mur::Mur()
+{
+}
 
 Mur::Mur(double AX, double AY, double BX, double BY)
 {
-	pointsA[0] = AX;
-	pointsA[1] = AY;
-	pointsB[0] = BX;
-	pointsB[1] = BY;
+	points[0] = AX;
+	points[1] = AY;
+	points[2] = BX;
+	points[3] = BY;
+}
+
+void Mur::Set(double AX, double AY, double BX, double BY)
+{
+	points[0] = AX;
+	points[1] = AY;
+	points[2] = BX;
+	points[3] = BY;
 }
 
 Mur::~Mur()
 {
 }
 
-Interraction Mur::VerrifierColision(Ball ball)
+/*Interraction* Mur::VerrifierColision(Ball balle)
 {
-	return Interraction();
-}
+	return NULL;//Interraction();
+}*/
 
 void Mur::Display()
 {
-	cout << "Mur Coor A: " << to_string(pointsA[0]) << "," << to_string(pointsA[1]) << endl;
-	cout << "Mur Coor B: " << to_string(pointsB[0]) << "," << to_string(pointsB[1]) << endl;
+	cout << "Mur Coor A: " << to_string(points[0]) << "," << to_string(points[1]) << endl;
+	cout << "Mur Coor B: " << to_string(points[2]) << "," << to_string(points[3]) << endl;
 
 }
 

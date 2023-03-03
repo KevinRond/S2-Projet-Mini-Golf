@@ -2,9 +2,10 @@
 #define TERRAIN_H
 #include <iostream>
 #include <fstream>
+#include "Mur.h"
+#include "Ball.h"
 #include "Hole.h"
 #include "Interraction.h"
-#include "Mur.h"
 
 /*
 LA classe Terrain possède un tableau qui contiendra les éléments du terrain comme les murs, les trous, le point de départ.
@@ -14,13 +15,14 @@ Celle-ci retourne un objet Interraction qui seront les nouvelles "instructions" 
 La classe retournera toujours un objet Interaction avec une coordonnée X,Y
 La classe Ball sera responsable de de savoir si elle atteint cette position dépendament de sa velossité
 */
-using namespace std;
+
 class Terrain
 {
 private:
 	int nbMur;
-	//Hole hole;				//Trou du terrain
-	Mur *TableauMur[50];	//tableau pointeur des murs du terrain
+	Hole* hole;				//Trou du terrain
+	Ball* balle1;			//Départ de la balle
+	Mur* TableauMur[50];	//tableau pointeur des murs du terrain
 
 public:
 	Terrain();

@@ -3,13 +3,7 @@
 
 #include <iostream>
 #include "GameManager.h"
-#include "Ball.h"
-#include "Hole.h"
-#include "Terrain.h"
-#include "Terrain.cpp"
-#include "Interraction.h"
-#include "Mur.h"
-#include "Mur.cpp"
+
 
 using namespace std;
 
@@ -17,10 +11,8 @@ int main()
 {
 	//GameManager gm(20, 25);
 	//gm.Run();
-	cout << "etape 0" << endl;
 	Terrain terrain1;
 	terrain1.OpenTerrain();
-	cout << "etape 1" << endl;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

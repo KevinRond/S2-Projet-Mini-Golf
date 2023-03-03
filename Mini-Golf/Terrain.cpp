@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "Terrain.h"
-
+using namespace std;
 /*
 LA classe Terrain possède un tableau qui contiendra les éléments du terrain comme les murs, les trous, le point de départ.
 Elle cherche dans un fichier txt les composantes qui constituront le terrain.
@@ -19,8 +19,7 @@ using namespace std;
 Terrain::Terrain()
 {
 	nbMur = 0;
-	//Terrain::OpenTerrain();
-	cout << "etape 2" << endl;
+	cout << "creation du terrain" << endl;
 }
 
 Terrain::~Terrain()
@@ -58,19 +57,31 @@ bool Terrain::OpenTerrain()
 					Coor1[Coor] = stod(ptt);
 					ptt.clear();
 					Coor = !Coor;
-						if (Coor2[0] != -1.0)
-						{
-							Mur MurTemp(Coor1[0], Coor1[1], Coor2[0], Coor2[1]);
-							TableauMur[nbMur] = MurTemp.Get();	//création d'objet mur
-							nbMur++;
-							MurTemp.Display();
-						}
+					if (Coor2[0] != -1.0)
+					{
+						Mur *MurTemp = new Mur;
+						MurTemp->Set(Coor1[0], Coor1[1], Coor2[0], Coor2[1]);
+						TableauMur[nbMur] = MurTemp->Get();	//création d'objet mur
+						nbMur++;
+						MurTemp->Display();
+					}
 					Coor2[0] = Coor1[0];
 					Coor2[1] = Coor1[1];
 				}
-				else if (lineContents[i] == 'B') {}
-				else if (lineContents[i] == 'T') {}
-				else {
+				else if (lineContents[i] == 'B')
+				{
+					Ball* BalleTemp = new Ball;
+					BalleTemp->setXY(Coor1[0], Coor1[1]);
+					balle1 = BalleTemp->get();
+					nbMur++;
+					BalleTemp->Display();
+				}
+				else if (lineContents[i] == 'T')
+				{
+				
+				}
+				else
+				{
 					ptt += lineContents[i];
 				}
 				i++;
@@ -83,10 +94,12 @@ bool Terrain::OpenTerrain()
 		}
 
 		myFile.close();
+		return true;
 	}
 
 	return false;
 }
+
 
 Interraction Terrain::VerrifierColision(Ball ball)
 {

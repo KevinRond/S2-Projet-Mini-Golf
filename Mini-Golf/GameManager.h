@@ -4,9 +4,14 @@
 #include <time.h>
 #include <conio.h>
 #include <string>
+
+
+#include "Direction.h"
 #include "Ball.h"
 #include "Hole.h"
-#include "Direction.h"
+#include "Terrain.h"
+#include "Interraction.h"
+#include "Mur.h"
 
 const int MAX_STRENGTH = 100;
 
@@ -16,8 +21,8 @@ private:
 	int width, height;
 	int stroke, score;
 	bool quit;
-	Ball* ball;
-	Hole* hole;
+	//Ball* ball;
+	//Hole* hole;
 public:
 	GameManager(int w, int h);
 	~GameManager();

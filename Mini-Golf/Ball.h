@@ -6,24 +6,30 @@
 class Ball
 {
 private:
-	int x, y, ball_Strength;
-	int originalX, originalY;
+	double x, y, ball_Strength;
+	double originalX, originalY;
 	eDir direction;
 public:
-	Ball(int posX, int posY);
+	Ball();
+	Ball(double posX, double posY);
+	~Ball();
+	
 	void Reset();
-	void changeDirection(eDir d);
-	int getX();
-	int getY();
-	int getBallStrength();
+	//void changeDirection(eDir d);
+	void setXY(double posX, double posY);
+	//Ball* get();
+	double getX();
+	double getY();
+	double getBallStrength();
 	void setBallStrength(int newStrength);
 	eDir getDirection();
 	void Move();
-	friend std::ostream& operator << (std::ostream& o, Ball ball)
-	{
+	void Display();
+	//friend std::ostream& operator << (std::ostream& o, Ball ball);
+	/* {
 		o << "Ball [" << ball.x << "," << ball.y << "][" << ball.direction << "]";
 		return o;
-	}
+	}*/
 };
 
 #endif
