@@ -2,22 +2,26 @@
 using namespace std;
 Mur::Mur()
 {
+	Hx = 0.0;
+	Hy = 0.0;
+	Tx = 0.0;
+	Ty = 0.0;
 }
 
 Mur::Mur(double AX, double AY, double BX, double BY)
 {
-	points[0] = AX;
-	points[1] = AY;
-	points[2] = BX;
-	points[3] = BY;
+	Hx = AX;
+	Hy = AY;
+	Tx = BX;
+	Ty = BY;
 }
 
 void Mur::Set(double AX, double AY, double BX, double BY)
 {
-	points[0] = AX;
-	points[1] = AY;
-	points[2] = BX;
-	points[3] = BY;
+	Hx = AX;
+	Hy = AY;
+	Tx = BX;
+	Ty = BY;
 }
 
 Mur::~Mur()
@@ -26,13 +30,8 @@ Mur::~Mur()
 
 void Mur::Display()
 {
-	cout << "Mur Coor A: " << this->Get(0) << "," << this->Get(1) << endl;
-	cout << "Mur Coor B: " << this->Get(2) << "," << this->Get(3) << endl;
-}
-
-double Mur::Get(int index)
-{
-	return points[index];
+	cout << "Mur Coor A: " << Hx << "," << Hy << endl;
+	cout << "Mur Coor B: " << Tx << "," << Ty << endl;
 }
 
 Mur *Mur::Get()

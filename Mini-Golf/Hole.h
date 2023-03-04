@@ -9,7 +9,7 @@ Son radius (radius)
 class Hole
 {
 private:			//[0]=X [1]=Y
-	double Txy[2];	//emplacement du trou
+	double Tx, Ty;	//emplacement du trou
 	double radius;	//radius du trou
 public:
 	Hole();
@@ -21,7 +21,8 @@ public:
 	void Set_xy(double posX, double posY);
 
 	//Getter
-	void Get_xy();
+	double Get_x();
+	double Get_y();
 
 	//Affichage
 	void Display();

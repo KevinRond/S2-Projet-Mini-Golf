@@ -113,3 +113,9 @@ void Terrain::Display()
 	balle1->Display();
 	hole1->Display();
 }
+
+void Terrain::CoupDonne(Coup *coup1)
+{	//La methode retourne l'emplacement de la balle pour chaque intervale de temps donne (a ajuster avec un taux de rafraichissement d'affichage)
+	//Elle prendre l'objet COUP l'applique a BALL et valide la colision avec l'un de ses objets (MUR ou TROU)
+
+}

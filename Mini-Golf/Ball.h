@@ -12,11 +12,11 @@ Une acceleration (Axy)
 
 class Ball
 {
-private:			//[0]=X [1]=Y
-	double xy[2];	//Position actuel
-	double Oxy[2];  //Position d'origine
-	double Vxy[2];	//Velocite
-	double Axy[2];	//acceleration
+private:
+	double x, y;	//Position actuel
+	double Ox, Oy;  //Position d'origine
+	double Vx, Vy;	//Velocite
+	double Ax, Ay;	//acceleration
 
 
 public:
@@ -32,10 +32,14 @@ public:
 	void Set_Axy(double posX, double posY);	//Set l'acceleration
 
 	//Getter
-	double Get_xy();	//Set la position actuel
-	double Get_Oxy();	//Set la position d'origine
-	double Get_Vxy();	//Set la velocite
-	double Get_Axy();	//Set l'acceleration
+	double Get_x();		//Set la position actuel X
+	double Get_y();		//Set la position actuel Y
+	double Get_Ox();	//Set la position d'origine X
+	double Get_Oy();	//Set la position d'origine Y
+	double Get_Vx();	//Set la velocite X
+	double Get_Vy();	//Set la velocite Y
+	double Get_Ax();	//Set l'acceleration X
+	double Get_Ay();	//Set l'acceleration Y
 
 	//Affichage
 	void Display();

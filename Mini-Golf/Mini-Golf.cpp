@@ -8,6 +8,7 @@
 #include "Terrain.h"
 #include "Interraction.h"
 #include "Mur.h"
+#include "Coup.h"
 
 
 using namespace std;
