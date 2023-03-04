@@ -6,18 +6,22 @@
 class Mur
 {
 private:
-	double* points = new double[4];
+	double* points = new double[4];	//Head_X[0]Y[1] Tail_X[2]Y[3]
 
 public:
-	Mur();
-	Mur(double AX, double AY, double BX, double BY);
+	Mur();												//Constructeur
+	Mur(double AX, double AY, double BX, double BY);	//Constructeur avec parametre
+	~Mur();												//Destructeur
+
+	//setter
 	void Set(double AX, double AY, double BX, double BY);
-	~Mur();
-	//Interraction *VerrifierColision(Ball balle); //Recoit l'objet ball et determine s'il y a une interaction si non retour nul
-	Mur* Get();
-	double Get(int x);
+
+	//Getter
+	double Get(int index);		//
+	Mur* Get();		//Retourne le pointeur du Mur
+		
+	//Affichage
 	void Display();
-	
 };
 
 #endif

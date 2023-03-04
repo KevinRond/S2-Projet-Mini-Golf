@@ -2,41 +2,82 @@
 using namespace std;
 Ball::Ball()
 {
-    originalX = 0;
-    originalY = 0;
-    x = 0;
-    y = 0;
-    ball_Strength = 0;
-
+    xy[0] = 0;
+    xy[1] = 0;
+    Oxy[0] = 0;
+    Oxy[1] = 0;
+    Vxy[0] = 0;
+    Vxy[1] = 0;
+    Axy[0] = 0;
+    Axy[1] = 0;
 }
+
 Ball::~Ball(){}
-Ball* Ball::get()
+
+Ball* Ball::Get()
 {
     return this;
 }
+
 Ball::Ball(double posX, double posY)
 {
-	originalX = posX;
-	originalY = posY;
-	x = posX;
-	y = posY;
-    ball_Strength = 0;
-
+    xy[0] = posX;
+    xy[1] = posY;
+    Oxy[0] = posX;
+    Oxy[1] = posY;
+    Vxy[0] = 0;
+    Vxy[1] = 0;
+    Axy[0] = 0;
+    Axy[1] = 0;
 }
 
-
-void Ball::setXY(double posX, double posY)
+void Ball::Set_xy(double posX, double posY)
 {
-    originalX = posX;
-    originalY = posY;
-    x = posX;
-    y = posY;
-    ball_Strength = 0;
+    xy[0] = posX;
+    xy[1] = posY;
+}
 
+void Ball::Set_Oxy(double posX, double posY)
+{
+    Oxy[0] = posX;
+    Oxy[1] = posY;
+}
+
+void Ball::Set_Vxy(double posX, double posY)
+{
+    Vxy[0] = posX;
+    Vxy[1] = posY;
+}
+
+void Ball::Set_Axy(double posX, double posY)
+{
+    Axy[0] = posX;
+    Axy[1] = posY;
+}
+
+double Ball::Get_xy()
+{
+    return 0.0;
+}
+
+double Ball::Get_Oxy()
+{
+    return 0.0;
+}
+
+double Ball::Get_Vxy()
+{
+
+    return  0.0;
+}
+
+double Ball::Get_Axy()
+{
+    return 0.0;
 }
 
 void Ball::Display()
 {
     
-    cout << "Balle location : (" << x << "," << y << ")" << endl;
+    cout << "Balle location : (" << xy[0] << "," << xy[1] << ")" << endl;
 }

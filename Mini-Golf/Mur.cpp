@@ -24,15 +24,15 @@ Mur::~Mur()
 {
 }
 
-/*Interraction* Mur::VerrifierColision(Ball balle)
-{
-	return NULL;//Interraction();
-}*/
-
 void Mur::Display()
 {
 	cout << "Mur Coor A: " << this->Get(0) << "," << this->Get(1) << endl;
 	cout << "Mur Coor B: " << this->Get(2) << "," << this->Get(3) << endl;
+}
+
+double Mur::Get(int index)
+{
+	return points[index];
 }
 
 Mur *Mur::Get()
@@ -40,7 +40,3 @@ Mur *Mur::Get()
 	return this;
 }
 
-double Mur::Get(int x)
-{
-	return points[x];
-}

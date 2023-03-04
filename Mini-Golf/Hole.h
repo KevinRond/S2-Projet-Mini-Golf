@@ -1,19 +1,29 @@
 #ifndef HOLE_H
 #define HOLE_H
 #include <iostream>
-
+/*
+La classe trou comporte les caracteristiques suivantes:
+La location du trou (Txy)
+Son radius (radius)
+*/
 class Hole
 {
-private: 
-	int x, y;
+private:			//[0]=X [1]=Y
+	double Txy[2];	//emplacement du trou
+	double radius;	//radius du trou
 public:
 	Hole();
-	Hole(int posX, int posY);
+	Hole(double posX, double posY);
 	~Hole();
-	int getX();
-	int getY();
-	void setXY(double posX, double posY);
-	Hole* get();
+	Hole* Get();
+
+	//Setter
+	void Set_xy(double posX, double posY);
+
+	//Getter
+	void Get_xy();
+
+	//Affichage
 	void Display();
 };
 

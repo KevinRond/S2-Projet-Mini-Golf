@@ -2,21 +2,18 @@
 #include <fstream>
 #include <string>
 #include "Terrain.h"
-using namespace std;
+
 /*
-LA classe Terrain possede un tableau qui contiendra les elements du terrain comme les murs, les trous, le point de depart.
-Elle cherche dans un fichier txt les composantes qui constituront le terrain.
-Lors que la balle est en mouvement, cette classe ira trouver avec laquel de ses composantes (trou, mur) elle interagit
-Celle-ci retourne un objet Interraction qui seront les nouvelles "instructions" que la la balle devra suivre.
-La classe retournera toujours un objet Interaction avec une coordonnee X,Y
-La classe Ball sera responsable de de savoir si elle atteint cette position dependament de sa velossite
+LA classe Terrain comporte les ellements suivants:
+-Un tableau *pointeur des Mur qui la compose TableauMur[]
+-Un objet Trou (hole1) et ball (balle1)
+Ses methodes:
+-Lire un fichier de terrain
+-Verifier la prochaine interaction
+-Compiler un parcours de location d'un coup
 */
 
-//	int nbMur = 0;
-//	Hole hole;				//Trou du terrain
-//	Mur* TableauMur[];	//tableau pointeur des murs du terrain
 using namespace std;
-
 Terrain::Terrain()
 {
 	nbMur = 0;
@@ -27,95 +24,80 @@ Terrain::~Terrain()
 {
 }
 
-
 Terrain *Terrain::OpenTerrain()
 {
-	/* POUR VOIR OU CA LECRIT (REPERTOIRE DE TRAVAIL)
-	ofstream outFile;
-	outFile.open("Terrain3.txt", ios_base::out);
-	if (outFile.is_open()) // check if open() succeeded
-	{
-		cout << "opened" << endl;
-		outFile.close();
-	}*/
+	ifstream myFile;								//Creation de l'objet fichier
+	myFile.open("Terrain1.txt", ios_base::in);		//ouveture du fichier
+	bool Coor = false;								//Operateur inverseur qui determinera si 0=X ou 1=Y
+	string lineContents;							//Contenu de la ligne lu complete
+	char separatorXY = ',';							//separateur d'axe XY (X,Y)
+	char separatorCoor = ';';						//separateur de coordonnees (X,Y);(X,Y)
+	int i = 0;										//Index de ligne de lecture
+	string ptt;										//Pour accumulation des nombres a double digit
+	double Coor1[2];								//Premiere coordonnee
+	double Coor2[2];								//Deuxiere coordonnee
+	Coor2[0]=-1.0;									//initialise a 0 pour savoir si premiere lecture
 
-
-	ifstream myFile;
-	myFile.open("Terrain1.txt", ios_base::in);
-	bool Coor = false; //Operateur qui determine si X ou Y, si false c'est un X, si true c'est Y
-	string lineContents; //contenu de la ligne complete
-	char separatorXY = ','; //separateur XY (X,Y)
-	char separatorCoor = ';'; //separateur de point (X,Y);(X,Y)
-	int i = 0;
-	string ptt; //pour accumulation de carractere
-	double Coor1[2];
-	double Coor2[2];
-	Coor2[0]=-1.0;
-	if (myFile.is_open()) // check if open() succeeded
+	if (myFile.is_open())										//Verrifie si l'ouverture est faite
 	{
 		while (myFile.good())
 		{
-			getline(myFile, lineContents);
-			cout << lineContents << endl;
-			while (lineContents[i] != '\0') {
-				if (lineContents[i] == separatorXY) {
-					Coor1[Coor] = stod(ptt);
-					Coor = !Coor;
-					ptt.clear();
+			getline(myFile, lineContents);						//Lecture de la ligne au complet
+			while (lineContents[i] != '\0') {					//Lecture jusqu'a la fin (caractere nul)
+				if (lineContents[i] == separatorXY) {			//verifie le separateur de (,)
+					Coor1[Coor] = stod(ptt);					//Converti le texte en numerique
+					Coor = !Coor;								//Inverse le parametre de coor
+					ptt.clear();								//Vide l'accumulateur
 				}
-				else if (lineContents[i] == separatorCoor)
-				{
-					Coor1[Coor] = stod(ptt);
-					ptt.clear();
-					Coor = !Coor;
-					if (Coor2[0] != -1.0)
+				else if (lineContents[i] == separatorCoor)						//verifie le separateur de (;)
+				{																//Coordonne est donc complette
+					Coor1[Coor] = stod(ptt);									//Converti le texte en numerique
+					Coor = !Coor;												//Inverse le parametre de coor
+					ptt.clear();												//Vide l'accumulateur
+					if (Coor2[0] != -1.0)										//Verifie si c'est la premiere coor (besoin de 2 pour un mur)
 					{
-						Mur *MurTemp = new Mur;
-						MurTemp->Set(Coor1[0], Coor1[1], Coor2[0], Coor2[1]);
-						TableauMur[nbMur] = MurTemp->Get();	//creation d'objet mur
-						nbMur++;
-						MurTemp->Display();
-						cout << "Mur #" << nbMur << " ajoute" << endl;
+						Mur *MurTemp = new Mur;									//Creation d'un objet Mur
+						MurTemp->Set(Coor1[0], Coor1[1], Coor2[0], Coor2[1]);	//Attribution de ses 2 coor
+						TableauMur[nbMur] = MurTemp->Get();						//Assignation au TableauMur de notre terrain
+						nbMur++;												//Incremenation du nombre de Murs
+						MurTemp->Display();//TO BE DELETE
+						cout << "Mur #" << nbMur << " ajoute" << endl;//TO BE DELETE
 					}
-					Coor2[0] = Coor1[0];
-					Coor2[1] = Coor1[1];
+					Coor2[0] = Coor1[0];						//Continuation de notre ligne de mur, la permutation du point de tete se fait en coor2 (tail)
+					Coor2[1] = Coor1[1];						//le prochain point sera en coor1 (tete)
 				}
-				else if (lineContents[i] == 'B')
+				else if (lineContents[i] == 'B')				//Verification si dernier point est la balle
 				{
-					Ball* BalleTemp = new Ball;
-					BalleTemp->setXY(Coor1[0], Coor1[1]);
-					balle1 = BalleTemp->get();
-					BalleTemp->Display();
-					cout << "Depart de balle a " << BalleTemp->get() << " ajoute" << endl;
+					Ball* BalleTemp = new Ball;					//Creation d'un objet Ball
+					BalleTemp->Set_xy(Coor1[0], Coor1[1]);		//Son emplacement
+					balle1 = BalleTemp->Get();					//Assignation du pointeur de l'objet creer a son attribu balle1
+					BalleTemp->Display();//TO BE DELETE
+					cout << "Depart de balle a " << BalleTemp->Get() << " ajoute" << endl;//TO BE DELETE
 				}
-				else if (lineContents[i] == 'T')
+				else if (lineContents[i] == 'T')				//Verification si dernier point est un trou
 				{
-					Hole* HoleTemp = new Hole;
-					HoleTemp->setXY(Coor1[0], Coor1[1]);
-					hole1 = HoleTemp->get();
-					HoleTemp->Display();
-					cout << "Le trou du parcours est a " << HoleTemp->get() << " ajoute" << endl;
+					Hole* HoleTemp = new Hole;					//Creation objet Hole
+					HoleTemp->Set_xy(Coor1[0], Coor1[1]);		//Son emplacement
+					hole1 = HoleTemp->Get();					//Assignation du pointeur de l'objet creer a son attribu hole1
+					HoleTemp->Display();//TO BE DELETE
+					cout << "Le trou est a " << HoleTemp->Get() << " ajoute" << endl;//TO BE DELETE
 				}
 				else
 				{
-					ptt += lineContents[i];
+					ptt += lineContents[i];	//Ajout du caractere en lecture a l'accumulateur
 				}
-				i++;
-
-				cout << ptt << endl;
-				
+				i++;						//Incrementation de l'index de caractere
 			}
-			i = 0;
-			Coor2[0] = -1.0;
+			i = 0;							//Nouvelle ligne reset l'incrementeur
+			Coor2[0] = -1.0;				//Remet la 2e coor NULL en fin de ligne
 		}
 
-		myFile.close();
-		return this;
+		myFile.close();						//Ferme le fichier
+		return this;						//Retourne le ponteur du terrain
 	}
-
-	return this;
+	cout << "File not found" << endl;
+	return nullptr;
 }
-
 
 Interraction Terrain::VerrifierColision(Ball ball)
 {

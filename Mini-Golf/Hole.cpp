@@ -3,42 +3,36 @@ using namespace std;
 
 Hole::Hole()
 {
-	x = 0.0;
-	y = 0.0;
+	Txy[0] = 0.0;
+	Txy[1] = 0.0;
 }
 
-Hole::Hole(int posX, int posY)
+Hole::Hole(double posX, double posY)
 {
-	x = posX;
-	y = posY;
+	Txy[0] = posX;
+	Txy[1] = posY;
 }
 
 Hole::~Hole()
 {
 }
 
-int Hole::getX()
-{
-	return x;
-}
-
-int Hole::getY()
-{
-	return y;
-}
-
-void Hole::setXY(double posX, double posY)
-{
-	x = posX;
-	y = posY;
-}
-
-Hole* Hole::get()
+Hole* Hole::Get()
 {
 	return this;
 }
 
+void Hole::Set_xy(double posX, double posY)
+{
+	Txy[0] = posX;
+	Txy[1] = posY;
+}
+
+void Hole::Get_xy()
+{
+}
+
 void Hole::Display()
 {
-	cout << "Trou location : (" << x << "," << y << ")" << endl;
+	cout << "Trou location : (" << Txy[0] << "," << Txy[1] << ")" << endl;
 }
