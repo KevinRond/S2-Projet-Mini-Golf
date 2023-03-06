@@ -5,6 +5,7 @@
 #include "GameManager.h"
 #include "Ball.h"
 #include "Hole.h"
+#include "Wall.h"
 
 using namespace std;
 

@@ -6,6 +6,7 @@
 #include <string>
 #include "Ball.h"
 #include "Hole.h"
+#include "Wall.h"
 //#include "Direction.h"
 
 const int MAX_STRENGTH = 100;
@@ -18,6 +19,7 @@ private:
 	bool quit;
 	Ball* ball;
 	Hole* hole;
+	Wall* wall;
 public:
 	GameManager(int w, int h);
 	~GameManager();

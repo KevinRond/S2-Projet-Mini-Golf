@@ -143,11 +143,13 @@
     <ClCompile Include="Mini-Golf.cpp" />
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Hole.cpp" />
+    <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Direction.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="Wall.h" />
     <ClInclude Include="Hole.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
