@@ -122,8 +122,10 @@ void Terrain::Display()
 }
 
 void Terrain::CoupDonne(Coup *coup1)
-{	//La methode retourne l'emplacement de la balle pour chaque intervale de temps donne (a ajuster avec un taux de rafraichissement d'affichage)
+{	
+	//La methode retourne l'emplacement de la balle pour chaque intervale de temps donne (a ajuster avec un taux de rafraichissement d'affichage)
 	//Elle prendre l'objet COUP l'applique a BALL et valide la colision avec l'un de ses objets (MUR ou TROU)
 
-	//get vitesseX,Y et acceleration. L'appliquer a balle
+	balle1->Set_Vxy(coup1->getVitesseX(), coup1->getVitesseY());
+	balle1->Set_Axy(coup1->getAcceleration(), coup1->getAcceleration());
 }

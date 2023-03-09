@@ -28,5 +28,8 @@ public:
 	//Getter
 	double getDirection();	//Lecture de la direction
 	double getAmplitude();	//Lecture de l'amplitude
+	double getVitesseX();
+	double getVitesseY();
+	double getAcceleration();
 };
 #endif

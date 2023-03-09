@@ -47,13 +47,27 @@ void Coup::calculAcceleration()
 	acceleration = K*((-1*vitesseX/amplitude)-(vitesseY/amplitude))
 }
 
-void Coup::getDirection()
+double Coup::getDirection()
 {
-	//Retournera un pointeur vers l'array de direction
-	
+	return direction;
 }
 
-void Coup::getAmplitude()
+double Coup::getAmplitude()
 {
-	
+	return amplitude;
+}
+
+double Coup::getVitesseX()
+{
+	return vitesseX;
+}
+
+double Coup::getVitesseY()
+{
+	return vitesseY;
+}
+
+double Coup::getAcceleration()
+{
+	return acceleration;
 }
