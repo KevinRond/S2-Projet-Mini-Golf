@@ -3,6 +3,8 @@
 #include <iostream>
 #include <time.h>
 #include <conio.h>
+#include <cmath>
+#include <vector>
 #include <string>
 #include "Ball.h"
 #include "Hole.h"
@@ -29,6 +31,7 @@ public:
 	void Input();
 	void Logic();
 	void Run();
+	
 };
 
 #endif

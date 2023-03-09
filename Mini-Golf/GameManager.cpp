@@ -32,6 +32,7 @@ void GameManager::Draw()
 {
 	system("cls");
 	wall->remove();
+	wall->ajouterMur(0, 0, 0, 30);
 	/*for (int j = 0; j < width + 2; j++)
 	{
 		cout << "|";
@@ -151,7 +152,7 @@ void GameManager::Input()
 
 void GameManager::Logic()
 {
-	int prevballX = ball->getX();
+	int prevballx = ball->getX();
 	int prevbally = ball->getY();
 	ball->Move();
 	int ballx = ball->getX();
@@ -160,10 +161,12 @@ void GameManager::Logic()
 	int holey = hole->getY();
 	double currentAngle = ball->getDirection();
 
-	if (wall->collision(ballx, bally))
+	if (wall->collisionv2(ballx, bally) != -1)
 	{
+		//double angle_incident = atan2(prevbally - bally, prevballx - ballx);
+		//double angle_mur = atan2(wall->getey)
 		//Collision with left wall
-		if (ballx == 0)
+		if (ballx == 1)
 		{
 			if (currentAngle == 90)
 			{
@@ -181,7 +184,7 @@ void GameManager::Logic()
 		}
 
 		//Collision with right wall
-		if (ballx == width)
+		if (ballx == width - 1)
 		{
 			if (currentAngle == 90)
 			{
@@ -199,7 +202,7 @@ void GameManager::Logic()
 		}
 
 		//Collision with top wall
-		if (bally == 0)
+		if (bally == 1)
 		{
 
 			ball->setDirection(360 - currentAngle);
@@ -207,7 +210,7 @@ void GameManager::Logic()
 		}
 
 		//Collision with bottom wall
-		if (bally == height)
+		if (bally == height - 1)
 		{
 			ball->setDirection(360 - currentAngle);
 			//ball->setnewY(bally-(ball->getnewY() - bally));
