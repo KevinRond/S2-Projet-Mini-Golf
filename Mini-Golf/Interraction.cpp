@@ -1,4 +1,5 @@
 #include "Interraction.h"
+#include<cmath>
 using namespace std;
 /*
 La classe interaction caracterisera une interaction entre 2 objets
@@ -40,4 +41,15 @@ double Interraction::InterractionFac()
 double Interraction::Module()
 {
 	return 0.0;
+}
+
+
+void Interraction::InteractionMur(Ball balle, Mur mur)
+{
+	//eqtaion de la trajectoire de la balle y = mx + b
+	double m = tan(balle.Get_direction());
+	double b = balle.Get_Oy() - m * balle.Get_Ox();
+
+	//equation du mur 
+
 }

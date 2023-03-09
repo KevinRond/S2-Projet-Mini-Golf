@@ -93,3 +93,13 @@ void Ball::Display()
     
     cout << "Balle location : (" << x << "," << y << ")" << endl;
 }
+
+double Ball::Get_direction()
+{
+    return direction;
+}
+
+void Ball::Set_direction(double newdirection)
+{
+    direction = newdirection;
+}
