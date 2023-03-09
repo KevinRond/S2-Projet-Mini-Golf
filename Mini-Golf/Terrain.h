@@ -26,6 +26,7 @@ private:
 	Hole* hole1;			//Trou du terrain
 	Ball* balle1;			//Depart de la balle
 	Mur* TableauMur[50];	//tableau pointeur des murs du terrain
+	Parcours parcourstotal;
 	//Vector<pair<double, double>> parcours;
 
 public:
@@ -35,7 +36,7 @@ public:
 	Terrain *OpenTerrain();				//charge le terrain via fichier
 	void CoupDonne(Coup *coup1);			//Lorsqu'un coup est donnee, retournera le parcours (emplacement par laps de temps dt) de la balle
 
-	Interraction VerrifierColision(Ball ball);	//Doit virifie l'interaction avec son trou ou l'un de ses murs.
+	Interraction VerrifierColision();	//Doit virifie l'interaction avec son trou ou l'un de ses murs.
 	void Display();								//affiche le terrain
 };
 

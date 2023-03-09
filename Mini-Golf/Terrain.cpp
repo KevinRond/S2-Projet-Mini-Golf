@@ -99,16 +99,29 @@ Terrain *Terrain::OpenTerrain()
 	return nullptr;
 }
 
-Parcours Terrain::VerrifierColision(Ball ball)
+Parcours Terrain::VerrifierColision()
 {		/******************* ALI *********************/
-/*Ici la fonction t'envoie un onjet balle avec lequel tu utilisera ses 
+/*Ici la fonction t'envoie un objet balle avec lequel tu utilisera ses 
 attribus trouver la  colision avec un mur ou un trou du terrain. Prendre 
 choisir le plus proche et le fournir à l'objet interaction*/
 
+	// Recevoir l'objet ball
+
+	// La balle  va avoir une position initial et un direction en degres,
+	 
+	// Determiner l'odre des objets
+	// faire une verification des terrains: 
+	
+	// interaction la ball :
+
+	// Verification des mure:
+
+	// Retourné:
+	// Parcours est un tableau de positions 
 
 
-
-	return Parcours;
+	//parcourstotal += parcourssection
+	return parcourstotal;
 }
 
 void Terrain::Display()
