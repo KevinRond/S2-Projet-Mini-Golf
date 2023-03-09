@@ -9,6 +9,7 @@
 #include "Interraction.h"
 #include "Mur.h"
 #include "Coup.h"
+#include "GameManager.h"
 
 
 using namespace std;
