@@ -2,23 +2,31 @@
 #define COUP_H
 #include <iostream>
 #include <string>
+#include <cmath>
+#define K 10						//Constante d'acceleration de la balle
 
 class Coup
 {
 private:
-	double directionX, directionY;	//Vecteur de direction unitaire X[0],Y[1] ()
+	double direction;				//Direction mesure par le joystick
 	double amplitude;				//Amplitude de force (lecture de l'accelerometre)
+	double vitesseX, vitesseY;
+	double acceleration;
 
 public:
 	Coup();
 	~Coup();
 
 	//Setter
-	void Direction(double DirX, double DirY);		//Direction choisie + random factor
-	void Amplitude(double module);		//Lecture de l'amplitude
+	void setDirection(double DirX, double DirY);		//Direction choisie + random factor
+	void setAmplitude(double module);		//Lecture de l'amplitude
+	double degToRad(double deg);			//Transforme angle deg en radiant
+	void calculVitesseX();					//Calcul la vitesse en x utilisant la direction et l'amplitude
+	void calculVitesseY();					//Calcul la vitesse en y utilisant la direction et l'amplitude
+	void calculAcceleration();				//Calcul l'acceleration de la balle
 
 	//Getter
-	double GetDirection();	//Lecture de la direction
-	double GetAmplitude();	//Lecture de l'amplitude
+	double getDirection();	//Lecture de la direction
+	double getAmplitude();	//Lecture de l'amplitude
 };
 #endif

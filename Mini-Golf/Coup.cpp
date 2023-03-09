@@ -2,32 +2,58 @@
 using namespace std;
 Coup::Coup()
 {
-	Direction();
-	Amplitude();
+	setDirection();
+	setAmplitude();
+	calculVitesseX();
+	calculVitesseY();
+	calculAcceleration();
 }
 
 Coup::~Coup()
 {
 }
 
-void Coup::Direction(double DirX, double DirY)
+void Coup::setDirection(double DirX, double DirY)
 {
 	//Lecture de la direction choisie par le joueur
 	//Ajout de l'effet des MUONs sur la direction de la balle
 	//Set la direction finale dans l'attribut direction
 }
 
-void Coup::Amplitude(double module)
+void Coup::setAmplitude(double module)
 {
 	//Set l'amplitude
 }
 
-void Coup::GetDirection()
+double Coup::degToRad(double deg)
 {
-	//Retournera un pointeur vers l'array de direction
+	double rad;
+	rad = deg * 3.14159 / 180;
+	return rad;
 }
 
-double Coup::GetAmplitude()
+void Coup::calculVitesseX()
 {
-	return amplitude;
+	vitesseX = amplitude * cos(degToRad(direction));
+}
+
+void Coup::calculVitesseY()
+{
+	vitesseY = -(amplitude * sin(degToRad(direction)));
+}
+
+void Coup::calculAcceleration()
+{
+	acceleration = K*((-1*vitesseX/amplitude)-(vitesseY/amplitude))
+}
+
+void Coup::getDirection()
+{
+	//Retournera un pointeur vers l'array de direction
+	
+}
+
+void Coup::getAmplitude()
+{
+	
 }
