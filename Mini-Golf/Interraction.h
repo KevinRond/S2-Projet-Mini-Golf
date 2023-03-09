@@ -5,6 +5,8 @@ La classe interaction caracterisera une interaction entre 2 objets
 Ex: Ball avec Mur,Trou,Sable,glace
 On est dans un monde de mini-put, on peux faire s'quon veux...
 */
+#include "Terrain.h"
+#include <cmath>
 
 class Interraction
 {
@@ -22,6 +24,7 @@ public:
 	double InterractionAngle(); //Retourne l'angle d'incidence
 	double InterractionFac(); //Retourne le facteur d'influence
 	double Module(); //Retour la distance en les 2 objets en interaction
+	void InteractionMur(Ball balle, Mur mur);
 };
 
 #endif
