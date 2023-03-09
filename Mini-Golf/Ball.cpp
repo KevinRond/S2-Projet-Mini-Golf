@@ -1,79 +1,95 @@
 #include "Ball.h"
+using namespace std;
+Ball::Ball()
+{
+    x = 0.0;
+    y = 0.0;
+    Ox = 0.0;
+    Oy = 0.0;
+    Vx = 0.0;
+    Vy = 0.0;
+    Ax = 0.0;
+    Ay = 0.0;
+}
 
-Ball::Ball(int posX, int posY)
+Ball::~Ball(){}
+
+Ball* Ball::Get()
 {
-	originalX = posX;
-	originalY = posY;
-	x = posX;
-	y = posY;
-    ball_Strength = 0;
-	direction = STOP;
+    return this;
 }
-void Ball::Reset()
+
+Ball::Ball(double posX, double posY)
 {
-	x = originalX;
-	y = originalY;
-	direction = STOP;
+    x = posX;
+    y = posY;
+    Ox = posX;
+    Oy = posY;
+    Vx = 0.0;
+    Vy = 0.0;
+    Ax = 0.0;
+    Ay = 0.0;
 }
-void Ball::changeDirection(eDir d)
+void Ball::Set_xy(double posX, double posY)
 {
-	direction = d;
+    x = posX;
+    y = posY;
 }
-int Ball::getX()
+
+void Ball::Set_Oxy(double posX, double posY)
 {
-	return x;
+    Ox = posX;
+    Oy = posY;
 }
-int Ball::getY()
+
+void Ball::Set_Vxy(double posX, double posY)
 {
-	return y;
+    Vx = posX;
+    Vy = posY;
 }
-int Ball::getBallStrength()
+
+void Ball::Set_Axy(double posX, double posY)
 {
-    return ball_Strength;
+    Ax = posX;
+    Ay = posY;
 }
-void Ball::setBallStrength(int newStrength)
+
+double Ball::Get_x()
 {
-    ball_Strength = newStrength;
+    return x;
 }
-eDir Ball::getDirection()
+double Ball::Get_y()
 {
-	return direction;
+    return y;
 }
-void Ball::Move()
+double Ball::Get_Ox()
 {
-	switch (direction)
-	{
-    case STOP:
-        break;
-    case LEFT:
-        x--;
-        break;
-    case RIGHT:
-        x++;
-        break;
-    case UPLEFT:
-        x--; 
-        y--;
-        break;
-    case DOWNLEFT:
-        x--; 
-        y++;
-        break;
-    case UPRIGHT:
-        x++; 
-        y--;
-        break;
-    case DOWNRIGHT:
-        x++; 
-        y++;
-        break;
-    case UP:
-        y--;
-        break;
-    case DOWN:
-        y++;
-        break;
-    default:
-        break;
-	}
+    return Ox;
+}
+double Ball::Get_Oy()
+{
+    return Oy;
+}
+double Ball::Get_Vx()
+{
+
+    return  Vx;
+}
+double Ball::Get_Vy()
+{
+
+    return  Vy;
+}
+double Ball::Get_Ax()
+{
+    return Ax;
+}
+double Ball::Get_Ay()
+{
+    return Ay;
+}
+void Ball::Display()
+{
+    
+    cout << "Balle location : (" << x << "," << y << ")" << endl;
 }

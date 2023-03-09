@@ -2,16 +2,25 @@
 //
 
 #include <iostream>
-#include "GameManager.h"
+
 #include "Ball.h"
 #include "Hole.h"
+#include "Terrain.h"
+#include "Interraction.h"
+#include "Mur.h"
+#include "Coup.h"
+#include "GameManager.h"
+
 
 using namespace std;
 
 int main()
 {
-	GameManager gm(20, 25);
-	gm.Run();
+	//GameManager gm(20, 25);
+	//gm.Run();
+	Terrain *terrain1 = new Terrain[1];
+	terrain1->OpenTerrain();
+	terrain1->Display();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

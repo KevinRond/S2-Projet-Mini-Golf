@@ -1,28 +1,41 @@
 #include "Hole.h"
 using namespace std;
 
-Hole::Hole(int posX, int posY)
+Hole::Hole()
 {
-	x = posX;
-	y = posY;
+	Tx = 0.0;
+	Ty = 0.0;
 }
 
-int Hole::getX()
+Hole::Hole(double posX, double posY)
 {
-	return x;
+	Tx = posX;
+	Ty = posY;
+}
+Hole::~Hole()
+{
 }
 
-int Hole::getY()
+Hole* Hole::Get()
 {
-	return y;
+	return this;
 }
 
-void Hole::setX(int posX)
+void Hole::Set_xy(double posX, double posY)
 {
-	x = posX;
+	Tx = posX;
+	Ty = posY;
 }
 
-void Hole::setY(int posY)
+double Hole::Get_x()
 {
-	y = posY;
+	return Tx;
+}
+double Hole::Get_y()
+{
+	return Ty;
+}
+void Hole::Display()
+{
+	cout << "Trou location : (" << Tx << "," << Ty << ")" << endl;
 }
