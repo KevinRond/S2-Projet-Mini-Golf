@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include "Terrain.h"
+#include "Parcours.h"
 
 /*
 LA classe Terrain comporte les ellements suivants:
@@ -99,17 +100,17 @@ Terrain *Terrain::OpenTerrain()
 	return nullptr;
 }
 
-Parcours Terrain::VerrifierColision(Ball ball)
+/*Parcours Terrain::VerrifierColision()
 {		/******************* ALI *********************/
 /*Ici la fonction t'envoie un onjet balle avec lequel tu utilisera ses 
 attribus trouver la  colision avec un mur ou un trou du terrain. Prendre 
-choisir le plus proche et le fournir à l'objet interaction*/
+choisir le plus proche et le fournir a l'objet interaction
 
 
 
 
-	return Parcours;
-}
+	return this;
+}*/
 
 void Terrain::Display()
 {
@@ -121,8 +122,29 @@ void Terrain::Display()
 	hole1->Display();
 }
 
-void Terrain::CoupDonne(Coup *coup1)
+void Terrain::testParcours()
+{
+	Parcours Complet, segment1, segment2;		//EXEMPLE : Creation de 3 parcours
+					
+	for (int i = 0;i < 100;i++)					//Load them with dummy values
+	{
+		segment1.addCoor(i, 100 - i);
+	}				
+
+	for (int i = 0;i < 75;i++)
+	{
+		segment2.addCoor(i + 75, 75 - i);
+	}
+
+
+	Complet += segment1;
+	Complet += segment2;
+	Complet.Display();
+
+}
+
+/*void Terrain::CoupDonne(Coup* coup1)
 {	//La methode retourne l'emplacement de la balle pour chaque intervale de temps donne (a ajuster avec un taux de rafraichissement d'affichage)
 	//Elle prendre l'objet COUP l'applique a BALL et valide la colision avec l'un de ses objets (MUR ou TROU)
 
-}
+}*/
