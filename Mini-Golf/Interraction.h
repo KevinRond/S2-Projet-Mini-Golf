@@ -24,7 +24,12 @@ public:
 	double InterractionAngle(); //Retourne l'angle d'incidence
 	double InterractionFac(); //Retourne le facteur d'influence
 	double Module(); //Retour la distance en les 2 objets en interaction
-	void InteractionMur(Ball balle, Mur mur);
+	void interactionGen(Ball *balle, Mur *mur, Hole* hole);
+	void vitesseUpdate(Ball* balle);
+	void positionUpdate(Ball* balle);
+	void angleReflexion(Ball* balle, Mur *mur);
+	double* intersection(Ball* balle, Mur* mur);
+	double penteMur(Mur* mur);
 };
 
 #endif
