@@ -2,8 +2,8 @@
 using namespace std;
 Coup::Coup()
 {
-	Direction();
-	Amplitude();
+	Direction(0,0);
+	Amplitude(0);
 }
 
 Coup::~Coup()
@@ -22,12 +22,13 @@ void Coup::Amplitude(double module)
 	//Set l'amplitude
 }
 
-void Coup::GetDirection()
+double Coup::GetDirection()
 {
 	//Retournera un pointeur vers l'array de direction
+	return 0.0;
 }
 
 double Coup::GetAmplitude()
 {
-	return amplitude;
+	return 0.0;
 }

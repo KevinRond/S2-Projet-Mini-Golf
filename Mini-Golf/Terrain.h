@@ -32,17 +32,11 @@ public:
 	Terrain();		//Constructeur
 	~Terrain();		//Destructeur
 
-	Terrain *OpenTerrain();				//charge le terrain via fichier
-	void CoupDonne(Coup *coup1);			//Lorsqu'un coup est donnee, retournera le parcours (emplacement par laps de temps dt) de la balle
+	Terrain *OpenTerrain();					//charge le terrain via fichier
+	//void CoupDonne(Coup *coup1);			//Lorsqu'un coup est donnee, retournera le parcours (emplacement par laps de temps dt) de la balle
 
-	Interraction VerrifierColision(Ball ball);	//Doit virifie l'interaction avec son trou ou l'un de ses murs.
-	void Display();								//affiche le terrain
+	//Parcours VerrifierColision();			//Doit virifie l'interaction avec son trou ou l'un de ses murs.
+	void Display();							//affiche le terrain
+	void testParcours();
 };
-
-struct Parcours
-{
-	int dt=10;					//intervale de temps en ms
-	double location_dt[2][2];	//Location xy par intervale de temps dt
-};
-
 #endif
