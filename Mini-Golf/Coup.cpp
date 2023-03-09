@@ -6,7 +6,7 @@ Coup::Coup()
 	setAmplitude();
 	calculVitesseX();
 	calculVitesseY();
-	acceleration = 0;
+	calculAcceleration();
 }
 
 Coup::~Coup()
