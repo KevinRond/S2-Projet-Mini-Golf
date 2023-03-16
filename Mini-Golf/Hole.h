@@ -23,6 +23,7 @@ public:
 	//Getter
 	double Get_x();
 	double Get_y();
+	double Get_radius();
 
 	//Affichage
 	void Display();

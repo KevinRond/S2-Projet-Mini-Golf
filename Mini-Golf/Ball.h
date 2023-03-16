@@ -18,6 +18,7 @@ private:
 	double Vx, Vy;	//Velocite
 	double Ax, Ay;	//acceleration
 	double direction; //direction de la balle
+	double rayon;
 
 
 public:
@@ -45,6 +46,7 @@ public:
 	double Get_Ax();	//Set l'acceleration X
 	double Get_Ay();	//Set l'acceleration Y
 	double Get_direction();
+	double Get_rayon();
 
 	//Affichage
 	void Display();

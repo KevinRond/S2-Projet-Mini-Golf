@@ -131,8 +131,26 @@ void Interraction::verifVxVy(double verifVx, double verifVy, Ball* balle) //fonc
 
 void Interraction::hitWall(Mur* mur, Ball* balle)
 {
-	double m = tan(balle->Get_direction() * PI / 180);
-	double b = balle->Get_Oy() - m * balle->Get_Ox();
+	double * intersectionmur = intersection(balle, mur); //trouve le point d'intersection entre la balle et le mur
+	double distanceToWall = sqrt(pow(intersectionmur[0] - balle->Get_Ox(), 2) + pow(intersectionmur[1] - balle->Get_Oy(), 2)); //trouve la distance entre la balle et le mur
+	timeHitWall = distanceToWall / (sqrt(pow(balle->Get_Vx(), 2) + pow(balle->Get_Vy(), 2))); // trouve le temps nécessaire a la balle pour atteindre le mur
+	
+}
+
+double* Interraction::intersectionTrou(Ball* balle, Hole* hole)
+{
+	double pointIntersectionHole[2];
+	pointIntersectionHole[0] = hole->Get_x();
+	pointIntersectionHole[1] = hole->Get_y();
+	return pointIntersectionHole;
+}
+
+
+bool Interraction::hitHole(Ball* balle, Hole* hole)
+{
+	double* intersectionHoleXY = intersectionTrou(balle, hole);
+	double distance = sqrt(pow(intersectionHoleXY[0] - balle->Get_x(), 2) + pow(intersectionHoleXY[1] - balle->Get_y(), 2));
+	return distance <= balle->Get_rayon() - hole->Get_radius() && balle->Get_Vx() > 0.5 && balle->Get_Vy() > 0.5;
 }
 
 void Interraction::vitesseUpdate(Ball* balle)
@@ -160,41 +178,53 @@ void Interraction::positionUpdate(Ball* balle)
 	posX = posX + dt * Vx;
 	posY = posY + dt * Vy;
 	balle->Set_xy(posX, posY);
+	timeBall = timeBall + 0.01;
 }
 
 void Interraction::interactionGen(Ball* balle, Mur* mur, Hole* hole)
 {
 	double posX = balle->Get_x();
 	double posY = balle->Get_y();
+	timeBall = 0;
 	if (mur != NULL)
 	{
 		double* intersectionXY;
 		intersectionXY = intersection(balle, mur);
 		double murX = intersectionXY[0];
 		double murY = intersectionXY[1];
+		hitWall(mur , balle);
 		while ( balle->Get_Vx() == 0 && balle->Get_Vy() == 0)
 		{
 			double verifVx = balle->Get_Vx();
 			double verifVy = balle->Get_Vy();
-			if (balle->Get_x() == intersectionXY[0] && balle->Get_y() == intersectionXY[1])
+			if (timeBall >= timeHitWall)      // regarde si le temp de la balle depasse le temps ou elle touche le mur
 			{
-				angleReflexion(balle, mur);
+				angleReflexion(balle, mur);    //change l'angle de de la balle lorsqu'elle reflette le mur
+				balle->Set_xy(intersectionXY[0], intersectionXY[1]); //met la balle au point de rencontre en celle-ci et le mur
+				break;                     // arrete la fonction pour que ali recommence
+			}
+			positionUpdate(balle);         // change la position de la balle selon sa velocité
+			vitesseUpdate(balle);            // diminue la velocité de la balle
+			verifVxVy(verifVx, verifVy, balle);   //verifie si la velocité doit etre mis a 0 en raison d'un changement de +/-
+			
+		}
+	}
+
+	else if (hole != NULL)
+	{
+		while (balle->Get_Vx() == 0 && balle->Get_Vy() == 0)
+		{
+			double verifVx = balle->Get_Vx();
+			double verifVy = balle->Get_Vy();
+			if (hitHole(balle, hole))
+			{
+				cout << "la balle est rentrer dans le trou";
+				break;
 			}
 			positionUpdate(balle);
 			vitesseUpdate(balle);
 			verifVxVy(verifVx, verifVy, balle);
-			
 		}
-		//angleReflexion(balle, mur);
-		//trouver si la balle se rend au mur
-
-
-
-	}
-
-	if (hole != NULL)
-	{
-
 	}
 
 

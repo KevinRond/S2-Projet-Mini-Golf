@@ -10,6 +10,7 @@ Ball::Ball()
     Vy = 0.0;
     Ax = 0.0;
     Ay = 0.0;
+    rayon = 5;
 }
 
 Ball::~Ball(){}
@@ -97,6 +98,11 @@ void Ball::Display()
 double Ball::Get_direction()
 {
     return direction;
+}
+
+double Ball::Get_rayon()
+{
+    return rayon;
 }
 
 void Ball::Set_direction(double newdirection)
