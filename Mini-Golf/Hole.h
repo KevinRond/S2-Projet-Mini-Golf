@@ -23,6 +23,7 @@ public:
 	//Getter
 	double Get_x();
 	double Get_y();
+	double Get_radius();   //avoir le rayon de la balle
 
 	//Affichage
 	void Display();

@@ -35,6 +35,10 @@ double Hole::Get_y()
 {
 	return Ty;
 }
+double Hole::Get_radius()
+{
+	return radius;
+}
 void Hole::Display()
 {
 	cout << "Trou location : (" << Tx << "," << Ty << ")" << endl;

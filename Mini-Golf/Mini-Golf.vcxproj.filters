@@ -33,9 +33,12 @@
     <ClCompile Include="Coup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="GameManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+=======
+>>>>>>> Interface--Alex
     <ClCompile Include="Hole.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -62,9 +65,12 @@
     <ClInclude Include="Coup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="GameManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+=======
+>>>>>>> Interface--Alex
     <ClInclude Include="Hole.h">
       <Filter>Header Files</Filter>
     </ClInclude>
