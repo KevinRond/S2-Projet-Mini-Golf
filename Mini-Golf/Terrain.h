@@ -8,6 +8,10 @@
 #include "Interraction.h"
 #include "Coup.h"
 #include <vector>
+#include <cmath>
+
+
+#define PI 3.14159265
 
 
 /*
@@ -51,7 +55,7 @@ public:
 	*/
 	bool GetIntersectionHole(double x, double y, double xt, double yt, double radius);
 	double distance(double x1, double y1, double x2, double y2);
-	Interraction VerifierColision(Ball* ball, Hole* trou, vector<Mur>* vecteur_mur);	//Doit virifie l'interaction avec son trou ou l'un de ses murs.
+	void VerifierColision(Ball* ball, Hole* trou, vector<Mur*> vecteur_mur);	//Doit virifie l'interaction avec son trou ou l'un de ses murs.
 	void Display();								//affiche le terrain
 };
 
