@@ -12,7 +12,7 @@ Ses methodes:
 -Lire un fichier de terrain
 -Verifier la prochaine interaction
 -Compiler un parcours de location d'un coup
-*/
+*/  
 
 using namespace std;
 Terrain::Terrain()
@@ -59,7 +59,8 @@ Terrain *Terrain::OpenTerrain()
 					{
 						Mur *MurTemp = new Mur;									//Creation d'un objet Mur
 						MurTemp->Set(Coor1[0], Coor1[1], Coor2[0], Coor2[1]);	//Attribution de ses 2 coor
-						TableauMur[nbMur] = MurTemp->Get();						//Assignation au TableauMur de notre terrain
+						//TableauMur[nbMur] = MurTemp->Get();						//Assignation au TableauMur de notre terrain
+						vecteurMur.push_back(MurTemp->Get());
 						nbMur++;												//Incremenation du nombre de Murs
 						MurTemp->Display();//TO BE DELETE
 						cout << "Mur #" << nbMur << " ajoute" << endl;//TO BE DELETE
@@ -102,22 +103,37 @@ Terrain *Terrain::OpenTerrain()
 
 
 
-Parcours Terrain::VerifierColision()
+Parcours Terrain::VerifierColision(Ball* ball , Hole*trou, vector<Mur>* vecteur_mur)
 {		/******************* ALI *********************/
 /*Ici la fonction t'envoie un objet balle avec lequel tu utilisera ses 
 attribus trouver la  colision avec un mur ou un trou du terrain. Prendre 
 choisir le plus proche et le fournir à l'objet interaction*/
-
-	// Recevoir l'objet ball
-
-	// La balle  va avoir une position initial et un direction en degres,
+// Recevoir l'objet ball
 	 
-	// Determiner l'odre des objets
-	// faire une verification des terrains: 
+	double distance_min = INFINITY;
+	int index_collision = -1;
+	posX = ball->Get_Ox();
+	posY = ball->Get_Oy();
+	 
+	// Verifier collisions avec les mures 
+	for (int i = 0; i < vecteurMur.size(); i++)
+	{
+		
 	
-	// interaction la ball :
+	}
 
-	// Verification des mure:
+	// Verifier collisions avec trous
+	for (int i = 0; i < ; i++) {
+		if (distance(ball->Get_Ox(), ball->Get_Oy(), trou->Get_x(), trou->Get_y()) <= 5) {// remplacer 5 par le rayon voulu
+			distance_min = 0;
+			index_collision = i + nombre_murs_;
+			break;
+		}
+	}
+
+	
+
+
 
 	// Retourné:
 	// Parcours est un tableau de positions:
@@ -149,9 +165,9 @@ double Terrain::GetIntersection(double x1 , double x2 ,double y1 ,double y2,doub
 	else
 
 	{
-		intersection_X = (c2 - c1) / (m1 - m2);
+		intersection_X = (c2 - c1) / (m1 - m2); //on vient chercher l'intersection en point x
 
-		intersection_Y = m1 * intersection_X + c1;
+		intersection_Y = m1 * intersection_X + c1;// on vient cherhcer l intersection en pointy
 
 		std::cout << "le point d intersection = ";
 
@@ -162,13 +178,8 @@ double Terrain::GetIntersection(double x1 , double x2 ,double y1 ,double y2,doub
 	}
 
 }
-double Terrain::distance(double x1, double y1, double x2, double y2) {
+double Terrain::distance(double x1, double y1, double x2, double y2) { // on vient chercher  la distance entre deux points
 	return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
-}
-
-bool Terrain::GetIntersectionHole(double x, double y, double xt, double yt, double radius) {
-	double d = distance(x, y, xt, yt);
-	return d <= radius;
 }
 
 void Terrain::Display()
