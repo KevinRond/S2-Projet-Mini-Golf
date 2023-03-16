@@ -103,3 +103,13 @@ void Ball::Set_direction(double newdirection)
 {
     direction = newdirection;
 }
+
+void Ball::Set_Vx(double posX)
+{
+    Vx = posX;
+}
+
+void Ball::Set_Vy(double posY)
+{
+    Vy = posY;
+}

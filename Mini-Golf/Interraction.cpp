@@ -55,7 +55,7 @@ double* Interraction::intersection(Ball* balle, Mur* mur)
 {
 	double pointIntersection[2];
 	//equation de la trajectoire de la balle y = mx + b
-	double m = tan(balle->Get_direction());
+	double m = tan(balle->Get_direction()* PI/180 );
 	double b = balle->Get_Oy() - m * balle->Get_Ox();
 
 	//equation de la droite du mur y = mx + c
@@ -75,15 +75,76 @@ double Interraction::penteMur(Mur* mur)
 	return m_wall;
 }
 
+void Interraction::verifVxVy(double verifVx, double verifVy, Ball* balle) //fonction pour pas que la balle bouge a linfini
+{
+	if (verifVx > 0 && verifVy > 0)
+	{
+		if (balle->Get_Vx() < 0)
+		{
+			balle->Set_Vx(0);
+		}
+
+		if (balle->Get_Vy() < 0)
+		{
+			balle->Set_Vy(0);
+		}
+	}
+	else if (verifVx > 0 && verifVy < 0)
+	{
+		if (balle->Get_Vx() < 0)
+		{
+			balle->Set_Vx(0);
+		}
+
+		if (balle->Get_Vy() > 0)
+		{
+			balle->Set_Vy(0);
+		}
+	}
+
+	else if (verifVx < 0 && verifVy > 0)
+	{
+		if (balle->Get_Vx() > 0)
+		{
+			balle->Set_Vx(0);
+		}
+
+		if (balle->Get_Vy() < 0)
+		{
+			balle->Set_Vy(0);
+		}
+	}
+	else if (verifVx < 0 && verifVy < 0)
+	{
+		if (balle->Get_Vx() > 0)
+		{
+			balle->Set_Vx(0);
+		}
+
+		if (balle->Get_Vy() > 0)
+		{
+			balle->Set_Vy(0);
+		}
+	}
+	
+}
+
+void Interraction::hitWall(Mur* mur, Ball* balle)
+{
+	double m = tan(balle->Get_direction() * PI / 180);
+	double b = balle->Get_Oy() - m * balle->Get_Ox();
+}
+
 void Interraction::vitesseUpdate(Ball* balle)
 {
 	double Vx = balle->Get_Vx();
 	double Vy = balle->Get_Vy();
-	double a = balle->Get_Ax();
+	double ax = balle->Get_Ax();
+	double ay = balle->Get_Ay();
 	double dt = 0.01; // 10 ms car on veut le deplacement a chaque delta t = 10 ms
 
-	Vx = Vx + dt * a;
-	Vy = Vy + dt * a;
+	Vx = Vx + dt * ax;
+	Vy = Vy + dt * ay;
 	balle->Set_Vxy(Vx, Vy);
 }
 
@@ -113,12 +174,16 @@ void Interraction::interactionGen(Ball* balle, Mur* mur, Hole* hole)
 		double murY = intersectionXY[1];
 		while ( balle->Get_Vx() == 0 && balle->Get_Vy() == 0)
 		{
+			double verifVx = balle->Get_Vx();
+			double verifVy = balle->Get_Vy();
 			if (balle->Get_x() == intersectionXY[0] && balle->Get_y() == intersectionXY[1])
 			{
 				angleReflexion(balle, mur);
 			}
 			positionUpdate(balle);
 			vitesseUpdate(balle);
+			verifVxVy(verifVx, verifVy, balle);
+			
 		}
 		//angleReflexion(balle, mur);
 		//trouver si la balle se rend au mur

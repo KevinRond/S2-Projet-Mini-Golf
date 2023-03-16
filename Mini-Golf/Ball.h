@@ -32,6 +32,8 @@ public:
 	void Set_Vxy(double posX, double posY);	//Set la velocite
 	void Set_Axy(double posX, double posY);	//Set l'acceleration
 	void Set_direction(double newdirection);
+	void Set_Vx(double posX);
+	void Set_Vy(double posY);
 
 	//Getter
 	double Get_x();		//Set la position actuel X
