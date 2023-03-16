@@ -34,8 +34,13 @@ public:
 	~Terrain();		//Destructeur
 
 	Terrain *OpenTerrain();				//charge le terrain via fichier
-	void CoupDonne(Coup *coup1);			//Lorsqu'un coup est donnee, retournera le parcours (emplacement par laps de temps dt) de la balle
-
+	void CoupDonne(Coup *coup1);	
+	//Lorsqu'un coup est donnee, retournera le parcours (emplacement par laps de temps dt) de la balle
+	//Interraction DirectionTrou;
+	//Interraction DirectionMur();
+	double GetIntersection(double x1, double x2, double y1,double y2, double x3, double y3); //fonction qui va aller chercher 
+	bool GetIntersectionHole(double x, double y, double xt, double yt, double radius);
+	double distance(double x1, double y1, double x2, double y2);
 	Interraction VerrifierColision();	//Doit virifie l'interaction avec son trou ou l'un de ses murs.
 	void Display();								//affiche le terrain
 };

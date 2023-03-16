@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <cmath>
 #include "Terrain.h"
 
 /*
@@ -99,7 +100,9 @@ Terrain *Terrain::OpenTerrain()
 	return nullptr;
 }
 
-Parcours Terrain::VerrifierColision()
+
+
+Parcours Terrain::VerifierColision()
 {		/******************* ALI *********************/
 /*Ici la fonction t'envoie un objet balle avec lequel tu utilisera ses 
 attribus trouver la  colision avec un mur ou un trou du terrain. Prendre 
@@ -117,11 +120,55 @@ choisir le plus proche et le fournir à l'objet interaction*/
 	// Verification des mure:
 
 	// Retourné:
-	// Parcours est un tableau de positions 
+	// Parcours est un tableau de positions:
 
 
 	//parcourstotal += parcourssection
 	return parcourstotal;
+}
+
+double Terrain::GetIntersection(double x1 , double x2 ,double y1 ,double y2,double x3 ,double y3){
+/*Fonction qui va venir chercher l instersection */
+	double  dx, dy;
+	double m1,m2;
+	double intersection_X, intersection_Y;
+	double c1,c2;
+
+   //  trouver la equation de la droite  droite des mures 
+	dx = x2 - x1;
+	dy = y2 - y1;
+	m1 = dx / dy;
+	c1 =  y1 - m1 * x1;
+  // trouver l'équation de la droite effectuer par la balle 
+	m2 = x3 / y3;
+	c2 = y3 - m2 * x3;
+
+	if ((m1 - m2) == 0)
+        // les droite sont parallles lorsqu'elles ont les meme pentes
+		std::cout << " Aucune intersection entre les lignes\n";
+	else
+
+	{
+		intersection_X = (c2 - c1) / (m1 - m2);
+
+		intersection_Y = m1 * intersection_X + c1;
+
+		std::cout << "le point d intersection = ";
+
+		std::cout << intersection_X;
+		std::cout << ",";
+		std::cout << intersection_Y;
+		std::cout << "\n";
+	}
+
+}
+double Terrain::distance(double x1, double y1, double x2, double y2) {
+	return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+}
+
+bool Terrain::GetIntersectionHole(double x, double y, double xt, double yt, double radius) {
+	double d = distance(x, y, xt, yt);
+	return d <= radius;
 }
 
 void Terrain::Display()
