@@ -77,7 +77,7 @@ double Interraction::penteMur(Mur* mur)
 
 void Interraction::verifVxVy(double verifVx, double verifVy, Ball* balle) //fonction pour pas que la balle bouge a linfini
 {
-	if (verifVx > 0 && verifVy > 0)
+	if (verifVx > 0 && verifVy > 0)  //si deviens négatif, deviens 0, pour pas que ca aille par en arriere a l'infini
 	{
 		if (balle->Get_Vx() < 0)
 		{
@@ -89,7 +89,7 @@ void Interraction::verifVxVy(double verifVx, double verifVy, Ball* balle) //fonc
 			balle->Set_Vy(0);
 		}
 	}
-	else if (verifVx > 0 && verifVy < 0)
+	else if (verifVx > 0 && verifVy < 0) //regarde si la velocité change de sens pour eviter cela
 	{
 		if (balle->Get_Vx() < 0)
 		{
@@ -102,7 +102,7 @@ void Interraction::verifVxVy(double verifVx, double verifVy, Ball* balle) //fonc
 		}
 	}
 
-	else if (verifVx < 0 && verifVy > 0)
+	else if (verifVx < 0 && verifVy > 0) //idem que précédemment
 	{
 		if (balle->Get_Vx() > 0)
 		{
@@ -114,7 +114,7 @@ void Interraction::verifVxVy(double verifVx, double verifVy, Ball* balle) //fonc
 			balle->Set_Vy(0);
 		}
 	}
-	else if (verifVx < 0 && verifVy < 0)
+	else if (verifVx < 0 && verifVy < 0) //si deviens positif, deviens 0...
 	{
 		if (balle->Get_Vx() > 0)
 		{
@@ -129,7 +129,7 @@ void Interraction::verifVxVy(double verifVx, double verifVy, Ball* balle) //fonc
 	
 }
 
-void Interraction::hitWall(Mur* mur, Ball* balle)
+void Interraction::hitWall(Mur* mur, Ball* balle) //temps pour que la balle touche le mur
 {
 	double * intersectionmur = intersection(balle, mur); //trouve le point d'intersection entre la balle et le mur
 	double distanceToWall = sqrt(pow(intersectionmur[0] - balle->Get_Ox(), 2) + pow(intersectionmur[1] - balle->Get_Oy(), 2)); //trouve la distance entre la balle et le mur
@@ -137,7 +137,7 @@ void Interraction::hitWall(Mur* mur, Ball* balle)
 	
 }
 
-double* Interraction::intersectionTrou(Ball* balle, Hole* hole)
+double* Interraction::intersectionTrou(Ball* balle, Hole* hole) //trouver l'intersection du trou(coordonnée de sont centre)
 {
 	double pointIntersectionHole[2];
 	pointIntersectionHole[0] = hole->Get_x();
@@ -146,7 +146,7 @@ double* Interraction::intersectionTrou(Ball* balle, Hole* hole)
 }
 
 
-bool Interraction::hitHole(Ball* balle, Hole* hole)
+bool Interraction::hitHole(Ball* balle, Hole* hole)  // regarder si la balle est au moins a la moitier dans le trou
 {
 	double* intersectionHoleXY = intersectionTrou(balle, hole);
 	double distance = sqrt(pow(intersectionHoleXY[0] - balle->Get_x(), 2) + pow(intersectionHoleXY[1] - balle->Get_y(), 2));
@@ -155,15 +155,15 @@ bool Interraction::hitHole(Ball* balle, Hole* hole)
 
 void Interraction::vitesseUpdate(Ball* balle)
 {
-	double Vx = balle->Get_Vx();
+	double Vx = balle->Get_Vx();			//avoir les info sur la velocité et la decceleration
 	double Vy = balle->Get_Vy();
 	double ax = balle->Get_Ax();
 	double ay = balle->Get_Ay();
 	double dt = 0.01; // 10 ms car on veut le deplacement a chaque delta t = 10 ms
 
-	Vx = Vx + dt * ax;
+	Vx = Vx + dt * ax; //formule changer la velocité de la balle a chaque 10 ms
 	Vy = Vy + dt * ay;
-	balle->Set_Vxy(Vx, Vy);
+	balle->Set_Vxy(Vx, Vy);  //changer la velocité de la balle
 }
 
 void Interraction::positionUpdate(Ball* balle)
@@ -175,55 +175,51 @@ void Interraction::positionUpdate(Ball* balle)
 	double dt = 0.01; // 10 ms car on veut le deplacement a chaque delta t = 10 ms
 
 
-	posX = posX + dt * Vx;
+	posX = posX + dt * Vx; // formule pour changer la position de x a chaque 10 ms
 	posY = posY + dt * Vy;
-	balle->Set_xy(posX, posY);
-	timeBall = timeBall + 0.01;
+	balle->Set_xy(posX, posY); //changer la position
+	timeBall = timeBall + 0.01; //augmenter le temps parcourue ar la balle
 }
 
-void Interraction::interactionGen(Ball* balle, Mur* mur, Hole* hole)
+void Interraction::interactionGen(Ball* balle, Mur* mur, Hole* hole) //faire le parcours jusqua ce que v = 0 ou que la balle touche un object
 {
-	double posX = balle->Get_x();
+	double posX = balle->Get_x();   // position en x et y
 	double posY = balle->Get_y();
-	timeBall = 0;
-	if (mur != NULL)
+	timeBall = 0; //reset temps de la balle pour chaque petite partie du parcours
+	if (mur != NULL)  //si cest objet mur
 	{
-		double* intersectionXY;
-		intersectionXY = intersection(balle, mur);
-		double murX = intersectionXY[0];
+		double* intersectionXY; 
+		intersectionXY = intersection(balle, mur); //prend l'intersection entre la balle et le mur
+		double murX = intersectionXY[0];   
 		double murY = intersectionXY[1];
-		hitWall(mur , balle);
-		while ( balle->Get_Vx() == 0 && balle->Get_Vy() == 0)
+		hitWall(mur , balle); //set le temps pour que la balle se rend au mur
+		while ( balle->Get_Vx() == 0 && balle->Get_Vy() == 0)  //tant que la balle a de la vitesse
 		{
-			double verifVx = balle->Get_Vx();
-			double verifVy = balle->Get_Vy();
 			if (timeBall >= timeHitWall)      // regarde si le temp de la balle depasse le temps ou elle touche le mur
 			{
 				angleReflexion(balle, mur);    //change l'angle de de la balle lorsqu'elle reflette le mur
 				balle->Set_xy(intersectionXY[0], intersectionXY[1]); //met la balle au point de rencontre en celle-ci et le mur
-				break;                     // arrete la fonction pour que ali recommence
-			}
-			positionUpdate(balle);         // change la position de la balle selon sa velocité
-			vitesseUpdate(balle);            // diminue la velocité de la balle
-			verifVxVy(verifVx, verifVy, balle);   //verifie si la velocité doit etre mis a 0 en raison d'un changement de +/-
+				break;                         // arrete la fonction pour que ali recommence
+			}     
+			positionUpdate(balle);            // change la position de la balle selon sa velocité
+			vitesseUpdate(balle);              // diminue la velocité de la balle
+			verifVxVy(balle->Get_Vx(), balle->Get_Vy(), balle);   //verifie si la velocité doit etre mis a 0 en raison d'un changement de +/-
 			
 		}
 	}
 
-	else if (hole != NULL)
+	else if (hole != NULL) //si cest le trou le plus proche
 	{
-		while (balle->Get_Vx() == 0 && balle->Get_Vy() == 0)
+		while (balle->Get_Vx() == 0 && balle->Get_Vy() == 0) //tant que la balle na pas une velocite de 0
 		{
-			double verifVx = balle->Get_Vx();
-			double verifVy = balle->Get_Vy();
 			if (hitHole(balle, hole))
 			{
-				cout << "la balle est rentrer dans le trou";
-				break;
+				cout << "la balle est rentrer dans le trou"; //je ne savais pas quoi mettre, A CHANGER
+				break;                                       //arrete la boucle while
 			}
-			positionUpdate(balle);
-			vitesseUpdate(balle);
-			verifVxVy(verifVx, verifVy, balle);
+			positionUpdate(balle);                          //update la position de la balle
+			vitesseUpdate(balle);							//diminue la velocité de la balle
+			verifVxVy(balle->Get_Vx(), balle->Get_Vy(), balle);  //verifie si la velocité doit etre mis a 0 en raison d'un changement de +/-
 		}
 	}
 
