@@ -1,7 +1,21 @@
-﻿  Ball.cpp
-  GameManager.cpp
-C:\Users\kevin\source\repos\Mini-Golf\Mini-Golf\GameManager.cpp(6,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+﻿  Generate moc_predefs.h
+  Ball.cpp
+  Coup.cpp
+Coup.cpp(5,15): error C2660: 'Coup::setDirection': function does not take 0 arguments
+C:\Users\kevin\Documents\GitHub\S2-Projet-Mini-Golf\Mini-Golf\Coup.h(21,7): message : see declaration of 'Coup::setDirection'
+Coup.cpp(6,15): error C2660: 'Coup::setAmplitude': function does not take 0 arguments
+C:\Users\kevin\Documents\GitHub\S2-Projet-Mini-Golf\Mini-Golf\Coup.h(22,7): message : see declaration of 'Coup::setAmplitude'
+Coup.cpp(48,1): error C2143: syntax error: missing ';' before '}'
+  Hole.cpp
+  Interraction.cpp
+  Mini-Golf.cpp
+  Mur.cpp
+  Terrain.cpp
+Terrain.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1166 that is illegal in the current source character set (codepage 65001).
+Terrain.cpp(103,1): error C2556: 'Parcours Terrain::VerrifierColision(Ball)': overloaded function differs only by return type from 'Interraction Terrain::VerrifierColision(Ball)'
+C:\Users\kevin\Documents\GitHub\S2-Projet-Mini-Golf\Mini-Golf\Terrain.h(38): message : see declaration of 'Terrain::VerrifierColision'
+Terrain.cpp(102,19): error C2371: 'Terrain::VerrifierColision': redefinition; different basic types
+C:\Users\kevin\Documents\GitHub\S2-Projet-Mini-Golf\Mini-Golf\Terrain.h(38): message : see declaration of 'Terrain::VerrifierColision'
+Terrain.cpp(111,9): error C2275: 'Parcours': illegal use of this type as an expression
+C:\Users\kevin\Documents\GitHub\S2-Projet-Mini-Golf\Mini-Golf\Terrain.h(42): message : see declaration of 'Parcours'
   Generating Code...
-GameManager.obj : error LNK2019: unresolved external symbol "public: int __thiscall Ball::getX(void)" (?getX@Ball@@QAEHXZ) referenced in function "public: void __thiscall GameManager::Draw(void)" (?Draw@GameManager@@QAEXXZ)
-GameManager.obj : error LNK2019: unresolved external symbol "public: int __thiscall Ball::getY(void)" (?getY@Ball@@QAEHXZ) referenced in function "public: void __thiscall GameManager::Draw(void)" (?Draw@GameManager@@QAEXXZ)
-C:\Users\kevin\source\repos\Mini-Golf\Debug\Mini-Golf.exe : fatal error LNK1120: 2 unresolved externals

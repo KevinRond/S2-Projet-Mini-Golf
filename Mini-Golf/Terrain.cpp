@@ -122,6 +122,7 @@ void Terrain::Display()
 	hole1->Display();
 }
 
+<<<<<<< HEAD
 void Terrain::testParcours()
 {
 	Parcours Complet, segment1, segment2;		//EXEMPLE : Creation de 3 parcours
@@ -148,3 +149,13 @@ void Terrain::testParcours()
 	//Elle prendre l'objet COUP l'applique a BALL et valide la colision avec l'un de ses objets (MUR ou TROU)
 
 }*/
+=======
+void Terrain::CoupDonne(Coup *coup1)
+{	
+	//La methode retourne l'emplacement de la balle pour chaque intervale de temps donne (a ajuster avec un taux de rafraichissement d'affichage)
+	//Elle prendre l'objet COUP l'applique a BALL et valide la colision avec l'un de ses objets (MUR ou TROU)
+
+	balle1->Set_Vxy(coup1->getVitesseX(), coup1->getVitesseY());
+	balle1->Set_Axy(coup1->getAcceleration(), coup1->getAcceleration());
+}
+>>>>>>> Coup-Terrain--Kev
