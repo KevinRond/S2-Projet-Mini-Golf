@@ -199,6 +199,7 @@ void Interraction::interactionGen(Ball* balle, Mur* mur, Hole* hole) //faire le 
 			{
 				angleReflexion(balle, mur);    //change l'angle de de la balle lorsqu'elle reflette le mur
 				balle->Set_xy(intersectionXY[0], intersectionXY[1]); //met la balle au point de rencontre en celle-ci et le mur
+				balle->Set_Oxy(balle->Get_x(), balle->Get_y());
 				break;                         // arrete la fonction pour que ali recommence
 			}     
 			positionUpdate(balle);            // change la position de la balle selon sa velocité
@@ -206,6 +207,7 @@ void Interraction::interactionGen(Ball* balle, Mur* mur, Hole* hole) //faire le 
 			verifVxVy(balle->Get_Vx(), balle->Get_Vy(), balle);   //verifie si la velocité doit etre mis a 0 en raison d'un changement de +/-
 			
 		}
+		balle->Set_Oxy(balle->Get_x(), balle->Get_y());
 	}
 
 	else if (hole != NULL) //si cest le trou le plus proche
@@ -220,7 +222,9 @@ void Interraction::interactionGen(Ball* balle, Mur* mur, Hole* hole) //faire le 
 			positionUpdate(balle);                          //update la position de la balle
 			vitesseUpdate(balle);							//diminue la velocité de la balle
 			verifVxVy(balle->Get_Vx(), balle->Get_Vy(), balle);  //verifie si la velocité doit etre mis a 0 en raison d'un changement de +/-
+
 		}
+		balle->Set_Oxy(balle->Get_x(), balle->Get_y());
 	}
 
 

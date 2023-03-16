@@ -18,7 +18,7 @@ private:
 	double Vx, Vy;	//Velocite
 	double Ax, Ay;	//acceleration
 	double direction; //direction de la balle
-	double rayon;
+	double rayon; //rayon de la balle
 
 
 public:
