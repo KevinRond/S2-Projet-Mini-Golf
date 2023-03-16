@@ -12,7 +12,7 @@ Ses methodes:
 -Lire un fichier de terrain
 -Verifier la prochaine interaction
 -Compiler un parcours de location d'un coup
-*/
+*/  
 
 using namespace std;
 Terrain::Terrain()
@@ -59,7 +59,8 @@ Terrain *Terrain::OpenTerrain()
 					{
 						Mur *MurTemp = new Mur;									//Creation d'un objet Mur
 						MurTemp->Set(Coor1[0], Coor1[1], Coor2[0], Coor2[1]);	//Attribution de ses 2 coor
-						TableauMur[nbMur] = MurTemp->Get();						//Assignation au TableauMur de notre terrain
+						//TableauMur[nbMur] = MurTemp->Get();						//Assignation au TableauMur de notre terrain
+						vecteurMur.push_back(MurTemp->Get());
 						nbMur++;												//Incremenation du nombre de Murs
 						MurTemp->Display();//TO BE DELETE
 						cout << "Mur #" << nbMur << " ajoute" << endl;//TO BE DELETE
@@ -100,23 +101,154 @@ Terrain *Terrain::OpenTerrain()
 	return nullptr;
 }
 
-/*Parcours Terrain::VerrifierColision()
+
+
+void Terrain::VerifierColision(Ball* ball , Hole*trou, vector<Mur*> vecteur_mur)
 {		/******************* ALI *********************/
-/*Ici la fonction t'envoie un onjet balle avec lequel tu utilisera ses 
+/*Ici la fonction t'envoie un objet balle avec lequel tu utilisera ses 
 attribus trouver la  colision avec un mur ou un trou du terrain. Prendre 
-choisir le plus proche et le fournir a l'objet interaction
+choisir le plus proche et le fournir � l'objet interaction*/
+// Recevoir l'objet ball
+	while (ball->Get_Vx() != 0 && ball->Get_Vy() != 0 || trou->get_reussi() == 1)
+	{
+		double distance_min = INFINITY;
+		int index_collision = -1;
+		double posX = ball->Get_Ox();
+		double posY = ball->Get_Oy();
+		double dx = cos(ball->Get_direction());
+		double dy = sin(ball->Get_direction());
+		double distance;
+		int trouOuMur;
+
+		// Verifier collisions avec les mures 
+		for (int i = 0; i < vecteurMur.size(); i++)
+		{
+			Mur* mur = vecteurMur[i];
+
+			//normal du mur
+			double nx = mur->GetTy() - mur->GetHy();
+			double ny = mur->GetTx() - mur->GetHx();
+
+			//calcul angle ball et normal du mur
+
+			double angleEntreVect = acos((dx * nx + dy * ny) / (sqrt(dx * dx + dy * dy) * sqrt(nx * nx + ny * ny)));
+
+			//verif si le mur est dans la direction de la balle
+
+			if (angleEntreVect < PI / 2)
+			{
+				//distance entre la balle et le mur
+				double vx = mur->GetHx() - ball->Get_Ox();
+				double vy = mur->GetHy() - ball->Get_Oy();
+				distance = (vx * dx + vy * dy) / sqrt(dx * dx + dy * dy);
+
+				if (distance < distance_min)
+				{
+					index_collision = i;
+					distance_min = distance;
+					trouOuMur = 0;
+				}
+			}
+
+		}
+
+		//verifier si le trou est le plus proche de la balle
+		//angle en radian
+		double anglerad = ball->Get_direction() * PI / 180.0;
+		//distance entre ball et troue
+		distance = sqrt(pow(trou->Get_x() - ball->Get_Ox(), 2) + pow(trou->Get_y() - ball->Get_Oy(), 2));
+
+		double angleToHole = atan2(trou->Get_y() - ball->Get_Oy(), trou->Get_x() - ball->Get_Ox());
+
+		//diff�rence d'angle
+		double anglediff = abs(anglerad - angleToHole);
+
+		if (anglediff <= PI / 180.0)
+		{
+			if (distance < distance_min)
+			{
+				distance_min = distance;
+				trouOuMur = 1;
+			}
+		}
+
+		//verifier c quoi qu'on envoie
+
+		if (trouOuMur == 0) // si cest un mur qui est le plus proche
+		{
+
+		}
+
+		else // si cest un trou
+		{
+
+		}
+
+	}
+	// Verifier collisions avec trous
+	/*for (int i = 0; i <; i++) {
+		if (distance(ball->Get_Ox(), ball->Get_Oy(), trou->Get_x(), trou->Get_y()) <= 5) {// remplacer 5 par le rayon voulu
+			distance_min = 0;
+			//index_collision = i + nombre_murs_;
+			break;
+		}
+	}*/
+
+	
 
 
 
+	// Retourn�:
+	// Parcours est un tableau de positions:
 
-	return this;
-}*/
+
+	//parcourstotal += parcourssection
+}
+
+double Terrain::GetIntersection(double x1 , double x2 ,double y1 ,double y2,double x3 ,double y3){
+/*Fonction qui va venir chercher l instersection */
+	double  dx, dy;
+	double m1,m2;
+	double intersection_X, intersection_Y;
+	double c1,c2;
+
+   //  trouver la equation de la droite  droite des mures 
+	dx = x2 - x1;
+	dy = y2 - y1;
+	m1 = dx / dy;
+	c1 =  y1 - m1 * x1;
+  // trouver l'�quation de la droite effectuer par la balle 
+	m2 = x3 / y3;
+	c2 = y3 - m2 * x3;
+
+	if ((m1 - m2) == 0)
+        // les droite sont parallles lorsqu'elles ont les meme pentes
+		std::cout << " Aucune intersection entre les lignes\n";
+	else
+
+	{
+		intersection_X = (c2 - c1) / (m1 - m2); //on vient chercher l'intersection en point x
+
+		intersection_Y = m1 * intersection_X + c1;// on vient cherhcer l intersection en pointy
+
+		std::cout << "le point d intersection = ";
+
+		std::cout << intersection_X;
+		std::cout << ",";
+		std::cout << intersection_Y;
+		std::cout << "\n";
+	}
+
+}
+double Terrain::distance(double x1, double y1, double x2, double y2) { // on vient chercher  la distance entre deux points
+	return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+}
 
 void Terrain::Display()
 {
-	for (int i = 0; i < nbMur; i++) {
+	for (int i = 0; i < vecteurMur.size(); i++) {
 		cout << "Mur # " << i+1 << "/" << nbMur << endl;
-		TableauMur[i]->Display();
+		vecteurMur[i]->Display();
 	}
 	balle1->Display();
 	hole1->Display();
