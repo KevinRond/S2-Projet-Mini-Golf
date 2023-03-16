@@ -24,6 +24,26 @@ void Mur::Set(double AX, double AY, double BX, double BY)
 	Ty = BY;
 }
 
+double Mur::GetHx()
+{
+	return Hx;
+}
+
+double Mur::GetHy()
+{
+	return Hy;
+}
+
+double Mur::GetTx()
+{
+	return Tx;
+}
+
+double Mur::GetTy()
+{
+	return Ty;
+}
+
 Mur::~Mur()
 {
 }
