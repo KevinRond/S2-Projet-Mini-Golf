@@ -22,6 +22,7 @@ int main()
 	terrain1->OpenTerrain();
 	terrain1->Display();
 	terrain1->testParcours();
+	
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

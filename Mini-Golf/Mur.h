@@ -11,9 +11,9 @@ private:
 	double Tx, Ty;
 
 public:
-	Mur();												//Constructeur
-	Mur(double AX, double AY, double BX, double BY);	//Constructeur avec parametre
-	~Mur();												//Destructeur
+	Mur();												
+	Mur(double AX, double AY, double BX, double BY);
+	~Mur();												
 
 	//setter
 	void Set(double AX, double AY, double BX, double BY);

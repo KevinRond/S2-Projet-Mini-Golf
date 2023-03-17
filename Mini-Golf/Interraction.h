@@ -34,6 +34,9 @@ public:
 	void positionUpdate(Ball* balle);
 
 	//Interraction avec un mur
+	Parcours BalleMur(Ball* balle, Mur* mur);
+	Parcours BalleTrou(Ball* balle, Hole* trou);
+
 	void angleReflexion(Ball* balle, Mur *mur);
 	double* intersection(Ball* balle, Mur* mur);
 	double penteMur(Mur* mur);

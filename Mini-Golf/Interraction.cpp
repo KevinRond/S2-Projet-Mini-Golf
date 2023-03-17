@@ -17,6 +17,18 @@ Interraction::~Interraction()
 {
 }
 
+Parcours Interraction::BalleMur(Ball* balle, Mur* mur)
+{
+
+	return Parcours();
+}
+
+Parcours Interraction::BalleTrou(Ball* balle, Hole* trou)
+{
+
+	return Parcours();
+}
+
 
 double Interraction::InterractionX()
 {
@@ -180,6 +192,8 @@ void Interraction::positionUpdate(Ball* balle)
 	balle->Set_xy(posX, posY); //changer la position
 	timeBall = timeBall + 0.01; //augmenter le temps parcourue ar la balle
 }
+
+
 
 void Interraction::interactionGen(Ball* balle, Mur* mur, Hole* hole) //faire le parcours jusqua ce que v = 0 ou que la balle touche un object
 {
