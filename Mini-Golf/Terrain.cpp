@@ -31,23 +31,23 @@ Parcours Terrain::CoupDonne(Coup* coup1)
 	int indexColision;															//-1 pour un trou, et le reste pour l'index du mur
 	Parcours ParcoursSection;
 	balle1->Set_Vxy(coup1->getVitesseX(), coup1->getVitesseY());				//Determine la vitesse de la balle
-	balle1->Set_Axy(coup1->getAcceleration(K), coup1->getAcceleration(K));		//Determine l'acceleration de la balle
-	balle1->Set_direction(coup1->getDirection)									//attribut la direction de balle
+	balle1->Set_Axy(coup1->getAccelerationX(), coup1->getAccelerationY());		//Determine l'acceleration de la balle
+	balle1->Set_direction(coup1->getDirection());							//attribut la direction de balle
 
-	while (balle1.Get_Vx() != 0 && balle1.Get_Vy() != 0 || hole1.Sitrou() == true)
+	while (balle1->Get_Vx() != 0 && balle1->Get_Vy() != 0 || hole1->Sitrou() == true)
 	{
-		indexColision = VerifierColision()										//Rapporte l'index de colision
+		indexColision = VerifierColision();										//Rapporte l'index de colision
 		if (indexColision == -1)												//Si interraction avec un trou (-1)
 		{
-			ParcoursSection = BalleTrou(balle1, hole1);							//Retourne le parcours jusqua la prochaine interaction
+			ParcoursSection = interraction->BalleTrou(balle1, hole1);							//Retourne le parcours jusqua la prochaine interaction
 		}
 		else if (indexColision >= 0)											//Si interraction avec un Mur (0 et +)
 		{
-			ParcoursSection = BalleMur(balle1, vecteurMur1(indexColision));		//Retourne le parcours jusqu'a la prochaine interaction
+			ParcoursSection = interraction->BalleMur(balle1, vecteurMur1[indexColision]);		//Retourne le parcours jusqu'a la prochaine interaction
 		}
 		ParcoursTotal += ParcoursSection;										//Cumule les parcours de section
 	}
-	return ParcoursTotal
+	return ParcoursTotal;
 }
 
 
@@ -86,7 +86,7 @@ Terrain *Terrain::OpenTerrain()
 						Mur *MurTemp = new Mur;									//Creation d'un objet Mur
 						MurTemp->Set(Coor1[0], Coor1[1], Coor2[0], Coor2[1]);	//Attribution de ses 2 coor
 						//TableauMur[nbMur] = MurTemp->Get();						//Assignation au TableauMur de notre terrain
-						vecteurMur.push_back(MurTemp->Get());
+						vecteurMur1.push_back(MurTemp->Get());
 						nbMur++;												//Incremenation du nombre de Murs
 						MurTemp->Display();//TO BE DELETE
 						cout << "Mur #" << nbMur << " ajoute" << endl;//TO BE DELETE
@@ -133,10 +133,10 @@ int Terrain::VerifierColision()
 {	//To CHECK utility
 	double distance_min = INFINITY;
 	int index_collision = -1;
-	double posX = ball->Get_Ox();
-	double posY = ball->Get_Oy();
-	double dx = cos(ball->Get_direction());
-	double dy = sin(ball->Get_direction());
+	double posX = balle1->Get_Ox();
+	double posY = balle1->Get_Oy();
+	double dx = cos(balle1->Get_direction());
+	double dy = sin(balle1->Get_direction());
 	int trouOuMur;
 	double Plusproche = INFINITY;
 
@@ -148,25 +148,25 @@ int Terrain::VerifierColision()
 	double Bmx, Bb;												//Doite de la balle y=mx+b
 	double Ox = balle1->Get_Ox();										//Origine de la balle
 	double Oy = balle1->Get_Oy();
-	double Ix, Iy												//Point d'intersection
+	double Ix, Iy;											//Point d'intersection
 	double Nmx, Nb;												//Pente de la normale
 	double Tx = hole1->Get_x(),									//Coor du trou
-		double Ty = hole1->Get_y();
+	double Ty = hole1->Get_y();
 	for (int i = 0; i < vecteurMur1.size(); i++)				// Verifier collisions avec les mures 
 	{																												//Check colision avec Mur
-		Mmx = (vecteurMur1[i]->GetHy - vecteurMur1[i]->GetTy) / (vecteurMur1[i]->GetHx - vecteurMur1[i]->GetTx;);	//Trouve la pente du mur
-		Mb = vecteurMur1[i]->GetHy / (Mmx * vecteurMur1[i]->GetHx);													//Resout l'equation du mur
+		Mmx = (vecteurMur1[i]->GetHy() - vecteurMur1[i]->GetTy()) / (vecteurMur1[i]->GetHx() - vecteurMur1[i]->GetTx());	//Trouve la pente du mur
+		Mb = vecteurMur1[i]->GetHy() / (Mmx * vecteurMur1[i]->GetHx());													//Resout l'equation du mur
 
-		Bmx = asin(balle1->Get_direction;																			//Trouve la pente de balle
+		Bmx = asin(balle1->Get_direction());																			//Trouve la pente de balle
 		Bb = Oy / (Bmx * Ox);																						//Resout l'equation de balle
 
 		if (Mmx != Bmx)															//Si les droites ne sont pas paralleles
 		{
-			Ix = (Mb - Bb) / (Bmx - Mmx)										//Resout le point d'intersection
-			Iy = Bmx * Ix + Bb													//Entre la trajectoire de balle et le mur
-			if (Ix > Tx && Ix < Hx && Iy > Ty && Iy < Hy)						//Valide si la colisin s'est fait dans les limites du mur
+			Ix = (Mb - Bb) / (Bmx - Mmx);										//Resout le point d'intersection
+			Iy = Bmx * Ix + Bb;													//Entre la trajectoire de balle et le mur
+			if (Ix > Tx && Ix < vecteurMur1[i]->GetHx() && Iy > Ty && Iy < vecteurMur1[i]->GetHy())						//Valide si la colisin s'est fait dans les limites du mur
 			{																	//Si oui
-				distance = sqrt((Ix - Ox) * (Ix - Ox) + (Iy - Oy) * (Iy - Oy))	//Trouve la distance entre les 2 points
+				distance = sqrt((Ix - Ox) * (Ix - Ox) + (Iy - Oy) * (Iy - Oy));	//Trouve la distance entre les 2 points
 				if (distance < Plusproche)										//Si c'est la distance est plus proche retient l'index
 				{
 					Plusproche = distance;										//Set le nouveau plus proche
@@ -175,16 +175,16 @@ int Terrain::VerifierColision()
 			}
 		}
 	}																			//Check colision avec Trou
-	Nmx = -1 / Bmx																//Trouve la pente de la normale
-	Nb = Ty - Nmx * Tx															//Resout l'equation de la normale passant par le trou
-	Ix = (Mb - Bb) / (Bmx - Mmx)												//Trouve les coordonnes de l'intersection des 2 droites
-	Iy = Bmx * Ix + Bb
+	Nmx = -1 / Bmx;															//Trouve la pente de la normale
+	Nb = Ty - Nmx * Tx;														//Resout l'equation de la normale passant par le trou
+	Ix = (Mb - Bb) / (Bmx - Mmx);											//Trouve les coordonnes de l'intersection des 2 droites
+	Iy = Bmx * Ix + Bb;
 	if (Ox != Ix && Oy != Iy)													//Dans le cas que l'interaction est confirme mais que le trou n'est pas reussi la nouvelle
 	{																			//position de balle aura donc la meme que l'interaction calcule precedament
-		distanceTrou = sqrt((Ix - Tx) * (Ix - Tx) + (Iy - Ty) * (Iy - Ty))		//Calcul la distance du point d'intersection avec le trou
+		distanceTrou = sqrt((Ix - Tx) * (Ix - Tx) + (Iy - Ty) * (Iy - Ty));		//Calcul la distance du point d'intersection avec le trou
 			if (distanceTrou < hole1->Get_radius())									//Si cette distance est sous le radius du trou il y a collision
 			{
-				distanceTrou = sqrt((Ix - Ox) * (Ix - Ox) + (Iy - Oy) * (Iy - Oy))	//Calcul la distance de la balle du point d'intersection
+				distanceTrou = sqrt((Ix - Ox) * (Ix - Ox) + (Iy - Oy) * (Iy - Oy));	//Calcul la distance de la balle du point d'intersection
 					if (distance < Plusproche)										//Si c'est la distance est plus proche change l'index
 					{
 						Plusproche = distance;										//Set le nouveau plus proche
@@ -253,7 +253,7 @@ int Terrain::VerifierColision()
 
 
 	//parcourstotal += parcourssection
-}
+//}
 /*
 double Terrain::GetIntersection(double x1 , double x2 ,double y1 ,double y2,double x3 ,double y3){
 	double  dx, dy;													//Fonction qui va venir chercher l instersection
@@ -290,9 +290,9 @@ double Terrain::distance(double x1, double y1, double x2, double y2)
 
 void Terrain::Display()
 {
-	for (int i = 0; i < vecteurMur.size(); i++) {
+	for (int i = 0; i < vecteurMur1.size(); i++) {
 		cout << "Mur # " << i+1 << "/" << nbMur << endl;
-		vecteurMur[i]->Display();
+		vecteurMur1[i]->Display();
 	}
 	balle1->Display();
 	hole1->Display();

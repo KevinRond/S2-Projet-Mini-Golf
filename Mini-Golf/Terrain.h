@@ -33,7 +33,8 @@ private:
 	Ball* balle1;					//Depart de la balle
 	std::vector<Mur*> vecteurMur1;	//tableau pointeur des murs du terrain
 	Parcours ParcoursTotal;
-	double K						//Facteur de friction
+	Interraction* interraction;
+	double K;						//Facteur de friction
 	
 public:
 	Terrain();		
@@ -53,7 +54,8 @@ public:
 	*/
 	bool GetIntersectionHole(double x, double y, double xt, double yt, double radius);
 	double distance(double x1, double y1, double x2, double y2);
-	int VerifierColision(Ball* ball, Hole* trou, vector<Mur*> vecteur_mur);			//Doit virifie l'interaction avec son trou ou l'un de ses murs.
+	int VerifierColision();			//Doit virifie l'interaction avec son trou ou l'un de ses murs.
 	void Display();																		//affiche le terrain
+	void testParcours();
 };
 #endif

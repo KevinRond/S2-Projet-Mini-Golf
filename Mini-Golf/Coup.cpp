@@ -3,11 +3,11 @@ using namespace std;
 Coup::Coup()				//Initialisation de l'objet
 {
 	setDirection(90);
-	setAmplitude();
+	//setAmplitude();		//JSP QUELLE AMPLITUDE METTRE LOL
 	calculVitesseX();
 	calculVitesseY();
-	calculAccelerationX();
-	calculAccelerationY();
+	//calculAccelerationX();    //ERREUR AVEC LES FONCTIONS EN COMMENTTAIRE
+	//calculAccelerationY();
 }
 
 Coup::~Coup()
@@ -21,8 +21,8 @@ void Coup::initball(double dir, double ampli)	//Lorsque les parametre d'un coup 
 	amplitude = ampli;
 	calculVitesseX();
 	calculVitesseY();
-	calculAccelerationY();
-	calculAccelerationX();
+	calculAccelerationY(ampli);
+	calculAccelerationX(ampli);
 }
 
 void Coup::setDirection(double dir)		//update seulement la direction
@@ -30,19 +30,24 @@ void Coup::setDirection(double dir)		//update seulement la direction
 	direction = dir;
 }
 
-double Coup::GetDirection()
+void Coup::setAmplitude(double ampli)
+{
+	ampli = amplitude;
+}
+
+double Coup::getDirection()
 {
 	return direction;
 }
 
 void Coup::calculVitesseX()
 {
-	vitesseX = amplitude * cos(degToRad(direction * 3.14159265 / 180));
+	vitesseX = amplitude * cos(direction * 3.14159265 / 180);
 }
 
 void Coup::calculVitesseY()
 {
-	vitesseY = -(amplitude * sin(degToRad(direction * 3.14159265 / 180)));
+	vitesseY = -(amplitude * sin(direction * 3.14159265 / 180));
 }
 
 void Coup::calculAccelerationY(short Kfactor)
