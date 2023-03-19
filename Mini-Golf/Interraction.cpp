@@ -19,14 +19,54 @@ Interraction::~Interraction()
 
 Parcours Interraction::BalleMur(Ball* balle, Mur* mur)
 {
-	//ICI
-	return Parcours();
+	Parcours petitParcour;
+	double posX = balle->Get_x();   // position en x et y
+	double posY = balle->Get_y();
+	timeBall = 0; //reset temps de la balle pour chaque petite partie du parcours
+	double* intersectionXY;
+	intersectionXY = intersection(balle, mur); //prend l'intersection entre la balle et le mur
+	double murX = intersectionXY[0];
+	double murY = intersectionXY[1];
+	hitWall(mur, balle); //set le temps pour que la balle se rend au mur
+	while (balle->Get_Vx() == 0 && balle->Get_Vy() == 0)  //tant que la balle a de la vitesse
+		{
+			if (timeBall >= timeHitWall)      // regarde si le temp de la balle depasse le temps ou elle touche le mur
+			{
+				angleReflexion(balle, mur);    //change l'angle de de la balle lorsqu'elle reflette le mur
+				balle->Set_xy(intersectionXY[0], intersectionXY[1]); //met la balle au point de rencontre en celle-ci et le mur
+				balle->Set_Oxy(balle->Get_x(), balle->Get_y());
+				petitParcour.addCoor(balle->Get_x(), balle->Get_y());  //ajout des coordonné dans le parcours
+				break;                         // arrete la fonction pour que ali recommence
+			}
+			positionUpdate(balle);            // change la position de la balle selon sa velocité
+			vitesseUpdate(balle);              // diminue la velocité de la balle
+			verifVxVy(balle->Get_Vx(), balle->Get_Vy(), balle);   //verifie si la velocité doit etre mis a 0 en raison d'un changement de +/-
+			petitParcour.addCoor(balle->Get_x(), balle->Get_y());
+		}
+	balle->Set_Oxy(balle->Get_x(), balle->Get_y());
+	return petitParcour;
 }
 
 Parcours Interraction::BalleTrou(Ball* balle, Hole* trou)
 {
-	//ICI
-	return Parcours();
+	double posX = balle->Get_x();   // position en x et y
+	double posY = balle->Get_y();
+	Parcours petitParcour;
+	while (balle->Get_Vx() == 0 && balle->Get_Vy() == 0) //tant que la balle na pas une velocite de 0
+	{
+		if (hitHole(balle, trou))
+		{
+			trou->SetTrouReussi(true);
+			break;                                       //arrete la boucle while
+		}
+		positionUpdate(balle);                          //update la position de la balle
+		vitesseUpdate(balle);							//diminue la velocité de la balle
+		verifVxVy(balle->Get_Vx(), balle->Get_Vy(), balle);  //verifie si la velocité doit etre mis a 0 en raison d'un changement de +/-
+		petitParcour.addCoor(balle->Get_x(), balle->Get_y());
+
+	}
+	balle->Set_Oxy(balle->Get_x(), balle->Get_y());
+	return petitParcour;
 }
 
 
