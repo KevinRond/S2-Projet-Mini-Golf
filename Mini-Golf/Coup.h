@@ -2,6 +2,7 @@
 #define COUP_H
 #include <iostream>
 #include <string>
+#include <cmath>
 
 class Coup
 {
@@ -18,13 +19,14 @@ public:
 	//Setter
 	void initball(double dir, double ampli);	//Initialisation des parametres de ball depuis un coup
 	void setDirection(double dir);				//Direction choisie + random factor
+	void setAmplitude(double ampli);
 
 	//updater
 	
 	void calculVitesseX();						//Calcul la vitesse en x utilisant la direction et l'amplitude
 	void calculVitesseY();						//Calcul la vitesse en y utilisant la direction et l'amplitude
-	void calculAccelerationX();					//Calcul l'acceleration de la balle en X
-	void calculAccelerationY();					//Calcul l'acceleration de la balle en Y
+	void calculAccelerationX(short Kfactor);					//Calcul l'acceleration de la balle en X
+	void calculAccelerationY(short Kfactor);					//Calcul l'acceleration de la balle en Y
 
 	//Getter
 	double getDirection();						//Lecture de la direction retour en rad

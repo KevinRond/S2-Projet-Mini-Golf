@@ -23,7 +23,7 @@ public:
 	void SetTrouReussi(bool sitrou);
 
 	//Getter
-	double Get_x()				//retourne la position X du trou
+	double Get_x();				//retourne la position X du trou
 	double Get_y();				//retourne la position Y du trou
 	double Get_radius();		//avoir le rayon de la balle
 	bool Sitrou();				//verrifie si la balle est dans le trou
