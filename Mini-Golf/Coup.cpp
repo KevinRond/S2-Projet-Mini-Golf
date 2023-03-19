@@ -1,33 +1,81 @@
 #include "Coup.h"
 using namespace std;
-Coup::Coup()
+Coup::Coup()				//Initialisation de l'objet
 {
-	Direction();
-	Amplitude();
+	setDirection(90);
+	setAmplitude();
+	calculVitesseX();
+	calculVitesseY();
+	calculAccelerationX();
+	calculAccelerationY();
 }
 
 Coup::~Coup()
 {
 }
 
-void Coup::Direction(double DirX, double DirY)
+
+void Coup::initball(double dir, double ampli)	//Lorsque les parametre d'un coup arrivent, ils update tout les attribues de la balle
 {
-	//Lecture de la direction choisie par le joueur
-	//Ajout de l'effet des MUONs sur la direction de la balle
-	//Set la direction finale dans l'attribut direction
+	direction = dir;
+	amplitude = ampli;
+	calculVitesseX();
+	calculVitesseY();
+	calculAccelerationY();
+	calculAccelerationX();
 }
 
-void Coup::Amplitude(double module)
+void Coup::setDirection(double dir)		//update seulement la direction
 {
-	//Set l'amplitude
+	direction = dir;
 }
 
-void Coup::GetDirection()
+double Coup::GetDirection()
 {
-	//Retournera un pointeur vers l'array de direction
+	return direction;
 }
 
-double Coup::GetAmplitude()
+void Coup::calculVitesseX()
 {
-	return amplitude;
+	vitesseX = amplitude * cos(degToRad(direction * 3.14159265 / 180));
+}
+
+void Coup::calculVitesseY()
+{
+	vitesseY = -(amplitude * sin(degToRad(direction * 3.14159265 / 180)));
+}
+
+void Coup::calculAccelerationY(short Kfactor)
+{
+	accelerationY = Kfactor * (vitesseY / amplitude);
+}
+
+void Coup::calculAccelerationX(short Kfactor)
+{
+	accelerationX = Kfactor * (-vitesseX / amplitude);
+}
+
+double Coup::getDirection()
+{
+	return direction;
+}
+
+double Coup::getVitesseX()
+{
+	return vitesseX;
+}
+
+double Coup::getVitesseY()
+{
+	return vitesseY;
+}
+
+double Coup::getAccelerationY()
+{
+	return accelerationY;
+}
+
+double Coup::getAccelerationX()
+{
+	return accelerationX;
 }

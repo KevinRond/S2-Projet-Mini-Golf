@@ -1,2 +1,6 @@
-^C:\USERS\SUPER\DOCUMENTS\GITHUB\S2-PROJET-MINI-GOLF\MINI-GOLF\DEBUG\MOC_PREDEFS.H.CBT
+<<<<<<< HEAD
+^C:\USERS\KEVIN\DOCUMENTS\GITHUB\S2-PROJET-MINI-GOLF\MINI-GOLF\DEBUG\MOC_PREDEFS.H.CBT
+=======
+^C:\USERS\ALEXI\ONEDRIVE\DOCUMENTS\GITHUB\S2-PROJET-MINI-GOLF\MINI-GOLF\DEBUG\MOC_PREDEFS.H.CBT
+>>>>>>> Interface--Alex
 cl -BxC:\Qt\6.4.2\msvc2019_64\bin\qmake.exe -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -Zi -MDd -std:c++17 -utf-8 -E C:\Qt\6.4.2\msvc2019_64\mkspecs\features\data\dummy.cpp 2>NUL >debug\moc_predefs.h

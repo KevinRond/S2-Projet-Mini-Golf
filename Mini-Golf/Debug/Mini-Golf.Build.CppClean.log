@@ -1,11 +1,16 @@
 c:\users\super\documents\github\s2-projet-mini-golf\mini-golf\debug\vc142.pdb
 c:\users\super\documents\github\s2-projet-mini-golf\mini-golf\debug\terrain.obj
+c:\users\super\documents\github\s2-projet-mini-golf\mini-golf\debug\parcours.obj
 c:\users\super\documents\github\s2-projet-mini-golf\mini-golf\debug\mur.obj
 c:\users\super\documents\github\s2-projet-mini-golf\mini-golf\debug\mini-golf.obj
 c:\users\super\documents\github\s2-projet-mini-golf\mini-golf\debug\interraction.obj
 c:\users\super\documents\github\s2-projet-mini-golf\mini-golf\debug\hole.obj
+c:\users\super\documents\github\s2-projet-mini-golf\mini-golf\debug\gamemanager.obj
+c:\users\super\documents\github\s2-projet-mini-golf\mini-golf\debug\coup.obj
 c:\users\super\documents\github\s2-projet-mini-golf\mini-golf\debug\ball.obj
 c:\users\super\documents\github\s2-projet-mini-golf\mini-golf\debug\moc_predefs.h
+c:\users\super\documents\github\s2-projet-mini-golf\mini-golf\debug\mini-golf.exe
+c:\users\super\documents\github\s2-projet-mini-golf\mini-golf\debug\mini-golf.ilk
 c:\users\super\documents\github\s2-projet-mini-golf\mini-golf\debug\mini-golf.pdb
 c:\users\super\documents\github\s2-projet-mini-golf\mini-golf\debug\mini-golf.tlog\cl.command.1.tlog
 c:\users\super\documents\github\s2-projet-mini-golf\mini-golf\debug\mini-golf.tlog\cl.read.1.tlog
@@ -13,10 +18,6 @@ c:\users\super\documents\github\s2-projet-mini-golf\mini-golf\debug\mini-golf.tl
 c:\users\super\documents\github\s2-projet-mini-golf\mini-golf\debug\mini-golf.tlog\custombuild.command.1.tlog
 c:\users\super\documents\github\s2-projet-mini-golf\mini-golf\debug\mini-golf.tlog\custombuild.read.1.tlog
 c:\users\super\documents\github\s2-projet-mini-golf\mini-golf\debug\mini-golf.tlog\custombuild.write.1.tlog
-c:\users\super\documents\github\s2-projet-mini-golf\mini-golf\debug\mini-golf.tlog\link-cvtres.read.1.tlog
-c:\users\super\documents\github\s2-projet-mini-golf\mini-golf\debug\mini-golf.tlog\link-cvtres.write.1.tlog
-c:\users\super\documents\github\s2-projet-mini-golf\mini-golf\debug\mini-golf.tlog\link-rc.read.1.tlog
-c:\users\super\documents\github\s2-projet-mini-golf\mini-golf\debug\mini-golf.tlog\link-rc.write.1.tlog
 c:\users\super\documents\github\s2-projet-mini-golf\mini-golf\debug\mini-golf.tlog\link.command.1.tlog
 c:\users\super\documents\github\s2-projet-mini-golf\mini-golf\debug\mini-golf.tlog\link.read.1.tlog
 c:\users\super\documents\github\s2-projet-mini-golf\mini-golf\debug\mini-golf.tlog\link.write.1.tlog

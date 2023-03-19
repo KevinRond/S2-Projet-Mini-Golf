@@ -8,6 +8,12 @@
 #include "Interraction.h"
 #include "Coup.h"
 #include <vector>
+#include <cmath>
+#include "Parcours.h"
+
+
+#define PI 3.14159265
+
 
 /*
 LA classe Terrain comporte les ellements suivants:
@@ -23,26 +29,31 @@ class Terrain
 {
 private:
 	int nbMur;
-	Hole* hole1;			//Trou du terrain
-	Ball* balle1;			//Depart de la balle
-	Mur* TableauMur[50];	//tableau pointeur des murs du terrain
-	//Vector<pair<double, double>> parcours;
-
+	Hole* hole1;					//Trou du terrain
+	Ball* balle1;					//Depart de la balle
+	std::vector<Mur*> vecteurMur1;	//tableau pointeur des murs du terrain
+	Parcours ParcoursTotal;
+	double K						//Facteur de friction
+	
 public:
-	Terrain();		//Constructeur
-	~Terrain();		//Destructeur
+	Terrain();		
+	~Terrain();		
 
 	Terrain *OpenTerrain();				//charge le terrain via fichier
-	void CoupDonne(Coup *coup1);			//Lorsqu'un coup est donnee, retournera le parcours (emplacement par laps de temps dt) de la balle
+	Parcours CoupDonne(Coup *coup1);	//Fonction principale, resoura le coup et retournera le parcours au GM
 
-	Interraction VerrifierColision(Ball ball);	//Doit virifie l'interaction avec son trou ou l'un de ses murs.
-	void Display();								//affiche le terrain
+	double GetIntersection(double x1, double x2, double y1,double y2, double x3, double y3); //fonction détermine la colision avec un mur
+	/*	
+		x1 = x tail mur
+		x2 = x head mur
+		x3 = x balle
+		y1 = y tail mur
+		y2 = y head mur
+		y3 = y balle
+	*/
+	bool GetIntersectionHole(double x, double y, double xt, double yt, double radius);
+	double distance(double x1, double y1, double x2, double y2);
+	int VerifierColision(Ball* ball, Hole* trou, vector<Mur*> vecteur_mur);			//Doit virifie l'interaction avec son trou ou l'un de ses murs.
+	void Display();																		//affiche le terrain
 };
-
-struct Parcours
-{
-	int dt=10;					//intervale de temps en ms
-	double location_dt[2][2];	//Location xy par intervale de temps dt
-};
-
 #endif

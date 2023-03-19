@@ -1,4 +1,5 @@
 #include "Ball.h"
+#include <cmath>
 using namespace std;
 Ball::Ball()
 {
@@ -10,6 +11,7 @@ Ball::Ball()
     Vy = 0.0;
     Ax = 0.0;
     Ay = 0.0;
+    rayon = 5; //avoir le rayon de la balle pour le trou
 }
 
 Ball::~Ball(){}
@@ -96,10 +98,25 @@ void Ball::Display()
 
 double Ball::Get_direction()
 {
-    return direction;
+    return 2 * M_PI / direction;
+}
+
+double Ball::Get_rayon()
+{
+    return rayon;
 }
 
 void Ball::Set_direction(double newdirection)
 {
     direction = newdirection;
+}
+
+void Ball::Set_Vx(double posX)
+{
+    Vx = posX;
+}
+
+void Ball::Set_Vy(double posY)
+{
+    Vy = posY;
 }
