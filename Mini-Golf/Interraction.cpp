@@ -19,13 +19,13 @@ Interraction::~Interraction()
 
 Parcours Interraction::BalleMur(Ball* balle, Mur* mur)
 {
-
+	//ICI
 	return Parcours();
 }
 
 Parcours Interraction::BalleTrou(Ball* balle, Hole* trou)
 {
-
+	//ICI
 	return Parcours();
 }
 

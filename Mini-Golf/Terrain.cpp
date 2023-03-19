@@ -146,10 +146,10 @@ int Terrain::VerifierColision()
 	int IndexColision;											//Retourne l'index du mur de 0 à ... et -1 si c'est un trou
 	double Mmx, Mb;												//Droite du mur y=mx+b
 	double Bmx, Bb;												//Doite de la balle y=mx+b
-	double Ox = Get_Ox();										//Origine de la balle
-	double Oy = Get_Oy();
+	double Ox = balle1->Get_Ox();										//Origine de la balle
+	double Oy = balle1->Get_Oy();
 	double Ix, Iy												//Point d'intersection
-		double Nmx, Nb;												//Pente de la normale
+	double Nmx, Nb;												//Pente de la normale
 	double Tx = hole1->Get_x(),									//Coor du trou
 		double Ty = hole1->Get_y();
 	for (int i = 0; i < vecteurMur1.size(); i++)				// Verifier collisions avec les mures 
