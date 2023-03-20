@@ -4,6 +4,8 @@
 #include "Terrain.h"
 #include "Parcours.h"
 #include <cmath>
+#include "Interraction.h"
+
 
 /*
 LA classe Terrain comporte les ellements suivants:
@@ -132,7 +134,7 @@ int Terrain::VerifierColision()
 {
 	double distance;
 	double distanceTrou;
-	double Plusproche;
+	double Plusproche = INFINITY;
 	int IndexColision = -2;										//Retourne l'index du mur de 0 a... et -1 si c'est un trou
 	double Mmx, Mb;												//Droite du mur y=mx+b
 	double Bmx, Bb;												//Doite de la balle y=mx+b
@@ -154,7 +156,7 @@ int Terrain::VerifierColision()
 		Mmx = (Hy - Ty) / (Hx - Tx);									//Trouve la pente du mur
 		Mb = Hy / (Mmx * Hx);											//Resout l'equation du mur
 
-		Bmx = asin(balle1->Get_directions());							//Trouve la pente de balle
+		Bmx = asin(balle1->Get_direction());							//Trouve la pente de balle
 		Bb = Oy / (Bmx * Ox);											//Resout l'equation de balle
 
 		if (Mmx != Bmx)																//Si les droites ne sont pas paralleles
@@ -172,21 +174,21 @@ int Terrain::VerifierColision()
 			}
 		}
 		i++;
-	}																				//Check colision avec Trou
-	Nmx = -1 / Bmx;																	//Trouve la pente de la normale
-	Nb = Ty - Nmx * Tx;																//Resout l'equation de la normale passant par le trou
-	Ix = (Mb - Bb) / (Bmx - Mmx);													//Trouve les coordonnes de l'intersection des 2 droites
+	}																					//Check colision avec Trou
+	Nmx = -1 / Bmx;																		//Trouve la pente de la normale
+	Nb = TrouY - Nmx * TrouX;															//Resout l'equation de la normale passant par le trou
+	Ix = (Mb - Bb) / (Bmx - Mmx);														//Trouve les coordonnes de l'intersection des 2 droites
 	Iy = Bmx * Ix + Bb;
-	if (Ox != Ix && Oy != Iy)														//Dans le cas que l'interaction est confirme mais que le trou n'est pas reussi la nouvelle
-	{																				//position de balle aura donc la meme que l'interaction calcule precedament
-		distanceTrou = sqrt((Ix - Tx) * (Ix - Tx) + (Iy - Ty) * (Iy - Ty));			//Calcul la distance du point d'intersection avec le trou
-		if (distanceTrou < hole1->Get_radius())										//Si cette distance est sous le radius du trou il y a collision
+	if (Ox != Ix && Oy != Iy)															//Dans le cas que l'interaction est confirme mais que le trou n'est pas reussi la nouvelle
+	{																					//position de balle aura donc la meme que l'interaction calcule precedament
+		distanceTrou = sqrt((Ix - TrouX) * (Ix - TrouX) + (Iy - TrouY) * (Iy - TrouY));	//Calcul la distance du point d'intersection avec le trou
+		if (distanceTrou < hole1->Get_radius())											//Si cette distance est sous le radius du trou il y a collision
 		{
-			distanceTrou = sqrt((Ix - Ox) * (Ix - Ox) + (Iy - Oy) * (Iy - Oy));		//Calcul la distance de la balle du point d'intersection
-			if (distance < Plusproche)												//Si c'est la distance est plus proche change l'index
+			distanceTrou = sqrt((Ix - Ox) * (Ix - Ox) + (Iy - Oy) * (Iy - Oy));			//Calcul la distance de la balle du point d'intersection
+			if (distance < Plusproche)													//Si c'est la distance est plus proche change l'index
 			{
-				Plusproche = distance;												//Set le nouveau plus proche
-				IndexColision = -1;													//Definit l'index a Trou
+				Plusproche = distance;													//Set le nouveau plus proche
+				IndexColision = -1;														//Definit l'index a Trou
 			}
 		}
 	}

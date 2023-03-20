@@ -21,8 +21,8 @@ void Coup::initball(double dir, double ampli)	//Lorsque les parametre d'un coup 
 	amplitude = ampli;
 	calculVitesseX();
 	calculVitesseY();
-	calculAccelerationY(ampli);
-	calculAccelerationX(ampli);
+	calculAccelerationY();
+	calculAccelerationX();
 }
 
 void Coup::setDirection(double dir)				//sauvegarde la direction en degre
@@ -32,7 +32,7 @@ void Coup::setDirection(double dir)				//sauvegarde la direction en degre
 
 void Coup::setAmplitude(double ampli)
 {
-	ampli = amplitude;
+	amplitude = ampli;
 }
 
 double Coup::getDirection()
@@ -59,11 +59,6 @@ void Coup::calculAccelerationY()
 void Coup::calculAccelerationX()
 {
 	accelerationX = (-vitesseX / amplitude);
-}
-
-double Coup::getDirection()
-{
-	return direction;
 }
 
 double Coup::getVitesseX()

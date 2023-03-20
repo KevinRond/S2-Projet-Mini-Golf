@@ -13,7 +13,7 @@ Parcours::~Parcours()
 
 void Parcours::addCoor(double x, double y)
 {
-	std::pair<double, double> coor = std::make_pair(x, y);
+	pair<double, double> coor = make_pair(x, y);
 	CoorXY.push_back(coor);
 }
 

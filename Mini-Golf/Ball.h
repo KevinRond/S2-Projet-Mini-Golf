@@ -2,7 +2,7 @@
 #define BALL_H
 #include <iostream>
 #include <string>
-#define PI 3.14159265
+#include <math.h>
 /*
 La classe ball comporte les caracteristiques physiques suivantes:
 Une position actuel (xy) et d'origine (Oxy)

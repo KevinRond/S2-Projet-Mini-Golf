@@ -25,8 +25,8 @@ public:
 	
 	void calculVitesseX();						//Calcul la vitesse en x utilisant la direction et l'amplitude
 	void calculVitesseY();						//Calcul la vitesse en y utilisant la direction et l'amplitude
-	void calculAccelerationX();	//Calcul l'acceleration de la balle en X
-	void calculAccelerationY();	//Calcul l'acceleration de la balle en Y
+	void calculAccelerationX();					//Calcul l'acceleration de la balle en X
+	void calculAccelerationY();					//Calcul l'acceleration de la balle en Y
 
 	//Getter
 	double getDirection();						//Lecture de la direction retour en rad

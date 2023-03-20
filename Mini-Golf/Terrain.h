@@ -1,3 +1,4 @@
+
 #ifndef TERRAIN_H
 #define TERRAIN_H
 #include <iostream>
@@ -5,7 +6,6 @@
 #include "Mur.h"
 #include "Ball.h"
 #include "Hole.h"
-#include "Interraction.h"
 #include "Coup.h"
 #include <vector>
 #include <cmath>
@@ -29,9 +29,7 @@ private:
 	Ball* balle1;					//Depart de la balle
 	std::vector<Mur*> vecteurMur1;	//tableau pointeur des murs du terrain
 	Parcours ParcoursTotal;
-	double K = 1;					//Facteur de friction
-	Interraction* interraction;
-	
+	double K = 1;					//Facteur de friction	
 public:
 	Terrain();		
 	~Terrain();		
