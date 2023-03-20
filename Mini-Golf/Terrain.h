@@ -30,6 +30,7 @@ private:
 	std::vector<Mur*> vecteurMur1;	//tableau pointeur des murs du terrain
 	Parcours ParcoursTotal;
 	double K = 1;					//Facteur de friction
+	Interraction* interraction;
 	
 public:
 	Terrain();		

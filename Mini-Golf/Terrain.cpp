@@ -34,7 +34,7 @@ Parcours Terrain::CoupDonne(Coup coup1)
 	balle1->Set_Axy(coup1.getAccelerationX(), coup1.getAccelerationY());					//Determine l'acceleration de la balle
 	balle1->Set_direction(coup1.getDirection());												//attribut la direction de balle
 
-	while (balle1.Get_Vx() != 0 && balle1.Get_Vy() != 0 || hole1.Sitrou() == true)
+	while (balle1->Get_Vx() != 0 && balle1->Get_Vy() != 0 || hole1->Sitrou() == true)
 	{
 		indexColision = VerifierColision();													//Rapporte l'index de colision
 		if (indexColision == -1)															//Si interraction avec un trou (-1)

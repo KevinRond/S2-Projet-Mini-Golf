@@ -2,6 +2,7 @@
 #define COUP_H
 #include <iostream>
 #include <string>
+#include <cmath>
 
 class Coup
 {
@@ -17,7 +18,8 @@ public:
 
 	//Setter
 	void initball(double dir, double ampli);	//Initialisation des parametres de ball depuis un coup
-	void setDirection(double dir);				//Direction en deg
+	void setDirection(double dir);				//Direction choisie + random factor
+	void setAmplitude(double ampli);
 
 	//updater
 	

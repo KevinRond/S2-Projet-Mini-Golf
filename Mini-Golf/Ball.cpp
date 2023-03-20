@@ -101,7 +101,7 @@ void Ball::Display()
 
 double Ball::Get_direction()
 {
-    return 2 * M_PI / direction;
+    return 2 * PI / direction;
 }
 
 double Ball::Get_rayon()
