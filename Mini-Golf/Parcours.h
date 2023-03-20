@@ -1,6 +1,9 @@
 #ifndef PARCOURS_H
 #define PARCOURS_H
 #include <iostream>
+#include <string>
+#include <vector>
+#include <utility>
 
 class Parcours
 {
@@ -11,13 +14,13 @@ public:
     void addCoor(double x, double y);
     void operator+=(Parcours ParscoursAajouter);
     int GetSize();
-    double Getx(int index);
-    double Gety(int index);
+    std::vector<std::pair<double, double>> GetCoorXY() const {
+        return CoorXY;
+    }
+    
     void Display();
 
 private:
-    int size =0;
-    int capacity = 16;
-    double** tableau01;
+    std::vector<std::pair<double, double>> CoorXY;
 };
 #endif

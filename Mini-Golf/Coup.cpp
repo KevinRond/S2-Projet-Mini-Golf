@@ -3,7 +3,6 @@ using namespace std;
 Coup::Coup()				//Initialisation de l'objet
 {
 	setDirection(90);
-	setAmplitude();
 	calculVitesseX();
 	calculVitesseY();
 	calculAccelerationX();
@@ -25,34 +24,30 @@ void Coup::initball(double dir, double ampli)	//Lorsque les parametre d'un coup 
 	calculAccelerationX();
 }
 
-void Coup::setDirection(double dir)		//update seulement la direction
+void Coup::setDirection(double dir)				//sauvegarde la direction en degre
 {
 	direction = dir;
 }
 
-double Coup::GetDirection()
-{
-	return direction;
-}
-
 void Coup::calculVitesseX()
 {
-	vitesseX = amplitude * cos(degToRad(direction * 3.14159265 / 180));
+	vitesseX = amplitude * cos(direction);
 }
 
 void Coup::calculVitesseY()
 {
-	vitesseY = -(amplitude * sin(degToRad(direction * 3.14159265 / 180)));
+	vitesseY = -(amplitude * sin(direction));
 }
 
-void Coup::calculAccelerationY(short Kfactor)
+
+void Coup::calculAccelerationY()
 {
-	accelerationY = Kfactor * (vitesseY / amplitude);
+	accelerationY = (vitesseY / amplitude);
 }
 
-void Coup::calculAccelerationX(short Kfactor)
+void Coup::calculAccelerationX()
 {
-	accelerationX = Kfactor * (-vitesseX / amplitude);
+	accelerationX = (-vitesseX / amplitude);
 }
 
 double Coup::getDirection()

@@ -1,5 +1,8 @@
 #include "Ball.h"
 #include <cmath>
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 using namespace std;
 Ball::Ball()
 {
@@ -108,7 +111,7 @@ double Ball::Get_rayon()
 
 void Ball::Set_direction(double newdirection)
 {
-    direction = newdirection;
+    direction = (newdirection * M_PI / 180);
 }
 
 void Ball::Set_Vx(double posX)

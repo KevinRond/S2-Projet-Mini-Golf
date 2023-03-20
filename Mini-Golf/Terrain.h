@@ -11,10 +11,6 @@
 #include <cmath>
 #include "Parcours.h"
 
-
-#define PI 3.14159265
-
-
 /*
 LA classe Terrain comporte les ellements suivants:
 -Un tableau *pointeur des Mur qui la compose TableauMur[]
@@ -33,27 +29,14 @@ private:
 	Ball* balle1;					//Depart de la balle
 	std::vector<Mur*> vecteurMur1;	//tableau pointeur des murs du terrain
 	Parcours ParcoursTotal;
-	double K						//Facteur de friction
+	double K = 1;					//Facteur de friction
 	
 public:
 	Terrain();		
 	~Terrain();		
 
 	Terrain *OpenTerrain();				//charge le terrain via fichier
-	Parcours CoupDonne(Coup *coup1);	//Fonction principale, resoura le coup et retournera le parcours au GM
-
-	double GetIntersection(double x1, double x2, double y1,double y2, double x3, double y3); //fonction détermine la colision avec un mur
-	/*	
-		x1 = x tail mur
-		x2 = x head mur
-		x3 = x balle
-		y1 = y tail mur
-		y2 = y head mur
-		y3 = y balle
-	*/
-	bool GetIntersectionHole(double x, double y, double xt, double yt, double radius);
-	double distance(double x1, double y1, double x2, double y2);
-	int VerifierColision(Ball* ball, Hole* trou, vector<Mur*> vecteur_mur);			//Doit virifie l'interaction avec son trou ou l'un de ses murs.
-	void Display();																		//affiche le terrain
+	Parcours CoupDonne(Coup coup1);	//Fonction principale, resoura le coup et retournera le parcours au GM
+	int VerifierColision();				//Doit virifie l'interaction avec son trou ou l'un de ses murs.
 };
 #endif
