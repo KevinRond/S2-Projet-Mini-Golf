@@ -2,46 +2,42 @@
 using namespace std;
 Mur::Mur()
 {
-	Hx = 0.0;
-	Hy = 0.0;
-	Tx = 0.0;
-	Ty = 0.0;
 }
 
 Mur::Mur(double AX, double AY, double BX, double BY)
 {
-	Hx = AX;
-	Hy = AY;
-	Tx = BX;
-	Ty = BY;
+	CoorXY.first.first = AX;
+	CoorXY.first.second = AY;
+	CoorXY.second.first = BX;
+	CoorXY.second.second = BY;
 }
 
 void Mur::Set(double AX, double AY, double BX, double BY)
 {
-	Hx = AX;
-	Hy = AY;
-	Tx = BX;
-	Ty = BY;
+	CoorXY.first.first = AX;
+	CoorXY.first.second = AY;
+	CoorXY.second.first = BX;
+	CoorXY.second.second = BY;
 }
 
 double Mur::GetHx()
 {
-	return Hx;
+	return CoorXY.first.first;
 }
 
 double Mur::GetHy()
 {
-	return Hy;
+	return CoorXY.first.second;
 }
 
 double Mur::GetTx()
 {
-	return Tx;
+	return CoorXY.second.first;
 }
 
 double Mur::GetTy()
 {
-	return Ty;
+	return CoorXY.second.second;
 }
 
 Mur::~Mur()
@@ -50,12 +46,11 @@ Mur::~Mur()
 
 void Mur::Display()
 {
-	cout << "Mur Coor A: " << Hx << "," << Hy << endl;
-	cout << "Mur Coor B: " << Tx << "," << Ty << endl;
+	cout << "Mur Coor A: " << CoorXY.first.first << "," << CoorXY.first.second << endl;
+	cout << "Mur Coor B: " << CoorXY.second.first << "," << CoorXY.second.second << endl;
 }
 
 Mur *Mur::Get()
 {
 	return this;
 }
-

@@ -29,7 +29,7 @@ Terrain::~Terrain()
 
 Parcours Terrain::CoupDonne(Coup coup1)
 {
-	int indexColision;																		//-1 pour un trou, et le reste pour l'index du mur
+	int indexColision = -2;																		//-1 pour un trou, et le reste pour l'index du mur
 	Parcours ParcoursSection;
 	Interraction Interaction1;
 	balle1->Set_Vxy(coup1.getVitesseX(), coup1.getVitesseY());								//Determine la vitesse de la balle
@@ -53,10 +53,10 @@ Parcours Terrain::CoupDonne(Coup coup1)
 }
 
 
-Terrain *Terrain::OpenTerrain()
+Terrain *Terrain::OpenTerrain(std::string  terrain)
 {
 	ifstream myFile;								//Creation de l'objet fichier
-	myFile.open("Terrain1.txt", ios_base::in);		//ouveture du fichier
+	myFile.open(terrain, ios_base::in);		//ouveture du fichier
 	bool Coor = false;								//Operateur inverseur qui determinera si 0=X ou 1=Y
 	string lineContents;							//Contenu de la ligne lu complete
 	char separatorXY = ',';							//separateur d'axe XY (X,Y)
@@ -89,7 +89,6 @@ Terrain *Terrain::OpenTerrain()
 						MurTemp->Set(Coor1[0], Coor1[1], Coor2[0], Coor2[1]);	//Attribution de ses 2 coor
 						vecteurMur1.push_back(MurTemp->Get());					//Assignation au TableauMur de notre terrain
 						nbMur++;												//Incremenation du nombre de Murs
-						MurTemp->Display();//TO BE DELETE
 					}
 					Coor2[0] = Coor1[0];						//Continuation de notre ligne de mur, la permutation du point de tete se fait en coor2 (tail)
 					Coor2[1] = Coor1[1];						//le prochain point sera en coor1 (tete)
@@ -97,7 +96,7 @@ Terrain *Terrain::OpenTerrain()
 				else if (lineContents[i] == 'B')				//Verification si dernier point est la balle
 				{
 					Ball* BalleTemp = new Ball;					//Creation d'un objet Ball
-					BalleTemp->Set_xy(Coor1[0], Coor1[1]);		//Son emplacement
+					BalleTemp->Set_Oxy(Coor1[0], Coor1[1]);		//Son emplacement
 					balle1 = BalleTemp->Get();					//Assignation du pointeur de l'objet creer a son attribu balle1
 				}
 				else if (lineContents[i] == 'T')				//Verification si dernier point est un trou
@@ -146,31 +145,44 @@ int Terrain::VerifierColision()
 	double TrouY = hole1->Get_y();
 	double Hx, Hy, Tx, Ty;										//coor d'un mur
 	std::vector<Mur>::iterator it;
+	int i = 0;
 	for (auto it = vecteurMur1.begin();it != vecteurMur1.end(); ++it)	// Verifier collisions avec les mures 
 	{
-		int i = 0;
 		Hy = (*it)->GetHy();											//coor d'un mur
 		Ty = (*it)->GetTy();
 		Hx = (*it)->GetHx();
 		Tx = (*it)->GetTx();											//Check colision avec Mur
 		Mmx = (Hy - Ty) / (Hx - Tx);									//Trouve la pente du mur
-		Mb = Hy / (Mmx * Hx);											//Resout l'equation du mur
+		Mb = Hy - Mmx * Hx;											//Resout l'equation du mur
 
-		Bmx = asin(balle1->Get_direction());							//Trouve la pente de balle
-		Bb = Oy / (Bmx * Ox);											//Resout l'equation de balle
+		Bmx = tan(balle1->Get_direction());								//Trouve la pente de balle
+		Bb = Oy - Bmx * Ox;												//Resout l'equation de balle
 
-		if (Mmx != Bmx)																//Si les droites ne sont pas paralleles
+		if (isinf(Mmx))																//Si les droites ne sont pas paralleles
 		{
-			Ix = (Mb - Bb) / (Bmx - Mmx);											//Resout le point d'intersection
-			Iy = Bmx * Ix + Bb;														//Entre la trajectoire de balle et le mur
-			if (Ix > Tx && Ix < Hx && Iy > Ty && Iy < Hy)							//Valide si la colisin s'est fait dans les limites du mur
-			{																		//Si oui
-				distance = sqrt((Ix - Ox) * (Ix - Ox) + (Iy - Oy) * (Iy - Oy));		//Trouve la distance entre les 2 points
-				if (distance < Plusproche)											//Si c'est la distance est plus proche retient l'index
-				{
-					Plusproche = distance;											//Set le nouveau plus proche
-					IndexColision = i;												//Memorise d'index du mur
-				}
+			Mb = 0;
+			Ix = Hx;
+			Iy = Bmx * Ix + Mb;
+		}
+		else if (isinf(Bmx))
+		{
+			Bb = 0;
+			Ix = Ox;
+			Iy = Mmx * Ix + Bb;
+		}
+		else if (Mmx != Bmx)
+		{
+			Ix = (Mb - Bb) / (Mmx - Bmx);											//Resout le point d'intersection
+			Iy = Mmx * Ix + Bb;														//Entre la trajectoire de balle et le mur
+		}
+		if (Ix >= Tx && Ix <= Hx && Iy >= Ty && Iy <= Hy)							//Valide si la colisin s'est fait dans les limites du mur
+		{																		//Si oui
+			distance = sqrt(pow((Ix - Ox),2) + pow((Iy - Oy),2));		//Trouve la distance entre les 2 points
+			if (distance < Plusproche)											//Si c'est la distance est plus proche retient l'index
+			{
+				Plusproche = distance;											//Set le nouveau plus proche
+				IndexColision = i;												//Memorise d'index du mur
+				cout << "colision avec l'objet " << IndexColision << "a la coor (" << Ix << "," << Iy << ")" << endl;
 			}
 		}
 		i++;
@@ -189,8 +201,20 @@ int Terrain::VerifierColision()
 			{
 				Plusproche = distance;													//Set le nouveau plus proche
 				IndexColision = -1;														//Definit l'index a Trou
+				cout << "colision avec l'objet " << IndexColision << "a la coor (" << Ix << "," << Iy << ")" << endl;
 			}
 		}
 	}
 	return IndexColision;
+}
+
+void Terrain::Display()
+{
+	balle1->Display();
+	hole1->Display();
+	std::vector<Mur>::iterator it;
+	for (auto it = vecteurMur1.begin();it != vecteurMur1.end(); ++it)
+	{
+		(*it)->Display();
+	}
 }

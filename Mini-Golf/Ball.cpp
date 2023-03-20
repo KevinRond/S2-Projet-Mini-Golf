@@ -94,7 +94,7 @@ double Ball::Get_Ay()
 void Ball::Display()
 {
     
-    cout << "Balle location : (" << x << "," << y << ")" << endl;
+    cout << "Balle location : (" << Ox << "," << Oy << ")" << endl;
 }
 
 double Ball::Get_direction()

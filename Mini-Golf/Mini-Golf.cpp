@@ -17,8 +17,11 @@ int main()
 {
 	//GameManager gm(20, 25);
 	//gm.Run();
-	Terrain *terrain1 = new Terrain[1];
-	terrain1->OpenTerrain();
+	Terrain *terrain1 = new Terrain;
+	terrain1->OpenTerrain("Terrain2.txt");
+	terrain1->Display();
+	Coup coup1(90, 5);
+	terrain1->CoupDonne(coup1);
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

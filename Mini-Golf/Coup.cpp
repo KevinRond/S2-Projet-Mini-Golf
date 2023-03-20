@@ -1,13 +1,13 @@
 #include "Coup.h"
 using namespace std;
-Coup::Coup()				//Initialisation de l'objet
+Coup::Coup(double dir, double ampli)				//Initialisation de l'objet
 {
-	setDirection(90);
-	//setAmplitude();		//JSP QUELLE AMPLITUDE METTRE LOL
+	direction = dir;
+	amplitude = ampli;
 	calculVitesseX();
 	calculVitesseY();
-	//calculAccelerationX();    //ERREUR AVEC LES FONCTIONS EN COMMENTTAIRE
-	//calculAccelerationY();
+	calculAccelerationY();
+	calculAccelerationX();
 }
 
 Coup::~Coup()
@@ -15,7 +15,7 @@ Coup::~Coup()
 }
 
 
-void Coup::initball(double dir, double ampli)	//Lorsque les parametre d'un coup arrivent, ils update tout les attribues de la balle
+void Coup::initcoup(double dir, double ampli)	//Lorsque les parametre d'un coup arrivent, ils update tout les attribues de la balle
 {
 	direction = dir;
 	amplitude = ampli;
@@ -47,7 +47,7 @@ void Coup::calculVitesseX()
 
 void Coup::calculVitesseY()
 {
-	vitesseY = -(amplitude * sin(direction * 3.14159265 / 180));
+	vitesseY = (amplitude * sin(direction * 3.14159265 / 180));
 }
 
 
@@ -58,7 +58,7 @@ void Coup::calculAccelerationY()
 
 void Coup::calculAccelerationX()
 {
-	accelerationX = (-vitesseX / amplitude);
+	accelerationX = (vitesseX / amplitude);
 }
 
 double Coup::getVitesseX()

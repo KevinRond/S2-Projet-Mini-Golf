@@ -13,11 +13,11 @@ private:
 	double accelerationX, accelerationY;		//Acceleration en X et Y
 
 public:
-	Coup();
+	Coup(double dir, double ampli);
 	~Coup();
 
 	//Setter
-	void initball(double dir, double ampli);	//Initialisation des parametres de ball depuis un coup
+	void initcoup(double dir, double ampli);	//Initialisation des parametres de ball depuis un coup
 	void setDirection(double dir);				//Direction choisie + random factor
 	void setAmplitude(double ampli);
 

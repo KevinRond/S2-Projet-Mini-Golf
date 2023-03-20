@@ -2,13 +2,13 @@
 #define MUR_H
 #include <iostream>
 #include <string>
+#include <utility>
 
 class Mur
 {
 private:
-	double* points = new double[4];	//Head_X[0]Y[1] Tail_X[2]Y[3]
-	double Hx, Hy;
-	double Tx, Ty;
+
+	std::pair<std::pair<double, double>, std::pair<double, double>> CoorXY;
 
 public:
 	Mur();												
