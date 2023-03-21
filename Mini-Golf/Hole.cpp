@@ -50,5 +50,5 @@ bool Hole::Sitrou()
 }
 void Hole::Display()
 {
-	cout << "Trou location : (" << Tx << "," << Ty << ")" << endl;
+	//cout << "Trou location : (" << Tx << "," << Ty << ")" << endl;
 }
