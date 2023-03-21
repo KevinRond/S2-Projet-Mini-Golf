@@ -2,7 +2,7 @@
 using namespace std;
 Coup::Coup()				//Initialisation de l'objet
 {
-	setDirection(90);
+	direction = 90;
 	//setAmplitude();		//JSP QUELLE AMPLITUDE METTRE LOL
 	calculVitesseX();
 	calculVitesseY();
@@ -60,10 +60,6 @@ void Coup::calculAccelerationX(short Kfactor)
 	accelerationX = Kfactor * (-vitesseX / amplitude);
 }
 
-double Coup::getDirection()
-{
-	return direction;
-}
 
 double Coup::getVitesseX()
 {

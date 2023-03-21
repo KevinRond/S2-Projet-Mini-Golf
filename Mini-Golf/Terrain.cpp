@@ -150,7 +150,7 @@ int Terrain::VerifierColision()
 	double Oy = balle1->Get_Oy();
 	double Ix, Iy;											//Point d'intersection
 	double Nmx, Nb;												//Pente de la normale
-	double Tx = hole1->Get_x(),									//Coor du trou
+	double Tx = hole1->Get_x();								//Coor du trou
 	double Ty = hole1->Get_y();
 	for (int i = 0; i < vecteurMur1.size(); i++)				// Verifier collisions avec les mures 
 	{																												//Check colision avec Mur
