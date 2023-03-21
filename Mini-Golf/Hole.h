@@ -10,7 +10,7 @@ class Hole
 {
 private:						//[0]=X [1]=Y
 	double Tx, Ty;				//emplacement du trou
-	double radius;				//radius du trou
+	double radius=1;				//radius du trou
 	bool TrouReussi = false;
 public:
 	Hole();
