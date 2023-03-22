@@ -11,6 +11,8 @@ Interraction::Interraction()
 {
 	x = 0.0;
 	y = 0.0;
+	module = 0.0;
+	Degre = 0.0;
 }
 
 Interraction::~Interraction()
@@ -20,38 +22,45 @@ Interraction::~Interraction()
 Parcours Interraction::BalleMur(Ball* balle, Mur* mur)
 {
 	Parcours petitParcour;
-	double posX = balle->Get_x();														// position en x et y
-	double posY = balle->Get_y();
+	double verifVx = balle->Get_Vx();
+	double verifVy = balle->Get_Vy();
 	timeBall = 0;																		//reset temps de la balle pour chaque petite partie du parcours
 	pair<double, double> intersectionXY = intersection(balle, mur);											//prend l'intersection entre la balle et le mur
 	hitWall(mur, balle);																//set le temps pour que la balle se rend au mur
 	while (balle->Get_Vx() != 0 && balle->Get_Vy() != 0)								//tant que la balle a de la vitesse
 		{
+			double posX = balle->Get_x();														// position en x et y
+			double posY = balle->Get_y();
 			if (timeBall >= timeHitWall)												// regarde si le temp de la balle depasse le temps ou elle touche le mur
 			{
+				cout << "touche mur" << endl;
 				angleReflexion(balle, mur);												//change l'angle de de la balle lorsqu'elle reflette le mur
 				balle->Set_xy(intersectionXY.first, intersectionXY.second);				//met la balle au point de rencontre en celle-ci et le mur
-				balle->Set_Oxy(posX, posY);
+				balle->Set_Oxy(intersectionXY.first, intersectionXY.second);
 				petitParcour.addCoor(balle->Get_x(), balle->Get_y());					//ajout des coordonne dans le parcours
 				break;																	//arrete la fonction pour que ali recommence
 			}
 			positionUpdate(balle);														//change la position de la balle selon sa velocite
 			vitesseUpdate(balle);														//diminue la velocite de la balle
-			verifVxVy(balle->Get_Vx(), balle->Get_Vy(), balle);							//verifie si la velocite doit etre mis a 0 en raison d'un changement de +/-
+			verifVxVy(verifVx, verifVy, balle);							//verifie si la velocite doit etre mis a 0 en raison d'un changement de +/-
 			petitParcour.addCoor(posX, posY);
 			//cout << balle->Get_Vx() << "  " << balle->Get_Vy() << endl;
+			cout <<"["<< balle->Get_x() << "  " << balle->Get_y() << "]"<< endl;
 		}
-	balle->Set_Oxy(posX, posY);
+	balle->Set_Oxy(balle->Get_x(), balle->Get_y());
 	return petitParcour;
 }
 
 Parcours Interraction::BalleTrou(Ball* balle, Hole* trou)
 {
-	double posX = balle->Get_x();											//position en x et y
-	double posY = balle->Get_y();
+
 	Parcours petitParcour;
+	double verifVx = balle->Get_Vx();
+	double verifVy = balle->Get_Vy();
 	while (balle->Get_Vx() != 0 && balle->Get_Vy() != 0)					//tant que la balle na pas une velocite de 0
 	{
+		double posX = balle->Get_x();											//position en x et y
+		double posY = balle->Get_y();
 		if (hitHole(balle, trou))
 		{
 			trou->SetTrouReussi(true);
@@ -59,11 +68,11 @@ Parcours Interraction::BalleTrou(Ball* balle, Hole* trou)
 		}
 		positionUpdate(balle);												//update la position de la balle
 		vitesseUpdate(balle);												//diminue la velocite de la balle
-		verifVxVy(balle->Get_Vx(), balle->Get_Vy(), balle);					//verifie si la velocite doit etre mis a 0 en raison d'un changement de +/-
+		verifVxVy(verifVx, verifVy, balle);						//verifie si la velocite doit etre mis a 0 en raison d'un changement de +/-
 		petitParcour.addCoor(posX, posY);
 		//cout << balle->Get_Vx() << "  " << balle->Get_Vy() << endl;
 	}
-	balle->Set_Oxy(posX, posY);
+	balle->Set_Oxy(balle->Get_x(), balle->Get_y());
 	return petitParcour;
 }
 
@@ -96,7 +105,7 @@ double Interraction::Module()
 void Interraction::angleReflexion(Ball* balle, Mur* mur)							//trouver l'angle de reflexion de la balle
 {
 	double oldangle = balle->Get_direction();
-	balle->Set_direction(2 * atan(penteMur(mur) - oldangle));
+	balle->Set_direction((2 * atan2((mur->GetTy() - mur->GetHy()), (mur->GetTx() - mur->GetHx())) - oldangle)*180 / 3.14159265);
 }
 
 pair<double, double> Interraction::intersection(Ball* balle, Mur* mur)							//equation de la trajectoire de la balle y = mx + b
@@ -199,7 +208,7 @@ void Interraction::vitesseUpdate(Ball* balle)
 	double Vy = balle->Get_Vy();
 	double ax = balle->Get_Ax();
 	double ay = balle->Get_Ay();
-	double dt = 0.01;																				//10 ms car on veut le deplacement a chaque delta t = 10 ms
+	double dt = 0.1;																				//10 ms car on veut le deplacement a chaque delta t = 10 ms
 
 	Vx = Vx + dt * ax;																				//formule changer la velocite de la balle a chaque 10 ms
 	Vy = Vy + dt * ay;
@@ -212,18 +221,18 @@ void Interraction::positionUpdate(Ball* balle)
 	double Vy = balle->Get_Vy();
 	double posX = balle->Get_x();
 	double posY = balle->Get_y();
-	double dt = 0.01;																				//10 ms car on veut le deplacement a chaque delta t = 10 ms
+	double dt = 0.1;																				//10 ms car on veut le deplacement a chaque delta t = 10 ms
 
 
 	posX = posX + dt * Vx;																			//formule pour changer la position de x a chaque 10 ms
 	posY = posY + dt * Vy;
 	balle->Set_xy(posX, posY);																		//changer la position
-	timeBall = timeBall + 0.01;																		//augmenter le temps parcourue ar la balle
+	timeBall = timeBall + 0.1;																		//augmenter le temps parcourue ar la balle
 }
 
 
 
-void Interraction::interactionGen(Ball* balle, Mur* mur, Hole* hole)					//faire le parcours jusqua ce que v = 0 ou que la balle touche un object
+/*void Interraction::interactionGen(Ball* balle, Mur* mur, Hole* hole)					//faire le parcours jusqua ce que v = 0 ou que la balle touche un object
 {
 	double posX = balle->Get_x();														//position en x et y
 	double posY = balle->Get_y();
@@ -270,4 +279,4 @@ void Interraction::interactionGen(Ball* balle, Mur* mur, Hole* hole)					//faire
 	}
 
 
-}
+}*/

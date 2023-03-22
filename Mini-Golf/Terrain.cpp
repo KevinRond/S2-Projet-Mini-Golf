@@ -49,7 +49,7 @@ Parcours Terrain::CoupDonne(Coup coup1)
 		}
 		ParcoursTotal += ParcoursSection;													//Cumule les parcours de section
 		cout << balle1->Get_Vx() << "  " << balle1->Get_Vy() << endl;
-		
+		cout << balle1->Get_Ox() << "  " << balle1->Get_Oy() << endl;
 	}
 	return ParcoursTotal;
 }

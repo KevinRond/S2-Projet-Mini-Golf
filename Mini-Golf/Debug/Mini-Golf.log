@@ -1,4 +1,3 @@
 ﻿  Interraction.cpp
-  Terrain.cpp
-  Génération de code en cours...
+Interraction.cpp(15,10): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
   Mini-Golf.vcxproj -> C:\Users\alexi\OneDrive\Documents\GitHub\S2-Projet-Mini-Golf\Mini-Golf\debug\Mini-Golf.exe
