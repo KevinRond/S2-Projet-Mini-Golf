@@ -5,7 +5,10 @@ La classe interaction caracterisera une interaction entre 2 objets
 Ex: Ball avec Mur,Trou,Sable,glace
 On est dans un monde de mini-put, on peux faire s'quon veux...
 */
-#include "Terrain.h"
+#include "Ball.h"
+#include "Hole.h"
+#include "Parcours.h"
+#include "Mur.h"
 #include <cmath>
 #include <vector>
 #include <utility>

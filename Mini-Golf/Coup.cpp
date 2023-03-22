@@ -53,12 +53,12 @@ void Coup::calculVitesseY()
 
 void Coup::calculAccelerationY()
 {
-	accelerationY = (vitesseY / amplitude);
+	accelerationY = -(vitesseY / amplitude);
 }
 
 void Coup::calculAccelerationX()
 {
-	accelerationX = (vitesseX / amplitude);
+	accelerationX = -(vitesseX / amplitude);
 }
 
 double Coup::getVitesseX()

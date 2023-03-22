@@ -25,7 +25,7 @@ Parcours Interraction::BalleMur(Ball* balle, Mur* mur)
 	timeBall = 0;																		//reset temps de la balle pour chaque petite partie du parcours
 	pair<double, double> intersectionXY = intersection(balle, mur);											//prend l'intersection entre la balle et le mur
 	hitWall(mur, balle);																//set le temps pour que la balle se rend au mur
-	while (balle->Get_Vx() == 0 && balle->Get_Vy() == 0)								//tant que la balle a de la vitesse
+	while (balle->Get_Vx() != 0 && balle->Get_Vy() != 0)								//tant que la balle a de la vitesse
 		{
 			if (timeBall >= timeHitWall)												// regarde si le temp de la balle depasse le temps ou elle touche le mur
 			{
@@ -39,6 +39,7 @@ Parcours Interraction::BalleMur(Ball* balle, Mur* mur)
 			vitesseUpdate(balle);														//diminue la velocite de la balle
 			verifVxVy(balle->Get_Vx(), balle->Get_Vy(), balle);							//verifie si la velocite doit etre mis a 0 en raison d'un changement de +/-
 			petitParcour.addCoor(posX, posY);
+			//cout << balle->Get_Vx() << "  " << balle->Get_Vy() << endl;
 		}
 	balle->Set_Oxy(posX, posY);
 	return petitParcour;
@@ -49,7 +50,7 @@ Parcours Interraction::BalleTrou(Ball* balle, Hole* trou)
 	double posX = balle->Get_x();											//position en x et y
 	double posY = balle->Get_y();
 	Parcours petitParcour;
-	while (balle->Get_Vx() == 0 && balle->Get_Vy() == 0)					//tant que la balle na pas une velocite de 0
+	while (balle->Get_Vx() != 0 && balle->Get_Vy() != 0)					//tant que la balle na pas une velocite de 0
 	{
 		if (hitHole(balle, trou))
 		{
@@ -60,7 +61,7 @@ Parcours Interraction::BalleTrou(Ball* balle, Hole* trou)
 		vitesseUpdate(balle);												//diminue la velocite de la balle
 		verifVxVy(balle->Get_Vx(), balle->Get_Vy(), balle);					//verifie si la velocite doit etre mis a 0 en raison d'un changement de +/-
 		petitParcour.addCoor(posX, posY);
-
+		//cout << balle->Get_Vx() << "  " << balle->Get_Vy() << endl;
 	}
 	balle->Set_Oxy(posX, posY);
 	return petitParcour;

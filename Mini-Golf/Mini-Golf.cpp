@@ -20,7 +20,7 @@ int main()
 	Terrain *terrain1 = new Terrain;
 	terrain1->OpenTerrain("Terrain2.txt");
 	terrain1->Display();
-	Coup coup1(90, 5);
+	Coup coup1(45, 5);
 	terrain1->CoupDonne(coup1);
 }
 

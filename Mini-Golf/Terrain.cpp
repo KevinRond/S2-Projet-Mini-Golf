@@ -35,8 +35,8 @@ Parcours Terrain::CoupDonne(Coup coup1)
 	balle1->Set_Vxy(coup1.getVitesseX(), coup1.getVitesseY());								//Determine la vitesse de la balle
 	balle1->Set_Axy(coup1.getAccelerationX(), coup1.getAccelerationY());					//Determine l'acceleration de la balle
 	balle1->Set_direction(coup1.getDirection());												//attribut la direction de balle
-
-	while (balle1->Get_Vx() != 0 && balle1->Get_Vy() != 0 || hole1->Sitrou() == true)
+	
+	while ((balle1->Get_Vx() != 0 && balle1->Get_Vy() != 0) || hole1->Sitrou() == true)
 	{
 		indexColision = VerifierColision();													//Rapporte l'index de colision
 		if (indexColision == -1)															//Si interraction avec un trou (-1)
@@ -48,6 +48,8 @@ Parcours Terrain::CoupDonne(Coup coup1)
 			ParcoursSection = Interaction1.BalleMur(balle1, vecteurMur1.at(indexColision));	//Retourne le parcours jusqu'a la prochaine interaction
 		}
 		ParcoursTotal += ParcoursSection;													//Cumule les parcours de section
+		cout << balle1->Get_Vx() << "  " << balle1->Get_Vy() << endl;
+		
 	}
 	return ParcoursTotal;
 }
@@ -221,7 +223,7 @@ int Terrain::VerifierColision()
 			{
 				Plusproche = distance;												//Set le nouveau plus proche
 				IndexColision = i;													//Memorise d'index du mur
-				cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(Ix) << "," << round(Iy) << ")" << " a une distance de " << round(distance) << endl;
+				//cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(Ix) << "," << round(Iy) << ")" << " a une distance de " << round(distance) << endl;
 			}
 		}
 		i++;
@@ -269,10 +271,11 @@ int Terrain::VerifierColision()
 			if (distanceTrou < Plusproche)													//Si c'est la distance est plus proche change l'index
 			{
 				IndexColision = -1;														//Definit l'index a Trou
-				cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(Ix) << "," << round(Iy) << ")" << endl;
+				//cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(Ix) << "," << round(Iy) << ")" << endl;
 			}
 		}
 	}
+	cout << IndexColision << endl;
 	return IndexColision;
 }
 
