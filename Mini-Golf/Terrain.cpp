@@ -48,7 +48,7 @@ Parcours Terrain::CoupDonne(Coup coup1)
 			ParcoursSection = Interaction1.BalleMur(balle1, vecteurMur1.at(indexColision));	//Retourne le parcours jusqu'a la prochaine interaction
 		}
 		ParcoursTotal += ParcoursSection;													//Cumule les parcours de section
-		cout << balle1->Get_Vx() << "  " << balle1->Get_Vy() << endl;
+		//cout << balle1->Get_Vx() << "  " << balle1->Get_Vy() << endl;
 		cout << balle1->Get_Ox() << "  " << balle1->Get_Oy() << endl;
 	}
 	return ParcoursTotal;
@@ -99,6 +99,7 @@ Terrain *Terrain::OpenTerrain(std::string  terrain)
 				{
 					Ball* BalleTemp = new Ball;					//Creation d'un objet Ball
 					BalleTemp->Set_Oxy(Coor1[0], Coor1[1]);		//Son emplacement
+					BalleTemp->Set_xy(Coor1[0], Coor1[1]);
 					balle1 = BalleTemp->Get();					//Assignation du pointeur de l'objet creer a son attribu balle1
 				}
 				else if (lineContents[i] == 'T')				//Verification si dernier point est un trou
@@ -219,7 +220,7 @@ int Terrain::VerifierColision()
 		if (isBetween(Ix, Hx, Tx) && isBetween(Iy, Hy, Ty))							//Valide si la colisin s'est fait dans les limites du mur
 		{																			//Si oui
 			distance = sqrt(pow((Ix - Ox), 2) + pow((Iy - Oy), 2));					//Trouve la distance entre les 2 points
-			if (distance < Plusproche)												//Si c'est la distance est plus proche retient l'index
+			if (distance < Plusproche && distance != 0)												//Si c'est la distance est plus proche retient l'index
 			{
 				Plusproche = distance;												//Set le nouveau plus proche
 				IndexColision = i;													//Memorise d'index du mur
@@ -275,7 +276,7 @@ int Terrain::VerifierColision()
 			}
 		}
 	}
-	cout << IndexColision << endl;
+	//cout << IndexColision << endl;
 	return IndexColision;
 }
 

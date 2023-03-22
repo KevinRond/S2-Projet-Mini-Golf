@@ -105,13 +105,20 @@ double Interraction::Module()
 void Interraction::angleReflexion(Ball* balle, Mur* mur)							//trouver l'angle de reflexion de la balle
 {
 	double oldangle = balle->Get_direction();
-	balle->Set_direction((2 * atan2((mur->GetTy() - mur->GetHy()), (mur->GetTx() - mur->GetHx())) - oldangle)*180 / 3.14159265);
+	if (perpendiculaire(balle, mur))
+	{
+		balle->Set_direction(oldangle + 180);
+	}
+	else
+	{
+		balle->Set_direction((2 * atan2((mur->GetTy() - mur->GetHy()), (mur->GetTx() - mur->GetHx())) - oldangle) * 180 / 3.14159265);
+	}
 }
 
 pair<double, double> Interraction::intersection(Ball* balle, Mur* mur)							//equation de la trajectoire de la balle y = mx + b
 {
 	pair<double, double> pointIntersection;
-	double m = tan(balle->Get_direction());
+	double m = tan(balle->Get_direction()*180/3.14159265);
 	double b = balle->Get_Oy() - m * balle->Get_Ox();	
 	double m_wall = (mur->GetTy() - mur->GetHy()) / (mur->GetTx() - mur->GetHx());	//equation de la droite du mur y = mx + c
 	double c_wall = mur->GetTy() - m_wall * mur->GetTx();
@@ -202,13 +209,33 @@ bool Interraction::hitHole(Ball* balle, Hole* hole)													//regarder si la
 	return distance <= balle->Get_rayon() - hole->Get_radius() && balle->Get_Vx() > 0.5 && balle->Get_Vy() > 0.5;
 }
 
+bool Interraction::perpendiculaire(Ball* balle, Mur* mur)
+{
+	//Calculer vecteur normal mur
+	double normWallx = mur->GetTy() - mur->GetHy();
+	double normWally = mur->GetTx() - mur->GetHx();
+
+	//normaliser vecteur normal
+	double norm = sqrt(normWallx * normWallx + normWally * normWally);
+	normWallx = normWallx / norm;
+	normWally = normWally / norm;
+
+	//direction de la balle
+	double ball_dirx = cos(balle->Get_direction());
+	double ball_diry = sin(balle->Get_direction());
+	//produit scalaire
+
+	double produitScalaire = normWallx * ball_dirx + normWally * ball_diry;
+	return produitScalaire == 0;
+}
+
 void Interraction::vitesseUpdate(Ball* balle)
 {
 	double Vx = balle->Get_Vx();																	//avoir les info sur la velocite et la decceleration
 	double Vy = balle->Get_Vy();
 	double ax = balle->Get_Ax();
 	double ay = balle->Get_Ay();
-	double dt = 0.1;																				//10 ms car on veut le deplacement a chaque delta t = 10 ms
+	double dt = 0.01;																				//10 ms car on veut le deplacement a chaque delta t = 10 ms
 
 	Vx = Vx + dt * ax;																				//formule changer la velocite de la balle a chaque 10 ms
 	Vy = Vy + dt * ay;
@@ -221,13 +248,13 @@ void Interraction::positionUpdate(Ball* balle)
 	double Vy = balle->Get_Vy();
 	double posX = balle->Get_x();
 	double posY = balle->Get_y();
-	double dt = 0.1;																				//10 ms car on veut le deplacement a chaque delta t = 10 ms
+	double dt = 0.01;																				//10 ms car on veut le deplacement a chaque delta t = 10 ms
 
 
 	posX = posX + dt * Vx;																			//formule pour changer la position de x a chaque 10 ms
 	posY = posY + dt * Vy;
 	balle->Set_xy(posX, posY);																		//changer la position
-	timeBall = timeBall + 0.1;																		//augmenter le temps parcourue ar la balle
+	timeBall = timeBall + 0.01;																		//augmenter le temps parcourue ar la balle
 }
 
 

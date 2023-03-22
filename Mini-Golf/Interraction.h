@@ -50,6 +50,7 @@ public:
 	bool hitHole(Ball* balle, Hole* hole);
 
 	void interactionGen(Ball* balle, Mur* mur, Hole* hole);	//Interraction principal avec soit un mur, soit un trou
+	bool perpendiculaire(Ball* balle, Mur* mur);
 };
 
 #endif
