@@ -11,6 +11,7 @@
 #include <cmath>
 #include "Parcours.h"
 #include <utility>
+#include <random>
 
 /*
 LA classe Terrain comporte les ellements suivants:
@@ -34,6 +35,7 @@ private:
 	int prevIndex = -2;
 	double K = 1;					//Facteur de friction	
 	int nbCoup = 0;
+	int nbRicochet = 0;
 public:
 	Terrain();		
 	~Terrain();		
@@ -44,5 +46,7 @@ public:
 	bool isBetween(double value, double bound1, double bound2);
 	bool isOnLine(double x0, double y0, double m, double b);
 	void Display();
+	int getCOup();
+	int getRicochet();
 };
 #endif

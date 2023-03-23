@@ -56,6 +56,11 @@ Parcours Terrain::CoupDonne(Coup coup1)
 		{
 			break;
 		}
+		if (hole1->Sitrou() == false)
+		{
+			bool played = PlaySound(TEXT("balle.wav"), NULL, SND_SYNC);
+		}
+		//bool played = PlaySound(TEXT("tUnConnard.wav"), NULL, SND_SYNC);
 		ParcoursTotal += ParcoursSection;													//Cumule les parcours de section
 		//cout << balle1->Get_Vx() << "  " << balle1->Get_Vy() << endl;
 		//cout << balle1->Get_Ox() << "  " << balle1->Get_Oy() << endl;
@@ -312,6 +317,16 @@ void Terrain::Display()
 	{
 		(*it)->Display();
 	}
+}
+
+int Terrain::getCOup()
+{
+	return nbCoup;
+}
+
+int Terrain::getRicochet()
+{
+	return nbRicochet;
 }
 
 bool Terrain::isBetween(double value, double bound1, double bound2)

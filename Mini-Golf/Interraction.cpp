@@ -132,7 +132,15 @@ void Interraction::angleReflexion(Ball* balle, Mur* mur, std::pair<double, doubl
 		if (mur->GetHx() == mur->GetTx())
 		{
 			
-			angleReflechis = abs(oldangle - PI);
+			angleReflechis = oldangle - PI;
+			if (angleReflechis < 0)
+			{
+				angleReflechis = -angleReflechis;
+			}
+			else
+			{
+				angleReflechis = 2*PI - angleReflechis;
+			}
 			balle->Set_direction(angleReflechis * 180 / PI);
 			
 		}
