@@ -18,7 +18,7 @@ int main()
 	//GameManager gm(20, 25);
 	//gm.Run();
 	Terrain *terrain1 = new Terrain;
-	terrain1->OpenTerrain("Terrain2.txt");
+	terrain1->OpenTerrain("Terrain1.txt");
 	terrain1->Display();
 	/*Interraction* inter = new Interraction;
 	Ball* ball1 = new Ball;
@@ -26,7 +26,7 @@ int main()
 	ball1->Set_direction(270);
 	ball1->Set_Vx(5);
 	inter->BalleMur(ball1, mur1);*/
-	Coup coup1(30, 100);
+	Coup coup1(1, 11);
 	terrain1->CoupDonne(coup1);
 	//terrain1->CoupDonne(coup1);
 }

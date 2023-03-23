@@ -26,7 +26,8 @@ Parcours Interraction::BalleMur(Ball* balle, Mur* mur, std::pair<double, double>
 	double verifVy = balle->Get_Vy();
 	timeBall = 0;																		//reset temps de la balle pour chaque petite partie du parcours
 	//pair<double, double> intersectionXY = intersection(balle, mur);											//prend l'intersection entre la balle et le mur																//set le temps pour que la balle se rend au mur
-	//cout << "coordonee angle: " << balle->Get_Ax() << "; " << balle->Get_Ay() << endl;
+	//cout << "intersection: " << intersectionXY.first << "; " << intersectionXY.second << endl;
+																											//cout << "coordonee angle: " << balle->Get_Ax() << "; " << balle->Get_Ay() << endl;
 	while (balle->Get_Vx() != 0 && balle->Get_Vy() != 0)								//tant que la balle a de la vitesse
 		{
 			double posX = balle->Get_x();														// position en x et y
@@ -133,6 +134,10 @@ void Interraction::angleReflexion(Ball* balle, Mur* mur, std::pair<double, doubl
 			angleMur = atan2(mur->GetTy() - mur->GetHy(), mur->GetTx() - mur->GetHx());
 			angleIncident = fmod(oldangle - angleMur + 2 * PI, 2 * PI);
 			angleReflechis = fmod(angleMur - angleIncident + PI, 2 * PI);
+			while (angleReflechis < 0)
+			{
+				angleReflechis = angleReflechis + PI;
+			}
 			balle->Set_direction(angleReflechis * 180 / PI);
 		}
 		
@@ -159,7 +164,7 @@ void Interraction::angleReflexion(Ball* balle, Mur* mur, std::pair<double, doubl
 pair<double, double> Interraction::intersection(Ball* balle, Mur* mur)							//equation de la trajectoire de la balle y = mx + b
 {
 	pair<double, double> pointIntersection;
-	double m = tan(balle->Get_direction()*3.14159265/180);
+	double m = tan(balle->Get_direction());
 	double b = balle->Get_Oy() - m * balle->Get_Ox();
 	double m_wall, c_wall;
 	if (mur->GetHx() == mur->GetTx())
