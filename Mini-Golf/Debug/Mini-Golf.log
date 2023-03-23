@@ -1,2 +1,6 @@
-﻿  Mini-Golf.cpp
+﻿  Interraction.cpp
+Interraction.cpp(15,10): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+Interraction.cpp(63,85): warning C4100: 'inters' : paramètre formel non référencé
+Interraction.cpp(116,84): warning C4100: 'inters' : paramètre formel non référencé
+Interraction.cpp(247,33): warning C4100: 'mur' : paramètre formel non référencé
   Mini-Golf.vcxproj -> C:\Users\alexi\OneDrive\Documents\GitHub\S2-Projet-Mini-Golf\Mini-Golf\debug\Mini-Golf.exe

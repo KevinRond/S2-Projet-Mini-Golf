@@ -62,7 +62,7 @@ Parcours Interraction::BalleMur(Ball* balle, Mur* mur, std::pair<double, double>
 
 Parcours Interraction::BalleTrou(Ball* balle, Hole* trou, std::pair<double, double> inters)
 {
-
+	cout << "rentredans trou" << endl;
 	Parcours petitParcour;
 	double verifVx = balle->Get_Vx();
 	double verifVy = balle->Get_Vy();
@@ -80,6 +80,8 @@ Parcours Interraction::BalleTrou(Ball* balle, Hole* trou, std::pair<double, doub
 		verifVxVy(verifVx, verifVy, balle);						//verifie si la velocite doit etre mis a 0 en raison d'un changement de +/-
 		petitParcour.addCoor(posX, posY);
 		//cout << balle->Get_Vx() << "  " << balle->Get_Vy() << endl;
+		cout << balle->Get_Vx() << "  " << balle->Get_Vy() << endl;
+		cout << "[" << balle->Get_x() << "  " << balle->Get_y() << "]" << endl;
 	}
 	balle->Set_Oxy(balle->Get_x(), balle->Get_y());
 	return petitParcour;
@@ -263,7 +265,8 @@ bool Interraction::hitHole(Ball* balle, Hole* hole)													//regarder si la
 {
 	pair<double, double> intersectionHoleXY = intersectionTrou(hole);
 	double distance = sqrt(abs(pow(intersectionHoleXY.first - balle->Get_x(), 2)) + abs(pow(intersectionHoleXY.second - balle->Get_y(), 2)));
-	return distance <= balle->Get_rayon() - hole->Get_radius() && balle->Get_Vx() > 0.5 && balle->Get_Vy() > 0.5;
+	cout << "distance trou: " << distance << endl;
+	return distance <= hole->Get_radius() - balle->Get_rayon();
 }
 
 bool Interraction::perpendiculaire(Ball* balle, Mur* mur)

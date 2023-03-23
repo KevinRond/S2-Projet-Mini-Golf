@@ -267,26 +267,34 @@ int Terrain::VerifierColision()
 	}
 	else if (balle1->Get_direction() > 3.14159265358979323846)		//Verifie si l'interaction occur dans les cadrants du bas
 	{
-		if (Iy < Oy) {
+		if (Iy > Oy) {
 			Iy = INFINITY;
 		}
 	}
 	if (Ox != Ix && Oy != Iy)															//Dans le cas que l'interaction est confirme mais que le trou n'est pas reussi la nouvelle
 	{																					//position de balle aura donc la meme que l'interaction calcule precedament
-		distanceTrou = sqrt(abs(pow((Ix - TrouX),2)) + abs(pow((Iy - TrouY),2)));	//Calcul la distance du point d'intersection avec le trou
-		if (distanceTrou < hole1->Get_radius())											//Si cette distance est sous le radius du trou il y a collision
-		{
+		cout << "check le trou" << endl;
+		//distanceTrou = sqrt(abs(pow((Ix - TrouX),2)) + abs(pow((Iy - TrouY),2)));	//Calcul la distance du point d'intersection avec le trou
+		//if (distanceTrou < hole1->Get_radius())											//Si cette distance est sous le radius du trou il y a collision
+		//{
 			distanceTrou = sqrt(abs((Ix - Ox) * (Ix - Ox) + (Iy - Oy) * (Iy - Oy)));			//Calcul la distance de la balle du point d'intersection
-			if (distanceTrou < Plusproche && i != IndexColision)													//Si c'est la distance est plus proche change l'index
+			if (distanceTrou < Plusproche)													//Si c'est la distance est plus proche change l'index
 			{
 				IndexColision = -1;														//Definit l'index a Trou
 				pointIntersection.first = Ix;
 				pointIntersection.second = Iy;
-				//cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(Ix) << "," << round(Iy) << ")" << endl;
+				cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(Ix) << "," << round(Iy) << ")" << endl;
 			}
-		}
+		//}
 	}
 	//cout << IndexColision << endl;
+	/*double distanceTrou;
+	distanceTrou = sqrt(pow(hole1->Get_x() - balle1->Get_x(), 2) + pow(hole1->Get_y() - balle1->Get_y(), 2));
+	if (distanceTrou < Plusproche)
+	{
+		Plusproche = distanceTrou;
+		IndexColision = -1;
+	}*/
 	return IndexColision;
 }
 
