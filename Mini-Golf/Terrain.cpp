@@ -60,6 +60,7 @@ Parcours Terrain::CoupDonne(Coup coup1)
 		//cout << balle1->Get_Vx() << "  " << balle1->Get_Vy() << endl;
 		//cout << balle1->Get_Ox() << "  " << balle1->Get_Oy() << endl;
 	}
+	nbCoup++;
 	return ParcoursTotal;
 }
 

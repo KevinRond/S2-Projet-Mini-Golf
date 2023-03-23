@@ -33,6 +33,7 @@ private:
 	std::pair<double, double> pointIntersection;
 	int prevIndex = -2;
 	double K = 1;					//Facteur de friction	
+	int nbCoup = 0;
 public:
 	Terrain();		
 	~Terrain();		
