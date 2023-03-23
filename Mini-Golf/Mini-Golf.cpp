@@ -10,25 +10,39 @@
 #include "Mur.h"
 #include "Coup.h"
 #include "GameManager.h"
+#include "Manette.h"
 
 using namespace std;
+
 
 int main()
 {
 	//GameManager gm(20, 25);
 	//gm.Run();
-	Terrain *terrain1 = new Terrain;
-	terrain1->OpenTerrain("Terrain2.txt");
-	terrain1->Display();
+	//Terrain *terrain1 = new Terrain;
+	//terrain1->OpenTerrain("Terrain2.txt");
+	//terrain1->Display();
 	/*Interraction* inter = new Interraction;
 	Ball* ball1 = new Ball;
 	Mur* mur1 = new Mur(0, 20, 20, 20);
 	ball1->Set_direction(270);
 	ball1->Set_Vx(5);
 	inter->BalleMur(ball1, mur1);*/
-	Coup coup1(30, 100);
-	terrain1->CoupDonne(coup1);
+	//Coup coup1(30, 100);
 	//terrain1->CoupDonne(coup1);
+	//terrain1->CoupDonne(coup1);
+	Manette manette;
+	int donnee;
+	manette.demande(4, 9);
+	string com = "COM7";
+	manette.setup(com);
+	std::thread comm(&Manette::communication, &manette);
+	for (int i; i < 1000; i++) {
+		cout << manette.getAmplitude() << endl;
+		Sleep(100);
+	}
+	manette.setState(false);
+	return donnee;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
