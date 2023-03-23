@@ -28,18 +28,25 @@ private:
 	bool button1, button2, button3, button4;
 	bool s_finished;
 
+
 public:
 	Manette();
-	int communication();
+	void communication();
 	void demande(int NewCas, int NewAfficher);
 	void setup(string usbport);
 	bool SendToSerial(SerialPort* arduino, json j_msg);
 	bool RcvFromSerial(SerialPort* arduino, string& msg);
+
 	int getCas();
 	int getAfficher();
 	int getAmplitude();
+	bool getButton1();
+	bool getButton2();
+	bool getButton3();
+	bool getButton4();
 	int getJoyX();
 	int getJoyY();
+
 	void setCas(int nouveauCas);
 	void setAfficher(int nouvelAffichage);
 	void setState(bool nouveauState);

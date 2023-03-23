@@ -32,17 +32,44 @@ int main()
 	//terrain1->CoupDonne(coup1);
 	//terrain1->CoupDonne(coup1);
 	Manette manette;
-	int donnee;
-	manette.demande(4, 9);
+	manette.demande(1, 9);
 	string com = "COM7";
 	manette.setup(com);
 	std::thread comm(&Manette::communication, &manette);
+
+/*----------------------------- Tests Manette -----------------------------*/
 	for (int i; i < 1000; i++) {
-		cout << manette.getAmplitude() << endl;
+		if (manette.getCas() == 1) {
+			cout << "Valeur Joystick: " << manette.getJoyY() << endl;
+			if (manette.getButton1() == true)
+				cout << "Bouton 1" << endl;
+			if (manette.getButton2() == true)
+				cout << "Bouton 2" << endl;
+			if (manette.getButton3() == true)
+				cout << "Bouton 3" << endl;
+			if (manette.getButton4() == true)
+				cout << "Bouton 4" << endl;
+		}
+		if (manette.getCas() == 2) {
+			cout << "Valeur Joystick: " << manette.getJoyX() << endl;
+			if (manette.getButton1() == true)
+				cout << "Bouton 1" << endl;
+			if (manette.getButton2() == true)
+				cout << "Bouton 2" << endl;
+			if (manette.getButton3() == true)
+				cout << "Bouton 3" << endl;
+			if (manette.getButton4() == true)
+				cout << "Bouton 4" << endl;
+		}
+		if (manette.getCas() == 3)
+			cout << manette.getAmplitude() << endl;
+
 		Sleep(100);
 	}
+/*------------------------------------------------------------------------*/
 	manette.setState(false);
-	return donnee;
+
+	return 0;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

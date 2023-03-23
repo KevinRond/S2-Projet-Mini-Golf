@@ -1,7 +1,3 @@
-﻿  Manette.cpp
-Manette.cpp(121,66): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
-  Mini-Golf.cpp
-  Generating Code...
-C:\Users\kevin\Documents\GitHub\S2-Projet-Mini-Golf\Mini-Golf\Mini-Golf.cpp(45): warning C4700: uninitialized local variable 'i' used
-C:\Users\kevin\Documents\GitHub\S2-Projet-Mini-Golf\Mini-Golf\Mini-Golf.cpp(50): warning C4700: uninitialized local variable 'donnee' used
+﻿  Mini-Golf.cpp
+C:\Users\kevin\Documents\GitHub\S2-Projet-Mini-Golf\Mini-Golf\Mini-Golf.cpp(40): warning C4700: uninitialized local variable 'i' used
   Mini-Golf.vcxproj -> C:\Users\kevin\Documents\GitHub\S2-Projet-Mini-Golf\Mini-Golf\debug\Mini-Golf.exe

@@ -20,12 +20,13 @@ Manette::Manette()
 }
 
 /*----------------------------- Fonction "Main" -----------------------------*/
-int Manette::communication() {
+void Manette::communication() {
     string raw_msg;
     // Structure de donnees JSON pour envoie et reception
     json j_msg_send, j_msg_rcv;
     // Boucle pour tester la communication bidirectionnelle Arduino-PC
     while (!s_finished) {
+        Sleep(15);
         for (int i = 0; i < 1; i++) {
             // Envoie message Arduino
             json B1;
@@ -41,7 +42,7 @@ int Manette::communication() {
                 cerr << "Erreur lors de l'envoie du message. " << endl;
             }
             // Reception message Arduino
-            if (cas == 4)
+            if (cas == 3)
                 Sleep(1000);
             else
                 Sleep(50);
@@ -78,30 +79,49 @@ int Manette::communication() {
                         button4 = true;
                     else
                         button4 = false;
-                    break;
-
-                case 2:
                     joystick = j_msg_rcv["poty"];
                     joyY = joystick;
                     break;
-                case 3:
+
+                case 2:
+                    B1 = j_msg_rcv["b1"];
+                    if (B1 == true)
+                        button1 = true;
+                    else
+                        button1 = false;
+                    B2 = j_msg_rcv["b2"];
+                    if (B2 == true)
+                        button2 = true;
+                    else
+                        button2 = false;
+                    B3 = j_msg_rcv["b3"];
+                    if (B3 == true)
+                        button3 = true;
+                    else
+                        button3 = false;
+
+                    B4 = j_msg_rcv["b4"];
+                    if (B4 == true)
+                        button4 = true;
+                    else
+                        button4 = false;
                     joystick = j_msg_rcv["potx"];
                     joyX = joystick;
                     break;
-                case 4:
+                case 3:
                     if (j_msg_rcv["acc"] > 0) {
                         accelero = j_msg_rcv["acc"];
                         amplitude = accelero;
                         cout << "amplitude = " << amplitude << endl;
                     }
-                    else
+                    else {
                         amplitude = 0;
+                    }
                     break;
                 }
             }
         }
     }
-    return 10;
 }
 void Manette::setup(string usbport) {
     string com = usbport;
@@ -167,6 +187,23 @@ int Manette::getAmplitude()
 {
     return amplitude;
 }
+bool Manette::getButton1()
+{
+    return button1;
+}
+bool Manette::getButton2()
+{
+    return button2;
+}
+bool Manette::getButton3()
+{
+    return button3;
+}
+bool Manette::getButton4()
+{
+    return button4;
+}
+
 int Manette::getJoyX()
 {
     return joyX;
