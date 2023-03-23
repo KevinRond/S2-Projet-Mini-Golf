@@ -44,7 +44,7 @@ public:
 	std::pair<double, double> intersection(Ball* balle, Mur* mur);
 	double penteMur(Mur* mur);
 	void verifVxVy(double verifVx, double verifVy, Ball* balle);
-	void hitWall(Mur* mur, Ball* balle);
+	bool hitWall(Mur* mur, Ball* balle);
 
 	std::pair<double, double> intersectionTrou(Hole* hole);		//Interraction avec un hole
 	bool hitHole(Ball* balle, Hole* hole);

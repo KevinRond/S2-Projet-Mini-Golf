@@ -219,12 +219,12 @@ int Terrain::VerifierColision()
 		}
 		if (isBetween(Ix, Hx, Tx) && isBetween(Iy, Hy, Ty))							//Valide si la colisin s'est fait dans les limites du mur
 		{																			//Si oui
-			distance = sqrt(pow((Ix - Ox), 2) + pow((Iy - Oy), 2));					//Trouve la distance entre les 2 points
-			if (distance < Plusproche && distance != 0)												//Si c'est la distance est plus proche retient l'index
+			distance = sqrt(abs(pow((Ix - Ox), 2)) + abs(pow((Iy - Oy), 2)));					//Trouve la distance entre les 2 points
+			if (distance < Plusproche)												//Si c'est la distance est plus proche retient l'index
 			{
 				Plusproche = distance;												//Set le nouveau plus proche
 				IndexColision = i;													//Memorise d'index du mur
-				//cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(Ix) << "," << round(Iy) << ")" << " a une distance de " << round(distance) << endl;
+				cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(Ix) << "," << round(Iy) << ")" << " a une distance de " << round(distance) << endl;
 			}
 		}
 		i++;
@@ -265,10 +265,10 @@ int Terrain::VerifierColision()
 	}
 	if (Ox != Ix && Oy != Iy)															//Dans le cas que l'interaction est confirme mais que le trou n'est pas reussi la nouvelle
 	{																					//position de balle aura donc la meme que l'interaction calcule precedament
-		distanceTrou = sqrt(pow((Ix - TrouX),2) + pow((Iy - TrouY),2));	//Calcul la distance du point d'intersection avec le trou
+		distanceTrou = sqrt(abs(pow((Ix - TrouX),2)) + abs(pow((Iy - TrouY),2)));	//Calcul la distance du point d'intersection avec le trou
 		if (distanceTrou < hole1->Get_radius())											//Si cette distance est sous le radius du trou il y a collision
 		{
-			distanceTrou = sqrt((Ix - Ox) * (Ix - Ox) + (Iy - Oy) * (Iy - Oy));			//Calcul la distance de la balle du point d'intersection
+			distanceTrou = sqrt(abs((Ix - Ox) * (Ix - Ox) + (Iy - Oy) * (Iy - Oy)));			//Calcul la distance de la balle du point d'intersection
 			if (distanceTrou < Plusproche)													//Si c'est la distance est plus proche change l'index
 			{
 				IndexColision = -1;														//Definit l'index a Trou

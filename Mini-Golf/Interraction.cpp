@@ -25,26 +25,28 @@ Parcours Interraction::BalleMur(Ball* balle, Mur* mur)
 	double verifVx = balle->Get_Vx();
 	double verifVy = balle->Get_Vy();
 	timeBall = 0;																		//reset temps de la balle pour chaque petite partie du parcours
-	pair<double, double> intersectionXY = intersection(balle, mur);											//prend l'intersection entre la balle et le mur
-	hitWall(mur, balle);																//set le temps pour que la balle se rend au mur
+	pair<double, double> intersectionXY = intersection(balle, mur);											//prend l'intersection entre la balle et le mur																//set le temps pour que la balle se rend au mur
 	while (balle->Get_Vx() != 0 && balle->Get_Vy() != 0)								//tant que la balle a de la vitesse
 		{
 			double posX = balle->Get_x();														// position en x et y
 			double posY = balle->Get_y();
-			if (timeBall >= timeHitWall)												// regarde si le temp de la balle depasse le temps ou elle touche le mur
+			if (hitWall(mur, balle))												// regarde si le temp de la balle depasse le temps ou elle touche le mur
 			{
 				cout << "touche mur" << endl;
-				angleReflexion(balle, mur);												//change l'angle de de la balle lorsqu'elle reflette le mur
 				balle->Set_xy(intersectionXY.first, intersectionXY.second);				//met la balle au point de rencontre en celle-ci et le mur
 				balle->Set_Oxy(intersectionXY.first, intersectionXY.second);
-				petitParcour.addCoor(balle->Get_x(), balle->Get_y());					//ajout des coordonne dans le parcours
+				angleReflexion(balle, mur);												//change l'angle de de la balle lorsqu'elle reflette le mur		
+				positionUpdate(balle);														//change la position de la balle selon sa velocite
+				vitesseUpdate(balle);														//diminue la velocite de la balle
+				verifVxVy(verifVx, verifVy, balle);
+				petitParcour.addCoor(balle->Get_x(), balle->Get_y());						//ajout des coordonne dans le parcours
 				break;																	//arrete la fonction pour que ali recommence
 			}
 			positionUpdate(balle);														//change la position de la balle selon sa velocite
 			vitesseUpdate(balle);														//diminue la velocite de la balle
 			verifVxVy(verifVx, verifVy, balle);							//verifie si la velocite doit etre mis a 0 en raison d'un changement de +/-
 			petitParcour.addCoor(posX, posY);
-			//cout << balle->Get_Vx() << "  " << balle->Get_Vy() << endl;
+			cout << balle->Get_Vx() << "  " << balle->Get_Vy() << endl;
 			cout <<"["<< balle->Get_x() << "  " << balle->Get_y() << "]"<< endl;
 		}
 	balle->Set_Oxy(balle->Get_x(), balle->Get_y());
@@ -118,12 +120,22 @@ void Interraction::angleReflexion(Ball* balle, Mur* mur)							//trouver l'angle
 pair<double, double> Interraction::intersection(Ball* balle, Mur* mur)							//equation de la trajectoire de la balle y = mx + b
 {
 	pair<double, double> pointIntersection;
-	double m = tan(balle->Get_direction()*180/3.14159265);
-	double b = balle->Get_Oy() - m * balle->Get_Ox();	
-	double m_wall = (mur->GetTy() - mur->GetHy()) / (mur->GetTx() - mur->GetHx());	//equation de la droite du mur y = mx + c
-	double c_wall = mur->GetTy() - m_wall * mur->GetTx();
+	double m = tan(balle->Get_direction()*3.14159265/180);
+	double b = balle->Get_Oy() - m * balle->Get_Ox();
+	double m_wall, c_wall;
+	if (mur->GetHx() == mur->GetTx())
+	{
+		m_wall = INFINITY;
+		c_wall = mur->GetHx();
+	}
+	else
+	{
+		m_wall = (mur->GetTy() - mur->GetHy()) / (mur->GetTx() - mur->GetHx());	//equation de la droite du mur y = mx + c
+		c_wall = mur->GetTy() - m_wall * mur->GetTx();
+	}
+	cout << "jesuisdeseperer" << m_wall << endl;
+	
 	pointIntersection = make_pair((c_wall - b) / (m - m_wall), (m * ((c_wall - b) / (m - m_wall)) + b));								//calcul de l'intersection entre les deux droites
-
 	return pointIntersection;
 }
 
@@ -187,12 +199,14 @@ void Interraction::verifVxVy(double verifVx, double verifVy, Ball* balle)			//fo
 	
 }
 
-void Interraction::hitWall(Mur* mur, Ball* balle)																				//temps pour que la balle touche le mur
+bool Interraction::hitWall(Mur* mur, Ball* balle)																				//temps pour que la balle touche le mur
 {
 	pair<double, double> intersectionmur = intersection(balle, mur);																		//trouve le point d'intersection entre la balle et le mur
-	double distanceToWall = sqrt(pow(intersectionmur.first - balle->Get_Ox(), 2) + pow(intersectionmur.second - balle->Get_Oy(), 2));	//trouve la distance entre la balle et le mur
-	timeHitWall = distanceToWall / (sqrt(pow(balle->Get_Vx(), 2) + pow(balle->Get_Vy(), 2)));									// trouve le temps necessaire a la balle pour atteindre le mur
-	
+	double distanceToWall = sqrt(pow(intersectionmur.first - balle->Get_x(), 2) +pow(intersectionmur.second - balle->Get_y(), 2));	//trouve la distance entre la balle et le mur
+	//timeHitWall = distanceToWall / (sqrt(pow(balle->Get_Vx(), 2) + pow(balle->Get_Vy(), 2)));									// trouve le temps necessaire a la balle pour atteindre le mur
+	cout <<"yoyooy"<< distanceToWall << endl;
+	cout << "{" << intersectionmur.first << "," << intersectionmur.second << "}" << endl;
+	return distanceToWall <= balle->Get_rayon();
 }
 
 pair<double, double> Interraction::intersectionTrou(Hole* hole)										//trouver l'intersection du trou(coordonnee de sont centre)
@@ -205,7 +219,7 @@ pair<double, double> Interraction::intersectionTrou(Hole* hole)										//trouv
 bool Interraction::hitHole(Ball* balle, Hole* hole)													//regarder si la balle est au moins a la moitier dans le trou
 {
 	pair<double, double> intersectionHoleXY = intersectionTrou(hole);
-	double distance = sqrt(pow(intersectionHoleXY.first - balle->Get_x(), 2) + pow(intersectionHoleXY.second - balle->Get_y(), 2));
+	double distance = sqrt(abs(pow(intersectionHoleXY.first - balle->Get_x(), 2)) + abs(pow(intersectionHoleXY.second - balle->Get_y(), 2)));
 	return distance <= balle->Get_rayon() - hole->Get_radius() && balle->Get_Vx() > 0.5 && balle->Get_Vy() > 0.5;
 }
 
@@ -216,7 +230,7 @@ bool Interraction::perpendiculaire(Ball* balle, Mur* mur)
 	double normWally = mur->GetTx() - mur->GetHx();
 
 	//normaliser vecteur normal
-	double norm = sqrt(normWallx * normWallx + normWally * normWally);
+	double norm = sqrt(abs(normWallx * normWallx + normWally * normWally));
 	normWallx = normWallx / norm;
 	normWally = normWally / norm;
 

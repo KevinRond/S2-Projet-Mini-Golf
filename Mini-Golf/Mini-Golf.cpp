@@ -20,7 +20,13 @@ int main()
 	Terrain *terrain1 = new Terrain;
 	terrain1->OpenTerrain("Terrain2.txt");
 	terrain1->Display();
-	Coup coup1(90, 5);
+	/*Interraction* inter = new Interraction;
+	Ball* ball1 = new Ball;
+	Mur* mur1 = new Mur(0, 20, 20, 20);
+	ball1->Set_direction(270);
+	ball1->Set_Vx(5);
+	inter->BalleMur(ball1, mur1);*/
+	Coup coup1(30, 2);
 	terrain1->CoupDonne(coup1);
 	terrain1->CoupDonne(coup1);
 }

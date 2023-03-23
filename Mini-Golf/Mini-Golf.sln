@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33214.272
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Mini-Golf", "Mini-Golf.vcxproj", "{D8E017EB-1768-329D-953C-7FB9632C868A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D8E017EB-1768-329D-953C-7FB9632C868A}.Debug|x64.ActiveCfg = Debug|x64
+		{D8E017EB-1768-329D-953C-7FB9632C868A}.Debug|x64.Build.0 = Debug|x64
+		{D8E017EB-1768-329D-953C-7FB9632C868A}.Release|x64.ActiveCfg = Release|x64
+		{D8E017EB-1768-329D-953C-7FB9632C868A}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {313C710E-0A10-44FF-9AAF-02E5CB75405C}
+	EndGlobalSection
+EndGlobal
