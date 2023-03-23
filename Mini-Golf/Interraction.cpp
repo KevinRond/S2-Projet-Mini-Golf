@@ -19,7 +19,7 @@ Interraction::~Interraction()
 {
 }
 
-Parcours Interraction::BalleMur(Ball* balle, Mur* mur, std::pair<double, double> inters)
+Parcours Interraction::BalleMur(Ball* balle, Mur* mur, std::pair<double, double> inters, Hole* hole)
 {
 	Parcours petitParcour;
 	double verifVx = balle->Get_Vx();
@@ -32,6 +32,13 @@ Parcours Interraction::BalleMur(Ball* balle, Mur* mur, std::pair<double, double>
 		{
 			double posX = balle->Get_x();														// position en x et y
 			double posY = balle->Get_y();
+			if (hitHole(balle, hole))
+			{
+				hole->SetTrouReussi(true);
+				balle->Set_Vxy(0, 0);
+				cout << "TU AS REUSSI JP BRAVOOOOOOOOOOO" << endl;
+				break;
+			}
 			if (hitWall(mur, balle, inters))												// regarde si le temp de la balle depasse le temps ou elle touche le mur
 			{
 				cout << "touche mur" << endl;
@@ -73,6 +80,8 @@ Parcours Interraction::BalleTrou(Ball* balle, Hole* trou, std::pair<double, doub
 		if (hitHole(balle, trou))
 		{
 			trou->SetTrouReussi(true);
+			balle->Set_Vxy(0, 0);
+			cout << "Alex mange dans le trou" << endl;
 			break;															 //arrete la boucle while
 		}
 		positionUpdate(balle);												//update la position de la balle
@@ -314,7 +323,7 @@ void Interraction::positionUpdate(Ball* balle)
 	posX = posX + dt * Vx;																			//formule pour changer la position de x a chaque 10 ms
 	posY = posY + dt * Vy;
 	balle->Set_xy(posX, posY);																		//changer la position
-	timeBall = timeBall + 0.01;																		//augmenter le temps parcourue ar la balle
+	timeBall = timeBall + 0.1;																		//augmenter le temps parcourue ar la balle
 }
 
 

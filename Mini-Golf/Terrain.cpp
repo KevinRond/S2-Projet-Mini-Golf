@@ -36,8 +36,12 @@ Parcours Terrain::CoupDonne(Coup coup1)
 	balle1->Set_Axy(coup1.getAccelerationX(), coup1.getAccelerationY());					//Determine l'acceleration de la balle
 	balle1->Set_direction(coup1.getDirection());												//attribut la direction de balle
 	
-	while ((balle1->Get_Vx() != 0 && balle1->Get_Vy() != 0) || hole1->Sitrou() == true)
+	while ((balle1->Get_Vx() != 0 && balle1->Get_Vy() != 0))
 	{
+		if (hole1->Sitrou() == true)
+		{
+			break;
+		}
 		indexColision = VerifierColision();													//Rapporte l'index de colision
 		cout << "INdex: " << indexColision << endl;
 		if (indexColision == -1)															//Si interraction avec un trou (-1)
@@ -46,7 +50,7 @@ Parcours Terrain::CoupDonne(Coup coup1)
 		}
 		else if (indexColision >= 0)														//Si interraction avec un Mur (0 et +)
 		{
-			ParcoursSection = Interaction1.BalleMur(balle1, vecteurMur1.at(indexColision), pointIntersection);	//Retourne le parcours jusqu'a la prochaine interaction
+			ParcoursSection = Interaction1.BalleMur(balle1, vecteurMur1.at(indexColision), pointIntersection, hole1);	//Retourne le parcours jusqu'a la prochaine interaction
 		}
 		else
 		{
@@ -237,56 +241,56 @@ int Terrain::VerifierColision()
 		}
 		i++;
 	}																					//Check colision avec Trou
-	Nmx = -1 / Bmx;																		//Trouve la pente de la normale
-	Nb = TrouY - Nmx * TrouX;															//Resout l'equation de la normale passant par le trou
-	Ix = (Nb - Bb) / (Bmx - Nmx);														//Trouve les coordonnes de l'intersection des 2 droites
-	Iy = Bmx * Ix + Bb;
-	if (isOnLine(TrouX, TrouY, Bmx, Bb))
-	{
-		Ix = TrouX;
-		Iy = TrouY;
-	}
+	//Nmx = -1 / Bmx;																		//Trouve la pente de la normale
+	//Nb = TrouY - Nmx * TrouX;															//Resout l'equation de la normale passant par le trou
+	//Ix = (Nb - Bb) / (Bmx - Nmx);														//Trouve les coordonnes de l'intersection des 2 droites
+	//Iy = Bmx * Ix + Bb;
+	//if (isOnLine(TrouX, TrouY, Bmx, Bb))
+	//{
+	//	Ix = TrouX;
+	//	Iy = TrouY;
+	//}
 
-	if (balle1->Get_direction() < 3.14159265358979323846 / 2 || balle1->Get_direction() > 3.14159265358979323846 * 1.5)			//Verifie si l'interaction occur dans les cadrants de droite
-	{
-		if (Ix < Ox) {
-			Ix = INFINITY;
-		}
-	}
-	else if (balle1->Get_direction() > 3.14159265358979323846 / 2 && balle1->Get_direction() < 3.14159265358979323846 * 1.5)		//Verifie si l'interaction occur dans les cadrants de gauche
-	{
-		if (Ix > Ox) {
-			Ix = INFINITY;
-		}
-	}
-	if (balle1->Get_direction() > 0 && balle1->Get_direction() < 3.14159265358979323846)			//Verifie si l'interaction occur dans les cadrants du haut
-	{
-		if (Iy < Oy) {
-			Iy = INFINITY;
-		}
-	}
-	else if (balle1->Get_direction() > 3.14159265358979323846)		//Verifie si l'interaction occur dans les cadrants du bas
-	{
-		if (Iy > Oy) {
-			Iy = INFINITY;
-		}
-	}
-	if (Ox != Ix && Oy != Iy)															//Dans le cas que l'interaction est confirme mais que le trou n'est pas reussi la nouvelle
-	{																					//position de balle aura donc la meme que l'interaction calcule precedament
-		cout << "check le trou" << endl;
-		//distanceTrou = sqrt(abs(pow((Ix - TrouX),2)) + abs(pow((Iy - TrouY),2)));	//Calcul la distance du point d'intersection avec le trou
-		//if (distanceTrou < hole1->Get_radius())											//Si cette distance est sous le radius du trou il y a collision
-		//{
-			distanceTrou = sqrt(abs((Ix - Ox) * (Ix - Ox) + (Iy - Oy) * (Iy - Oy)));			//Calcul la distance de la balle du point d'intersection
-			if (distanceTrou < Plusproche)													//Si c'est la distance est plus proche change l'index
-			{
-				IndexColision = -1;														//Definit l'index a Trou
-				pointIntersection.first = Ix;
-				pointIntersection.second = Iy;
-				cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(Ix) << "," << round(Iy) << ")" << endl;
-			}
-		//}
-	}
+	//if (balle1->Get_direction() < 3.14159265358979323846 / 2 || balle1->Get_direction() > 3.14159265358979323846 * 1.5)			//Verifie si l'interaction occur dans les cadrants de droite
+	//{
+	//	if (Ix < Ox) {
+	//		Ix = INFINITY;
+	//	}
+	//}
+	//else if (balle1->Get_direction() > 3.14159265358979323846 / 2 && balle1->Get_direction() < 3.14159265358979323846 * 1.5)		//Verifie si l'interaction occur dans les cadrants de gauche
+	//{
+	//	if (Ix > Ox) {
+	//		Ix = INFINITY;
+	//	}
+	//}
+	//if (balle1->Get_direction() > 0 && balle1->Get_direction() < 3.14159265358979323846)			//Verifie si l'interaction occur dans les cadrants du haut
+	//{
+	//	if (Iy < Oy) {
+	//		Iy = INFINITY;
+	//	}
+	//}
+	//else if (balle1->Get_direction() > 3.14159265358979323846)		//Verifie si l'interaction occur dans les cadrants du bas
+	//{
+	//	if (Iy > Oy) {
+	//		Iy = INFINITY;
+	//	}
+	//}
+	//if (Ox != Ix && Oy != Iy)															//Dans le cas que l'interaction est confirme mais que le trou n'est pas reussi la nouvelle
+	//{																					//position de balle aura donc la meme que l'interaction calcule precedament
+	//	distanceTrou = sqrt(abs(pow((Ix - TrouX),2)) + abs(pow((Iy - TrouY),2)));	//Calcul la distance du point d'intersection avec le trou
+	//	//if (distanceTrou < hole1->Get_radius())											//Si cette distance est sous le radius du trou il y a collision
+	//	//{
+	//	if(isBetween(Ix, hole1->Get_x()-hole1->Get_radius(), hole1->Get_x() + hole1->Get_radius())&& isBetween(Iy, hole1->Get_y() - hole1->Get_radius(), hole1->Get_y() + hole1->Get_radius()))
+	//		distanceTrou = sqrt(abs((Ix - Ox) * (Ix - Ox) + (Iy - Oy) * (Iy - Oy)));			//Calcul la distance de la balle du point d'intersection
+	//		if (distanceTrou < Plusproche && i != IndexColision)													//Si c'est la distance est plus proche change l'index
+	//		{
+	//			IndexColision = -1;														//Definit l'index a Trou
+	//			pointIntersection.first = Ix;
+	//			pointIntersection.second = Iy;
+	//			cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(Ix) << "," << round(Iy) << ")" << endl;
+	//		}
+	//	//}
+	//}
 	//cout << IndexColision << endl;
 	/*double distanceTrou;
 	distanceTrou = sqrt(pow(hole1->Get_x() - balle1->Get_x(), 2) + pow(hole1->Get_y() - balle1->Get_y(), 2));

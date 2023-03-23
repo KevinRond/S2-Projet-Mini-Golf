@@ -18,7 +18,7 @@ int main()
 	//GameManager gm(20, 25);
 	//gm.Run();
 	Terrain *terrain1 = new Terrain;
-	terrain1->OpenTerrain("Terrain2.txt");
+	terrain1->OpenTerrain("Terrain3.txt");
 	terrain1->Display();
 	/*Interraction* inter = new Interraction;
 	Ball* ball1 = new Ball;
@@ -26,7 +26,15 @@ int main()
 	ball1->Set_direction(270);
 	ball1->Set_Vx(5);
 	inter->BalleMur(ball1, mur1);*/
-	Coup coup1(90, 5);
+	string direction;
+	string force;
+	cout << "entrer la direction de la balle" << endl;
+	cin >> direction;
+	cout << "enter la puissance" << endl;
+	cin >> force;
+	double forced = stod(force);
+	double directiond = stod(direction);
+	Coup coup1(directiond,forced);
 	terrain1->CoupDonne(coup1);
 	//terrain1->CoupDonne(coup1);
 }

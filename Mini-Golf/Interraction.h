@@ -37,7 +37,7 @@ public:
 	void vitesseUpdate(Ball* balle);	//Modification de la velocite et de la position
 	void positionUpdate(Ball* balle);
 
-	Parcours BalleMur(Ball* balle, Mur* mur, std::pair<double, double> inters);				//Interraction avec un mur
+	Parcours BalleMur(Ball* balle, Mur* mur, std::pair<double, double> inters, Hole* trou);				//Interraction avec un mur
 	Parcours BalleTrou(Ball* balle, Hole* trou, std::pair<double, double> inters);
 
 	void angleReflexion(Ball* balle, Mur *mur, std::pair<double, double> inters);
