@@ -12,7 +12,7 @@ On est dans un monde de mini-put, on peux faire s'quon veux...
 #include <cmath>
 #include <vector>
 #include <utility>
-
+#define _USE_MATH_DEFINES
 #define PI 3.14159265359
 
 class Interraction
@@ -37,14 +37,14 @@ public:
 	void vitesseUpdate(Ball* balle);	//Modification de la velocite et de la position
 	void positionUpdate(Ball* balle);
 
-	Parcours BalleMur(Ball* balle, Mur* mur);				//Interraction avec un mur
-	Parcours BalleTrou(Ball* balle, Hole* trou);
+	Parcours BalleMur(Ball* balle, Mur* mur, std::pair<double, double> inters);				//Interraction avec un mur
+	Parcours BalleTrou(Ball* balle, Hole* trou, std::pair<double, double> inters);
 
-	void angleReflexion(Ball* balle, Mur *mur);
+	void angleReflexion(Ball* balle, Mur *mur, std::pair<double, double> inters);
 	std::pair<double, double> intersection(Ball* balle, Mur* mur);
 	double penteMur(Mur* mur);
 	void verifVxVy(double verifVx, double verifVy, Ball* balle);
-	bool hitWall(Mur* mur, Ball* balle);
+	bool hitWall(Mur* mur, Ball* balle, std::pair<double, double> inters);
 
 	std::pair<double, double> intersectionTrou(Hole* hole);		//Interraction avec un hole
 	bool hitHole(Ball* balle, Hole* hole);

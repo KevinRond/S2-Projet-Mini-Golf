@@ -26,9 +26,9 @@ int main()
 	ball1->Set_direction(270);
 	ball1->Set_Vx(5);
 	inter->BalleMur(ball1, mur1);*/
-	Coup coup1(30, 2);
+	Coup coup1(135, 10);
 	terrain1->CoupDonne(coup1);
-	terrain1->CoupDonne(coup1);
+	//terrain1->CoupDonne(coup1);
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

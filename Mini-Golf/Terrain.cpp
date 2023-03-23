@@ -41,15 +41,15 @@ Parcours Terrain::CoupDonne(Coup coup1)
 		indexColision = VerifierColision();													//Rapporte l'index de colision
 		if (indexColision == -1)															//Si interraction avec un trou (-1)
 		{
-			ParcoursSection = Interaction1.BalleTrou(balle1, hole1);						//Retourne le parcours jusqua la prochaine interaction
+			ParcoursSection = Interaction1.BalleTrou(balle1, hole1, pointIntersection);						//Retourne le parcours jusqua la prochaine interaction
 		}
 		else if (indexColision >= 0)														//Si interraction avec un Mur (0 et +)
 		{
-			ParcoursSection = Interaction1.BalleMur(balle1, vecteurMur1.at(indexColision));	//Retourne le parcours jusqu'a la prochaine interaction
+			ParcoursSection = Interaction1.BalleMur(balle1, vecteurMur1.at(indexColision), pointIntersection);	//Retourne le parcours jusqu'a la prochaine interaction
 		}
 		ParcoursTotal += ParcoursSection;													//Cumule les parcours de section
 		//cout << balle1->Get_Vx() << "  " << balle1->Get_Vy() << endl;
-		cout << balle1->Get_Ox() << "  " << balle1->Get_Oy() << endl;
+		//cout << balle1->Get_Ox() << "  " << balle1->Get_Oy() << endl;
 	}
 	return ParcoursTotal;
 }
@@ -224,7 +224,9 @@ int Terrain::VerifierColision()
 			{
 				Plusproche = distance;												//Set le nouveau plus proche
 				IndexColision = i;													//Memorise d'index du mur
-				cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(Ix) << "," << round(Iy) << ")" << " a une distance de " << round(distance) << endl;
+				pointIntersection.first = Ix;
+				pointIntersection.second = Iy;
+				cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(pointIntersection.first) << "," << round(Iy) << ")" << " a une distance de " << round(distance) << endl;
 			}
 		}
 		i++;
@@ -272,6 +274,8 @@ int Terrain::VerifierColision()
 			if (distanceTrou < Plusproche)													//Si c'est la distance est plus proche change l'index
 			{
 				IndexColision = -1;														//Definit l'index a Trou
+				pointIntersection.first = Ix;
+				pointIntersection.second = Iy;
 				//cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(Ix) << "," << round(Iy) << ")" << endl;
 			}
 		}
