@@ -3,23 +3,24 @@
 #include <iostream>
 #include <string>
 #include <cmath>
+#include "Manette.h"
 
 class Coup
 {
 private:
-	double direction;							//Direction du coup en Rad
-	double amplitude;							//Amplitude de force (lecture de l'accelerometre)
+	int direction;							//Direction du coup en Rad
+	int amplitude;							//Amplitude de force (lecture de l'accelerometre)
 	double vitesseX, vitesseY;					//Vitesse en X et Y
 	double accelerationX, accelerationY;		//Acceleration en X et Y
 
 public:
-	Coup(double dir, double ampli);
+	Coup();
 	~Coup();
 
 	//Setter
-	void initcoup(double dir, double ampli);	//Initialisation des parametres de ball depuis un coup
-	void setDirection(double dir);				//Direction choisie + random factor
-	void setAmplitude(double ampli);
+	void initcoup();	//Initialisation des parametres de ball depuis un coup
+	void setDirection(int lectureJoystick);				//Direction choisie + random factor
+	void setAmplitude(int lectureAmplitude);
 
 	//updater
 	
@@ -29,7 +30,8 @@ public:
 	void calculAccelerationY();					//Calcul l'acceleration de la balle en Y
 
 	//Getter
-	double getDirection();						//Lecture de la direction retour en rad
+	int getAmplitude();
+	int getDirection();						//Lecture de la direction retour en rad
 	double getVitesseX();						//Retourne vitesse en X
 	double getVitesseY();						//Retourne vitesse en Y
 	double getAccelerationX();					//Retourne acceleration en X

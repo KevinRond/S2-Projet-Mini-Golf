@@ -37,7 +37,7 @@ Parcours Interraction::BalleMur(Ball* balle, Mur* mur, std::pair<double, double>
 				hole->SetTrouReussi(true);
 				balle->Set_Vxy(0, 0);
 				cout << "TU AS REUSSI JP BRAVOOOOOOOOOOO" << endl;
-				bool played = PlaySound(TEXT("BIRDIE.wav"), NULL, SND_SYNC);
+				//bool played = PlaySound(TEXT("BIRDIE.wav"), NULL, SND_SYNC);
 				break;
 			}
 			if (hitWall(mur, balle, inters))												// regarde si le temp de la balle depasse le temps ou elle touche le mur

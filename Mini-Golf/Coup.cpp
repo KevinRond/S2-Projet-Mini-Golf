@@ -2,10 +2,10 @@
 using namespace std;
 
 
-Coup::Coup(double dir, double ampli)				//Initialisation de l'objet
+Coup::Coup()				//Initialisation de l'objet
 {
-	direction = dir;
-	amplitude = ampli;
+	direction = 90;
+	amplitude = 0;
 	calculVitesseX();
 	calculVitesseY();
 	calculAccelerationY();
@@ -17,27 +17,31 @@ Coup::~Coup()
 }
 
 
-void Coup::initcoup(double dir, double ampli)	//Lorsque les parametre d'un coup arrivent, ils update tout les attribues de la balle
+void Coup::initcoup()	//Lorsque les parametre d'un coup arrivent, ils update tout les attribues de la balle
 {
-	direction = dir;
-	amplitude = ampli;
 	calculVitesseX();
 	calculVitesseY();
 	calculAccelerationY();
 	calculAccelerationX();
 }
 
-void Coup::setDirection(double dir)				//sauvegarde la direction en degre
+void Coup::setDirection(int lectureJoystick)
 {
-	direction = dir;
+	direction = direction - lectureJoystick;
 }
 
-void Coup::setAmplitude(double ampli)
+void Coup::setAmplitude(int lectureAmplitude)
 {
-	amplitude = ampli;
+	amplitude = lectureAmplitude;
 }
 
-double Coup::getDirection()
+
+int Coup::getAmplitude()
+{
+	return amplitude;
+}
+
+int Coup::getDirection()
 {
 	return direction;
 }
