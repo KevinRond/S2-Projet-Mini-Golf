@@ -12,6 +12,7 @@ On est dans un monde de mini-put, on peux faire s'quon veux...
 #include <cmath>
 #include <vector>
 #include <utility>
+#include <windows.h>
 #define _USE_MATH_DEFINES
 #define PI 3.14159265359
 

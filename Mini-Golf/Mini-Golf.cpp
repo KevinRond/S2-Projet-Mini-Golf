@@ -10,6 +10,7 @@
 #include "Mur.h"
 #include "Coup.h"
 #include "GameManager.h"
+#include <windows.h>
 
 using namespace std;
 
@@ -18,7 +19,7 @@ int main()
 	//GameManager gm(20, 25);
 	//gm.Run();
 	Terrain *terrain1 = new Terrain;
-	terrain1->OpenTerrain("Terrain3.txt");
+	terrain1->OpenTerrain("Terrain2.txt");
 	terrain1->Display();
 	/*Interraction* inter = new Interraction;
 	Ball* ball1 = new Ball;
@@ -36,6 +37,7 @@ int main()
 	double directiond = stod(direction);
 	Coup coup1(directiond,forced);
 	terrain1->CoupDonne(coup1);
+	
 	//terrain1->CoupDonne(coup1);
 }
 

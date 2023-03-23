@@ -315,8 +315,8 @@ void Terrain::Display()
 
 bool Terrain::isBetween(double value, double bound1, double bound2)
 {
-	double lower = std::min(bound1, bound2);
-	double upper = std::max(bound1, bound2);
+	double lower = min(bound1, bound2);
+	double upper = max(bound1, bound2);
 	return value >= lower && value <= upper;
 }
 bool Terrain::isOnLine(double x0, double y0, double m, double b) {
