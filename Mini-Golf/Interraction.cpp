@@ -36,7 +36,7 @@ Parcours Interraction::BalleMur(Ball* balle, Mur* mur, std::pair<double, double>
 				//balle->Set_xy(inters.first, inters.second);				//met la balle au point de rencontre en celle-ci et le mur
 				//balle->Set_Oxy(inters.first, inters.second);
 				angleReflexion(balle, mur, inters);												//change l'angle de de la balle lorsqu'elle reflette le mur		
-				cout <<"angle: "<< balle->Get_direction() << endl;
+				cout <<"angle: "<< balle->Get_direction()*180/PI << endl;
 				positionUpdate(balle);														//change la position de la balle selon sa velocite
 				vitesseUpdate(balle);													//diminue la velocite de la balle
 				//balle->Set_xy(inters.first, inters.second);				//met la balle au point de rencontre en celle-ci et le mur
@@ -49,7 +49,7 @@ Parcours Interraction::BalleMur(Ball* balle, Mur* mur, std::pair<double, double>
 			vitesseUpdate(balle);														//diminue la velocite de la balle
 			verifVxVy(verifVx, verifVy, balle);							//verifie si la velocite doit etre mis a 0 en raison d'un changement de +/-
 			petitParcour.addCoor(posX, posY);
-			//cout << balle->Get_Vx() << "  " << balle->Get_Vy() << endl;
+			cout << balle->Get_Vx() << "  " << balle->Get_Vy() << endl;
 			cout <<"["<< balle->Get_x() << "  " << balle->Get_y() << "]"<< endl;
 		}
 	balle->Set_Oxy(balle->Get_x(), balle->Get_y());
@@ -120,6 +120,11 @@ void Interraction::angleReflexion(Ball* balle, Mur* mur, std::pair<double, doubl
 			balle->Set_direction(angleReflechis * 180 / PI);
 			
 		}
+		else if (mur->GetHy() == mur->GetTy())
+		{
+			angleReflechis = 2 * PI - oldangle;
+			balle->Set_direction(angleReflechis * 180 / PI);
+		}
 		else
 		{
 			angleMur = atan2(mur->GetTy() - mur->GetHy(), mur->GetTx() - mur->GetHx());
@@ -128,14 +133,23 @@ void Interraction::angleReflexion(Ball* balle, Mur* mur, std::pair<double, doubl
 			balle->Set_direction(angleReflechis * 180 / PI);
 		}
 		
-		//angleIncident = oldangle - angleMur *;
-		/*double angleReflexion = fmod(angleMur + PI - angleIncident, 2 * PI);
 		
 		double vitesse = sqrt(balle->Get_Vx() * balle->Get_Vx() + balle->Get_Vy() * balle->Get_Vy());
 
-		double newVx = -vitesse * cos(angleReflexion);
-		double newVy = -vitesse * sin(angleReflexion);
-		balle->Set_Vxy(newVx, newVy);*/
+		double newVx = vitesse * cos(angleReflechis);
+		double newVy = vitesse * sin(angleReflechis);
+
+		if ((balle->Get_Vx() < 0 && newVx > 0) || (balle->Get_Vx() > 0 && newVx < 0))
+		{
+			balle->Set_Axy(-balle->Get_Ax(), balle->Get_Ay());
+		}
+		if ((balle->Get_Vy() < 0 && newVy > 0) || (balle->Get_Vy() > 0 && newVy < 0))
+		{
+			balle->Set_Axy(balle->Get_Ax(), -balle->Get_Ay());
+		}
+		balle->Set_Vxy(newVx, newVy);
+
+		
 		//balle->Set_direction(angleIncident * 180 / PI);
 }
 
@@ -155,7 +169,6 @@ pair<double, double> Interraction::intersection(Ball* balle, Mur* mur)							//e
 		m_wall = (mur->GetTy() - mur->GetHy()) / (mur->GetTx() - mur->GetHx());	//equation de la droite du mur y = mx + c
 		c_wall = mur->GetTy() - m_wall * mur->GetTx();
 	}
-	cout << "jesuisdeseperer" << m_wall << endl;
 	
 	pointIntersection = make_pair((c_wall - b) / (m - m_wall), (m * ((c_wall - b) / (m - m_wall)) + b));								//calcul de l'intersection entre les deux droites
 	return pointIntersection;

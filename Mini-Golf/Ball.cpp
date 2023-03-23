@@ -12,7 +12,7 @@ Ball::Ball()
     Vy = 0.0;
     Ax = 0.0;
     Ay = 0.0;
-    rayon = 3; //avoir le rayon de la balle pour le trou
+    rayon = 0.5; //avoir le rayon de la balle pour le trou
 }
 
 Ball::~Ball(){}

@@ -220,12 +220,13 @@ int Terrain::VerifierColision()
 		if (isBetween(Ix, Hx, Tx) && isBetween(Iy, Hy, Ty))							//Valide si la colisin s'est fait dans les limites du mur
 		{																			//Si oui
 			distance = sqrt(abs(pow((Ix - Ox), 2)) + abs(pow((Iy - Oy), 2)));					//Trouve la distance entre les 2 points
-			if (distance < Plusproche)												//Si c'est la distance est plus proche retient l'index
+			if (distance < Plusproche && i != prevIndex)												//Si c'est la distance est plus proche retient l'index
 			{
 				Plusproche = distance;												//Set le nouveau plus proche
 				IndexColision = i;													//Memorise d'index du mur
 				pointIntersection.first = Ix;
 				pointIntersection.second = Iy;
+				prevIndex = i;
 				cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(pointIntersection.first) << "," << round(Iy) << ")" << " a une distance de " << round(distance) << endl;
 			}
 		}

@@ -31,6 +31,7 @@ private:
 	std::vector<Mur*> vecteurMur1;	//tableau pointeur des murs du terrain
 	Parcours ParcoursTotal;
 	std::pair<double, double> pointIntersection;
+	int prevIndex = -3;
 	double K = 1;					//Facteur de friction	
 public:
 	Terrain();		
