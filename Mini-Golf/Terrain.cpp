@@ -39,6 +39,7 @@ Parcours Terrain::CoupDonne(Coup coup1)
 	while ((balle1->Get_Vx() != 0 && balle1->Get_Vy() != 0) || hole1->Sitrou() == true)
 	{
 		indexColision = VerifierColision();													//Rapporte l'index de colision
+		cout << "INdex: " << indexColision << endl;
 		if (indexColision == -1)															//Si interraction avec un trou (-1)
 		{
 			ParcoursSection = Interaction1.BalleTrou(balle1, hole1, pointIntersection);						//Retourne le parcours jusqua la prochaine interaction
@@ -46,6 +47,10 @@ Parcours Terrain::CoupDonne(Coup coup1)
 		else if (indexColision >= 0)														//Si interraction avec un Mur (0 et +)
 		{
 			ParcoursSection = Interaction1.BalleMur(balle1, vecteurMur1.at(indexColision), pointIntersection);	//Retourne le parcours jusqu'a la prochaine interaction
+		}
+		else
+		{
+			break;
 		}
 		ParcoursTotal += ParcoursSection;													//Cumule les parcours de section
 		//cout << balle1->Get_Vx() << "  " << balle1->Get_Vy() << endl;
@@ -213,14 +218,14 @@ int Terrain::VerifierColision()
 		}
 		else if (balle1->Get_direction() > 3.14159265358979323846)		//Verifie si l'interaction occur dans les cadrants du bas
 		{
-			if (Iy < Oy) {
+			if (Iy > Oy) { //CEST LA
 				Iy = INFINITY;
 			}
 		}
 		if (isBetween(Ix, Hx, Tx) && isBetween(Iy, Hy, Ty))							//Valide si la colisin s'est fait dans les limites du mur
 		{																			//Si oui
 			distance = sqrt(abs(pow((Ix - Ox), 2)) + abs(pow((Iy - Oy), 2)));					//Trouve la distance entre les 2 points
-			if (distance < Plusproche && i != prevIndex)												//Si c'est la distance est plus proche retient l'index
+			if (distance < Plusproche)												//Si c'est la distance est plus proche retient l'index
 			{
 				Plusproche = distance;												//Set le nouveau plus proche
 				IndexColision = i;													//Memorise d'index du mur
@@ -272,7 +277,7 @@ int Terrain::VerifierColision()
 		if (distanceTrou < hole1->Get_radius())											//Si cette distance est sous le radius du trou il y a collision
 		{
 			distanceTrou = sqrt(abs((Ix - Ox) * (Ix - Ox) + (Iy - Oy) * (Iy - Oy)));			//Calcul la distance de la balle du point d'intersection
-			if (distanceTrou < Plusproche)													//Si c'est la distance est plus proche change l'index
+			if (distanceTrou < Plusproche && i != IndexColision)													//Si c'est la distance est plus proche change l'index
 			{
 				IndexColision = -1;														//Definit l'index a Trou
 				pointIntersection.first = Ix;

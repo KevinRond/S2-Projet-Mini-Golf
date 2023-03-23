@@ -26,6 +26,7 @@ Parcours Interraction::BalleMur(Ball* balle, Mur* mur, std::pair<double, double>
 	double verifVy = balle->Get_Vy();
 	timeBall = 0;																		//reset temps de la balle pour chaque petite partie du parcours
 	//pair<double, double> intersectionXY = intersection(balle, mur);											//prend l'intersection entre la balle et le mur																//set le temps pour que la balle se rend au mur
+	//cout << "coordonee angle: " << balle->Get_Ax() << "; " << balle->Get_Ay() << endl;
 	while (balle->Get_Vx() != 0 && balle->Get_Vy() != 0)								//tant que la balle a de la vitesse
 		{
 			double posX = balle->Get_x();														// position en x et y
@@ -37,9 +38,11 @@ Parcours Interraction::BalleMur(Ball* balle, Mur* mur, std::pair<double, double>
 				//balle->Set_Oxy(inters.first, inters.second);
 				angleReflexion(balle, mur, inters);												//change l'angle de de la balle lorsqu'elle reflette le mur		
 				cout <<"angle: "<< balle->Get_direction()*180/PI << endl;
+				//cout << "coordonee angle: " << balle->Get_Ax() << "; " << balle->Get_Ay() << endl;
+
 				positionUpdate(balle);														//change la position de la balle selon sa velocite
 				vitesseUpdate(balle);													//diminue la velocite de la balle
-				//balle->Set_xy(inters.first, inters.second);				//met la balle au point de rencontre en celle-ci et le mur
+																						//balle->Set_xy(inters.first, inters.second);				//met la balle au point de rencontre en celle-ci et le mur
 				balle->Set_Oxy(balle->Get_x(), balle->Get_y());
 				//verifVxVy(verifVx, verifVy, balle);
 				petitParcour.addCoor(balle->Get_x(), balle->Get_y());						//ajout des coordonne dans le parcours
@@ -112,7 +115,7 @@ void Interraction::angleReflexion(Ball* balle, Mur* mur, std::pair<double, doubl
 		double oldangle = balle->Get_direction();
 		double angleIncident;
 		double angleMur;
-		double angleReflechis;
+		double angleReflechis = 0;
 		if (mur->GetHx() == mur->GetTx())
 		{
 			
