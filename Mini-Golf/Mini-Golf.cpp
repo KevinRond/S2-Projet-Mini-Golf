@@ -56,9 +56,20 @@ int main()
 		cout << coup.getAmplitude() << endl;
 		Sleep(1000);
 	}
-	manette.demande(2, 9);
 	coup.initcoup();
 	terrain->CoupDonne(coup);
+	manette.setState(true);
+	manette.setState(false);
+	manette.communication();
+	manette.demande(2, 9);
+	while (!manette.getButton1())
+	{
+		coup.setDirection(manette.getJoyX() - 2);
+		cout << coup.getDirection() << endl;
+		Sleep(100);
+	}
+	
+
 
 	
 	
