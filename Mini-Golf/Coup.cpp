@@ -1,5 +1,7 @@
 #include "Coup.h"
 using namespace std;
+
+
 Coup::Coup(double dir, double ampli)				//Initialisation de l'objet
 {
 	direction = dir;
