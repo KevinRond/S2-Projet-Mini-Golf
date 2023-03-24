@@ -19,7 +19,7 @@ int main()
 	//GameManager gm(20, 25);
 	//gm.Run();
 	Terrain *terrain1 = new Terrain;
-	terrain1->OpenTerrain("Terrain4.txt");
+	terrain1->OpenTerrain("Terrain2.txt");
 	terrain1->Display();
 	/*Interraction* inter = new Interraction;
 	Ball* ball1 = new Ball;
@@ -31,7 +31,7 @@ int main()
 	string force;
 	while (1)
 	{
-		cout << "NOMBRE DE COUP: " << terrain1->getCOup() << endl;
+		//cout << "NOMBRE DE COUP: " << terrain1->getCOup() << endl;
 		cout << "entrer la direction de la balle" << endl;
 		cin >> direction;
 		cout << "enter la puissance" << endl;

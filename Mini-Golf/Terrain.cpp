@@ -56,10 +56,8 @@ Parcours Terrain::CoupDonne(Coup coup1)
 		{
 			break;
 		}
-		if (hole1->Sitrou() == false)
-		{
+		
 			bool played = PlaySound(TEXT("balle.wav"), NULL, SND_SYNC);
-		}
 		//bool played = PlaySound(TEXT("tUnConnard.wav"), NULL, SND_SYNC);
 		ParcoursTotal += ParcoursSection;													//Cumule les parcours de section
 		//cout << balle1->Get_Vx() << "  " << balle1->Get_Vy() << endl;
