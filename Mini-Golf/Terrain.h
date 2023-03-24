@@ -10,6 +10,8 @@
 #include <vector>
 #include <cmath>
 #include "Parcours.h"
+#include <utility>
+#include <random>
 
 /*
 LA classe Terrain comporte les ellements suivants:
@@ -29,7 +31,11 @@ private:
 	Ball* balle1;					//Depart de la balle
 	std::vector<Mur*> vecteurMur1;	//tableau pointeur des murs du terrain
 	Parcours ParcoursTotal;
+	std::pair<double, double> pointIntersection;
+	int prevIndex = -2;
 	double K = 1;					//Facteur de friction	
+	int nbCoup = 0;
+	int nbRicochet = 0;
 public:
 	Terrain();		
 	~Terrain();		
@@ -40,5 +46,7 @@ public:
 	bool isBetween(double value, double bound1, double bound2);
 	bool isOnLine(double x0, double y0, double m, double b);
 	void Display();
+	int getCOup();
+	int getRicochet();
 };
 #endif

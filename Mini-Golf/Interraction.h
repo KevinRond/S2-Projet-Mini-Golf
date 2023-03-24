@@ -5,11 +5,15 @@ La classe interaction caracterisera une interaction entre 2 objets
 Ex: Ball avec Mur,Trou,Sable,glace
 On est dans un monde de mini-put, on peux faire s'quon veux...
 */
-#include "Terrain.h"
+#include "Ball.h"
+#include "Hole.h"
+#include "Parcours.h"
+#include "Mur.h"
 #include <cmath>
 #include <vector>
 #include <utility>
-
+#include <windows.h>
+#define _USE_MATH_DEFINES
 #define PI 3.14159265359
 
 class Interraction
@@ -34,19 +38,20 @@ public:
 	void vitesseUpdate(Ball* balle);	//Modification de la velocite et de la position
 	void positionUpdate(Ball* balle);
 
-	Parcours BalleMur(Ball* balle, Mur* mur);				//Interraction avec un mur
-	Parcours BalleTrou(Ball* balle, Hole* trou);
+	Parcours BalleMur(Ball* balle, Mur* mur, std::pair<double, double> inters, Hole* trou);				//Interraction avec un mur
+	Parcours BalleTrou(Ball* balle, Hole* trou, std::pair<double, double> inters);
 
-	void angleReflexion(Ball* balle, Mur *mur);
+	void angleReflexion(Ball* balle, Mur *mur, std::pair<double, double> inters);
 	std::pair<double, double> intersection(Ball* balle, Mur* mur);
 	double penteMur(Mur* mur);
 	void verifVxVy(double verifVx, double verifVy, Ball* balle);
-	void hitWall(Mur* mur, Ball* balle);
+	bool hitWall(Mur* mur, Ball* balle, std::pair<double, double> inters);
 
 	std::pair<double, double> intersectionTrou(Hole* hole);		//Interraction avec un hole
 	bool hitHole(Ball* balle, Hole* hole);
 
 	void interactionGen(Ball* balle, Mur* mur, Hole* hole);	//Interraction principal avec soit un mur, soit un trou
+	bool perpendiculaire(Ball* balle, Mur* mur);
 };
 
 #endif
