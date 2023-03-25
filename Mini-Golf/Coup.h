@@ -8,7 +8,7 @@ class Coup
 {
 private:
 	double direction;							//Direction du coup en Rad
-	double amplitude;							//Amplitude de force (lecture de l'accelerometre)
+	double amplitude;							//Amplitude de force (in milles per hours)
 	double vitesseX, vitesseY;					//Vitesse en X et Y
 	double accelerationX, accelerationY;		//Acceleration en X et Y
 
@@ -29,7 +29,8 @@ public:
 	void calculAccelerationY();					//Calcul l'acceleration de la balle en Y
 
 	//Getter
-	double getDirection();						//Lecture de la direction retour en rad
+	double Get_Amplitude();
+	double Get_Direction();						//Lecture de la direction retour en rad
 	double getVitesseX();						//Retourne vitesse en X
 	double getVitesseY();						//Retourne vitesse en Y
 	double getAccelerationX();					//Retourne acceleration en X

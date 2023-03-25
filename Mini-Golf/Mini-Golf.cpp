@@ -10,7 +10,7 @@
 #include "Mur.h"
 #include "Coup.h"
 #include "GameManager.h"
-#include "Manette.h"
+//#include "Manette.h"
 
 using namespace std;
 
@@ -20,7 +20,7 @@ int main()
 	//GameManager gm(20, 25);
 	//gm.Run();
 	Terrain *terrain1 = new Terrain;
-	terrain1->OpenTerrain("Terrain2.txt");
+	terrain1->OpenTerrain("Terrain3.txt");
 	terrain1->Display();
 	/*Interraction* inter = new Interraction;
 	Ball* ball1 = new Ball;
@@ -43,7 +43,7 @@ int main()
 		terrain1->CoupDonne(coup1);
 		//cout << "NOMBRE DE RICOCHET: " << terrain1->getCOup() << endl;
 	}
-	
+	/*
 	//terrain1->CoupDonne(coup1);
 	//terrain1->CoupDonne(coup1);
 	Manette manette;
@@ -52,7 +52,7 @@ int main()
 	manette.setup(com);
 	std::thread comm(&Manette::communication, &manette);
 
-/*----------------------------- Tests Manette -----------------------------*/
+//----------------------------- Tests Manette -----------------------------
 	for (int i; i < 1000; i++) {
 		if (manette.getCas() == 1) {
 			cout << "Valeur Joystick: " << manette.getJoyY() << endl;
@@ -81,9 +81,9 @@ int main()
 
 		Sleep(100);
 	}
-/*------------------------------------------------------------------------*/
+//------------------------------------------------------------------------
 	manette.setState(false);
-
+	*/
 	return 0;
 }
 

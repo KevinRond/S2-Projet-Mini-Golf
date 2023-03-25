@@ -32,6 +32,11 @@ int Parcours::GetSize()
 
 
 
+void Parcours::removelast()
+{
+	CoorXY.pop_back();
+}
+
 void Parcours::Display()
 {
 
