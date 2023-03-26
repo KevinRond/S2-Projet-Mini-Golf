@@ -5,7 +5,6 @@ Hole::Hole()
 {
 	Tx = 0.0;
 	Ty = 0.0;
-	radius = 2.0;
 }
 
 Hole::Hole(double posX, double posY)
