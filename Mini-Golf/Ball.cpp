@@ -119,7 +119,7 @@ double Ball::Get_K()
 
 void Ball::Set_Direction(double newdirection)
 {
-    direction = (newdirection * 3.14159265358979323846 / 180);
+    direction = (newdirection);
 }
 
 void Ball::Set_Vx(double posX)
@@ -148,7 +148,7 @@ void Ball::Set_K(double k)
 std::pair<int, int> Ball::QuelCadrant()
 {
     int x, y;
-    if (direction < 3.14159265358979323846 / 2 || direction > 3.14159265358979323846 * 1.5)			//Verifie si l'interaction occur dans les cadrants de droite
+    if (direction <= 3.14159265358979323846 / 2 || direction >= 3.14159265358979323846 * 1.5)			//Verifie si l'interaction occur dans les cadrants de droite
     {
         x= 1;
     }
@@ -156,7 +156,7 @@ std::pair<int, int> Ball::QuelCadrant()
     {
         x= -1;
     }
-    if (direction > 0 && direction < 3.14159265358979323846)			//Verifie si l'interaction occur dans les cadrants du haut
+    if (direction >= 0 && direction <= 3.14159265358979323846)			//Verifie si l'interaction occur dans les cadrants du haut
     {
         y= 1;
     }

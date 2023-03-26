@@ -42,6 +42,7 @@ public:
 	Parcours BalleTrou(Ball* balle, Hole* trou, std::pair<double, double> inters);
 
 	void angleReflexion(Ball* balle, Mur *mur, std::pair<double, double> inters);
+	void angleReflexion(Ball* balle, Hole* trou, std::pair<double, double> inters);
 	std::pair<double, double> intersection(Ball* balle, Mur* mur);
 	double penteMur(Mur* mur);
 	void verifVxVy(double verifVx, double verifVy, Ball* balle);
