@@ -47,5 +47,6 @@ public:
 	void Display();
 	int getCOup();
 	int getRicochet();
+	bool verifTrou();
 };
 #endif

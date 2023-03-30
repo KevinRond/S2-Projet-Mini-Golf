@@ -49,6 +49,7 @@ Parcours Interraction::BalleMur(Ball* balle, Mur* mur, std::pair<double, double>
 
 	if (distanceItTraveled >= distancetoHit)
 	{
+		cout << "touche mur" << endl;
 		petitParcour.removelast();
 		x = (cos(Dir) * distancetoHit*0.99)*10 + Ox;
 		y = (sin(Dir) * distancetoHit*0.99)*10 + Oy;
@@ -63,6 +64,7 @@ Parcours Interraction::BalleMur(Ball* balle, Mur* mur, std::pair<double, double>
 		x = (cos(Dir) * distanceItTraveled) * 10 + Ox;
 		y = (sin(Dir) * distanceItTraveled) * 10 + Oy;
 		balle->Set_Oxy(x, y);
+		cout << "Balle en position (" << x << "," << y << ")." << endl;
 	}
 
 	return petitParcour;
@@ -168,12 +170,24 @@ void Interraction::angleReflexion(Ball* balle, Hole* trou, std::pair<double, dou
 
 void Interraction::angleReflexion(Ball* balle, Mur* mur, std::pair<double, double> inters)							//trouver l'angle de reflexion de la balle
 {
+		double Vxy = balle->Get_Amplitude();
 		double oldangle = balle->Get_Direction();
+		double oldangle1 = balle->Get_Direction();
 		double angleIncident;
 		double angleMur;
 		double angleReflechis = 0;
+		double facteurVelocity;
 		if (mur->GetHx() == mur->GetTx())
 		{
+			if (oldangle1 >= PI)
+			{
+				oldangle1 = oldangle1 - PI;
+			}
+			if (oldangle1 > PI / 2)
+			{
+				oldangle1 = PI - oldangle1;
+			}
+			facteurVelocity =PI/2 - ((PI/2 - oldangle1)/2);
 			
 			angleReflechis = oldangle - PI;
 			if (angleReflechis < 0)
@@ -185,12 +199,14 @@ void Interraction::angleReflexion(Ball* balle, Mur* mur, std::pair<double, doubl
 				angleReflechis = 2*PI - angleReflechis;
 			}
 			balle->Set_Direction(angleReflechis);
+
 			
 		}
 		else if (mur->GetHy() == mur->GetTy())
 		{
 			angleReflechis = 2 * PI - oldangle;
 			balle->Set_Direction(angleReflechis);
+
 		}
 		else
 		{
@@ -203,6 +219,12 @@ void Interraction::angleReflexion(Ball* balle, Mur* mur, std::pair<double, doubl
 			}
 			balle->Set_Direction(angleReflechis);
 		}
+		
+		facteurVelocity = facteurVelocity * 180/(PI * 100);
+		
+		balle->Set_Amplitude(Vxy * facteurVelocity);
+		//cout << "angle INCIDEENT: " << angleIncident* 180 / PI << endl;
+		cout << "FACteur velocity: " << facteurVelocity << endl;
 
 		/*
 			Ici on veux reduire la velocite par rapport a l'angle d'incidence

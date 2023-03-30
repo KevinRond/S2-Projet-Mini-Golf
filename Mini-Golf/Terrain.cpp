@@ -37,6 +37,10 @@ Parcours Terrain::CoupDonne(Coup coup1)
 
 	while ((balle1->Get_Ax() != 0 && balle1->Get_Ay() != 0))
 	{
+		if (hole1->Sitrou())
+		{
+			break;
+		}
 		indexColision = VerifierColision();													//Rapporte l'index de colision
 		cout << "Index: " << indexColision << endl;
 		if (indexColision == -1)															//Si interraction avec un trou (-1)
@@ -218,7 +222,7 @@ int Terrain::VerifierColision()
 		}
 		if (isBetween(Ix, Hx, Tx) && isBetween(Iy, Hy, Ty))							//Valide si la colisin s'est fait dans les limites du mur
 		{																			//Si oui
-			distance = sqrt(pow((Ix - Ox), 2)) + pow((Iy - Oy), 2);					//Trouve la distance entre les 2 points
+			distance = sqrt(pow((Ix - Ox), 2) + pow((Iy - Oy), 2));					//Trouve la distance entre les 2 points
 			if (distance < Plusproche)												//Si c'est la distance est plus proche retient l'index
 			{
 				Plusproche = distance;												//Set le nouveau plus proche
@@ -257,14 +261,28 @@ int Terrain::VerifierColision()
 		}
 	}
 																					//position de balle aura donc la meme que l'interaction calcule precedament
-	
+	if (balle1->Get_Direction() == 180 || balle1->Get_Direction() == 0)
+	{
+		distanceTrou = abs(Oy - TrouY);
+	}
+	else if (balle1->Get_Direction() == 90 || balle1->Get_Direction() == 270)
+	{
+		distanceTrou = abs(Ox - TrouX);
+	}
+	else
+	{
+		double dirX = cos(balle1->Get_Direction());
+		double dirY = sin(balle1->Get_Direction());
+		double pente = -dirY * Ox - dirX * Oy;
+		distanceTrou = abs(dirY * TrouX + dirX * TrouY + pente) / sqrt(dirX * dirX + dirY * dirY);
+	}
 	distanceTrou = sqrt(abs(pow((Ix - TrouX), 2)) + abs(pow((Iy - TrouY), 2)));		//Calcul la distance du point d'intersection avec le trou
 	if (distanceTrou < hole1->Get_radius())											//Si cette distance est sous le radius du trou il y a interraction
 	{
 		if (isBetween(Ix, hole1->Get_x() - hole1->Get_radius(), hole1->Get_x() + hole1->Get_radius()) && isBetween(Iy, hole1->Get_y() - hole1->Get_radius(), hole1->Get_y() + hole1->Get_radius()))
 		{
 			distanceTrou = sqrt(abs((Ix - Ox) * (Ix - Ox) + (Iy - Oy) * (Iy - Oy)));			//Calcul la distance de la balle du point d'intersection
-			if (distanceTrou < Plusproche && i != IndexColision)													//Si c'est la distance est plus proche change l'index
+			if (distanceTrou < Plusproche)													//Si c'est la distance est plus proche change l'index
 			{
 				IndexColision = -1;														//Definit l'index a Trou
 				pointIntersection.first = Ix;
@@ -302,6 +320,11 @@ int Terrain::getCOup()
 int Terrain::getRicochet()
 {
 	return nbRicochet;
+}
+
+bool Terrain::verifTrou()
+{
+	return hole1->Sitrou();
 }
 
 bool Terrain::isBetween(double value, double bound1, double bound2)
