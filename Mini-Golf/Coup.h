@@ -7,7 +7,7 @@
 class Coup
 {
 private:
-	double direction;							//Direction du coup en Rad
+	double direction;							//Direction du coup en rad
 	double amplitude;							//Amplitude de force (in milles per hours)
 	double vitesseX, vitesseY;					//Vitesse en X et Y
 	double accelerationX, accelerationY;		//Acceleration en X et Y
