@@ -30,8 +30,7 @@ int main()
 	inter->BalleMur(ball1, mur1);*/
 	string direction;
 	string force;
-	while (1)
-	{
+	while (terrain1->TerrainReussi() != 1) {
 		//cout << "NOMBRE DE COUP: " << terrain1->getCOup() << endl;
 		cout << "entrer la direction de la balle" << endl;
 		cin >> direction;

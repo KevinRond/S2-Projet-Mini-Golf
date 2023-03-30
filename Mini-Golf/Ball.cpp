@@ -1,6 +1,6 @@
 #include "Ball.h"
 #include <cmath>
-
+#define PI = 3.14159265358979323846
 using namespace std;
 Ball::Ball()
 {
@@ -119,6 +119,9 @@ double Ball::Get_K()
 
 void Ball::Set_Direction(double newdirection)
 {
+    if (newdirection < 0) {
+        newdirection = ((2 * 3.14159265358979323846) + newdirection);
+    }
     direction = (newdirection);
 }
 
