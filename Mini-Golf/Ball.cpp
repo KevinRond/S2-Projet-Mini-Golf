@@ -97,7 +97,7 @@ void Ball::Display()
     cout << "Balle location : (" << Ox << "," << Oy << ")" << endl;
 }
 
-double Ball::Get_direction()
+double Ball::Get_Direction()
 {
     return direction;
 }
@@ -107,9 +107,19 @@ double Ball::Get_rayon()
     return rayon;
 }
 
-void Ball::Set_direction(double newdirection)
+double Ball::Get_Amplitude()
 {
-    direction = (newdirection * 3.14159265358979323846 / 180);
+    return amplitude;
+}
+
+double Ball::Get_K()
+{
+    return K;
+}
+
+void Ball::Set_Direction(double newdirection)
+{
+    direction = (newdirection);
 }
 
 void Ball::Set_Vx(double posX)
@@ -120,4 +130,40 @@ void Ball::Set_Vx(double posX)
 void Ball::Set_Vy(double posY)
 {
     Vy = posY;
+}
+
+void Ball::Set_Amplitude(double amp)
+{
+    amplitude = amp;
+    Ax = cos(direction) * amp;
+    Ay = sin(direction) * amp;
+
+}
+
+void Ball::Set_K(double k)
+{
+    K = k;
+}
+
+std::pair<int, int> Ball::QuelCadrant()
+{
+    int x, y;
+    if (direction <= 3.14159265358979323846 / 2 || direction >= 3.14159265358979323846 * 1.5)			//Verifie si l'interaction occur dans les cadrants de droite
+    {
+        x= 1;
+    }
+    else if (direction > 3.14159265358979323846 / 2 && direction < 3.14159265358979323846 * 1.5)		//Verifie si l'interaction occur dans les cadrants de gauche
+    {
+        x= -1;
+    }
+    if (direction >= 0 && direction <= 3.14159265358979323846)			//Verifie si l'interaction occur dans les cadrants du haut
+    {
+        y= 1;
+    }
+    else if (direction > 3.14159265358979323846)		//Verifie si l'interaction occur dans les cadrants du bas
+    {
+        y= -1;
+    }
+    pair<double, double> Cadrant = make_pair(x, y);
+    return Cadrant;
 }

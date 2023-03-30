@@ -11,6 +11,7 @@
 #include <cmath>
 #include "Parcours.h"
 #include <utility>
+#include <random>
 
 /*
 LA classe Terrain comporte les ellements suivants:
@@ -34,15 +35,17 @@ private:
 	int prevIndex = -2;
 	double K = 1;					//Facteur de friction	
 	int nbCoup = 0;
+	int nbRicochet = 0;
 public:
 	Terrain();		
 	~Terrain();		
-
 	Terrain *OpenTerrain(std::string terrain);				//charge le terrain via fichier
 	Parcours CoupDonne(Coup coup1);		//Fonction principale, resoura le coup et retournera le parcours au GM
 	int VerifierColision();				//Doit virifie l'interaction avec son trou ou l'un de ses murs.
 	bool isBetween(double value, double bound1, double bound2);
 	bool isOnLine(double x0, double y0, double m, double b);
 	void Display();
+	int getCOup();
+	int getRicochet();
 };
 #endif

@@ -35,15 +35,18 @@ void Coup::setAmplitude(int lectureAmplitude)
 	amplitude = lectureAmplitude;
 }
 
-
 int Coup::getAmplitude()
 {
 	return amplitude;
 }
 
-int Coup::getDirection()
+double Coup::Get_Direction()
 {
 	return direction;
+}
+double Coup::Get_Amplitude()
+{
+	return amplitude;
 }
 
 void Coup::calculVitesseX()

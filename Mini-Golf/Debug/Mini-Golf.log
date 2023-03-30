@@ -1,3 +1,9 @@
-﻿  Mini-Golf.cpp
-C:\Users\kevin\Documents\GitHub\S2-Projet-Mini-Golf\Mini-Golf\Mini-Golf.cpp(40): warning C4700: uninitialized local variable 'i' used
-  Mini-Golf.vcxproj -> C:\Users\kevin\Documents\GitHub\S2-Projet-Mini-Golf\Mini-Golf\debug\Mini-Golf.exe
+﻿  Interraction.cpp
+Interraction.cpp(15,10): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+Interraction.cpp(40,10): warning C4189: 'played' : variable locale initialisée mais non référencée
+Interraction.cpp(71,85): warning C4100: 'inters' : paramètre formel non référencé
+Interraction.cpp(126,84): warning C4100: 'inters' : paramètre formel non référencé
+Interraction.cpp(257,33): warning C4100: 'mur' : paramètre formel non référencé
+  Mini-Golf.cpp
+  Génération de code en cours...
+  Mini-Golf.vcxproj -> C:\Users\alexi\OneDrive\Documents\GitHub\S2-Projet-Mini-Golf\Mini-Golf\debug\Mini-Golf.exe

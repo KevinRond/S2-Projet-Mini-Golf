@@ -17,7 +17,7 @@ public:
     std::vector<std::pair<double, double>> GetCoorXY() const {
         return CoorXY;
     }
-    
+    void removelast();
     void Display();
 
 private:

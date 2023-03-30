@@ -10,7 +10,7 @@
 #include "Mur.h"
 #include "Coup.h"
 #include "GameManager.h"
-#include "Manette.h"
+//#include "Manette.h"
 
 using namespace std;
 
@@ -19,16 +19,31 @@ int main()
 {
 	//GameManager gm(20, 25);
 	//gm.Run();
-	//Terrain *terrain1 = new Terrain;
-	//terrain1->OpenTerrain("Terrain2.txt");
-	//terrain1->Display();
+	Terrain *terrain1 = new Terrain;
+	terrain1->OpenTerrain("Terrain2.txt");
+	terrain1->Display();
 	/*Interraction* inter = new Interraction;
 	Ball* ball1 = new Ball;
 	Mur* mur1 = new Mur(0, 20, 20, 20);
 	ball1->Set_direction(270);
 	ball1->Set_Vx(5);
 	inter->BalleMur(ball1, mur1);*/
-	//Coup coup1(30, 100);
+	string direction;
+	string force;
+	while (1)
+	{
+		//cout << "NOMBRE DE COUP: " << terrain1->getCOup() << endl;
+		cout << "entrer la direction de la balle" << endl;
+		cin >> direction;
+		cout << "enter la puissance" << endl;
+		cin >> force;
+		double forced = stod(force);
+		double directiond = stod(direction);
+		Coup coup1(directiond, forced);
+		terrain1->CoupDonne(coup1);
+		//cout << "NOMBRE DE RICOCHET: " << terrain1->getCOup() << endl;
+	}
+	/*
 	//terrain1->CoupDonne(coup1);
 	//terrain1->CoupDonne(coup1);
 	Manette manette;
@@ -36,6 +51,8 @@ int main()
 	string com = "COM7";
 	manette.setup(com);
 	std::thread comm(&Manette::communication, &manette);
+
+//----------------------------- Tests Manette -----------------------------
 
 /*----------------------------- Tests Manette + coup -----------------------------*/
 	Terrain* terrain = new Terrain;
@@ -78,6 +95,7 @@ int main()
 
 
 /*----------------------------- Tests Lecture Manette -----------------------------*/
+
 	for (int i; i < 1000; i++) {
 		if (manette.getCas() == 1) {
 			cout << "Valeur Joystick: " << manette.getJoyY() << endl;
@@ -106,9 +124,9 @@ int main()
 
 		Sleep(100);
 	}
-/*------------------------------------------------------------------------*/
+//------------------------------------------------------------------------
 	manette.setState(false);
-
+	*/
 	return 0;
 }
 
