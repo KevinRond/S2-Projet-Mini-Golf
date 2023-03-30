@@ -35,10 +35,6 @@ void Coup::setAmplitude(int lectureAmplitude)
 	amplitude = lectureAmplitude;
 }
 
-int Coup::getAmplitude()
-{
-	return amplitude;
-}
 
 double Coup::Get_Direction()
 {
