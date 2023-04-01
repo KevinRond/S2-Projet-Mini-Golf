@@ -176,7 +176,7 @@ void Interraction::angleReflexion(Ball* balle, Mur* mur, std::pair<double, doubl
 		double angleIncident;
 		double angleMur;
 		double angleReflechis = 0;
-		double facteurVelocity;
+		double facteurVelocity = 0;
 		if (mur->GetHx() == mur->GetTx())
 		{
 			if (oldangle1 >= PI)
@@ -206,18 +206,39 @@ void Interraction::angleReflexion(Ball* balle, Mur* mur, std::pair<double, doubl
 		{
 			angleReflechis = 2 * PI - oldangle;
 			balle->Set_Direction(angleReflechis);
-
+			if (oldangle1 >= PI)
+			{
+				oldangle1 = oldangle1 - PI;
+			}
+			if (oldangle1 > PI / 2)
+			{
+				oldangle1 = PI - oldangle1;
+			}
+			facteurVelocity = PI / 2 - (oldangle1/2);
 		}
 		else
 		{
 			angleMur = atan2(mur->GetTy() - mur->GetHy(), mur->GetTx() - mur->GetHx());
+			cout << "ANGLE MUR: " << angleMur*180/PI << endl;
 			angleIncident = fmod(oldangle - angleMur + 2 * PI, 2 * PI);
-			angleReflechis = fmod(angleMur - angleIncident + PI, 2 * PI);
+			angleReflechis = fmod(angleMur - angleIncident + 2 *PI, 2 * PI);
+			balle->Set_Direction(angleReflechis);
+			cout << "ANGLE INCIDENT: "<< angleIncident*180/PI << endl;
+			cout << "ANGLE REFLECHI: " << angleReflechis*180/PI << endl;
 			while (angleReflechis < 0)
 			{
+				cout << "changement angle reflechis: " << angleReflechis * 180 / PI << endl;
 				angleReflechis = angleReflechis + PI;
 			}
-			balle->Set_Direction(angleReflechis);
+			if (angleIncident >= PI)
+			{
+				angleIncident = angleIncident - PI;
+			}
+			if (angleIncident > PI / 2)
+			{
+				angleIncident = angleIncident - PI/2;
+			}
+			facteurVelocity = PI / 2 - ((PI / 2 - angleIncident) / 2);
 		}
 		
 		facteurVelocity = facteurVelocity * 180/(PI * 100);

@@ -20,7 +20,7 @@ class Interraction
 {
 private:
 	double x, y;
-	int Degre;							//Angle ou direction de l'interaction
+	double Degre;							//Angle ou direction de l'interaction
 	double module;						//distance de l'interaction 
 	double Fac = 1;						//Facteur d'influence, peux etre utilise pour diminue ou augmente la vitesse suite a une interaction
 	double timeHitWall = 0;
