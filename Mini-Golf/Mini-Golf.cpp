@@ -10,7 +10,7 @@
 #include "Mur.h"
 #include "Coup.h"
 #include "GameManager.h"
-//#include "Manette.h"
+#include "Manette.h"
 
 using namespace std;
 
@@ -50,10 +50,39 @@ int main()
 	manette.demande(1, 9);
 	string com = "COM7";
 	manette.setup(com);
-	std::thread comm(&Manette::communication, &manette);
+	std::thread comm(&Manette::communication, &manette);*/
 
-//----------------------------- Tests Manette -----------------------------
-	for (int i; i < 1000; i++) {
+/*---------------------------- --- Tests Manette--------------------------------- */
+
+/*----------------------------- Tests Manette + coup -----------------------------*/
+	//Terrain* terrain = new Terrain;
+	//terrain->OpenTerrain("Terrain3.txt");
+	//terrain->Display();
+	//Coup coup;
+	//while (!manette.getButton1())
+	//{
+	//	coup.setDirection(manette.getJoyX()-2);
+	//	cout << coup.Get_Direction() << endl;
+	//	Sleep(100);
+	//}
+	//manette.demande(3, 9);
+	//for (int i = 0; i < 5; i++)
+	//{
+	//	if (manette.getAmplitude() > coup.Get_Amplitude())
+	//		coup.setAmplitude(manette.getAmplitude());
+	//	cout << coup.Get_Amplitude() << endl;
+	//	Sleep(1000);
+	//}
+	//coup.initcoup();
+	//terrain->CoupDonne(coup);
+	//
+	//manette.demande(2, 9); //Choisir direction
+
+
+
+/*----------------------------- Tests Lecture Manette -----------------------------*/
+
+	/*for (int i; i < 1000; i++) {
 		if (manette.getCas() == 1) {
 			cout << "Valeur Joystick: " << manette.getJoyY() << endl;
 			if (manette.getButton1() == true)
@@ -80,10 +109,10 @@ int main()
 			cout << manette.getAmplitude() << endl;
 
 		Sleep(100);
-	}
-//------------------------------------------------------------------------
-	manette.setState(false);
-	*/
+	}*/
+//------------------------------------------------------------------------//
+	//manette.setState(false);
+
 	return 0;
 }
 
