@@ -16,6 +16,7 @@ private:
 
 public:
 	Coup();
+	Coup(double dir, double amp);
 	~Coup();
 
 	//Setter

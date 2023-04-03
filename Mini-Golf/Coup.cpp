@@ -12,6 +12,12 @@ Coup::Coup()				//Initialisation de l'objet
 	calculAccelerationX();
 }
 
+Coup::Coup(double dir, double amp)
+{
+	direction = dir;
+	amplitude = amp;
+}
+
 Coup::~Coup()
 {
 }
