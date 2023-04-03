@@ -234,9 +234,14 @@ void Interraction::angleReflexion(Ball* balle, Mur* mur, std::pair<double, doubl
 			{
 				angleIncident = angleIncident - PI;
 			}
-			if (angleIncident > PI / 2)
+			if (angleIncident >= PI / 2)
 			{
+				cout << "changement" << endl;
 				angleIncident = angleIncident - PI/2;
+			}
+			else
+			{
+				angleIncident = PI / 2 - angleIncident;
 			}
 			facteurVelocity = PI / 2 - ((PI / 2 - angleIncident) / 2);
 		}
