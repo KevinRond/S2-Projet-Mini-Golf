@@ -36,6 +36,10 @@ Parcours Terrain::CoupDonne(Coup coup1)
 
 	while ((balle1->Get_Amplitude() != 0 && hole1->Sitrou() != 1))
 	{
+		if (hole1->Sitrou())
+		{
+			break;
+		}
 		indexColision = VerifierColision();													//Rapporte l'index de colision
 		cout << "Index: " << indexColision << endl;
 		if (indexColision == -1)															//Si interraction avec un trou (-1)

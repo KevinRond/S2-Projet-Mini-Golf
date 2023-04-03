@@ -20,7 +20,7 @@ int main()
 	//GameManager gm(20, 25);
 	//gm.Run();
 	Terrain *terrain1 = new Terrain;
-	terrain1->OpenTerrain("Terrain2.txt");
+	terrain1->OpenTerrain("Terrain5.txt");
 	terrain1->Display();
 	/*Interraction* inter = new Interraction;
 	Ball* ball1 = new Ball;
@@ -42,6 +42,7 @@ int main()
 		terrain1->CoupDonne(coup1);
 		//cout << "NOMBRE DE RICOCHET: " << terrain1->getCOup() << endl;
 	}
+	cout << "BRAVOOOOOOOO" << endl;
 	/*
 	//terrain1->CoupDonne(coup1);
 	//terrain1->CoupDonne(coup1);
