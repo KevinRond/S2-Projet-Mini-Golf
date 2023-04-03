@@ -187,7 +187,8 @@ void Interraction::angleReflexion(Ball* balle, Mur* mur, std::pair<double, doubl
 			{
 				oldangle1 = PI - oldangle1;
 			}
-			facteurVelocity =PI/2 - ((PI/2 - oldangle1)/2);
+			angleIncident = PI / 2 - oldangle1;
+			//facteurVelocity =PI/2 - ((PI/2 - oldangle1)/2);
 			
 			angleReflechis = oldangle - PI;
 			if (angleReflechis < 0)
@@ -214,7 +215,8 @@ void Interraction::angleReflexion(Ball* balle, Mur* mur, std::pair<double, doubl
 			{
 				oldangle1 = PI - oldangle1;
 			}
-			facteurVelocity = PI / 2 - (oldangle1/2);
+			angleIncident = oldangle1;
+			//facteurVelocity = PI / 2 - (oldangle1/2);
 		}
 		else
 		{
@@ -234,19 +236,13 @@ void Interraction::angleReflexion(Ball* balle, Mur* mur, std::pair<double, doubl
 			{
 				angleIncident = angleIncident - PI;
 			}
-			if (angleIncident >= PI / 2)
+			if (angleIncident > PI / 2)
 			{
 				cout << "changement" << endl;
-				angleIncident = angleIncident - PI/2;
+				angleIncident = PI - angleIncident;
 			}
-			else
-			{
-				angleIncident = PI / 2 - angleIncident;
-			}
-			facteurVelocity = PI / 2 - ((PI / 2 - angleIncident) / 2);
 		}
-		
-		facteurVelocity = facteurVelocity * 180/(PI * 100);
+		facteurVelocity = (100 - (angleIncident*180)/(2*PI))/100 ;
 		
 		balle->Set_Amplitude(Vxy * facteurVelocity);
 		//cout << "angle INCIDEENT: " << angleIncident* 180 / PI << endl;

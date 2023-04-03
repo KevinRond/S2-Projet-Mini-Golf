@@ -20,7 +20,7 @@ int main()
 	//GameManager gm(20, 25);
 	//gm.Run();
 	Terrain *terrain1 = new Terrain;
-	terrain1->OpenTerrain("Terrain5.txt");
+	terrain1->OpenTerrain("Terrain2.txt");
 	terrain1->Display();
 	/*Interraction* inter = new Interraction;
 	Ball* ball1 = new Ball;
