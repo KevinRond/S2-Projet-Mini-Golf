@@ -5,6 +5,7 @@
 #include <string>
 #include <thread>
 #include <atomic>
+#include "Coup.h"
 
 using namespace std;
 
@@ -29,14 +30,13 @@ using json = nlohmann::json;
 class Manette {
 private:
 	SerialPort* arduino;
-	atomic<bool> s_finished;
+	bool s_finished;
 	std::thread communicationThread;
-	int _cas, _afficher, _amplitude, _joyY, _joyX;
 
 public:
 	Manette(string comport);
 	~Manette();
-	void communication();
+	int communication();
 	void demande(int NewCas, int NewAfficher);
 	void setup(string usbport);
 	bool SendToSerial(SerialPort* arduino, json j_msg);
@@ -51,6 +51,8 @@ public:
 	bool getButton4();
 	int getJoyX();
 	int getJoyY();
+	double GetDirectionElec(class Coup);
+	double GetPuissanceElec(class Coup);
 
 	void setCas(int nouveauCas);
 	void setAfficher(int nouvelAffichage);
@@ -61,7 +63,7 @@ public:
 		return o;
 	}
 
-	atomic<int> cas, afficher, amplitude, joyY, joyX;
-	atomic<bool> button1, button2, button3, button4;
+	int cas, afficher, amplitude, joyY, joyX;
+	bool button1, button2, button3, button4;
 };
 #endif

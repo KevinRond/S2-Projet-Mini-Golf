@@ -1,5 +1,6 @@
 #include "Manette.h"
 
+
 /*------------------------------ Constantes ---------------------------------*/
 //int cas, afficher;
 
@@ -7,25 +8,19 @@ Manette::Manette(string comport)
 {
     //cout << "nouvelle manette" << endl;
     setup(comport);
-    s_finished = false;
-    communicationThread = std::thread(&Manette::communication, this);
 }
 
 Manette::~Manette()
 {
-    s_finished = true;
-    communicationThread.join();
     delete arduino;
 }
 
 /*----------------------------- Fonction "Main" -----------------------------*/
-void Manette::communication() {
+int Manette::communication() {
     string raw_msg;
     // Structure de donnees JSON pour envoie et reception
     json j_msg_send, j_msg_rcv;
     // Boucle pour tester la communication bidirectionnelle Arduino-PC
-    while (!s_finished) {
-        Sleep(15);
         for (int i = 0; i < 1; i++) {
             // Envoie message Arduino
             json B1;
@@ -34,10 +29,8 @@ void Manette::communication() {
             json B4;
             json accelero;
             json joystick;
-            j_msg_send["send"] = _cas;
-            cas = _cas;
-            j_msg_send["afficher"] = _afficher;
-            afficher = _afficher;
+            j_msg_send["send"] = cas;
+            j_msg_send["afficher"] = afficher;
             //j_msg_send["RCV"] = RCV;
             if (!SendToSerial(arduino, j_msg_send)) {
                 cerr << "Erreur lors de l'envoie du message. " << endl;
@@ -154,8 +147,9 @@ void Manette::communication() {
                     }
                     break;
                 }
-            }
+                return 0;
         }
+        return 0;
     }
 }
 void Manette::setup(string usbport) {
@@ -239,7 +233,6 @@ bool Manette::getButton4()
 {
     return button4;
 }
-
 int Manette::getJoyX()
 {
     return joyX;
@@ -266,6 +259,37 @@ void Manette::demande(int NewCas, int NewAfficher) {
     return;
 }
 
+double Manette::GetDirectionElec(Coup coup)
+{
+    button1 = false;
+    while (!button1)
+    {
+        communication();
+        coup.setDirection(joyX - 2);
+        cout << coup.Get_Direction() << endl;
+        Sleep(10);
+    }
+    return coup.Get_Direction();
+}
+double  Manette::GetPuissanceElec(Coup coup)
+{
+    amplitude = 0;
+    coup.setAmplitude(0);
+    int i = 0;
+    while (1)
+    {
+        communication();
+        if (getAmplitude() > coup.Get_Amplitude())
+        {
+            coup.setAmplitude(getAmplitude());
+        }
+        cout << coup.Get_Amplitude() << endl;
+      
+        if (coup.Get_Amplitude() > 3)
+            break;
+    }
+    return coup.Get_Amplitude();
+}
 //int main() {
 //    int donnee;
 //    demande(4, 9);

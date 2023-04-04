@@ -49,8 +49,8 @@ int main()
 
 /*---------------------------- --- SET UP MANETTE --------------------------------- */
 
-	Manette* manette = new Manette("com7");
-	manette->demande(2, 9);
+	Manette* manette = new Manette("com8");
+	
 
 /*---------------------------- --- Tests Manette--------------------------------- */
 
@@ -59,48 +59,36 @@ int main()
 	terrain->OpenTerrain("Terrain3.txt");
 	terrain->Display();
 	Coup coup;
-	//cout << "yo mama" << endl;
-	while (!manette->getButton1())
-	{	
-		//cout << "yo daddy" << endl;
-		coup.setDirection(manette->getJoyX()-2);
-		cout << coup.Get_Direction() << endl;
-		Sleep(100);
-	}
+	manette->demande(2, 9);
+	coup.setDirection(manette->GetDirectionElec(coup));
 	manette->demande(3, 9);
-	for (int i = 0; i < 5; i++)
-	{
-		if (manette->getAmplitude() > coup.Get_Amplitude())
-		{
-			coup.setAmplitude(manette->getAmplitude());
-		}
-		cout << coup.Get_Amplitude() << endl;
-		Sleep(1000);
-	}
+	coup.setAmplitude(manette->GetPuissanceElec(coup));
 	coup.initcoup();
 	terrain->CoupDonne(coup);
+
 	manette->demande(2, 9);
-	Sleep(100);
-	while (!manette->getButton2())
-	{
-		//cout << "yo daddy" << endl;
-		coup.setDirection(manette->getJoyX() - 2);
-		cout << coup.Get_Direction() << endl;
-		Sleep(100);
-	}
+	coup.setDirection(manette->GetDirectionElec(coup));
 	manette->demande(3, 9);
-	for (int i = 0; i < 5; i++)
-	{
-		if (manette->getAmplitude() > coup.Get_Amplitude())
-		{
-			coup.setAmplitude(manette->getAmplitude());
-		}
-		cout << coup.Get_Amplitude() << endl;
-		Sleep(1000);
-	}
+	coup.setAmplitude(manette->GetPuissanceElec(coup));
 	coup.initcoup();
 	terrain->CoupDonne(coup);
+
 	manette->demande(2, 9);
+	coup.setDirection(manette->GetDirectionElec(coup));
+	manette->demande(3, 9);
+	coup.setAmplitude(manette->GetPuissanceElec(coup));
+	coup.initcoup();
+	terrain->CoupDonne(coup);
+
+	manette->demande(2, 9);
+	coup.setDirection(manette->GetDirectionElec(coup));
+	manette->demande(3, 9);
+	coup.setAmplitude(manette->GetPuissanceElec(coup));
+	coup.initcoup();
+	terrain->CoupDonne(coup);
+
+
+	
 
 
 /*----------------------------- Tests Lecture Manette -----------------------------*/
