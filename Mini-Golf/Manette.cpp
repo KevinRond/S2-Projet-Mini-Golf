@@ -1,22 +1,21 @@
 #include "Manette.h"
 
-
 /*------------------------------ Constantes ---------------------------------*/
 //int cas, afficher;
 
-Manette::Manette()
+Manette::Manette(string comport)
 {
-    cas = 0;
-    afficher = 0;
-    s_finished = false;
-    amplitude = 0;
-    joyY = 2;
-    joyX = 2;
-    button1 = false;
-    button2 = false;
-    button3 = false;
-    button4 = false;
     //cout << "nouvelle manette" << endl;
+    setup(comport);
+    s_finished = false;
+    communicationThread = std::thread(&Manette::communication, this);
+}
+
+Manette::~Manette()
+{
+    s_finished = true;
+    communicationThread.join();
+    delete arduino;
 }
 
 /*----------------------------- Fonction "Main" -----------------------------*/
@@ -35,8 +34,10 @@ void Manette::communication() {
             json B4;
             json accelero;
             json joystick;
-            j_msg_send["send"] = cas;
-            j_msg_send["afficher"] = afficher;
+            j_msg_send["send"] = _cas;
+            cas = _cas;
+            j_msg_send["afficher"] = _afficher;
+            afficher = _afficher;
             //j_msg_send["RCV"] = RCV;
             if (!SendToSerial(arduino, j_msg_send)) {
                 cerr << "Erreur lors de l'envoie du message. " << endl;
@@ -60,25 +61,41 @@ void Manette::communication() {
                 case 1:
                     B1 = j_msg_rcv["b1"];
                     if (B1 == true)
+                    {
                         button1 = true;
+                    }
                     else
-                        button1 = false;                
+                    {
+                        button1 = false;
+                    }
                     B2 = j_msg_rcv["b2"];
                     if (B2 == true)
+                    {
                         button2 = true;
+                    }
                     else
+                    {
                         button2 = false;
+                    }
                     B3 = j_msg_rcv["b3"];
                     if (B3 == true)
+                    {
                         button3 = true;
+                    }
                     else
+                    {
                         button3 = false;
+                    }
 
                     B4 = j_msg_rcv["b4"];
                     if (B4 == true)
+                    {
                         button4 = true;
+                    }
                     else
+                    {
                         button4 = false;
+                    }
                     joystick = j_msg_rcv["poty"];
                     joyY = joystick;
                     break;
@@ -86,25 +103,43 @@ void Manette::communication() {
                 case 2:
                     B1 = j_msg_rcv["b1"];
                     if (B1 == true)
+                    {
                         button1 = true;
+                        //cout << "button1 true" << endl;
+                    }
                     else
+                    {
                         button1 = false;
+                        //cout << "button1 false" << endl;
+                    }
                     B2 = j_msg_rcv["b2"];
                     if (B2 == true)
+                    {
                         button2 = true;
+                    }
                     else
+                    {
                         button2 = false;
+                    }
                     B3 = j_msg_rcv["b3"];
                     if (B3 == true)
+                    {
                         button3 = true;
+                    }
                     else
+                    {
                         button3 = false;
+                    }
 
                     B4 = j_msg_rcv["b4"];
                     if (B4 == true)
+                    {
                         button4 = true;
+                    }
                     else
+                    {
                         button4 = false;
+                    }
                     joystick = j_msg_rcv["potx"];
                     joyX = joystick;
                     break;
@@ -189,6 +224,7 @@ int Manette::getAmplitude()
 }
 bool Manette::getButton1()
 {
+
     return button1;
 }
 bool Manette::getButton2()
@@ -219,10 +255,6 @@ void Manette::setCas(int nouveauCas)
 void Manette::setAfficher(int nouvelAffichage)
 {
     afficher = nouvelAffichage;
-}
-void Manette::setState(bool nouveauState)
-{
-    s_finished = nouveauState;
 }
 //void Manette::startThread()
 //{

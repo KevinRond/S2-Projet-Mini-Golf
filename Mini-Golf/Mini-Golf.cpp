@@ -15,6 +15,7 @@
 using namespace std;
 
 
+
 int main()
 {
 	//GameManager gm(20, 25);
@@ -48,38 +49,58 @@ int main()
 
 /*---------------------------- --- SET UP MANETTE --------------------------------- */
 
-	/*Manette manette;
-	manette.demande(2, 9);
-	string com = "COM7";
-	manette.setup(com);
-	std::thread comm(&Manette::communication, &manette);*/
+	Manette* manette = new Manette("com7");
+	manette->demande(2, 9);
 
 /*---------------------------- --- Tests Manette--------------------------------- */
 
 /*----------------------------- Tests Manette + coup -----------------------------*/
-	//Terrain* terrain = new Terrain;
-	//terrain->OpenTerrain("Terrain3.txt");
-	//terrain->Display();
-	//Coup coup;
-	//while (!manette.getButton1())
-	//{
-	//	coup.setDirection(manette.getJoyX()-2);
-	//	cout << coup.Get_Direction() << endl;
-	//	Sleep(100);
-	//}
-	//manette.demande(3, 9);
-	//for (int i = 0; i < 5; i++)
-	//{
-	//	if (manette.getAmplitude() > coup.Get_Amplitude())
-	//		coup.setAmplitude(manette.getAmplitude());
-	//	cout << coup.Get_Amplitude() << endl;
-	//	Sleep(1000);
-	//}
-	//coup.initcoup();
-	//terrain->CoupDonne(coup);
-	//
-	//manette.demande(2, 9); //Choisir direction
-
+	Terrain* terrain = new Terrain;
+	terrain->OpenTerrain("Terrain3.txt");
+	terrain->Display();
+	Coup coup;
+	//cout << "yo mama" << endl;
+	while (!manette->getButton1())
+	{	
+		//cout << "yo daddy" << endl;
+		coup.setDirection(manette->getJoyX()-2);
+		cout << coup.Get_Direction() << endl;
+		Sleep(100);
+	}
+	manette->demande(3, 9);
+	for (int i = 0; i < 5; i++)
+	{
+		if (manette->getAmplitude() > coup.Get_Amplitude())
+		{
+			coup.setAmplitude(manette->getAmplitude());
+		}
+		cout << coup.Get_Amplitude() << endl;
+		Sleep(1000);
+	}
+	coup.initcoup();
+	terrain->CoupDonne(coup);
+	manette->demande(2, 9);
+	Sleep(100);
+	while (!manette->getButton2())
+	{
+		//cout << "yo daddy" << endl;
+		coup.setDirection(manette->getJoyX() - 2);
+		cout << coup.Get_Direction() << endl;
+		Sleep(100);
+	}
+	manette->demande(3, 9);
+	for (int i = 0; i < 5; i++)
+	{
+		if (manette->getAmplitude() > coup.Get_Amplitude())
+		{
+			coup.setAmplitude(manette->getAmplitude());
+		}
+		cout << coup.Get_Amplitude() << endl;
+		Sleep(1000);
+	}
+	coup.initcoup();
+	terrain->CoupDonne(coup);
+	manette->demande(2, 9);
 
 
 /*----------------------------- Tests Lecture Manette -----------------------------*/
@@ -113,7 +134,7 @@ int main()
 		Sleep(100);
 	}*/
 //------------------------------------------------------------------------//
-	//manette.setState(false);
+	
 
 	return 0;
 }

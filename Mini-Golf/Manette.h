@@ -4,7 +4,11 @@
 #include <iostream>
 #include <string>
 #include <thread>
+#include <atomic>
+
 using namespace std;
+
+
 
 /*-------------------------- Librairies externes ----------------------------*/
 #include "include/serial/SerialPort.hpp"
@@ -17,6 +21,7 @@ using json = nlohmann::json;
 
 /*---------------------------- Variables globales ---------------------------*/
 //extern SerialPort* arduino; //doit etre un objet global!
+//bool mutex = 0;
 /*------------------------------ Constantes ---------------------------------*/
 //extern int cas, afficher;
 /*----------------------------- Fonction "Main" -----------------------------*/
@@ -24,13 +29,13 @@ using json = nlohmann::json;
 class Manette {
 private:
 	SerialPort* arduino;
-	int cas, afficher, amplitude, joyY, joyX;
-	bool button1, button2, button3, button4;
-	bool s_finished;
-
+	atomic<bool> s_finished;
+	std::thread communicationThread;
+	int _cas, _afficher, _amplitude, _joyY, _joyX;
 
 public:
-	Manette();
+	Manette(string comport);
+	~Manette();
 	void communication();
 	void demande(int NewCas, int NewAfficher);
 	void setup(string usbport);
@@ -49,12 +54,14 @@ public:
 
 	void setCas(int nouveauCas);
 	void setAfficher(int nouvelAffichage);
-	void setState(bool nouveauState);
 	//void startThread();
 	friend ostream& operator << (ostream& o,  const Manette& m)
 	{
 		o << "Valeur Mesuree [" << m.amplitude << "," << m.joyX << "," << m.joyY << "]";
 		return o;
 	}
+
+	atomic<int> cas, afficher, amplitude, joyY, joyX;
+	atomic<bool> button1, button2, button3, button4;
 };
 #endif
