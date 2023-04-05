@@ -6,10 +6,6 @@ Coup::Coup()				//Initialisation de l'objet
 {
 	direction = 90;
 	amplitude = 0;
-	calculVitesseX();
-	calculVitesseY();
-	calculAccelerationY();
-	calculAccelerationX();
 }
 
 Coup::Coup(double dir, double amp)
@@ -20,15 +16,6 @@ Coup::Coup(double dir, double amp)
 
 Coup::~Coup()
 {
-}
-
-
-void Coup::initcoup()	//Lorsque les parametre d'un coup arrivent, ils update tout les attribues de la balle
-{
-	calculVitesseX();
-	calculVitesseY();
-	calculAccelerationY();
-	calculAccelerationX();
 }
 
 void Coup::setDirection(int lectureJoystick)
@@ -49,27 +36,6 @@ double Coup::Get_Direction()
 double Coup::Get_Amplitude()
 {
 	return amplitude;
-}
-
-void Coup::calculVitesseX()
-{
-	vitesseX = amplitude * cos(direction * 3.14159265 / 180);
-}
-
-void Coup::calculVitesseY()
-{
-	vitesseY = (amplitude * sin(direction * 3.14159265 / 180));
-}
-
-
-void Coup::calculAccelerationY()
-{
-	accelerationY = -(vitesseY / amplitude);
-}
-
-void Coup::calculAccelerationX()
-{
-	accelerationX = -(vitesseX / amplitude);
 }
 
 double Coup::getVitesseX()

@@ -20,19 +20,10 @@ public:
 	~Coup();
 
 	//Setter
-	void initcoup();	//Initialisation des parametres de ball depuis un coup
-	void setDirection(int lectureJoystick);				//Direction choisie + random factor
+	void setDirection(int lectureJoystick);		//Direction choisie + random factor
 	void setAmplitude(int lectureAmplitude);
 
-	//updater
-	
-	void calculVitesseX();						//Calcul la vitesse en x utilisant la direction et l'amplitude
-	void calculVitesseY();						//Calcul la vitesse en y utilisant la direction et l'amplitude
-	void calculAccelerationX();					//Calcul l'acceleration de la balle en X
-	void calculAccelerationY();					//Calcul l'acceleration de la balle en Y
-
 	//Getter
-
 	double Get_Amplitude();
 	double Get_Direction();						//Lecture de la direction retour en rad
 
