@@ -10,40 +10,38 @@
 #include "Mur.h"
 #include "Coup.h"
 #include "GameManager.h"
+#include <QtWidgets/qmainwindow.h>
+#include "Interface.h"
 //#include "Manette.h"
 
 using namespace std;
 
 
-int main()
+int main(int argc, char* argv[])
 {
-	//GameManager gm(20, 25);
-	//gm.Run();
-	Terrain *terrain1 = new Terrain;
-	terrain1->OpenTerrain("Terrain2.txt");
-	terrain1->Display();
-	/*Interraction* inter = new Interraction;
-	Ball* ball1 = new Ball;
-	Mur* mur1 = new Mur(0, 20, 20, 20);
-	ball1->Set_direction(270);
-	ball1->Set_Vx(5);
-	inter->BalleMur(ball1, mur1);*/
-	string direction;
-	string force;
-	while (terrain1->verifTrou() == false)
-	{
-		//cout << "NOMBRE DE COUP: " << terrain1->getCOup() << endl;
-		cout << "entrer la direction de la balle" << endl;
-		cin >> direction;
-		cout << "enter la puissance" << endl;
-		cin >> force;
-		double forced = stod(force);
-		double directiond = stod(direction);
-		Coup coup1(directiond, forced);
-		terrain1->CoupDonne(coup1);
-		//cout << "NOMBRE DE RICOCHET: " << terrain1->getCOup() << endl;
-	}
-	cout << "BRAVOOOOOOOO" << endl;
+	QApplication a(argc, argv);
+	Labo1QTApp7 w;
+	w.show();
+	return a.exec();
+	//Terrain *terrain1 = new Terrain;
+	//terrain1->OpenTerrain("Terrain2.txt");
+	//terrain1->Display();
+	//string direction;
+	//string force;
+	//while (terrain1->verifTrou() == false)
+	//{
+	//	//cout << "NOMBRE DE COUP: " << terrain1->getCOup() << endl;
+	//	cout << "entrer la direction de la balle" << endl;
+	//	cin >> direction;
+	//	cout << "enter la puissance" << endl;
+	//	cin >> force;
+	//	double forced = stod(force);
+	//	double directiond = stod(direction);
+	//	Coup coup1(directiond, forced);
+	//	terrain1->CoupDonne(coup1);
+	//	//cout << "NOMBRE DE RICOCHET: " << terrain1->getCOup() << endl;
+	//}
+	//cout << "BRAVOOOOOOOO" << endl;
 	/*
 	//terrain1->CoupDonne(coup1);
 	//terrain1->CoupDonne(coup1);
