@@ -5,33 +5,25 @@ Labo1QTApp7::Labo1QTApp7(QWidget* parent)
 {
     //ui.setupUi(this);
 
-    this->resize(500, 500);
+    this->resize(1280,720);
 
-    fichier = new QMenu;
-    //fichier = menuBar()->addMenu(tr("&Fichier"));
-    edition = new QMenu;
-    //edition = menuBar()->addMenu(tr("&Edition"));
-
-
-    ouvrir = new QAction(tr("&Ouvrir"), this);
-    fermer = new QAction(tr("&Fermer"), this);
-    trouver = new QAction(tr("&Trouver"), this);
-
-    fichier->addAction(ouvrir);
-    fichier->addAction(fermer);
-    edition->addAction(trouver);
-
-    button = new QPushButton("Cliquer ici", this);
-    button->setGeometry(400, 400, 100, 50);
+    QPushButton* button = new QPushButton("Play",this);
+    button->setIcon(QIcon(".. / Graphic / Bouton.png"));
+    button->setIconSize(QSize(50,50));
+    button->setGeometry(400, 400, 300, 150);
+    button->setStyleSheet("QPushButton { border-image: url(../Graphic/BoutonOuvert.png); }"
+        "QPushButton:pressed { border-image: url(../Graphic/BoutonFermer.png); }");
+    
+    
 
     textEdit = new QTextEdit(this);
     textEdit->setGeometry(0, 40, 300, 300);
 
     connect(button, &QPushButton::released, this, &Labo1QTApp7::afficherMessage);
 
-   // setStyleSheet("QMainWindow{ background-image: url(C:/Users/alexi/source/repos/Labo1QTApp7/golf.png); }");
+    setStyleSheet("QMainWindow{ background-image: url(../Graphic/MainMenu.png); }");
     textEdit->setStyleSheet("background-color:white");
-    button->setStyleSheet("background-color:green");
+    //button->setStyleSheet("background-color:green");
 
 
 }
