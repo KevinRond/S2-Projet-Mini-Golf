@@ -6,19 +6,7 @@ MainMenu::MainMenu(QWidget* parent)
 {
     //ui.setupUi(this);
 
-    this->resize(1280, 720);
-    //this->setFixedSize(450, 350);
-
-    /*ListeMenus = new QStackedWidget(this);
-    menu1 = new QWidget(this);
-    menu2 = new QWidget(this);
-    ListeMenus->addWidget(menu1);
-    ListeMenus->addWidget(menu2);*/
-
-    /*layout1 = new QVBoxLayout(this);
-    layout1->addWidget(menu1);*/
-
-    //menuBar = new QMenuBar(this);
+    this->setFixedSize(1280, 720);
 
     fichier = new QMenu;
     fichier = menuBar()->addMenu("Fichier");

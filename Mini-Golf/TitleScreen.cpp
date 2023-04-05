@@ -5,16 +5,42 @@ TitleScreen::TitleScreen(QWidget* parent)
 {
     //ui.setupUi(this);
 
-    this->resize(1280, 720);
+    this->setFixedSize(1280, 720);
 
-    MainButton = new QPushButton("MINI-GOLF AAAAH", this);
-    MainButton->setGeometry(460, 300, 360, 120);
-    QString buttonStyle = "QPushButton {"
-        "font-family: Papyrus;"
-        "font-size: 24px;"
+    //Texte du titre
+    texteTitre = new QTextEdit(this);
+    texteTitre->setGeometry(460, 200, 360, 80);
+    texteTitre->setPlainText("Mini-G");
+    texteTitre->setReadOnly(true);
+    QString style_titre = "QTextEdit {"
+        "font-family: Helvetica;"
+        "font-size: 60px;"
+        "background-color: transparent;"
+        "border: none;"
         "}";
+    texteTitre->setStyleSheet(style_titre);
+    texteTitre->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    
 
-    MainButton->setStyleSheet(buttonStyle);
+    //Texte du sous-titre
+    soustitre = new QTextEdit(this);
+    soustitre->setGeometry(460, 280, 360, 60);
+    soustitre->setPlainText("by R2P2");
+    soustitre->setReadOnly(true);
+    QString style_soustitre = "QTextEdit {"
+        "font-family: Helvetica;"
+        "font-size: 24px;"
+        "background-color: transparent;"
+        "border: none;"
+        "}";
+    soustitre->setStyleSheet(style_soustitre);
+    soustitre->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+
+
+    //Set up du bouton
+    MainButton = new QPushButton("MINI-G", this);
+    MainButton->setGeometry(460, 400, 360, 70);
+    //MainButton->setStyleSheet(buttonStyle);
 
     connect(MainButton, &QPushButton::clicked, this, &TitleScreen::switchMenus);
 }
@@ -22,7 +48,9 @@ TitleScreen::TitleScreen(QWidget* parent)
 TitleScreen::~TitleScreen()
 {
     delete MainButton;
+    delete texteTitre;
 }
+
 
 void TitleScreen::switchMenus() 
 {

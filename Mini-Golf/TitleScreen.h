@@ -11,6 +11,7 @@
 #include <QTextBrowser>
 #include <QStackedWidget>
 #include <QLabel>
+#include <QKeyEvent>
 
 
 class TitleScreen : public QMainWindow
@@ -24,10 +25,13 @@ public:
 signals:
     void buttonClicked();
 
+
 private slots:
     void switchMenus();
 
 private:
     //Ui::QTLabo1Class ui;
     QPushButton* MainButton;
+    QTextEdit* texteTitre;
+    QTextEdit* soustitre;
 };
