@@ -39,10 +39,13 @@
     <ClCompile Include="Hole.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Interface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Interraction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Manette.cpp">
+    <ClCompile Include="MainMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Mini-Golf.cpp">
@@ -57,8 +60,8 @@
     <ClCompile Include="Terrain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\serial\SerialPort.cpp">
-      <Filter>Generated Files</Filter>
+    <ClCompile Include="TitleScreen.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -74,12 +77,15 @@
     <ClInclude Include="Hole.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <CustomBuild Include="Interface.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
     <ClInclude Include="Interraction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Manette.h">
+    <CustomBuild Include="MainMenu.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
+    </CustomBuild>
     <ClInclude Include="Mur.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -89,14 +95,29 @@
     <ClInclude Include="Terrain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\json.hpp">
+    <CustomBuild Include="TitleScreen.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\serial\SerialPort.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="debug\moc_Interface.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_Interface.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_MainMenu.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_MainMenu.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_TitleScreen.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_TitleScreen.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
     <CustomBuild Include="debug\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>

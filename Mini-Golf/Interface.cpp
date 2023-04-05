@@ -1,45 +1,36 @@
 #include "Interface.h"
 
-Labo1QTApp7::Labo1QTApp7(QWidget* parent)
+Interface::Interface(QWidget* parent)
     : QMainWindow(parent)
 {
     //ui.setupUi(this);
 
-    this->resize(500, 500);
+    this->resize(1280, 720);
+    
+    listeMenus = new QStackedWidget(this);
+    titleScreen = new TitleScreen(this);
+    menuPrincipal = new MainMenu(this);
 
-    fichier = new QMenu;
-    //fichier = menuBar()->addMenu(tr("&Fichier"));
-    edition = new QMenu;
-    //edition = menuBar()->addMenu(tr("&Edition"));
+    listeMenus->addWidget(titleScreen);
+    listeMenus->addWidget(menuPrincipal);
 
+    listeMenus->setCurrentWidget(titleScreen);
+    connect(titleScreen, &TitleScreen::buttonClicked, [this]() {
+        listeMenus->setCurrentWidget(listeMenus->widget(1));
+        });
+    connect(menuPrincipal, &MainMenu::buttonClicked, [this]() {
+        listeMenus->setCurrentWidget(listeMenus->widget(0));
+        });
 
-    ouvrir = new QAction(tr("&Ouvrir"), this);
-    fermer = new QAction(tr("&Fermer"), this);
-    trouver = new QAction(tr("&Trouver"), this);
-
-    fichier->addAction(ouvrir);
-    fichier->addAction(fermer);
-    edition->addAction(trouver);
-
-    button = new QPushButton("Cliquer ici", this);
-    button->setGeometry(400, 400, 100, 50);
-
-    textEdit = new QTextEdit(this);
-    textEdit->setGeometry(0, 40, 300, 300);
-
-    connect(button, &QPushButton::released, this, &Labo1QTApp7::afficherMessage);
-
-   // setStyleSheet("QMainWindow{ background-image: url(C:/Users/alexi/source/repos/Labo1QTApp7/golf.png); }");
-    textEdit->setStyleSheet("background-color:white");
-    button->setStyleSheet("background-color:green");
+    setCentralWidget(listeMenus);
 
 
 }
 
-Labo1QTApp7::~Labo1QTApp7()
-{}
-
-void Labo1QTApp7::afficherMessage()
+Interface::~Interface()
 {
-    textEdit->append("Bravo tu sais appuyer sur un bouton");
+    delete menuPrincipal;
+    delete titleScreen;
+    delete listeMenus;
 }
+

@@ -12,6 +12,7 @@
 #include "GameManager.h"
 #include <QtWidgets/qmainwindow.h>
 #include "Interface.h"
+#include "MainMenu.h"
 //#include "Manette.h"
 
 using namespace std;
@@ -20,7 +21,7 @@ using namespace std;
 int main(int argc, char* argv[])
 {
 	QApplication a(argc, argv);
-	Labo1QTApp7 w;
+	Interface w;
 	w.show();
 	return a.exec();
 	//Terrain *terrain1 = new Terrain;
@@ -83,7 +84,6 @@ int main(int argc, char* argv[])
 //------------------------------------------------------------------------
 	manette.setState(false);
 	*/
-	return 0;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
