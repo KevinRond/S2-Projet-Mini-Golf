@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MENUSELECTIONTERRAIN_H
+#define MENUSELECTIONTERRAIN_H
 
 #include <QtWidgets/QMainWindow>
 #include <QApplication>
@@ -22,23 +23,21 @@ public:
     ~MainMenu();
 
 signals:
-    void buttonClicked();
+    void b_jouer_appuyer();
+    void b_regle_appuyer();
+    void b_scoreboard_appuyer();
 
 private slots:
-    void updateTextButton();
-    void updateTextOuvrir();
-    void updateTextFermer();
-    void updateTextTrouver();
+    void action_jouer();
+    void action_regle();
+    void action_scoreboard();
 
 private:
-    //Ui::QTLabo1Class ui;
-    QMenu* fichier;
-    QMenu* edition;
-    QAction* ouvrir;
-    QAction* fermer;
-    QAction* trouver;
-    QPushButton* button1;
-    QTextEdit* zoneTexte;
-    QTextEdit* textFixe;
-    //QMenuBar* menuBar;
+    QVBoxLayout* layout;
+    QPushButton* b_jouer;
+    QPushButton* b_regle;
+    QPushButton* b_scoreboard;
+    QPushButton* b_quit;
 };
+
+#endif

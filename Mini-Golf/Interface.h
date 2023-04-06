@@ -1,7 +1,9 @@
 #pragma once
 
 
-//#include "ui_QTLabo1.h"
+#include <iostream>
+#include <string>
+
 #include <QtWidgets/QMainWindow>
 #include <QApplication>
 #include <QPushButton>
@@ -13,8 +15,13 @@
 #include <QTextBrowser>
 #include <QStackedWidget>
 #include <QLabel>
+
 #include "TitleScreen.h"
 #include "MainMenu.h"
+#include "MenuSelectionTerrain.h"
+#include "MenuScoreboard.h"
+#include "MenuReglements.h"
+#include "FenetreTerrain.h"
 
 
 class Interface : public QMainWindow
@@ -33,4 +40,8 @@ private:
     QStackedWidget* listeMenus;
     TitleScreen* titleScreen;
     MainMenu* menuPrincipal;
+    MenuSelectionTerrain* menuSelectionTerrain;
+    MenuScoreboard* menuScoreboard;
+    MenuReglements* menuReglements;
+    FenetreTerrain* fenetreTerrain;
 };

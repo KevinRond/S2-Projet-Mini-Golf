@@ -33,6 +33,9 @@
     <ClCompile Include="Coup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FenetreTerrain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="GameManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -46,6 +49,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MainMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuReglements.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuScoreboard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuSelectionTerrain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Mini-Golf.cpp">
@@ -71,6 +83,9 @@
     <ClInclude Include="Coup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <CustomBuild Include="FenetreTerrain.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
     <ClInclude Include="GameManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -84,6 +99,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <CustomBuild Include="MainMenu.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="MenuReglements.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="MenuScoreboard.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="MenuSelectionTerrain.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <ClInclude Include="Mur.h">
@@ -100,6 +124,12 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="debug\moc_FenetreTerrain.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_FenetreTerrain.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
     <ClCompile Include="debug\moc_Interface.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
@@ -110,6 +140,24 @@
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="release\moc_MainMenu.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_MenuReglements.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_MenuReglements.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_MenuScoreboard.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_MenuScoreboard.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_MenuSelectionTerrain.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_MenuSelectionTerrain.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="debug\moc_TitleScreen.cpp">

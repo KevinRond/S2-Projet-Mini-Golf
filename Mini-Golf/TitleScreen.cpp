@@ -25,7 +25,7 @@ TitleScreen::TitleScreen(QWidget* parent)
     //Texte du sous-titre
     soustitre = new QTextEdit(this);
     soustitre->setGeometry(460, 280, 360, 60);
-    soustitre->setPlainText("by R2P2");
+    soustitre->setPlainText("par R2P2");
     soustitre->setReadOnly(true);
     QString style_soustitre = "QTextEdit {"
         "font-family: Helvetica;"
@@ -38,7 +38,7 @@ TitleScreen::TitleScreen(QWidget* parent)
 
 
     //Set up du bouton
-    MainButton = new QPushButton("MINI-G", this);
+    MainButton = new QPushButton("Appuyer pour commencer", this);
     MainButton->setGeometry(460, 400, 360, 70);
     //MainButton->setStyleSheet(buttonStyle);
 

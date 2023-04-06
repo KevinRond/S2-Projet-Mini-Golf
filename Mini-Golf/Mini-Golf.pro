@@ -13,7 +13,11 @@ HEADERS     += \
 	Parcours.h \
 	Interface.h \
 	MainMenu.h \
-	TitleScreen.h
+	TitleScreen.h \ 
+	MenuSelectionTerrain.h \ 
+	MenuScoreboard.h \
+	MenuReglements.h \
+	FenetreTerrain.h
 SOURCES     += \
 	Ball.cpp \
 	Hole.cpp \
@@ -26,7 +30,11 @@ SOURCES     += \
 	Mini-Golf.cpp \
 	Interface.cpp \
 	MainMenu.cpp \
-	TitleScreen.cpp
+	TitleScreen.cpp \ 
+	MenuSelectionTerrain.cpp \ 
+	MenuScoreboard.cpp \
+	MenuReglements.cpp \
+	FenetreTerrain.cpp
 INCLUDEPATH += ../Mini-Golf
 INCLUDEPATH += ../Mini-Golf/include
 INCLUDEPATH += ../Mini-Golf/include/serial

@@ -145,11 +145,15 @@
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Coup.cpp" />
+    <ClCompile Include="FenetreTerrain.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Hole.cpp" />
     <ClCompile Include="Interface.cpp" />
     <ClCompile Include="Interraction.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="MenuReglements.cpp" />
+    <ClCompile Include="MenuScoreboard.cpp" />
+    <ClCompile Include="MenuSelectionTerrain.cpp" />
     <ClCompile Include="Mini-Golf.cpp" />
     <ClCompile Include="Mur.cpp" />
     <ClCompile Include="Parcours.cpp" />
@@ -159,6 +163,16 @@
   <ItemGroup>
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Coup.h" />
+    <CustomBuild Include="FenetreTerrain.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">FenetreTerrain.h;debug\moc_predefs.h;C:\Qt\6.4.2\msvc2019_64\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">C:\Qt\6.4.2\msvc2019_64\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include C:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf/debug/moc_predefs.h -IC:/Qt/6.4.2/msvc2019_64/mkspecs/win32-msvc -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf/include -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf/include/serial -IC:/Qt/6.4.2/msvc2019_64/include -IC:/Qt/6.4.2/msvc2019_64/include/QtWidgets -IC:/Qt/6.4.2/msvc2019_64/include/QtMultimedia -IC:/Qt/6.4.2/msvc2019_64/include/QtGui -IC:/Qt/6.4.2/msvc2019_64/include/QtNetwork -IC:/Qt/6.4.2/msvc2019_64/include/QtCore -I&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\ATLMFC\include&quot; -I&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\ucrt&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\shared&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\um&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\winrt&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\cppwinrt&quot; FenetreTerrain.h -o debug\moc_FenetreTerrain.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">MOC FenetreTerrain.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">debug\moc_FenetreTerrain.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">FenetreTerrain.h;release\moc_predefs.h;C:\Qt\6.4.2\msvc2019_64\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">C:\Qt\6.4.2\msvc2019_64\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DNDEBUG -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include C:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf/release/moc_predefs.h -IC:/Qt/6.4.2/msvc2019_64/mkspecs/win32-msvc -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf/include -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf/include/serial -IC:/Qt/6.4.2/msvc2019_64/include -IC:/Qt/6.4.2/msvc2019_64/include/QtWidgets -IC:/Qt/6.4.2/msvc2019_64/include/QtMultimedia -IC:/Qt/6.4.2/msvc2019_64/include/QtGui -IC:/Qt/6.4.2/msvc2019_64/include/QtNetwork -IC:/Qt/6.4.2/msvc2019_64/include/QtCore -I&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\ATLMFC\include&quot; -I&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\ucrt&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\shared&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\um&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\winrt&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\cppwinrt&quot; FenetreTerrain.h -o release\moc_FenetreTerrain.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">MOC FenetreTerrain.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">release\moc_FenetreTerrain.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Hole.h" />
     <CustomBuild Include="Interface.h">
@@ -182,6 +196,36 @@
       <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">MOC MainMenu.h</Message>
       <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">release\moc_MainMenu.cpp;%(Outputs)</Outputs>
     </CustomBuild>
+    <CustomBuild Include="MenuReglements.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">MenuReglements.h;debug\moc_predefs.h;C:\Qt\6.4.2\msvc2019_64\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">C:\Qt\6.4.2\msvc2019_64\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include C:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf/debug/moc_predefs.h -IC:/Qt/6.4.2/msvc2019_64/mkspecs/win32-msvc -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf/include -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf/include/serial -IC:/Qt/6.4.2/msvc2019_64/include -IC:/Qt/6.4.2/msvc2019_64/include/QtWidgets -IC:/Qt/6.4.2/msvc2019_64/include/QtMultimedia -IC:/Qt/6.4.2/msvc2019_64/include/QtGui -IC:/Qt/6.4.2/msvc2019_64/include/QtNetwork -IC:/Qt/6.4.2/msvc2019_64/include/QtCore -I&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\ATLMFC\include&quot; -I&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\ucrt&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\shared&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\um&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\winrt&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\cppwinrt&quot; MenuReglements.h -o debug\moc_MenuReglements.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">MOC MenuReglements.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">debug\moc_MenuReglements.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">MenuReglements.h;release\moc_predefs.h;C:\Qt\6.4.2\msvc2019_64\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">C:\Qt\6.4.2\msvc2019_64\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DNDEBUG -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include C:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf/release/moc_predefs.h -IC:/Qt/6.4.2/msvc2019_64/mkspecs/win32-msvc -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf/include -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf/include/serial -IC:/Qt/6.4.2/msvc2019_64/include -IC:/Qt/6.4.2/msvc2019_64/include/QtWidgets -IC:/Qt/6.4.2/msvc2019_64/include/QtMultimedia -IC:/Qt/6.4.2/msvc2019_64/include/QtGui -IC:/Qt/6.4.2/msvc2019_64/include/QtNetwork -IC:/Qt/6.4.2/msvc2019_64/include/QtCore -I&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\ATLMFC\include&quot; -I&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\ucrt&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\shared&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\um&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\winrt&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\cppwinrt&quot; MenuReglements.h -o release\moc_MenuReglements.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">MOC MenuReglements.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">release\moc_MenuReglements.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="MenuScoreboard.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">MenuScoreboard.h;debug\moc_predefs.h;C:\Qt\6.4.2\msvc2019_64\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">C:\Qt\6.4.2\msvc2019_64\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include C:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf/debug/moc_predefs.h -IC:/Qt/6.4.2/msvc2019_64/mkspecs/win32-msvc -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf/include -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf/include/serial -IC:/Qt/6.4.2/msvc2019_64/include -IC:/Qt/6.4.2/msvc2019_64/include/QtWidgets -IC:/Qt/6.4.2/msvc2019_64/include/QtMultimedia -IC:/Qt/6.4.2/msvc2019_64/include/QtGui -IC:/Qt/6.4.2/msvc2019_64/include/QtNetwork -IC:/Qt/6.4.2/msvc2019_64/include/QtCore -I&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\ATLMFC\include&quot; -I&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\ucrt&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\shared&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\um&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\winrt&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\cppwinrt&quot; MenuScoreboard.h -o debug\moc_MenuScoreboard.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">MOC MenuScoreboard.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">debug\moc_MenuScoreboard.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">MenuScoreboard.h;release\moc_predefs.h;C:\Qt\6.4.2\msvc2019_64\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">C:\Qt\6.4.2\msvc2019_64\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DNDEBUG -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include C:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf/release/moc_predefs.h -IC:/Qt/6.4.2/msvc2019_64/mkspecs/win32-msvc -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf/include -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf/include/serial -IC:/Qt/6.4.2/msvc2019_64/include -IC:/Qt/6.4.2/msvc2019_64/include/QtWidgets -IC:/Qt/6.4.2/msvc2019_64/include/QtMultimedia -IC:/Qt/6.4.2/msvc2019_64/include/QtGui -IC:/Qt/6.4.2/msvc2019_64/include/QtNetwork -IC:/Qt/6.4.2/msvc2019_64/include/QtCore -I&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\ATLMFC\include&quot; -I&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\ucrt&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\shared&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\um&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\winrt&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\cppwinrt&quot; MenuScoreboard.h -o release\moc_MenuScoreboard.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">MOC MenuScoreboard.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">release\moc_MenuScoreboard.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="MenuSelectionTerrain.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">MenuSelectionTerrain.h;debug\moc_predefs.h;C:\Qt\6.4.2\msvc2019_64\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">C:\Qt\6.4.2\msvc2019_64\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include C:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf/debug/moc_predefs.h -IC:/Qt/6.4.2/msvc2019_64/mkspecs/win32-msvc -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf/include -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf/include/serial -IC:/Qt/6.4.2/msvc2019_64/include -IC:/Qt/6.4.2/msvc2019_64/include/QtWidgets -IC:/Qt/6.4.2/msvc2019_64/include/QtMultimedia -IC:/Qt/6.4.2/msvc2019_64/include/QtGui -IC:/Qt/6.4.2/msvc2019_64/include/QtNetwork -IC:/Qt/6.4.2/msvc2019_64/include/QtCore -I&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\ATLMFC\include&quot; -I&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\ucrt&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\shared&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\um&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\winrt&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\cppwinrt&quot; MenuSelectionTerrain.h -o debug\moc_MenuSelectionTerrain.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">MOC MenuSelectionTerrain.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">debug\moc_MenuSelectionTerrain.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">MenuSelectionTerrain.h;release\moc_predefs.h;C:\Qt\6.4.2\msvc2019_64\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">C:\Qt\6.4.2\msvc2019_64\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DNDEBUG -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include C:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf/release/moc_predefs.h -IC:/Qt/6.4.2/msvc2019_64/mkspecs/win32-msvc -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf/include -IC:/Users/kevin/Documents/GitHub/S2-Projet-Mini-Golf/Mini-Golf/include/serial -IC:/Qt/6.4.2/msvc2019_64/include -IC:/Qt/6.4.2/msvc2019_64/include/QtWidgets -IC:/Qt/6.4.2/msvc2019_64/include/QtMultimedia -IC:/Qt/6.4.2/msvc2019_64/include/QtGui -IC:/Qt/6.4.2/msvc2019_64/include/QtNetwork -IC:/Qt/6.4.2/msvc2019_64/include/QtCore -I&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\ATLMFC\include&quot; -I&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\ucrt&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\shared&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\um&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\winrt&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\cppwinrt&quot; MenuSelectionTerrain.h -o release\moc_MenuSelectionTerrain.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">MOC MenuSelectionTerrain.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">release\moc_MenuSelectionTerrain.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
     <ClInclude Include="Mur.h" />
     <ClInclude Include="Parcours.h" />
     <ClInclude Include="Terrain.h" />
@@ -197,6 +241,12 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="debug\moc_FenetreTerrain.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_FenetreTerrain.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="debug\moc_Interface.cpp">
       <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">true</ExcludedFromBuild>
     </ClCompile>
@@ -207,6 +257,24 @@
       <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="release\moc_MainMenu.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_MenuReglements.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_MenuReglements.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_MenuScoreboard.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_MenuScoreboard.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_MenuSelectionTerrain.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_MenuSelectionTerrain.cpp">
       <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="debug\moc_TitleScreen.cpp">
