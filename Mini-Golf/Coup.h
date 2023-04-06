@@ -27,9 +27,5 @@ public:
 	double Get_Amplitude();
 	double Get_Direction();						//Lecture de la direction retour en rad
 
-	double getVitesseX();						//Retourne vitesse en X
-	double getVitesseY();						//Retourne vitesse en Y
-	double getAccelerationX();					//Retourne acceleration en X
-	double getAccelerationY();					//Retourne acceleration en Y
 };
 #endif

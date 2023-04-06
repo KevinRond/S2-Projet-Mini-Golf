@@ -37,8 +37,7 @@ double Ball::Get_Oy()
     return Oy;
 }
 void Ball::Display()
-{
-    
+{  
     cout << "Balle location : (" << Ox << "," << Oy << ")" << endl;
 }
 

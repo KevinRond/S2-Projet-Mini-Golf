@@ -6,6 +6,7 @@ HEADERS     += Ball.h Hole.h Interraction.h Mur.h Terrain.h Coup.h Manette.h Par
 SOURCES     += Ball.cpp Hole.cpp Interraction.cpp Mur.cpp Terrain.cpp Mini-Golf.cpp Coup.cpp Manette.cpp Parcours.cpp
 INCLUDEPATH += ../Mini-Golf
 INCLUDEPATH += ../Mini-Golf/include
+INCLUDEPATH += ../Mini-Golf/Terrain
 INCLUDEPATH += ../Mini-Golf/include/serial
 DEFINES += "_HAS_STD_BYTE=0"
 LIBS        += 

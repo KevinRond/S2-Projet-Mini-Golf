@@ -64,7 +64,7 @@ Parcours Interraction::BalleMur(Ball* balle, Mur* mur, std::pair<double, double>
 		x = (cos(Dir) * distanceItTraveled) * 10 + Ox;
 		y = (sin(Dir) * distanceItTraveled) * 10 + Oy;
 		balle->Set_Oxy(x, y);
-		cout << "Balle en position (" << x << "," << y << ")." << endl;
+		cout << "Balle en position (" << x << "," << 720-y << ")." << endl;
 	}
 	return petitParcour;
 }

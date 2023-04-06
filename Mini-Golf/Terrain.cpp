@@ -33,10 +33,6 @@ Parcours Terrain::CoupDonne(Coup coup1)
 
 	while ((balle1->Get_Amplitude() != 0 && hole1->Sitrou() != 1))
 	{
-		if (hole1->Sitrou())
-		{
-			break;
-		}
 		indexColision = VerifierColision();																		//Rapporte l'index de colision
 		cout << "Index: " << indexColision << endl;
 		if (indexColision == -1)																				//Si interraction avec un trou (-1)
@@ -94,10 +90,10 @@ Terrain *Terrain::OpenTerrain(std::string  terrain)
 					ptt.clear();												//Vide l'accumulateur
 					if (Coor2[0] != -1.0)										//Verifie si c'est la premiere coor (besoin de 2 pour un mur)
 					{
-						Mur *MurTemp = new Mur;									//Creation d'un objet Mur
-						MurTemp->Set(Coor1[0], Coor1[1], Coor2[0], Coor2[1]);	//Attribution de ses 2 coor
-						vecteurMur1.push_back(MurTemp->Get());					//Assignation au TableauMur de notre terrain
-						nbMur++;												//Incremenation du nombre de Murs
+						Mur *MurTemp = new Mur;											//Creation d'un objet Mur
+						MurTemp->Set(Coor1[0], 720-Coor1[1], Coor2[0], 720-Coor2[1]);	//Attribution de ses 2 coor
+						vecteurMur1.push_back(MurTemp->Get());							//Assignation au TableauMur de notre terrain
+						nbMur++;														//Incremenation du nombre de Murs
 					}
 					Coor2[0] = Coor1[0];						//Continuation de notre ligne de mur, la permutation du point de tete se fait en coor2 (tail)
 					Coor2[1] = Coor1[1];						//le prochain point sera en coor1 (tete)
@@ -105,13 +101,13 @@ Terrain *Terrain::OpenTerrain(std::string  terrain)
 				else if (lineContents[i] == 'B')				//Verification si dernier point est la balle
 				{
 					Ball* balletemp = new Ball;					//Assignation du pointeur de l'objet creer a son attribu balle1
-					balletemp->Set_Oxy(Coor1[0], Coor1[1]);
+					balletemp->Set_Oxy(Coor1[0], 720-Coor1[1]);
 					balle1 = balletemp->Get();
 				}
 				else if (lineContents[i] == 'T')				//Verification si dernier point est un trou
 				{
 					Hole* HoleTemp = new Hole;					//Creation objet Hole
-					HoleTemp->Set_xy(Coor1[0], Coor1[1]);		//Son emplacement
+					HoleTemp->Set_xy(Coor1[0], 720-Coor1[1]);	//Son emplacement
 					hole1 = HoleTemp->Get();					//Assignation du pointeur de l'objet creer a son attribu hole1
 				}
 				else if (lineContents[i] == 'S')
@@ -231,7 +227,7 @@ int Terrain::VerifierColision()
 				pointIntersection.first = Ix;
 				pointIntersection.second = Iy;
 				prevIndex = i;
-				cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(pointIntersection.first) << "," << round(Iy) << ")" << " a une distance de " << round(distance) << endl;
+				cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(pointIntersection.first) << "," << 720-round(Iy) << ")" << " a une distance de " << round(distance) << endl;
 			}
 		}
 		i++;
@@ -284,7 +280,7 @@ int Terrain::VerifierColision()
 				IndexColision = -1;												//Definit l'index a Trou
 				pointIntersection.first = Ix;
 				pointIntersection.second = Iy;
-				cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(Ix) << "," << round(Iy) << ") a une distance de " << round(distanceTrou) << endl;;
+				cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(Ix) << "," << 720-round(Iy) << ") a une distance de " << round(distanceTrou) << endl;;
 			}
 		}
 	}

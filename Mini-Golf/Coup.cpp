@@ -4,7 +4,7 @@ using namespace std;
 
 Coup::Coup()				//Initialisation de l'objet
 {
-	direction = 90;
+	direction = 45;
 	amplitude = 0;
 }
 
@@ -35,25 +35,6 @@ double Coup::Get_Direction()
 }
 double Coup::Get_Amplitude()
 {
-	return amplitude;
+	return amplitude * 1.5;
 }
 
-double Coup::getVitesseX()
-{
-	return vitesseX;
-}
-
-double Coup::getVitesseY()
-{
-	return vitesseY;
-}
-
-double Coup::getAccelerationY()
-{
-	return accelerationY;
-}
-
-double Coup::getAccelerationX()
-{
-	return accelerationX;
-}
