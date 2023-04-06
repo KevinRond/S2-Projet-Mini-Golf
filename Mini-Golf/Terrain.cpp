@@ -20,6 +20,7 @@ Ses methodes:
 using namespace std;
 Terrain::Terrain()
 {
+
 	nbMur = 0;
 }
 
@@ -327,6 +328,16 @@ bool Terrain::verifTrou()
 	return hole1->Sitrou();
 }
 
+double Terrain::getOx()
+{
+	return balle1->Get_Ox();
+}
+
+double Terrain::getOy()
+{
+	return balle1->Get_Oy();
+}
+
 bool Terrain::isBetween(double value, double bound1, double bound2)
 {
 	double lower = min(bound1, bound2);
@@ -337,3 +348,5 @@ bool Terrain::isOnLine(double x0, double y0, double m, double b) {
 	double y = m * x0 + b;
 	return y == y0;
 }
+
+
