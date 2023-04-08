@@ -9,7 +9,26 @@ Labo1QTApp7::Labo1QTApp7(QWidget* parent)
 
     this->resize(1280,720);
 
-    QPushButton* button = new QPushButton("Play",this);
+	listeMenu = new QStackedWidget(this);
+	autreMenu = new AutreMenu(this);
+	testAcceuil = new TestAcceuil(this);
+
+	listeMenu->addWidget(testAcceuil);
+	listeMenu->addWidget(autreMenu);
+
+	listeMenu->setCurrentWidget(testAcceuil);
+
+	//action test acceuil
+
+	connect(testAcceuil, &TestAcceuil::b_autreMenu_appuyer, [this]() {listeMenu->setCurrentWidget(listeMenu->widget(1)); });
+
+	//action autremenu
+
+	connect(autreMenu, &AutreMenu::b_retour_appuyer, [this]() {listeMenu->setCurrentWidget(listeMenu->widget(0)); });
+
+	setCentralWidget(listeMenu);
+
+    /*QPushButton* button = new QPushButton("Play",this);
     button->setGeometry(490, 300, 300, 150);
     button->setStyleSheet("QPushButton { border-image: url(../Graphic/BoutonOuvert1.png); }"
 		"QPushButton:hover { border-image: url(../Graphic/BoutonSelect.png); }"
@@ -38,14 +57,18 @@ Labo1QTApp7::Labo1QTApp7(QWidget* parent)
 	connect(button1, &QPushButton::released, this, &Labo1QTApp7::terrain);
 
     setStyleSheet("QMainWindow{ background-image: url(../Graphic/BeauFond3.png); }");
-    textEdit->setStyleSheet("background-color:white");
+    textEdit->setStyleSheet("background-color:white");*/
     //button->setStyleSheet("background-color:green");
 
  
 }
 
 Labo1QTApp7::~Labo1QTApp7()
-{}
+{
+	delete listeMenu;
+//	delete autreMenu;
+	//delete testAcceuil;
+}
 
 void Labo1QTApp7::terrain()
 {
@@ -92,7 +115,7 @@ void Labo1QTApp7::terrain()
 	//cout << "BRAVOOOOOOOO" << endl;
 }
 
-void Labo1QTApp7::afficherMessage()
-{
-    textEdit->append("Bravo tu sais appuyer sur un bouton");
-}
+//void Labo1QTApp7::afficherMessage()
+//{
+//    textEdit->append("Bravo tu sais appuyer sur un bouton");
+//}

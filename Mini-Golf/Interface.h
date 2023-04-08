@@ -10,8 +10,13 @@
 #include <QtGui>
 #include <Qlabel>
 #include <vector>
+#include <QstackedWidget>
+
+
 #include "Terrain.h"
 #include "Parcours.h"
+#include "AutreMenu.h"
+#include "TestAcceuil.h"
 //#include <QMediaPlayer>
 #include <QtWidgets/QTextEdit>
 
@@ -29,11 +34,13 @@ public:
 
 private slots: 
 
-    void afficherMessage();
+    //void afficherMessage();
     void terrain();
 
 private:
     //Ui::Labo1QTApp7Class ui;
+    QStackedWidget* listeMenu;
+    AutreMenu* autreMenu;
+    TestAcceuil* testAcceuil;
     
-    QTextEdit* textEdit;
 };
