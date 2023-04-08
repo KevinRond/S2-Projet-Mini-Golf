@@ -12,6 +12,8 @@
 #include "Parcours.h"
 #include <utility>
 #include <random>
+#include <Qlabel>
+#include <QObject>
 
 /*
 LA classe Terrain comporte les ellements suivants:
@@ -23,8 +25,9 @@ Ses methodes:
 -Compiler un parcours de location d'un coup
 */
 
-class Terrain
+class Terrain: public QObject
 {
+
 private:
 	int nbMur;
 	Hole* hole1;					//Trou du terrain
@@ -37,7 +40,7 @@ private:
 	int nbCoup = 0;
 	int nbRicochet = 0;
 public:
-	Terrain();		
+	Terrain();
 	~Terrain();		
 	Terrain *OpenTerrain(std::string terrain);				//charge le terrain via fichier
 	Parcours CoupDonne(Coup coup1);		//Fonction principale, resoura le coup et retournera le parcours au GM
@@ -48,5 +51,7 @@ public:
 	int getCOup();
 	int getRicochet();
 	bool verifTrou();
+	double getOx();
+	double getOy();
 };
 #endif
