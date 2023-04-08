@@ -47,8 +47,7 @@ Mur::~Mur()
 
 void Mur::Display()
 {
-	cout << "Mur Coor A: " << CoorXY.first.first << "," << CoorXY.first.second << endl;
-	cout << "Mur Coor B: " << CoorXY.second.first << "," << CoorXY.second.second << endl;
+	cout << "Mur Coor: (" << CoorXY.first.first << "," << CoorXY.first.second << ") (" << CoorXY.second.first << "," << CoorXY.second.second << ")" << endl;
 }
 
 Mur *Mur::Get()
