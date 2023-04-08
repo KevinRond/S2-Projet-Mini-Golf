@@ -8,4 +8,3 @@ INCLUDEPATH += ../Mini-Golf
 INCLUDEPATH += ../Mini-Golf/include
 INCLUDEPATH += ../Mini-Golf/include/serial
 QT          += widgets
-QT += core gui multimedia

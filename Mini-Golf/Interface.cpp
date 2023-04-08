@@ -10,24 +10,18 @@ Labo1QTApp7::Labo1QTApp7(QWidget* parent)
     this->resize(1280,720);
 
     QPushButton* button = new QPushButton("Play",this);
-    button->setIcon(QIcon(".. / Graphic / Bouton.png"));
-    button->setIconSize(QSize(50,50));
     button->setGeometry(490, 300, 300, 150);
     button->setStyleSheet("QPushButton { border-image: url(../Graphic/BoutonOuvert1.png); }"
 		"QPushButton:hover { border-image: url(../Graphic/BoutonSelect.png); }"
         "QPushButton:pressed { border-image: url(../Graphic/BoutonFermer1.png); }");
 
 	QPushButton* button1 = new QPushButton("Jouer", this);
-	button1->setIcon(QIcon(".. / Graphic / Bouton.png"));
-	button1->setIconSize(QSize(50, 50));
 	button1->setGeometry(490, 200, 300, 150);
 	button1->setStyleSheet("QPushButton { border-image: url(../Graphic/BoutonOuvert1.png); }"
 		"QPushButton:hover { border-image: url(../Graphic/BoutonSelect.png); }"
 		"QPushButton:pressed { border-image: url(../Graphic/BoutonFermer1.png); }");
     
 	QPushButton* button2 = new QPushButton("Coup", this);
-	button2->setIcon(QIcon(".. / Graphic / Bouton.png"));
-	button2->setIconSize(QSize(50, 50));
 	button2->setGeometry(490, 400, 300, 150);
 	button2->setStyleSheet("QPushButton { border-image: url(../Graphic/BoutonOuvert1.png); }"
 		"QPushButton:hover { border-image: url(../Graphic/BoutonSelect.png); }"
