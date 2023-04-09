@@ -8,6 +8,7 @@ MenuSelectionTerrain::MenuSelectionTerrain(QWidget* parent)
     //ui.setupUi(this);
 
     this->setFixedSize(1280, 720);
+    setStyleSheet("QMainWindow{ background-image: url(../Graphic/BeauFond3.png); }");
 
     texteTitre = new QTextEdit(this);
     texteTitre->setGeometry(240, 100, 800, 200);
@@ -23,7 +24,15 @@ MenuSelectionTerrain::MenuSelectionTerrain(QWidget* parent)
     texteTitre->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
     b_retour = new QPushButton("Retour", this);
-    b_retour->setGeometry(1100, 640, 150, 50);
+    b_retour->setGeometry(1080, 620, 200, 100);
+    b_retour->setStyleSheet("QPushButton { border-image: url(../Graphic/BoutonOuvert1.png);"
+        "font-family: Helvetica; "
+        "font-weight: bold; "
+        "font-size: 16px; "
+        "color: white "
+        "}"
+        "QPushButton:hover { border-image: url(../Graphic/BoutonSelect.png); }"
+        "QPushButton:pressed { border-image: url(../Graphic/BoutonFermer1.png); }");
 
     b_terrain1 = new QPushButton("Terrain 1", this);
     b_terrain2 = new QPushButton("Terrain 2", this);

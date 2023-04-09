@@ -10,6 +10,7 @@ MenuReglements::MenuReglements(QWidget* parent)
     b_retour(nullptr)
 {
     this->setFixedSize(1280, 720);
+    setStyleSheet("QWidget{ background-image: url(../Graphic/BeauFond3.png); }");
 
     //ui.setupUi(this);
     m_layout = new QVBoxLayout;

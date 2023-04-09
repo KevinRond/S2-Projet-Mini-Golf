@@ -6,6 +6,7 @@ TitleScreen::TitleScreen(QWidget* parent)
     //ui.setupUi(this);
 
     this->setFixedSize(1280, 720);
+    setStyleSheet("QMainWindow{ background-image: url(../Graphic/BeauFond3.png); }");
 
     //Texte du titre
     texteTitre = new QTextEdit(this);
@@ -39,7 +40,15 @@ TitleScreen::TitleScreen(QWidget* parent)
 
     //Set up du bouton
     MainButton = new QPushButton("Appuyer pour commencer", this);
-    MainButton->setGeometry(460, 400, 360, 70);
+    MainButton->setGeometry(475, 400, 300, 150);
+    MainButton->setStyleSheet("QPushButton { border-image: url(../Graphic/BoutonOuvert1.png);"
+        "font-family: Helvetica; "
+        "font-weight: bold; "
+        "font-size: 16px; "
+        "color: white "
+        "}"
+        "QPushButton:hover { border-image: url(../Graphic/BoutonSelect.png); }"
+        "QPushButton:pressed { border-image: url(../Graphic/BoutonFermer1.png); }");
     //MainButton->setStyleSheet(buttonStyle);
 
     connect(MainButton, &QPushButton::clicked, this, &TitleScreen::switchMenus);

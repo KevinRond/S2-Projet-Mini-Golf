@@ -11,7 +11,6 @@
 #include <QTextEdit>
 #include <QTextBrowser>
 #include <QStackedWidget>
-#include <QLabel>
 
 
 class MainMenu : public QMainWindow
