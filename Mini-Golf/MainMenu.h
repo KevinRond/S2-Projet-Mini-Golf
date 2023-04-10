@@ -33,12 +33,12 @@ private slots:
     void action_scoreboard();
 
 private:
-    QTextEdit* texteTitre;
-    QPushButton* b_jouer;
-    QPushButton* b_regle;
-    QPushButton* b_scoreboard;
-    QPushButton* b_quit;
-    QGraphicsDropShadowEffect* effectTitre;
+    QTextEdit* texteTitre;                          //Zone de texte du titre
+    QPushButton* b_jouer;                           //Bouton jouer
+    QPushButton* b_regle;                           //Bouton reglements
+    QPushButton* b_scoreboard;                      //Bouton Scoreboard
+    QPushButton* b_quit;                            //Bouton quitter
+    QGraphicsDropShadowEffect* effectTitre;         //Effet du titre
 };
 
 #endif

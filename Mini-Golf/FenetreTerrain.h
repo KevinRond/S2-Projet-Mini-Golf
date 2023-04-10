@@ -11,6 +11,7 @@
 #include <QTextBrowser>
 #include <QStackedWidget>
 #include <QLabel>
+#include <iostream>
 
 class FenetreTerrain : public QMainWindow
 {
@@ -30,9 +31,9 @@ private slots:
     void affiche_nom_fichier();
 
 private:
-    QTextEdit* texteTitre;
-    QTextEdit* nomfichier;
-    QPushButton* b_retour;
-    QString nom_fichier_terrain;
+    QTextEdit* texteTitre;              //Zone de texte du titre
+    QTextEdit* nomfichier;              
+    QPushButton* b_retour;              //Bouton retour
+    QString nom_fichier_terrain;        //QString qui store le fichier terrain a generer
 
 };

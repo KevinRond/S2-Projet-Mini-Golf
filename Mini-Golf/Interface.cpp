@@ -7,6 +7,7 @@ Interface::Interface(QWidget* parent)
 
     this->resize(1280, 720);
     
+    //Initialisation des widgets et insertion dans la liste des menus "listeMenus"
     listeMenus = new QStackedWidget(this);
     titleScreen = new TitleScreen(this);
     menuPrincipal = new MainMenu(this);
@@ -89,9 +90,13 @@ Interface::Interface(QWidget* parent)
         listeMenus->setCurrentWidget(listeMenus->widget(1));
         });
 
+    //Actions du fenetre terrain 
+    connect(fenetreTerrain, &FenetreTerrain::b_retour_appuyer, [this]() {
+        listeMenus->setCurrentWidget(listeMenus->widget(2));
+        });
+
+
     setCentralWidget(listeMenus);
-
-
 }
 
 Interface::~Interface()

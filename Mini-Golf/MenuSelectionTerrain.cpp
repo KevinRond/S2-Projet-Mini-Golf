@@ -10,6 +10,7 @@ MenuSelectionTerrain::MenuSelectionTerrain(QWidget* parent)
     this->setFixedSize(1280, 720);
     setStyleSheet("QMainWindow{ background-image: url(../Graphic/BeauFond3.png); }");
 
+    //Texte du titre
     texteTitre = new QTextEdit(this);
     texteTitre->setGeometry(240, 40, 800, 200);
     texteTitre->setPlainText("Selection Terrain");
@@ -23,12 +24,15 @@ MenuSelectionTerrain::MenuSelectionTerrain(QWidget* parent)
         "}";
     texteTitre->setStyleSheet(style_titre);
     texteTitre->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+
+    //Effet du titre
     effectTitre = new QGraphicsDropShadowEffect;
     effectTitre->setBlurRadius(5);
     effectTitre->setColor(Qt::black);
     effectTitre->setOffset(3, 3);
     texteTitre->setGraphicsEffect(effectTitre);
 
+    //Set up des boutons
     b_retour = new QPushButton("Retour", this);
     b_retour->setGeometry(1080, 620, 200, 100);
     b_retour->setStyleSheet("QPushButton { border-image: url(../Graphic/BoutonOuvert1.png);"
@@ -116,6 +120,7 @@ MenuSelectionTerrain::MenuSelectionTerrain(QWidget* parent)
         "QPushButton:hover { border: 15px solid white;  border-radius: 15px; }");
 
 
+    //Actions des boutons
     connect(b_retour, &QPushButton::clicked, this, &MenuSelectionTerrain::action_retour);
     connect(b_terrain1, &QPushButton::clicked, this, &MenuSelectionTerrain::action_terrain1);
     connect(b_terrain2, &QPushButton::clicked, this, &MenuSelectionTerrain::action_terrain2);

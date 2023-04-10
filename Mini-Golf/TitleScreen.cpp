@@ -40,12 +40,14 @@ TitleScreen::TitleScreen(QWidget* parent)
     soustitre->setStyleSheet(style_soustitre);
     soustitre->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
+    //Effet du titre
     effectTitre = new QGraphicsDropShadowEffect;
     effectTitre->setBlurRadius(5);
     effectTitre->setColor(Qt::black);
     effectTitre->setOffset(4, 4);
     texteTitre->setGraphicsEffect(effectTitre);
 
+    //Effet du sous-titre
     effectSousTitre = new QGraphicsDropShadowEffect;
     effectSousTitre->setBlurRadius(5);
     effectSousTitre->setColor(Qt::black);
@@ -66,6 +68,7 @@ TitleScreen::TitleScreen(QWidget* parent)
         "QPushButton:pressed { border-image: url(../Graphic/BoutonFermer1.png); }");
     //MainButton->setStyleSheet(buttonStyle);
 
+    //Actions du bouton
     connect(MainButton, &QPushButton::clicked, this, &TitleScreen::switchMenus);
 }
 

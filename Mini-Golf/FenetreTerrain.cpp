@@ -1,5 +1,7 @@
 #include "FenetreTerrain.h"
 
+using namespace std;
+
 FenetreTerrain::FenetreTerrain(QWidget* parent)
     : QMainWindow(parent)
 {
@@ -27,7 +29,8 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     nomfichier->setGeometry(40, 50, 370, 250);
     nomfichier->append(nom_fichier_terrain);
 
-    connect(b_retour, &QPushButton::clicked, this, &FenetreTerrain::affiche_nom_fichier);
+
+    connect(b_retour, &QPushButton::clicked, this, &FenetreTerrain::action_retour);
 
 }
 
@@ -46,6 +49,11 @@ void FenetreTerrain::action_retour()
 void FenetreTerrain::set_file_name(QString file_name)
 {
     nom_fichier_terrain = file_name;
+    QString terrainPNG = "../Terrain/" + nom_fichier_terrain + ".png";
+    QString terrainTXTQ = "../Terrain/" + nom_fichier_terrain + ".txt";
+    string terrainTXT = terrainTXTQ.toStdString();
+
+    setStyleSheet(QString("QMainWindow{ background-image: url(%1); }").arg(terrainPNG));
 }
 
 QString FenetreTerrain::get_file_name()
