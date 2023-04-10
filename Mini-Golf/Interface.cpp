@@ -46,15 +46,20 @@ Interface::Interface(QWidget* parent)
         });
     connect(menuSelectionTerrain, &MenuSelectionTerrain::b_terrain1_appuyer, [this]() {
         listeMenus->setCurrentWidget(listeMenus->widget(5));
-        fenetreTerrain->set_file_name("Terrain1.txt");
+        fenetreTerrain->set_file_name("Terrain1");
         });
     connect(menuSelectionTerrain, &MenuSelectionTerrain::b_terrain2_appuyer, [this]() {
         listeMenus->setCurrentWidget(listeMenus->widget(5));
-        fenetreTerrain->set_file_name("Terrain2.txt");
+        fenetreTerrain->set_file_name("Terrain2");
         });
     connect(menuSelectionTerrain, &MenuSelectionTerrain::b_terrain3_appuyer, [this]() {
         listeMenus->setCurrentWidget(listeMenus->widget(5));
-        fenetreTerrain->set_file_name("Terrain3.txt");
+        fenetreTerrain->set_file_name("Terrain3");
+        });
+
+    //Actions du menu de fenetre terrain
+    connect(fenetreTerrain, &FenetreTerrain::b_retour_appuyer, [this]() {
+        listeMenus->setCurrentWidget(listeMenus->widget(2));
         });
 
 

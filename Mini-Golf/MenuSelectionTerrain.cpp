@@ -44,7 +44,7 @@ MenuSelectionTerrain::MenuSelectionTerrain(QWidget* parent)
     connect(b_retour, &QPushButton::clicked, this, &MenuSelectionTerrain::action_retour);
     connect(b_terrain1, &QPushButton::clicked, this, &MenuSelectionTerrain::action_terrain1);
     connect(b_terrain2, &QPushButton::clicked, this, &MenuSelectionTerrain::action_terrain2);
-    connect(b_terrain3, &QPushButton::clicked, this, &MenuSelectionTerrain::action_terrain2);
+    connect(b_terrain3, &QPushButton::clicked, this, &MenuSelectionTerrain::action_terrain3);
 
 }
 
