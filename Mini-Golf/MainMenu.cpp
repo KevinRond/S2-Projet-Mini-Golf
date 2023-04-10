@@ -8,6 +8,25 @@ MainMenu::MainMenu(QWidget* parent)
     this->setFixedSize(1280, 720);
     setStyleSheet("QMainWindow{ background-image: url(../Graphic/BeauFond3.png); }");
 
+    texteTitre = new QTextEdit(this);
+    texteTitre->setGeometry(240, 100, 800, 200);
+    texteTitre->setPlainText("Menu Principale");
+    texteTitre->setReadOnly(true);
+    QString style_titre = "QTextEdit {"
+        "font-family: Helvetica;"
+        "font-size: 60px;"
+        "color: white;"
+        "background-color: transparent;"
+        "border: none;"
+        "}";
+    texteTitre->setStyleSheet(style_titre);
+    texteTitre->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    effectTitre = new QGraphicsDropShadowEffect;
+    effectTitre->setBlurRadius(5);
+    effectTitre->setColor(Qt::black);
+    effectTitre->setOffset(3, 3);
+    texteTitre->setGraphicsEffect(effectTitre);
+
     b_jouer = new QPushButton("Jouer", this);
     b_regle = new QPushButton("Regles", this);
     b_scoreboard = new QPushButton("Gagnant du prix Carl Carmoni", this);
@@ -60,6 +79,8 @@ MainMenu::MainMenu(QWidget* parent)
 
 MainMenu::~MainMenu()
 {
+    delete effectTitre;
+    delete texteTitre;
     delete b_jouer;
     delete b_regle;
     delete b_scoreboard;

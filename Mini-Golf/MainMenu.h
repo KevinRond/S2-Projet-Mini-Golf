@@ -11,6 +11,7 @@
 #include <QTextEdit>
 #include <QTextBrowser>
 #include <QStackedWidget>
+#include <QGraphicsDropShadowEffect>
 
 
 class MainMenu : public QMainWindow
@@ -32,11 +33,12 @@ private slots:
     void action_scoreboard();
 
 private:
-    QVBoxLayout* layout;
+    QTextEdit* texteTitre;
     QPushButton* b_jouer;
     QPushButton* b_regle;
     QPushButton* b_scoreboard;
     QPushButton* b_quit;
+    QGraphicsDropShadowEffect* effectTitre;
 };
 
 #endif

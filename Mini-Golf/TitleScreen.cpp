@@ -6,7 +6,7 @@ TitleScreen::TitleScreen(QWidget* parent)
     //ui.setupUi(this);
 
     this->setFixedSize(1280, 720);
-    setStyleSheet("QMainWindow{ background-image: url(../Graphic/BeauFond3.png); }");
+    setStyleSheet("QMainWindow{ background-image: url(../Graphic/TitleScreen.png); }");
 
     //Texte du titre
     texteTitre = new QTextEdit(this);
@@ -43,7 +43,7 @@ TitleScreen::TitleScreen(QWidget* parent)
     effectTitre = new QGraphicsDropShadowEffect;
     effectTitre->setBlurRadius(5);
     effectTitre->setColor(Qt::black);
-    effectTitre->setOffset(3, 3);
+    effectTitre->setOffset(4, 4);
     texteTitre->setGraphicsEffect(effectTitre);
 
     effectSousTitre = new QGraphicsDropShadowEffect;
