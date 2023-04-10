@@ -16,12 +16,14 @@ TitleScreen::TitleScreen(QWidget* parent)
     QString style_titre = "QTextEdit {"
         "font-family: Helvetica;"
         "font-size: 60px;"
+        "color: white;"
         "background-color: transparent;"
         "border: none;"
         "}";
     texteTitre->setStyleSheet(style_titre);
     texteTitre->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    
+
+
 
     //Texte du sous-titre
     soustitre = new QTextEdit(this);
@@ -31,6 +33,7 @@ TitleScreen::TitleScreen(QWidget* parent)
     QString style_soustitre = "QTextEdit {"
         "font-family: Helvetica;"
         "font-size: 24px;"
+        "color: white;" 
         "background-color: transparent;"
         "border: none;"
         "}";

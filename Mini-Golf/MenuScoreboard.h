@@ -11,6 +11,7 @@
 #include <QTextBrowser>
 #include <QStackedWidget>
 #include <QLabel>
+#include <QGraphicsDropShadowEffect>
 
 class MenuScoreboard : public QMainWindow
 {
@@ -29,5 +30,6 @@ private slots:
 private:
     QTextEdit* texteTitre;
     QPushButton* b_retour;
+    QGraphicsDropShadowEffect* effect;
 
 };
