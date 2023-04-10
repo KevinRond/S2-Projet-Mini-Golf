@@ -6,7 +6,7 @@ TitleScreen::TitleScreen(QWidget* parent)
     //ui.setupUi(this);
 
     this->setFixedSize(1280, 720);
-    setStyleSheet("QMainWindow{ background-image: url(../Graphic/BeauFond3.png); }");
+    setStyleSheet("QMainWindow{ background-image: url(../Graphic/Acceuil.png); }");
 
     //Texte du titre
     texteTitre = new QTextEdit(this);

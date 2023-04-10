@@ -3,15 +3,19 @@
 #define TERRAIN_H
 #include <iostream>
 #include <fstream>
+#include <vector>
+#include <cmath>
+#include <utility>
+#include <random>
+
 #include "Mur.h"
 #include "Ball.h"
 #include "Hole.h"
 #include "Coup.h"
-#include <vector>
-#include <cmath>
 #include "Parcours.h"
-#include <utility>
-#include <random>
+#include "Parcours.h"
+#include "Interraction.h"
+
 
 /*
 LA classe Terrain comporte les ellements suivants:
@@ -27,26 +31,29 @@ class Terrain
 {
 private:
 	int nbMur;
-	Hole* hole1;					//Trou du terrain
-	Ball* balle1;					//Depart de la balle
-	std::vector<Mur*> vecteurMur1;	//tableau pointeur des murs du terrain
+	Hole* hole1;						//Trou du terrain
+	Ball* balle1;						//Depart de la balle
+	std::vector<Mur*> vecteurMur1;		//tableau pointeur des murs du terrain
 	Parcours ParcoursTotal;
 	std::pair<double, double> pointIntersection;
 	int prevIndex = -2;
-	double K = 1;					//Facteur de friction	
+	double K = 0.15;					//Facteur de friction	
 	int nbCoup = 0;
 	int nbRicochet = 0;
+	bool terrainreussi = false;
+
 public:
-	Terrain();		
-	~Terrain();		
-	Terrain *OpenTerrain(std::string terrain);				//charge le terrain via fichier
-	Parcours CoupDonne(Coup coup1);		//Fonction principale, resoura le coup et retournera le parcours au GM
-	int VerifierColision();				//Doit virifie l'interaction avec son trou ou l'un de ses murs.
+	Terrain();
+	~Terrain();
+	Terrain* OpenTerrain(std::string terrain);		//charge le terrain via fichier
+	Parcours CoupDonne(Coup coup1);					//Fonction principale, resoura le coup et retournera le parcours au GM
+	int VerifierColision();							//Doit virifie l'interaction avec son trou ou l'un de ses murs.
 	bool isBetween(double value, double bound1, double bound2);
-	bool isOnLine(double x0, double y0, double m, double b);
 	void Display();
 	int getCOup();
 	int getRicochet();
-	bool verifTrou();
+	bool TerrainReussi();
+	double getOx();
+	double getOy();
 };
 #endif

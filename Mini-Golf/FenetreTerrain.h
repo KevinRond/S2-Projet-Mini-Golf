@@ -11,6 +11,12 @@
 #include <QTextBrowser>
 #include <QStackedWidget>
 #include <QLabel>
+#include <iostream>
+#include <QKeyEvent>
+#include <conio.h>
+#include <Terrain.h>
+#include <QThread>
+#include <Windows.h>
 
 class FenetreTerrain : public QMainWindow
 {
@@ -34,5 +40,10 @@ private:
     QTextEdit* nomfichier;
     QPushButton* b_retour;
     QString nom_fichier_terrain;
+    QLabel* balle;
+    Terrain* terrain1;
+
+protected:
+    void keyPressEvent(QKeyEvent* event) override;
 
 };
