@@ -15,11 +15,17 @@ MenuScoreboard::MenuScoreboard(QWidget* parent)
     QString style_titre = "QTextEdit {"
         "font-family: Helvetica;"
         "font-size: 60px;"
+        "color: white;"
         "background-color: transparent;"
         "border: none;"
         "}";
     texteTitre->setStyleSheet(style_titre);
     texteTitre->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    effect = new QGraphicsDropShadowEffect;
+    effect->setBlurRadius(5);
+    effect->setColor(Qt::black);
+    effect->setOffset(3, 3);
+    texteTitre->setGraphicsEffect(effect);
 
     b_retour = new QPushButton("Retour", this);
     b_retour->setGeometry(1080, 620, 200, 100);
@@ -40,6 +46,7 @@ MenuScoreboard::~MenuScoreboard()
 {
     delete texteTitre;
     delete b_retour;
+    delete effect;
 }
 
 void MenuScoreboard::action_retour()
