@@ -44,9 +44,9 @@ MenuScoreboard::MenuScoreboard(QWidget* parent)
 
 MenuScoreboard::~MenuScoreboard()
 {
+    delete effect;
     delete texteTitre;
     delete b_retour;
-    delete effect;
 }
 
 void MenuScoreboard::action_retour()

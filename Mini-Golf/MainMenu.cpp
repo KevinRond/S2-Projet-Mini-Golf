@@ -35,7 +35,7 @@ MainMenu::MainMenu(QWidget* parent)
     b_scoreboard->setStyleSheet("QPushButton { border-image: url(../Graphic/BoutonOuvert1.png);"
         "font-family: Helvetica; "
         "font-weight: bold; "
-        "font-size: 12px; "
+        "font-size: 14px; "
         "color: white "
         "}"
         "QPushButton:hover { border-image: url(../Graphic/BoutonSelect.png); }"

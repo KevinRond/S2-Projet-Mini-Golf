@@ -68,11 +68,12 @@ MenuReglements::MenuReglements(QWidget* parent)
 
 MenuReglements::~MenuReglements()
 {
+    delete effectTitre;
+    delete effectReglements;
     delete texteTitre;
     delete texteReglements;
     delete b_retour;
-    delete effectTitre;
-    delete effectReglements;
+    
 }
 
 void MenuReglements::action_retour()

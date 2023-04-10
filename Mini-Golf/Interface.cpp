@@ -46,15 +46,35 @@ Interface::Interface(QWidget* parent)
         });
     connect(menuSelectionTerrain, &MenuSelectionTerrain::b_terrain1_appuyer, [this]() {
         listeMenus->setCurrentWidget(listeMenus->widget(5));
-        fenetreTerrain->set_file_name("Terrain1.txt");
+        fenetreTerrain->set_file_name("Terrain1");
         });
     connect(menuSelectionTerrain, &MenuSelectionTerrain::b_terrain2_appuyer, [this]() {
         listeMenus->setCurrentWidget(listeMenus->widget(5));
-        fenetreTerrain->set_file_name("Terrain2.txt");
+        fenetreTerrain->set_file_name("Terrain2");
         });
     connect(menuSelectionTerrain, &MenuSelectionTerrain::b_terrain3_appuyer, [this]() {
         listeMenus->setCurrentWidget(listeMenus->widget(5));
-        fenetreTerrain->set_file_name("Terrain3.txt");
+        fenetreTerrain->set_file_name("Terrain3");
+        });
+    connect(menuSelectionTerrain, &MenuSelectionTerrain::b_terrain4_appuyer, [this]() {
+        listeMenus->setCurrentWidget(listeMenus->widget(5));
+        fenetreTerrain->set_file_name("Terrain4");
+        });
+    connect(menuSelectionTerrain, &MenuSelectionTerrain::b_terrain5_appuyer, [this]() {
+        listeMenus->setCurrentWidget(listeMenus->widget(5));
+        fenetreTerrain->set_file_name("Terrain5");
+        });
+    connect(menuSelectionTerrain, &MenuSelectionTerrain::b_terrain6_appuyer, [this]() {
+        listeMenus->setCurrentWidget(listeMenus->widget(5));
+        fenetreTerrain->set_file_name("Terrain6");
+        });
+    connect(menuSelectionTerrain, &MenuSelectionTerrain::b_terrain7_appuyer, [this]() {
+        listeMenus->setCurrentWidget(listeMenus->widget(5));
+        fenetreTerrain->set_file_name("Terrain7");
+        });
+    connect(menuSelectionTerrain, &MenuSelectionTerrain::b_terrain8_appuyer, [this]() {
+        listeMenus->setCurrentWidget(listeMenus->widget(5));
+        fenetreTerrain->set_file_name("Terrain8");
         });
 
 
