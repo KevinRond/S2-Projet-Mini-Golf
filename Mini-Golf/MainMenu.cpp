@@ -32,6 +32,9 @@ MainMenu::MainMenu(QWidget* parent)
 
     //Set up des boutons
     b_jouer = new QPushButton("Jouer", this);
+    //b_jouer->setFocusPolicy(Qt::StrongFocus);
+    //b_jouer->setFocusPolicy(Qt::TabFocus);
+    //b_jouer->setFocus();
     b_regle = new QPushButton("Regles", this);
     b_scoreboard = new QPushButton("Gagnant du prix Carl Carmoni", this);
     b_quit = new QPushButton("Quitter l'application", this);
@@ -44,7 +47,7 @@ MainMenu::MainMenu(QWidget* parent)
                                     "font-size: 24px; "
                                     "color: white "
                                     "}"
-        "QPushButton:hover { border-image: url(../Graphic/BoutonSelect.png); }"
+        "QPushButton:hover, QPushButton:focus { border-image: url(../Graphic/BoutonSelect.png); }"
         "QPushButton:pressed { border-image: url(../Graphic/BoutonFermer1.png); }");
     b_regle->setGeometry(475, 300, 300, 150);
     b_regle->setStyleSheet("QPushButton { border-image: url(../Graphic/BoutonOuvert1.png);"
@@ -53,7 +56,7 @@ MainMenu::MainMenu(QWidget* parent)
         "font-size: 24px; "
         "color: white "
         "}"
-        "QPushButton:hover { border-image: url(../Graphic/BoutonSelect.png); }"
+        "QPushButton:hover, QPushButton:focus { border-image: url(../Graphic/BoutonSelect.png); }"
         "QPushButton:pressed { border-image: url(../Graphic/BoutonFermer1.png); }");
     b_scoreboard->setGeometry(475, 400, 300, 150);
     b_scoreboard->setStyleSheet("QPushButton { border-image: url(../Graphic/BoutonOuvert1.png);"
@@ -62,7 +65,7 @@ MainMenu::MainMenu(QWidget* parent)
         "font-size: 14px; "
         "color: white "
         "}"
-        "QPushButton:hover { border-image: url(../Graphic/BoutonSelect.png); }"
+        "QPushButton:hover, QPushButton:focus { border-image: url(../Graphic/BoutonSelect.png); }"
         "QPushButton:pressed { border-image: url(../Graphic/BoutonFermer1.png); }");
     b_quit->setGeometry(475, 500, 300, 150);
     b_quit->setStyleSheet("QPushButton { border-image: url(../Graphic/BoutonOuvert1.png);"
@@ -71,7 +74,7 @@ MainMenu::MainMenu(QWidget* parent)
         "font-size: 20px; "
         "color: white "
         "}"
-        "QPushButton:hover { border-image: url(../Graphic/BoutonSelect.png); }"
+        "QPushButton:hover, QPushButton:focus { border-image: url(../Graphic/BoutonSelect.png); }"
         "QPushButton:pressed { border-image: url(../Graphic/BoutonFermer1.png); }");
 
 
@@ -105,4 +108,56 @@ void MainMenu::action_regle()
 void MainMenu::action_scoreboard()
 {
     emit b_scoreboard_appuyer();
+}
+
+void MainMenu::keyPressEvent(QKeyEvent* event)
+{
+    switch (event->key()) {
+    case Qt::Key_Left:
+        // Handle left arrow key press
+        break;
+    case Qt::Key_Right:
+        // Handle right arrow key press
+        break;
+    case Qt::Key_Up:
+        if (b_quit->hasFocus()) {
+            b_scoreboard->setFocus();
+        }
+        else if (b_scoreboard->hasFocus()) {
+            b_regle->setFocus();
+        }
+        else if (b_regle->hasFocus()) {
+            b_jouer->setFocus();
+        }
+        else {}
+        break;
+    case Qt::Key_Down:
+        if (b_jouer->hasFocus()) {
+            b_regle->setFocus();
+        }
+        else if (b_regle->hasFocus()) {
+            b_scoreboard->setFocus();
+        }
+        else if (b_scoreboard->hasFocus()) {
+            b_quit->setFocus();
+        }
+        else {}
+        break;
+    
+    case Qt::Key_Enter || Qt::Key_Return:
+        if (b_jouer->hasFocus()) {
+            action_jouer();
+        }
+        else if (b_regle->hasFocus()) {
+            action_regle();
+        }
+        else if (b_scoreboard->hasFocus()) {
+            action_scoreboard();
+        }
+        break;
+    default:
+        QWidget::keyPressEvent(event);
+    }
+
+    event->accept();
 }

@@ -12,6 +12,8 @@
 #include <QTextBrowser>
 #include <QStackedWidget>
 #include <QGraphicsDropShadowEffect>
+#include <QKeyEvent>
+#include <QShowEvent>
 
 
 class MainMenu : public QMainWindow
@@ -31,6 +33,9 @@ private slots:
     void action_jouer();
     void action_regle();
     void action_scoreboard();
+
+protected:
+    void keyPressEvent(QKeyEvent* event) override;
 
 private:
     QTextEdit* texteTitre;                          //Zone de texte du titre

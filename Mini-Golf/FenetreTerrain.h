@@ -11,6 +11,10 @@
 #include <QTextBrowser>
 #include <QStackedWidget>
 #include <QLabel>
+#include <QKeyEvent>
+#include <QLabel>
+#include <QGraphicsDropShadowEffect>
+
 #include <iostream>
 
 class FenetreTerrain : public QMainWindow
@@ -29,11 +33,22 @@ signals:
 private slots:
     void action_retour();
     void affiche_nom_fichier();
+    
+
+protected:
+    void keyPressEvent(QKeyEvent* event) override;
 
 private:
     QTextEdit* texteTitre;              //Zone de texte du titre
     QTextEdit* nomfichier;              
     QPushButton* b_retour;              //Bouton retour
     QString nom_fichier_terrain;        //QString qui store le fichier terrain a generer
+    QLabel* etiquette_force;
+    QLabel* etiquette_direction;
+    QGraphicsDropShadowEffect* effect_etiquette_force;
+    QGraphicsDropShadowEffect* effect_etiquette_direction;
+
+    int force_coup;
+    int direction_coup;
 
 };
