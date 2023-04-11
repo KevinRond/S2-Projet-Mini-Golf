@@ -1,7 +1,6 @@
 
 #include "Interraction.h"
 #include<cmath>
-using namespace std;
 /*
 La classe interaction caracterisera une interaction entre 2 objets
 Ex: Ball avec Mur,Trou,Sable,glace
@@ -50,7 +49,7 @@ Parcours Interraction::BalleMur(Ball* balle, Mur* mur, std::pair<double, double>
 	}
 	if (distanceItTraveled >= distancetoHit)
 	{
-		cout << "touche mur" << endl;
+		std::cout << "touche mur" << std::endl;
 		petitParcour.removelast();
 		x = (cos(Dir) * distancetoHit * 0.99) * 10 + Ox;
 		y = (sin(Dir) * distancetoHit * 0.99) * 10 + Oy;
@@ -67,8 +66,8 @@ Parcours Interraction::BalleMur(Ball* balle, Mur* mur, std::pair<double, double>
 		x = (cos(Dir) * distanceItTraveled) * 10 + Ox;
 		y = (sin(Dir) * distanceItTraveled) * 10 + Oy;
 		balle->Set_Oxy(x, y);
-		cout << "Balle en position (" << x << "," << 720-y << ")." << endl;
-		cout << "Balle en position (" << x << "," << 720 - y << ")." << endl;
+		std::cout << "Balle en position (" << x << "," << 720-y << ")." << std::endl;
+		std::cout << "Balle en position (" << x << "," << 720 - y << ")." << std::endl;
 	}
 	return petitParcour;
 }
@@ -118,7 +117,7 @@ Parcours Interraction::BalleTrou(Ball* balle, Hole* trou, std::pair<double, doub
 		x = (cos(Dir) * distanceItTraveled) * 10 + Ox;
 		y = (sin(Dir) * distanceItTraveled) * 10 + Oy;
 		balle->Set_Oxy(x, y);
-		cout << "Balle en position (" << x << "," << y << ")." << endl;
+		std::cout << "Balle en position (" << x << "," << y << ")." << std::endl;
 	}
 
 	return petitParcour;
@@ -161,7 +160,7 @@ void Interraction::angleReflexion(Ball* balle, Hole* trou, std::pair<double, dou
 	{
 		change = -change;
 	}
-	cout << "transfert de velocite de " << change / PI * 180 << " Deg." << endl;
+	std::cout << "transfert de velocite de " << change / PI * 180 << " Deg." << std::endl;
 	balle->Set_Direction(balle->Get_Direction() + change);
 }
 
@@ -186,8 +185,8 @@ void Interraction::angleReflexion(Ball* balle, Mur* mur)							//trouver l'angle
 			{
 				oldangle1 = PI - oldangle1;
 			}
-			facteurVelocity =PI/2 - ((PI/2 - oldangle1)/2);
-			
+			facteurVelocity = PI / 2 - ((PI / 2 - oldangle1) / 2);
+
 			angleReflechis = oldangle - PI;
 			if (angleReflechis < 0)
 			{
@@ -195,7 +194,7 @@ void Interraction::angleReflexion(Ball* balle, Mur* mur)							//trouver l'angle
 			}
 			else
 			{
-				angleReflechis = 2*PI - angleReflechis;
+				angleReflechis = 2 * PI - angleReflechis;
 			}
 			balle->Set_Direction(angleReflechis);
 			oldangle1 = oldangle1 - PI;
@@ -212,7 +211,7 @@ void Interraction::angleReflexion(Ball* balle, Mur* mur)							//trouver l'angle
 			{
 				oldangle1 = PI - oldangle1;
 			}
-			facteurVelocity = PI / 2 - (oldangle1/2);
+			facteurVelocity = PI / 2 - (oldangle1 / 2);
 		}
 		facteurVelocity = PI / 2 - ((PI / 2 - oldangle1) / 2);
 
@@ -224,15 +223,15 @@ void Interraction::angleReflexion(Ball* balle, Mur* mur)							//trouver l'angle
 		else
 		{
 			angleMur = atan2(mur->GetTy() - mur->GetHy(), mur->GetTx() - mur->GetHx());
-			cout << "ANGLE MUR: " << angleMur*180/PI << endl;
+			std::cout << "ANGLE MUR: " << angleMur * 180 / PI << std::endl;
 			angleIncident = fmod(oldangle - angleMur + 2 * PI, 2 * PI);
-			angleReflechis = fmod(angleMur - angleIncident + 2 *PI, 2 * PI);
+			angleReflechis = fmod(angleMur - angleIncident + 2 * PI, 2 * PI);
 			balle->Set_Direction(angleReflechis);
-			cout << "ANGLE INCIDENT: "<< angleIncident*180/PI << endl;
-			cout << "ANGLE REFLECHI: " << angleReflechis*180/PI << endl;
+			std::cout << "ANGLE INCIDENT: " << angleIncident * 180 / PI << std::endl;
+			std::cout << "ANGLE REFLECHI: " << angleReflechis * 180 / PI << std::endl;
 			while (angleReflechis < 0)
 			{
-				cout << "changement angle reflechis: " << angleReflechis * 180 / PI << endl;
+				std::cout << "changement angle reflechis: " << angleReflechis * 180 / PI << std::endl;
 				angleReflechis = angleReflechis + PI;
 			}
 			if (angleIncident >= PI)
@@ -241,16 +240,17 @@ void Interraction::angleReflexion(Ball* balle, Mur* mur)							//trouver l'angle
 			}
 			if (angleIncident > PI / 2)
 			{
-				angleIncident = angleIncident - PI/2;
+				angleIncident = angleIncident - PI / 2;
 			}
 			facteurVelocity = PI / 2 - ((PI / 2 - angleIncident) / 2);
 		}
-		facteurVelocity = facteurVelocity * 180/(PI * 100);				//Ici on veux reduire la velocite par rapport a l'angle d'incidence
+		facteurVelocity = facteurVelocity * 180 / (PI * 100);				//Ici on veux reduire la velocite par rapport a l'angle d'incidence
 		balle->Set_Amplitude(Vxy * facteurVelocity);
-		cout << "FACteur velocity: " << facteurVelocity << endl;
+		std::cout << "FACteur velocity: " << facteurVelocity << std::endl;
+	}
 }
-
-pair<double, double> Interraction::intersection(Ball* balle, Mur* mur)							//equation de la trajectoire de la balle y = mx + b
+	/*
+	std::pair<double, double> Interraction::intersection(Ball* balle, Mur* mur)							//equation de la trajectoire de la balle y = mx + b
 {
 	pair<double, double> pointIntersection;
 	double m = tan(balle->Get_Direction());
@@ -274,4 +274,4 @@ double Interraction::penteMur(Mur* mur)
 {
 	double m_wall = (mur->GetTy() - mur->GetHy()) / (mur->GetTx() - mur->GetHx());
 	return m_wall;
-}
+}*/

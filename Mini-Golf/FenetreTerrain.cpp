@@ -1,7 +1,4 @@
 #include "FenetreTerrain.h"
-
-using namespace std;
-
 FenetreTerrain::FenetreTerrain(QWidget* parent)
     : QMainWindow(parent)
 {
@@ -60,7 +57,7 @@ void FenetreTerrain::set_file_name(QString file_name)
     nom_fichier_terrain = file_name;
     QString terrainPNG = "../Terrain/" + nom_fichier_terrain + ".png";
     QString terrainTXTQ = "../Terrain/" + nom_fichier_terrain + ".txt";
-    string terrainTXT = terrainTXTQ.toStdString();
+    std::string terrainTXT = terrainTXTQ.toStdString();
 
     setStyleSheet(QString("QMainWindow{ background-image: url(%1); }").arg(terrainPNG));
 
@@ -68,8 +65,8 @@ void FenetreTerrain::set_file_name(QString file_name)
     balle->setPixmap(pixmap);
     terrain1->OpenTerrain(terrainTXT);
     terrain1->Display();
-    string direction;
-    string force;
+    std::string direction;
+    std::string force;
     double Ox = terrain1->getOx()*10;
     double Oy = terrain1->getOy()*10;
     balle->setGeometry(round(Ox), round(Oy), pixmap.width(), pixmap.height());
@@ -89,7 +86,7 @@ void FenetreTerrain::affiche_nom_fichier()
 
 void FenetreTerrain::keyPressEvent(QKeyEvent* event)
 {
-    vector<pair<double, double>> parcourVec;
+    std::vector<std::pair<double, double>> parcourVec;
     Parcours parcour;
     Coup coup1(45, 50);
     parcour = terrain1->CoupDonne(coup1);

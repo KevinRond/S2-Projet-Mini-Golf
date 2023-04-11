@@ -1,7 +1,6 @@
 #include "Ball.h"
 #include <cmath>
 #define PI 3.14159265358979323846
-using namespace std;
 Ball::Ball()
 {
     Ox = 0.0;
@@ -38,7 +37,7 @@ double Ball::Get_Oy()
 }
 void Ball::Display()
 {  
-    cout << "Balle location : (" << Ox << "," << Oy << ")" << endl;
+    std::cout << "Balle location : (" << Ox << "," << Oy << ")" << std::endl;
 }
 
 double Ball::Get_Direction()
@@ -98,6 +97,6 @@ std::pair<int, int> Ball::QuelCadrant()
     {
         y= -1;
     }
-    pair<double, double> Cadrant = make_pair(x, y);
+    std::pair<double, double> Cadrant = std::make_pair(x, y);
     return Cadrant;
 }

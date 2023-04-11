@@ -1,6 +1,4 @@
 #include "Coup.h"
-using namespace std;
-
 
 Coup::Coup()				//Initialisation de l'objet
 {

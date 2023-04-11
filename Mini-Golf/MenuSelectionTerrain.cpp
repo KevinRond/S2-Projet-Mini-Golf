@@ -1,7 +1,5 @@
 #include "MenuSelectionTerrain.h"
 
-using namespace std;
-
 MenuSelectionTerrain::MenuSelectionTerrain(QWidget* parent)
     : QMainWindow(parent)
 {
