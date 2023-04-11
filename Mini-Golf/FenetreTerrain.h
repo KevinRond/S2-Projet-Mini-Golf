@@ -38,10 +38,17 @@ private slots:
 private:
     QTextEdit* texteTitre;
     QTextEdit* nomfichier;
+    QLabel* forceText;
+    QLabel* directionText;
     QPushButton* b_retour;
     QString nom_fichier_terrain;
     QLabel* balle;
     Terrain* terrain1;
+    double xTrans;
+    double yTrans;
+    double direction;
+    double force;
+    Parcours parcours;
 
 protected:
     void keyPressEvent(QKeyEvent* event) override;

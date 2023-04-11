@@ -22,21 +22,44 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     texteTitre->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
     b_retour = new QPushButton("Retour", this);
-    b_retour->setGeometry(1100, 640, 150, 50);
+    b_retour->setGeometry(1080, 620, 200, 100);
+    b_retour->setStyleSheet("QPushButton { border-image: url(../Graphic/BoutonOuvert1.png);"
+        "font-family: Helvetica; "
+        "font-weight: bold; "
+        "font-size: 16px; "
+        "color: white "
+        "}"
+        "QPushButton:hover { border-image: url(../Graphic/BoutonSelect.png); }"
+        "QPushButton:pressed { border-image: url(../Graphic/BoutonFermer1.png); }");
 
-    nomfichier = new QTextEdit(this);
-    nomfichier->setGeometry(40, 50, 370, 250);
 
     QString terrainPNG = "../Terrain/" + nom_fichier_terrain + ".png";
     QString terrainTXT = "../Terrain/" + nom_fichier_terrain + ".txt";
     
     setStyleSheet(QString("QMainWindow{ background-image: url(%1); }").arg(terrainPNG));
-    nomfichier->append(terrainPNG);
+
 
     connect(b_retour, &QPushButton::clicked, this, &FenetreTerrain::action_retour);
 
     balle = new QLabel("Balle", this);
     terrain1 = new Terrain;
+    QPixmap pixmap("../Graphic/Ball.png");
+    balle->setPixmap(pixmap);
+    xTrans = pixmap.width() / 2;
+    yTrans = pixmap.height() / 2;
+
+    direction = 0;
+    force = 0;
+
+    forceText = new QLabel("Force du coup: " + QString::number(force), this);
+    forceText->move(50, 100);
+    forceText->setFixedSize(300, 50);
+
+    directionText = new QLabel("Direction du coup: " + QString::number(direction), this);
+    directionText->move(50, 150);
+    directionText->setFixedSize(300, 50);
+
+
 
 }
 
@@ -44,7 +67,9 @@ FenetreTerrain::~FenetreTerrain()
 {
     delete texteTitre;
     delete b_retour;
-    delete nomfichier;
+    delete balle;
+    delete forceText;
+    delete directionText;
 }
 
 void FenetreTerrain::action_retour()
@@ -61,15 +86,13 @@ void FenetreTerrain::set_file_name(QString file_name)
 
     setStyleSheet(QString("QMainWindow{ background-image: url(%1); }").arg(terrainPNG));
 
-    QPixmap pixmap("../Graphic/Ball.png");
-    balle->setPixmap(pixmap);
     terrain1->OpenTerrain(terrainTXT);
     terrain1->Display();
     std::string direction;
     std::string force;
-    double Ox = terrain1->getOx()*10;
-    double Oy = terrain1->getOy()*10;
-    balle->setGeometry(round(Ox), round(Oy), pixmap.width(), pixmap.height());
+    double Ox = round(terrain1->getOx()*10 - xTrans);
+    double Oy = round(((72 - terrain1->getOy())*10)- yTrans);
+    balle->setGeometry(Ox, Oy, xTrans*2, yTrans*2);
     balle->show();
     qApp->processEvents();
 }
@@ -86,18 +109,61 @@ void FenetreTerrain::affiche_nom_fichier()
 
 void FenetreTerrain::keyPressEvent(QKeyEvent* event)
 {
-    std::vector<std::pair<double, double>> parcourVec;
-    Parcours parcour;
-    Coup coup1(45, 50);
-    parcour = terrain1->CoupDonne(coup1);
-    parcourVec = parcour.GetCoorXY();
-    for (const auto& coord : parcourVec)
+    
+    Coup coup1(direction, force);
+    
+    switch (event->key())
     {
-        int x = round(coord.first)*10;
-        int y = round(coord.second)*10;
-        balle->move(x, y);
-        qApp->processEvents();
-        Sleep(50);
+    case Qt::Key_R:
+
+        parcours = terrain1->CoupDonne(coup1);
+        for (const auto& coord : parcours.GetCoorXY())
+        {
+            int x = round(coord.first * 10 - xTrans);
+            int y = round(((72 - coord.second) * 10) - yTrans);
+            balle->move(x, y);
+            qApp->processEvents();
+            Sleep(50);
+
+        }
+
+    case Qt::Key_A:
+
+        direction--;
+        break;
+
+    case Qt::Key_D:
+
+        direction++;
+        break;
+
+    case Qt::Key_Z:
+
+        force--;
+        break;
+
+    case Qt::Key_C:
+
+        force++;
+        break;
+
+    default:
+
+        QMainWindow::keyPressEvent(event);
+        return;
+
     }
+
+    // Ensure that strength is within a valid range
+    force = qBound(0.0, force, 100.0);
+    direction = qBound(0.0, direction, 360.0);
+
+    // Update the strength label
+    forceText->setText("Force du coup: " + QString::number(force));
+    directionText->setText("Direction du coup: " + QString::number(direction));
+
+    // Accept the key event
+    event->accept();
+ 
 }
 
