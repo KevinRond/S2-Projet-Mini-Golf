@@ -11,7 +11,7 @@
 #include <QTextEdit>
 #include <QTextBrowser>
 #include <QStackedWidget>
-#include <QLabel>
+#include <QGraphicsDropShadowEffect>
 
 
 class MainMenu : public QMainWindow
@@ -33,11 +33,12 @@ private slots:
     void action_scoreboard();
 
 private:
-    QVBoxLayout* layout;
-    QPushButton* b_jouer;
-    QPushButton* b_regle;
-    QPushButton* b_scoreboard;
-    QPushButton* b_quit;
+    QTextEdit* texteTitre;                          //Zone de texte du titre
+    QPushButton* b_jouer;                           //Bouton jouer
+    QPushButton* b_regle;                           //Bouton reglements
+    QPushButton* b_scoreboard;                      //Bouton Scoreboard
+    QPushButton* b_quit;                            //Bouton quitter
+    QGraphicsDropShadowEffect* effectTitre;         //Effet du titre
 };
 
 #endif

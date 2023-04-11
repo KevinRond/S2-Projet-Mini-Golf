@@ -25,7 +25,7 @@ private:
 	double Fac = 1;						//Facteur d'influence, peux etre utilise pour diminue ou augmente la vitesse suite a une interaction
 	double timeHitWall = 0;
 	double timeBall = 0;
-	
+
 public:
 	Interraction();						//lors de sa construction l'objet doit determine sa location X,Y son angle d'incidence et determiner un facteur
 	~Interraction();

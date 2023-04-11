@@ -53,5 +53,8 @@ public:
 	int getCOup();
 	int getRicochet();
 	bool TerrainReussi();
+	bool TerrainReussi();
+	double getOx();
+	double getOy();
 };
 #endif

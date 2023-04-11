@@ -1,12 +1,16 @@
 #include "FenetreTerrain.h"
 
+using namespace std;
+
 FenetreTerrain::FenetreTerrain(QWidget* parent)
     : QMainWindow(parent)
 {
     //ui.setupUi(this);
 
     this->setFixedSize(1280, 720);
+    
 
+    setStyleSheet("QMainWindow{ background-image: url(../Terrain/Terrain1.png); }");
     texteTitre = new QTextEdit(this);
     texteTitre->setGeometry(240, 100, 800, 400);
     texteTitre->setPlainText("Terrain");
@@ -25,9 +29,17 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
 
     nomfichier = new QTextEdit(this);
     nomfichier->setGeometry(40, 50, 370, 250);
-    nomfichier->append(nom_fichier_terrain);
 
-    connect(b_retour, &QPushButton::clicked, this, &FenetreTerrain::affiche_nom_fichier);
+    QString terrainPNG = "../Terrain/" + nom_fichier_terrain + ".png";
+    QString terrainTXT = "../Terrain/" + nom_fichier_terrain + ".txt";
+    
+    setStyleSheet(QString("QMainWindow{ background-image: url(%1); }").arg(terrainPNG));
+    nomfichier->append(terrainPNG);
+
+    connect(b_retour, &QPushButton::clicked, this, &FenetreTerrain::action_retour);
+
+    balle = new QLabel("Balle", this);
+    terrain1 = new Terrain;
 
 }
 
@@ -46,6 +58,23 @@ void FenetreTerrain::action_retour()
 void FenetreTerrain::set_file_name(QString file_name)
 {
     nom_fichier_terrain = file_name;
+    QString terrainPNG = "../Terrain/" + nom_fichier_terrain + ".png";
+    QString terrainTXTQ = "../Terrain/" + nom_fichier_terrain + ".txt";
+    string terrainTXT = terrainTXTQ.toStdString();
+
+    setStyleSheet(QString("QMainWindow{ background-image: url(%1); }").arg(terrainPNG));
+
+    QPixmap pixmap("../Graphic/Ball.png");
+    balle->setPixmap(pixmap);
+    terrain1->OpenTerrain(terrainTXT);
+    terrain1->Display();
+    string direction;
+    string force;
+    double Ox = terrain1->getOx()*10;
+    double Oy = terrain1->getOy()*10;
+    balle->setGeometry(round(Ox), round(Oy), pixmap.width(), pixmap.height());
+    balle->show();
+    qApp->processEvents();
 }
 
 QString FenetreTerrain::get_file_name()
@@ -56,5 +85,22 @@ QString FenetreTerrain::get_file_name()
 void FenetreTerrain::affiche_nom_fichier()
 {
     nomfichier->append(nom_fichier_terrain);
+}
+
+void FenetreTerrain::keyPressEvent(QKeyEvent* event)
+{
+    vector<pair<double, double>> parcourVec;
+    Parcours parcour;
+    Coup coup1(45, 50);
+    parcour = terrain1->CoupDonne(coup1);
+    parcourVec = parcour.GetCoorXY();
+    for (const auto& coord : parcourVec)
+    {
+        int x = round(coord.first)*10;
+        int y = round(coord.second)*10;
+        balle->move(x, y);
+        qApp->processEvents();
+        Sleep(50);
+    }
 }
 

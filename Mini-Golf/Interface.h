@@ -37,11 +37,12 @@ private slots:
 
 private:
     //Ui::QTLabo1Class ui;
-    QStackedWidget* listeMenus;
-    TitleScreen* titleScreen;
-    MainMenu* menuPrincipal;
-    MenuSelectionTerrain* menuSelectionTerrain;
-    MenuScoreboard* menuScoreboard;
-    MenuReglements* menuReglements;
-    FenetreTerrain* fenetreTerrain;
+    QStackedWidget* listeMenus;                     //Liste des menus
+    TitleScreen* titleScreen;                       //Menu Title Screen
+    MainMenu* menuPrincipal;                        //Menu Principale
+    MenuSelectionTerrain* menuSelectionTerrain;     //Menu de selection de terrains
+    MenuScoreboard* menuScoreboard;                 //Menu de scoreboard
+    MenuReglements* menuReglements;                 //Menu des reglements
+    FenetreTerrain* fenetreTerrain;                 //Menu d'affichage du terrain
+    //Il faudrait ajouter un menu pause et un menu de reussite apres le trou
 };

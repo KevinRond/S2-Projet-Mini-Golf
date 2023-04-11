@@ -12,6 +12,7 @@
 #include <QStackedWidget>
 #include <QLabel>
 #include <QKeyEvent>
+#include <QGraphicsDropShadowEffect>
 
 
 class TitleScreen : public QMainWindow
@@ -34,4 +35,6 @@ private:
     QPushButton* MainButton;
     QTextEdit* texteTitre;
     QTextEdit* soustitre;
+    QGraphicsDropShadowEffect* effectTitre;
+    QGraphicsDropShadowEffect* effectSousTitre;
 };

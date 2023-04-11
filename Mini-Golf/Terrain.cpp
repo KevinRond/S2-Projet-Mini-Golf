@@ -11,7 +11,7 @@ Ses methodes:
 -Lire un fichier de terrain
 -Verifier la prochaine interaction
 -Compiler un parcours de location d'un coup
-*/  
+*/
 
 using namespace std;
 Terrain::Terrain()
@@ -62,7 +62,7 @@ Parcours Terrain::CoupDonne(Coup coup1)
 }
 
 
-Terrain *Terrain::OpenTerrain(std::string  terrain)
+Terrain* Terrain::OpenTerrain(std::string  terrain)
 {
 	ifstream myFile;								//Creation de l'objet fichier
 	myFile.open(terrain, ios_base::in);				//ouveture du fichier
@@ -74,7 +74,7 @@ Terrain *Terrain::OpenTerrain(std::string  terrain)
 	string ptt;										//Pour accumulation des nombres a double digit
 	double Coor1[2];								//Premiere coordonnee
 	double Coor2[2];								//Deuxiere coordonnee
-	Coor2[0]=-1.0;									//initialise a 0 pour savoir si premiere lecture
+	Coor2[0] = -1.0;									//initialise a 0 pour savoir si premiere lecture
 
 	if (myFile.is_open())										//Verrifie si l'ouverture est faite
 	{
@@ -156,7 +156,7 @@ int Terrain::VerifierColision()
 	std::pair<int, int> Cadrant;								//definit le cadrant de direction
 	std::vector<Mur>::iterator it;
 	int i = 0;
-	for (auto it = vecteurMur1.begin();it != vecteurMur1.end(); ++it)	// Verifier collisions avec les mures 
+	for (auto it = vecteurMur1.begin(); it != vecteurMur1.end(); ++it)	// Verifier collisions avec les mures 
 	{
 		Hy = (*it)->GetHy();											//coor d'un mur
 		Ty = (*it)->GetTy();
@@ -184,7 +184,7 @@ int Terrain::VerifierColision()
 			Ix = Hx;
 			Iy = Bmx * Ix + Bb;
 		}
-		else if (abs(Bmx) >1000000)
+		else if (abs(Bmx) > 1000000)
 		{
 			Bb = 0;
 			Ix = Ox;
@@ -297,7 +297,7 @@ void Terrain::Display()
 	balle1->Display();
 	hole1->Display();
 	std::vector<Mur>::iterator it;
-	for (auto it = vecteurMur1.begin();it != vecteurMur1.end(); ++it)
+	for (auto it = vecteurMur1.begin(); it != vecteurMur1.end(); ++it)
 	{
 		cout << "Mur # " << i << " ";
 		(*it)->Display();
@@ -318,6 +318,16 @@ int Terrain::getRicochet()
 bool Terrain::TerrainReussi()
 {
 	return terrainreussi;
+}
+
+double Terrain::getOx()
+{
+	return balle1->Get_Ox();
+}
+
+double Terrain::getOy()
+{
+	return balle1->Get_Oy();
 }
 
 bool Terrain::isBetween(double value, double bound1, double bound2)

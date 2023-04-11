@@ -15,7 +15,20 @@
 
 
 
-class MenuReglements : public QWidget
+#include <QtWidgets/QMainWindow>
+#include <QApplication>
+#include <QPushButton>
+#include <QMenu>
+#include <QAction>
+#include <QVBoxLayout>
+#include <QMenuBar>
+#include <QTextEdit>
+#include <QTextBrowser>
+#include <QStackedWidget>
+#include <QLabel>
+#include <QGraphicsDropShadowEffect>
+
+class MenuReglements : public QMainWindow
 {
     Q_OBJECT
 
@@ -30,13 +43,10 @@ private slots:
     void action_retour();
 
 private:
-    //Ui::Labo1QTApp7Class ui;
-    QVBoxLayout* m_layout;
-    QLabel* m_labelLogo;
-    QLabel* m_labelVersion;
-    QLabel* m_labelDescription;
-    QLabel* m_labelCreateur;
-    //QPushButton* m_boutonFermer;
-    QPushButton* b_retour;
+    QTextEdit* texteTitre;                              //Zone de texte du titre
+    QTextEdit* texteReglements;                         //Zone de texte pour les reglements
+    QPushButton* b_retour;                              //Bouton de retour
+    QGraphicsDropShadowEffect* effectTitre;             //Effet du titre
+    QGraphicsDropShadowEffect* effectReglements;        //Effet du texte des reglements
 
 };
