@@ -55,6 +55,8 @@ Parcours Interraction::BalleMur(Ball* balle, Mur* mur, std::pair<double, double>
 		x = (cos(Dir) * distancetoHit * 0.99) * 10 + Ox;
 		y = (sin(Dir) * distancetoHit * 0.99) * 10 + Oy;
 		petitParcour.addCoor(x, y);
+		balle->Set_Amplitude(Vxy/ 0.44704);
+		angleReflexion(balle, mur);								//change l'angle de de la balle lorsqu'elle reflette le mur		
 		balle->Set_Amplitude(Vxy / 0.44704);
 		angleReflexion(balle, mur);								//change l'angle de de la balle lorsqu'elle reflette le mur		
 		balle->Set_Oxy(x, y);
@@ -65,6 +67,7 @@ Parcours Interraction::BalleMur(Ball* balle, Mur* mur, std::pair<double, double>
 		x = (cos(Dir) * distanceItTraveled) * 10 + Ox;
 		y = (sin(Dir) * distanceItTraveled) * 10 + Oy;
 		balle->Set_Oxy(x, y);
+		cout << "Balle en position (" << x << "," << 720-y << ")." << endl;
 		cout << "Balle en position (" << x << "," << 720 - y << ")." << endl;
 	}
 	return petitParcour;
@@ -175,6 +178,26 @@ void Interraction::angleReflexion(Ball* balle, Mur* mur)							//trouver l'angle
 	{
 		if (oldangle1 >= PI)
 		{
+			if (oldangle1 >= PI)
+			{
+				oldangle1 = oldangle1 - PI;
+			}
+			if (oldangle1 > PI / 2)
+			{
+				oldangle1 = PI - oldangle1;
+			}
+			facteurVelocity =PI/2 - ((PI/2 - oldangle1)/2);
+			
+			angleReflechis = oldangle - PI;
+			if (angleReflechis < 0)
+			{
+				angleReflechis = -angleReflechis;
+			}
+			else
+			{
+				angleReflechis = 2*PI - angleReflechis;
+			}
+			balle->Set_Direction(angleReflechis);
 			oldangle1 = oldangle1 - PI;
 		}
 		if (oldangle1 > PI / 2)

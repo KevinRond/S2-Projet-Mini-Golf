@@ -52,8 +52,7 @@ Parcours Terrain::CoupDonne(Coup coup1)
 	if (hole1->Sitrou() == 1) {
 		terrainreussi = true;
 		cout << "Trou Reussi!!! en " << nbCoup + 1 << " coups." << endl;
-	}
-	else {
+	}else{
 
 		nbCoup++;
 		cout << "Nombre de coup: " << nbCoup << " essaie encore!" << endl;
@@ -95,8 +94,8 @@ Terrain* Terrain::OpenTerrain(std::string  terrain)
 					ptt.clear();												//Vide l'accumulateur
 					if (Coor2[0] != -1.0)										//Verifie si c'est la premiere coor (besoin de 2 pour un mur)
 					{
-						Mur* MurTemp = new Mur;											//Creation d'un objet Mur
-						MurTemp->Set(Coor1[0], 720 - Coor1[1], Coor2[0], 720 - Coor2[1]);	//Attribution de ses 2 coor
+						Mur *MurTemp = new Mur;											//Creation d'un objet Mur
+						MurTemp->Set(Coor1[0], 720-Coor1[1], Coor2[0], 720-Coor2[1]);	//Attribution de ses 2 coor
 						vecteurMur1.push_back(MurTemp->Get());							//Assignation au TableauMur de notre terrain
 						nbMur++;														//Incremenation du nombre de Murs
 					}
@@ -106,13 +105,13 @@ Terrain* Terrain::OpenTerrain(std::string  terrain)
 				else if (lineContents[i] == 'B')				//Verification si dernier point est la balle
 				{
 					Ball* balletemp = new Ball;					//Assignation du pointeur de l'objet creer a son attribu balle1
-					balletemp->Set_Oxy(Coor1[0], 720 - Coor1[1]);
+					balletemp->Set_Oxy(Coor1[0], 720-Coor1[1]);
 					balle1 = balletemp->Get();
 				}
 				else if (lineContents[i] == 'T')				//Verification si dernier point est un trou
 				{
 					Hole* HoleTemp = new Hole;					//Creation objet Hole
-					HoleTemp->Set_xy(Coor1[0], 720 - Coor1[1]);	//Son emplacement
+					HoleTemp->Set_xy(Coor1[0], 720-Coor1[1]);	//Son emplacement
 					hole1 = HoleTemp->Get();					//Assignation du pointeur de l'objet creer a son attribu hole1
 				}
 				else if (lineContents[i] == 'S')
@@ -179,7 +178,7 @@ int Terrain::VerifierColision()
 			Ix = Ox;
 			Iy = Mmx * Ix + Mb;
 		}
-		else if (abs(Mmx) > 1000000)					//Si les droites ne sont pas paralleles
+		else if (abs(Mmx) >1000000)					//Si les droites ne sont pas paralleles
 		{
 			Mb = 0;
 			Ix = Hx;
@@ -232,7 +231,7 @@ int Terrain::VerifierColision()
 				pointIntersection.first = Ix;
 				pointIntersection.second = Iy;
 				prevIndex = i;
-				cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(pointIntersection.first) << "," << 720 - round(Iy) << ")" << " a une distance de " << round(distance) << endl;
+				cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(pointIntersection.first) << "," << 720-round(Iy) << ")" << " a une distance de " << round(distance) << endl;
 			}
 		}
 		i++;
@@ -272,20 +271,20 @@ int Terrain::VerifierColision()
 			Iy = INFINITY;
 		}
 	}
-	//position de balle aura donc la meme que l'interaction calcule precedament
-
+																				//position de balle aura donc la meme que l'interaction calcule precedament
+	
 	distanceTrou = sqrt(pow((Ix - TrouX), 2) + pow((Iy - TrouY), 2));			//Calcul la distance du point d'intersection avec le trou
 	if (distanceTrou < Plusproche && i != IndexColision)						//Si cette distance est sous le radius du trou il y a interraction
 	{
 		if (isBetween(Ix, hole1->Get_x() - hole1->Get_radius(), hole1->Get_x() + hole1->Get_radius()) && isBetween(Iy, hole1->Get_y() - hole1->Get_radius(), hole1->Get_y() + hole1->Get_radius()))
 		{
-			distanceTrou = sqrt(pow((Ix - TrouX), 2) + pow((Iy - TrouY), 2));		//Calcul la distance de la balle du point d'intersection
+			distanceTrou = sqrt(pow((Ix - TrouX),2) + pow((Iy - TrouY),2));		//Calcul la distance de la balle du point d'intersection
 			if (distanceTrou < hole1->Get_radius())								//Si c'est la distance est plus proche change l'index
 			{
 				IndexColision = -1;												//Definit l'index a Trou
 				pointIntersection.first = Ix;
 				pointIntersection.second = Iy;
-				cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(Ix) << "," << 720 - round(Iy) << ") a une distance de " << round(distanceTrou) << endl;;
+				cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(Ix) << "," << 720-round(Iy) << ") a une distance de " << round(distanceTrou) << endl;;
 			}
 		}
 	}
@@ -294,7 +293,7 @@ int Terrain::VerifierColision()
 
 void Terrain::Display()
 {
-	int i = 0;
+	int i =0;
 	balle1->Display();
 	hole1->Display();
 	std::vector<Mur>::iterator it;
