@@ -48,7 +48,7 @@ private:
     double yTrans;
     double direction;
     double force;
-    Parcours parcours;
+    int indexParcours;
 
 protected:
     void keyPressEvent(QKeyEvent* event) override;

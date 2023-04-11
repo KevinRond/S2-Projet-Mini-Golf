@@ -59,6 +59,8 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     directionText->move(50, 150);
     directionText->setFixedSize(300, 50);
 
+    indexParcours = 0;
+
 
 
 }
@@ -111,14 +113,14 @@ void FenetreTerrain::keyPressEvent(QKeyEvent* event)
 {
     
     Coup coup1(direction, force);
-    
+    Parcours parcours;
     switch (event->key())
     {
     case Qt::Key_R:
-
         parcours = terrain1->CoupDonne(coup1);
-        for (const auto& coord : parcours.GetCoorXY())
+        for (indexParcours; indexParcours < parcours.GetCoorXY().size(); indexParcours++)
         {
+            const auto& coord = parcours.GetCoorXY()[indexParcours];
             int x = round(coord.first * 10 - xTrans);
             int y = round(((72 - coord.second) * 10) - yTrans);
             balle->move(x, y);
