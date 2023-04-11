@@ -43,10 +43,10 @@ private slots:
     void action_retour();
 
 private:
-    QTextEdit* texteTitre;
-    QTextEdit* texteReglements;
-    QPushButton* b_retour;
-    QGraphicsDropShadowEffect* effectTitre;
-    QGraphicsDropShadowEffect* effectReglements;
+    QTextEdit* texteTitre;                              //Zone de texte du titre
+    QTextEdit* texteReglements;                         //Zone de texte pour les reglements
+    QPushButton* b_retour;                              //Bouton de retour
+    QGraphicsDropShadowEffect* effectTitre;             //Effet du titre
+    QGraphicsDropShadowEffect* effectReglements;        //Effet du texte des reglements
 
 };
