@@ -10,39 +10,36 @@
 #include "Mur.h"
 #include "Coup.h"
 #include "GameManager.h"
-#include "Manette.h"
+#include <QtWidgets/qmainwindow.h>
+#include "Interface.h"
+#include "MainMenu.h"
+//#include "Manette.h"
 
-using namespace std;
-
-
-int main()
+int main(int argc, char* argv[])
 {
-	//GameManager gm(20, 25);
-	//gm.Run();
-	Terrain *terrain1 = new Terrain;
-	terrain1->OpenTerrain("Terrain1.txt");
-	terrain1->Display();
-	/*Interraction* inter = new Interraction;
-	Ball* ball1 = new Ball;
-	Mur* mur1 = new Mur(0, 20, 20, 20);
-	ball1->Set_direction(270);
-	ball1->Set_Vx(5);
-	inter->BalleMur(ball1, mur1);*/
-	string direction;
-	string force;
-	while (terrain1->TerrainReussi() != 1) {
-		//cout << "NOMBRE DE COUP: " << terrain1->getCOup() << endl;
-		cout << "entrer la direction de la balle" << endl;
-		cin >> direction;
-		cout << "enter la puissance" << endl;
-		cin >> force;
-		double forced = stod(force);
-		double directiond = stod(direction);
-		Coup coup1(directiond, forced);
-		terrain1->CoupDonne(coup1);
-		//cout << "NOMBRE DE RICOCHET: " << terrain1->getCOup() << endl;
-	}
-	cout << "BRAVOOOOOOOO" << endl;
+	QApplication a(argc, argv);
+	Interface w;
+	w.show();
+	return a.exec();
+	//Terrain *terrain1 = new Terrain;
+	//terrain1->OpenTerrain("Terrain2.txt");
+	//terrain1->Display();
+	//string direction;
+	//string force;
+	//while (terrain1->verifTrou() == false)
+	//{
+	//	//cout << "NOMBRE DE COUP: " << terrain1->getCOup() << endl;
+	//	cout << "entrer la direction de la balle" << endl;
+	//	cin >> direction;
+	//	cout << "enter la puissance" << endl;
+	//	cin >> force;
+	//	double forced = stod(force);
+	//	double directiond = stod(direction);
+	//	Coup coup1(directiond, forced);
+	//	terrain1->CoupDonne(coup1);
+	//	//cout << "NOMBRE DE RICOCHET: " << terrain1->getCOup() << endl;
+	//}
+	//cout << "BRAVOOOOOOOO" << endl;
 	/*
 	//terrain1->CoupDonne(coup1);
 	//terrain1->CoupDonne(coup1);
@@ -50,39 +47,10 @@ int main()
 	manette.demande(1, 9);
 	string com = "COM7";
 	manette.setup(com);
-	std::thread comm(&Manette::communication, &manette);*/
+	std::thread comm(&Manette::communication, &manette);
 
-/*---------------------------- --- Tests Manette--------------------------------- */
-
-/*----------------------------- Tests Manette + coup -----------------------------*/
-	//Terrain* terrain = new Terrain;
-	//terrain->OpenTerrain("Terrain3.txt");
-	//terrain->Display();
-	//Coup coup;
-	//while (!manette.getButton1())
-	//{
-	//	coup.setDirection(manette.getJoyX()-2);
-	//	cout << coup.Get_Direction() << endl;
-	//	Sleep(100);
-	//}
-	//manette.demande(3, 9);
-	//for (int i = 0; i < 5; i++)
-	//{
-	//	if (manette.getAmplitude() > coup.Get_Amplitude())
-	//		coup.setAmplitude(manette.getAmplitude());
-	//	cout << coup.Get_Amplitude() << endl;
-	//	Sleep(1000);
-	//}
-	//coup.initcoup();
-	//terrain->CoupDonne(coup);
-	//
-	//manette.demande(2, 9); //Choisir direction
-
-
-
-/*----------------------------- Tests Lecture Manette -----------------------------*/
-
-	/*for (int i; i < 1000; i++) {
+//----------------------------- Tests Manette -----------------------------
+	for (int i; i < 1000; i++) {
 		if (manette.getCas() == 1) {
 			cout << "Valeur Joystick: " << manette.getJoyY() << endl;
 			if (manette.getButton1() == true)
@@ -109,11 +77,10 @@ int main()
 			cout << manette.getAmplitude() << endl;
 
 		Sleep(100);
-	}*/
-//------------------------------------------------------------------------//
-	//manette.setState(false);
-
-	return 0;
+	}
+//------------------------------------------------------------------------
+	manette.setState(false);
+	*/
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

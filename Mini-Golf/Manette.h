@@ -4,8 +4,6 @@
 #include <iostream>
 #include <string>
 #include <thread>
-using namespace std;
-
 /*-------------------------- Librairies externes ----------------------------*/
 #include "include/serial/SerialPort.hpp"
 #include "include/json.hpp"
@@ -33,9 +31,9 @@ public:
 	Manette();
 	void communication();
 	void demande(int NewCas, int NewAfficher);
-	void setup(string usbport);
+	void setup(std::string usbport);
 	bool SendToSerial(SerialPort* arduino, json j_msg);
-	bool RcvFromSerial(SerialPort* arduino, string& msg);
+	bool RcvFromSerial(SerialPort* arduino, std::string& msg);
 
 	int getCas();
 	int getAfficher();
@@ -51,7 +49,7 @@ public:
 	void setAfficher(int nouvelAffichage);
 	void setState(bool nouveauState);
 	//void startThread();
-	friend ostream& operator << (ostream& o,  const Manette& m)
+	friend std::ostream& operator << (std::ostream& o,  const Manette& m)
 	{
 		o << "Valeur Mesuree [" << m.amplitude << "," << m.joyX << "," << m.joyY << "]";
 		return o;

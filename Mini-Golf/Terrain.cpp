@@ -11,9 +11,7 @@ Ses methodes:
 -Lire un fichier de terrain
 -Verifier la prochaine interaction
 -Compiler un parcours de location d'un coup
-*/  
-
-using namespace std;
+*/
 Terrain::Terrain()
 {
 	nbMur = 0;
@@ -38,7 +36,7 @@ Parcours Terrain::CoupDonne(Coup coup1)
 			break;
 		}
 		indexColision = VerifierColision();																		//Rapporte l'index de colision
-		cout << "Index: " << indexColision << endl;
+		std::cout << "Index: " << indexColision << std::endl;
 		if (indexColision == -1)																				//Si interraction avec un trou (-1)
 		{
 			ParcoursSection = Interaction1.BalleTrou(balle1, hole1, pointIntersection);							//Retourne le parcours jusqua la prochaine interaction
@@ -51,30 +49,30 @@ Parcours Terrain::CoupDonne(Coup coup1)
 	}
 	if (hole1->Sitrou() == 1) {
 		terrainreussi = true;
-		cout << "Trou Reussi!!! en " << nbCoup + 1 << " coups." << endl;
+		std::cout << "Trou Reussi!!! en " << nbCoup + 1 << " coups." << std::endl;
 	}else{
 
 		nbCoup++;
-		cout << "Nombre de coup: " << nbCoup << " essaie encore!" << endl;
+		std::cout << "Nombre de coup: " << nbCoup << " essaie encore!" << std::endl;
 	}
 
 	return ParcoursTotal;
 }
 
 
-Terrain *Terrain::OpenTerrain(std::string  terrain)
+Terrain* Terrain::OpenTerrain(std::string  terrain)
 {
-	ifstream myFile;								//Creation de l'objet fichier
-	myFile.open(terrain, ios_base::in);				//ouveture du fichier
+	std::ifstream myFile;								//Creation de l'objet fichier
+	myFile.open(terrain, std::ios_base::in);				//ouveture du fichier
 	bool Coor = false;								//Operateur inverseur qui determinera si 0=X ou 1=Y
-	string lineContents;							//Contenu de la ligne lu complete
+	std::string lineContents;							//Contenu de la ligne lu complete
 	char separatorXY = ',';							//separateur d'axe XY (X,Y)
 	char separatorCoor = ';';						//separateur de coordonnees (X,Y);(X,Y)
 	int i = 0;										//Index de ligne de lecture
-	string ptt;										//Pour accumulation des nombres a double digit
+	std::string ptt;										//Pour accumulation des nombres a double digit
 	double Coor1[2];								//Premiere coordonnee
 	double Coor2[2];								//Deuxiere coordonnee
-	Coor2[0]=-1.0;									//initialise a 0 pour savoir si premiere lecture
+	Coor2[0] = -1.0;									//initialise a 0 pour savoir si premiere lecture
 
 	if (myFile.is_open())										//Verrifie si l'ouverture est faite
 	{
@@ -134,7 +132,7 @@ Terrain *Terrain::OpenTerrain(std::string  terrain)
 		myFile.close();						//Ferme le fichier
 		return this;						//Retourne le ponteur du terrain
 	}
-	cout << "File not found" << endl;
+	std::cout << "File not found" << std::endl;
 	return nullptr;
 }
 
@@ -156,7 +154,7 @@ int Terrain::VerifierColision()
 	std::pair<int, int> Cadrant;								//definit le cadrant de direction
 	std::vector<Mur>::iterator it;
 	int i = 0;
-	for (auto it = vecteurMur1.begin();it != vecteurMur1.end(); ++it)	// Verifier collisions avec les mures 
+	for (auto it = vecteurMur1.begin(); it != vecteurMur1.end(); ++it)	// Verifier collisions avec les mures 
 	{
 		Hy = (*it)->GetHy();											//coor d'un mur
 		Ty = (*it)->GetTy();
@@ -184,7 +182,7 @@ int Terrain::VerifierColision()
 			Ix = Hx;
 			Iy = Bmx * Ix + Bb;
 		}
-		else if (abs(Bmx) >1000000)
+		else if (abs(Bmx) > 1000000)
 		{
 			Bb = 0;
 			Ix = Ox;
@@ -231,7 +229,7 @@ int Terrain::VerifierColision()
 				pointIntersection.first = Ix;
 				pointIntersection.second = Iy;
 				prevIndex = i;
-				cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(pointIntersection.first) << "," << 720-round(Iy) << ")" << " a une distance de " << round(distance) << endl;
+				std::cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(pointIntersection.first) << "," << 720-round(Iy) << ")" << " a une distance de " << round(distance) << std::endl;
 			}
 		}
 		i++;
@@ -284,7 +282,7 @@ int Terrain::VerifierColision()
 				IndexColision = -1;												//Definit l'index a Trou
 				pointIntersection.first = Ix;
 				pointIntersection.second = Iy;
-				cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(Ix) << "," << 720-round(Iy) << ") a une distance de " << round(distanceTrou) << endl;;
+				std::cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(Ix) << "," << 720-round(Iy) << ") a une distance de " << round(distanceTrou) << std::endl;;
 			}
 		}
 	}
@@ -297,9 +295,9 @@ void Terrain::Display()
 	balle1->Display();
 	hole1->Display();
 	std::vector<Mur>::iterator it;
-	for (auto it = vecteurMur1.begin();it != vecteurMur1.end(); ++it)
+	for (auto it = vecteurMur1.begin(); it != vecteurMur1.end(); ++it)
 	{
-		cout << "Mur # " << i << " ";
+		std::cout << "Mur # " << i << " ";
 		(*it)->Display();
 		i++;
 	}
@@ -318,6 +316,16 @@ int Terrain::getRicochet()
 bool Terrain::TerrainReussi()
 {
 	return terrainreussi;
+}
+
+double Terrain::getOx()
+{
+	return balle1->Get_Ox();
+}
+
+double Terrain::getOy()
+{
+	return balle1->Get_Oy();
 }
 
 bool Terrain::isBetween(double value, double bound1, double bound2)

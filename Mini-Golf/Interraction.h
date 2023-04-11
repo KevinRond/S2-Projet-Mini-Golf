@@ -25,7 +25,7 @@ private:
 	double Fac = 1;						//Facteur d'influence, peux etre utilise pour diminue ou augmente la vitesse suite a une interaction
 	double timeHitWall = 0;
 	double timeBall = 0;
-	
+
 public:
 	Interraction();						//lors de sa construction l'objet doit determine sa location X,Y son angle d'incidence et determiner un facteur
 	~Interraction();
@@ -40,8 +40,8 @@ public:
 
 	void angleReflexion(Ball* balle, Mur *mur);
 	void angleReflexion(Ball* balle, Hole* trou, std::pair<double, double> inters);
-	std::pair<double, double> intersection(Ball* balle, Mur* mur);
-	double penteMur(Mur* mur);
+	//std::pair<double, double> intersection(Ball* balle, Mur* mur);
+	//double penteMur(Mur* mur);
 };
 
 #endif
