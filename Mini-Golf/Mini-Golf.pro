@@ -35,8 +35,8 @@ SOURCES     += \
 	MenuScoreboard.cpp \
 	MenuReglements.cpp \
 	FenetreTerrain.cpp
-INCLUDEPATH += ../Mini-Golf
-INCLUDEPATH += ../Mini-Golf/include
-INCLUDEPATH += ../Mini-Golf/Terrain
-INCLUDEPATH += ../Mini-Golf/include/serial
+INCLUDEPATH += ../../Mini-Golf
+INCLUDEPATH += ../../Mini-Golf/include
+INCLUDEPATH += ../../Mini-Golf/Terrain
+INCLUDEPATH += ../../Mini-Golf/include/serial
 QT          += widgets
