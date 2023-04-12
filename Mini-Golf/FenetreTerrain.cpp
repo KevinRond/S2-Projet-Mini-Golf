@@ -92,8 +92,8 @@ void FenetreTerrain::set_file_name(QString file_name)
     terrain1->Display();
     std::string direction;
     std::string force;
-    double Ox = round(terrain1->getOx()*10 - xTrans);
-    double Oy = round(((72 - terrain1->getOy())*10)- yTrans);
+    double Ox = round(terrain1->getOx()*100 - xTrans);
+    double Oy = round(720 - terrain1->getOy()*100- yTrans);
     balle->setGeometry(Ox, Oy, xTrans*2, yTrans*2);
     balle->show();
     qApp->processEvents();
@@ -122,11 +122,11 @@ void FenetreTerrain::keyPressEvent(QKeyEvent* event)
         for (indexParcours; indexParcours < parcourVec.size(); indexParcours++)
         {
             const auto& coord = parcourVec[indexParcours];
-            int x = round(coord.first * 10 - xTrans);
-            int y = round(((72 - coord.second) * 10) - yTrans);
+            int x = round(coord.first * 100 - xTrans);
+            int y = round(720 - (coord.second * 100) - yTrans);
             balle->move(x, y);
             qApp->processEvents();
-            Sleep(50);
+            Sleep(5);
 
         }
 

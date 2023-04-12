@@ -55,9 +55,7 @@ Parcours Interraction::BalleMur(Ball* balle, Mur* mur, std::pair<double, double>
 		y = (sin(Dir) * distancetoHit * 0.99) + Oy;
 		petitParcour.addCoor(x, y);
 		balle->Set_Amplitude(Vxy);
-		angleReflexion(balle, mur);								//change l'angle de de la balle lorsqu'elle reflette le mur		
-		balle->Set_Amplitude(Vxy);
-		angleReflexion(balle, mur);								//change l'angle de de la balle lorsqu'elle reflette le mur		
+		angleReflexion(balle, mur);								//change l'angle de de la balle lorsqu'elle reflette le mur			
 		balle->Set_Oxy(x, y);
 	}
 	else if (Vxy <= 0.01)
@@ -177,43 +175,13 @@ void Interraction::angleReflexion(Ball* balle, Mur* mur)							//trouver l'angle
 	{
 		if (oldangle1 >= PI)
 		{
-			if (oldangle1 >= PI)
-			{
-				oldangle1 = oldangle1 - PI;
-			}
-			if (oldangle1 > PI / 2)
-			{
-				oldangle1 = PI - oldangle1;
-			}
-			facteurVelocity = PI / 2 - ((PI / 2 - oldangle1) / 2);
-
-			angleReflechis = oldangle - PI;
-			if (angleReflechis < 0)
-			{
-				angleReflechis = -angleReflechis;
-			}
-			else
-			{
-				angleReflechis = 2 * PI - angleReflechis;
-			}
-			balle->Set_Direction(angleReflechis);
 			oldangle1 = oldangle1 - PI;
 		}
 		if (oldangle1 > PI / 2)
 		{
-			angleReflechis = 2 * PI - oldangle;
-			balle->Set_Direction(angleReflechis);
-			if (oldangle1 >= PI)
-			{
-				oldangle1 = oldangle1 - PI;
-			}
-			if (oldangle1 > PI / 2)
-			{
-				oldangle1 = PI - oldangle1;
-			}
-			facteurVelocity = PI / 2 - (oldangle1 / 2);
+			oldangle1 = PI - oldangle1;
 		}
-		facteurVelocity = PI / 2 - ((PI / 2 - oldangle1) / 2);
+		angleIncident = PI / 2 - oldangle1;
 
 		angleReflechis = oldangle - PI;
 		if (angleReflechis < 0)
@@ -222,30 +190,53 @@ void Interraction::angleReflexion(Ball* balle, Mur* mur)							//trouver l'angle
 		}
 		else
 		{
-			angleMur = atan2(mur->GetTy() - mur->GetHy(), mur->GetTx() - mur->GetHx());
-			std::cout << "ANGLE MUR: " << angleMur * 180 / PI << std::endl;
-			angleIncident = fmod(oldangle - angleMur + 2 * PI, 2 * PI);
-			angleReflechis = fmod(angleMur - angleIncident + 2 * PI, 2 * PI);
-			balle->Set_Direction(angleReflechis);
-			std::cout << "ANGLE INCIDENT: " << angleIncident * 180 / PI << std::endl;
-			std::cout << "ANGLE REFLECHI: " << angleReflechis * 180 / PI << std::endl;
-			while (angleReflechis < 0)
-			{
-				std::cout << "changement angle reflechis: " << angleReflechis * 180 / PI << std::endl;
-				angleReflechis = angleReflechis + PI;
-			}
-			if (angleIncident >= PI)
-			{
-				angleIncident = angleIncident - PI;
-			}
-			if (angleIncident > PI / 2)
-			{
-				angleIncident = angleIncident - PI / 2;
-			}
-			facteurVelocity = (100 - (angleIncident * 180) / (8 * PI)) / 100;
+			angleReflechis = 2 * PI - angleReflechis;
 		}
-		facteurVelocity = facteurVelocity * 180 / (PI * 100);				//Ici on veux reduire la velocite par rapport a l'angle d'incidence
-		balle->Set_Amplitude(Vxy * facteurVelocity);
-		std::cout << "FACteur velocity: " << facteurVelocity << std::endl;
+		balle->Set_Direction(angleReflechis);
+
+
 	}
+	else if (mur->GetHy() == mur->GetTy())
+	{
+		angleReflechis = 2 * PI - oldangle;
+		balle->Set_Direction(angleReflechis);
+		if (oldangle1 >= PI)
+		{
+			oldangle1 = oldangle1 - PI;
+		}
+		if (oldangle1 > PI / 2)
+		{
+			oldangle1 = PI - oldangle1;
+		}
+		angleIncident = oldangle1;
+	}
+	else
+	{
+		angleMur = atan2(mur->GetTy() - mur->GetHy(), mur->GetTx() - mur->GetHx());
+		std::cout << "ANGLE MUR: " << angleMur * 180 / PI << std::endl;
+		angleIncident = fmod(oldangle - angleMur + 2 * PI, 2 * PI);
+		angleReflechis = fmod(angleMur - angleIncident + 2 * PI, 2 * PI);
+		balle->Set_Direction(angleReflechis);
+		//cout << "ANGLE INCIDENT: "<< angleIncident*180/PI << endl;
+		std::cout << "ANGLE REFLECHI: " << angleReflechis * 180 / PI << std::endl;
+		while (angleReflechis < 0)
+		{
+			std::cout << "changement angle reflechis: " << angleReflechis * 180 / PI << std::endl;
+			angleReflechis = angleReflechis + PI;
+		}
+		if (angleIncident >= PI)
+		{
+			angleIncident = angleIncident - PI;
+		}
+		if (angleIncident > PI / 2)
+		{
+			std::cout << "changement" << std::endl;
+			angleIncident = PI - angleIncident;
+		}
+	}
+	facteurVelocity = (100 - (angleIncident * 180) / (8 * PI)) / 100;
+
+	balle->Set_Amplitude(Vxy * facteurVelocity);
+	std::cout << "angle INCIDEENT: " << angleIncident * 180 / PI << std::endl;
+	std::cout << "FACteur velocity: " << facteurVelocity << std::endl;
 }
