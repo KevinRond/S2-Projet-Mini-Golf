@@ -111,16 +111,17 @@ void FenetreTerrain::affiche_nom_fichier()
 
 void FenetreTerrain::keyPressEvent(QKeyEvent* event)
 {
-    
+    std::vector<std::pair<double, double>> parcourVec;
     Coup coup1(direction, force);
     Parcours parcours;
     switch (event->key())
     {
     case Qt::Key_R:
         parcours = terrain1->CoupDonne(coup1);
-        for (indexParcours; indexParcours < parcours.GetCoorXY().size(); indexParcours++)
+        parcourVec = parcours.GetCoorXY();
+        for (indexParcours; indexParcours < parcourVec.size(); indexParcours++)
         {
-            const auto& coord = parcours.GetCoorXY()[indexParcours];
+            const auto& coord = parcourVec[indexParcours];
             int x = round(coord.first * 10 - xTrans);
             int y = round(((72 - coord.second) * 10) - yTrans);
             balle->move(x, y);
