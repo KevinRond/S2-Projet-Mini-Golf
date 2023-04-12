@@ -48,7 +48,7 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     xTrans = pixmap.width() / 2;
     yTrans = pixmap.height() / 2;
 
-    direction = 0;
+    direction = 1;
     force = 0;
 
     forceText = new QLabel("Force du coup: " + QString::number(force), this);
@@ -126,7 +126,7 @@ void FenetreTerrain::keyPressEvent(QKeyEvent* event)
             int y = (720 - (coord.second * 100)) - yTrans;
             balle->move(x, y);
             qApp->processEvents();
-            Sleep(20);
+            Sleep(37);
 
         }
 
@@ -158,8 +158,8 @@ void FenetreTerrain::keyPressEvent(QKeyEvent* event)
     }
 
     // Ensure that strength is within a valid range
-    force = qBound(0.0, force, 100.0);
-    direction = qBound(0.0, direction, 360.0);
+    force = qBound(0.0, force, 20.0);
+    direction = qBound(1.0, direction, 360.0);
 
     // Update the strength label
     forceText->setText("Force du coup: " + QString::number(force));
