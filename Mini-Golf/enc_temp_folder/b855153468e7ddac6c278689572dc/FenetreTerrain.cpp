@@ -77,6 +77,7 @@ FenetreTerrain::~FenetreTerrain()
 
 void FenetreTerrain::action_retour()
 {
+    delete terrain1;
     emit b_retour_appuyer();
     
 }

@@ -286,6 +286,11 @@ int Terrain::VerifierColision()
 			}
 		}
 	}
+
+	if (IndexColision == -2)
+	{
+		std::cout << "erreur" << std::endl;
+	}
 	return IndexColision;
 }
 
