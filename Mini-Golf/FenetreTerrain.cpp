@@ -66,7 +66,6 @@ FenetreTerrain::~FenetreTerrain()
     delete balle;
     delete forceText;
     delete directionText;
-    delete terrain1;
 }
 
 void FenetreTerrain::action_retour()
