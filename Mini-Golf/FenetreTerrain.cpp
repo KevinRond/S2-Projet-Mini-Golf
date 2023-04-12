@@ -79,6 +79,10 @@ void FenetreTerrain::set_file_name(QString file_name)
     direction = 1;
     force = 1;
     indexParcours = 0;
+    // Update the strength label
+    forceText->setText("Force du coup: " + QString::number(force));
+    directionText->setText("Direction du coup: " + QString::number(direction));
+
     nom_fichier_terrain = file_name;
     QString terrainPNG = "../Terrain/" + nom_fichier_terrain + ".png";
     QString terrainTXTQ = "../Terrain/" + nom_fichier_terrain + ".txt";
