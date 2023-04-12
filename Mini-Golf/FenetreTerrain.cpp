@@ -48,7 +48,7 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     xTrans = pixmap.width() / 2;
     yTrans = pixmap.height() / 2;
 
-    direction = 1;
+    direction = 0;
     force = 0;
 
     forceText = new QLabel("Force du coup: " + QString::number(force), this);
@@ -59,14 +59,49 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     directionText->move(50, 150);
     directionText->setFixedSize(300, 50);
 
+    QString style_etiquette = "QLabel {"
+        "font-family: Helvetica;"
+        "font-size: 24px;"
+        "color: white; "
+        "background-color: transparent;"
+        "border: none;"
+        "}";
+
+    forceText->setStyleSheet(style_etiquette);
+    directionText->setStyleSheet(style_etiquette);
+
+    //Design des effets des etiquettes
+    effect_etiquette_force = new QGraphicsDropShadowEffect;
+    effect_etiquette_force->setBlurRadius(5);
+    effect_etiquette_force->setColor(Qt::black);
+    effect_etiquette_force->setOffset(1, 1);
+    forceText->setGraphicsEffect(effect_etiquette_force);
+
+    effect_etiquette_direction = new QGraphicsDropShadowEffect;
+    effect_etiquette_direction->setBlurRadius(5);
+    effect_etiquette_direction->setColor(Qt::black);
+    effect_etiquette_direction->setOffset(1, 1);
+    directionText->setGraphicsEffect(effect_etiquette_direction);
+
     indexParcours = 0;
+    transformIndex = 90;
 
+    ninetydeg.rotate(90);
+    onedeg.rotate(1);
+    angleFleche.rotate(transformIndex);
 
+    point = new QLabel(this);
+    QPixmap fleche("../Graphic/point.png");
+    point->setPixmap(fleche.transformed(angleFleche));
+    xPoint = fleche.height();
+    yPoint = fleche.width() / 2;
 
 }
 
 FenetreTerrain::~FenetreTerrain()
 {
+    delete effect_etiquette_force;
+    delete effect_etiquette_direction;
     delete texteTitre;
     delete b_retour;
     delete balle;
@@ -90,13 +125,18 @@ void FenetreTerrain::set_file_name(QString file_name)
 
     terrain1->OpenTerrain(terrainTXT);
     terrain1->Display();
-    std::string direction;
-    std::string force;
+    /*std::string direction;
+    std::string force;*/
     double Ox = terrain1->getOx()*100 - xTrans;
     double Oy = 720 - terrain1->getOy()*100- yTrans;
     balle->setGeometry(Ox, Oy, xTrans*2, yTrans*2);
     balle->show();
+
+    point->setGeometry(Ox, Oy-4, xPoint, yPoint+10);
+    point->show();
+   
     qApp->processEvents();
+
 }
 
 QString FenetreTerrain::get_file_name()
@@ -114,11 +154,20 @@ void FenetreTerrain::keyPressEvent(QKeyEvent* event)
     std::vector<std::pair<double, double>> parcourVec;
     Coup coup1(direction, force);
     Parcours parcours;
+    QPixmap fleche("../Graphic/point.png");
+    double Ox = terrain1->getOx() * 100 - xTrans;
+    double Oy = 720 - terrain1->getOy() * 100 - yTrans;
+    point->setGeometry(Ox, Oy - 4, xPoint, yPoint + 10);
+    point->show();
+
     switch (event->key())
     {
     case Qt::Key_R:
+
         parcours = terrain1->CoupDonne(coup1);
         parcourVec = parcours.GetCoorXY();
+        point->setVisible(false);
+
         for (indexParcours; indexParcours < parcourVec.size(); indexParcours++)
         {
             const auto& coord = parcourVec[indexParcours];
@@ -129,6 +178,7 @@ void FenetreTerrain::keyPressEvent(QKeyEvent* event)
             Sleep(37);
 
         }
+        
 
     case Qt::Key_A:
 
@@ -138,14 +188,16 @@ void FenetreTerrain::keyPressEvent(QKeyEvent* event)
     case Qt::Key_D:
 
         direction++;
+        transformIndex--;
+        point->setPixmap(fleche.transformed(angleFleche.rotate(transformIndex))); 
         break;
 
-    case Qt::Key_Z:
+    case Qt::Key_S:
 
         force--;
         break;
 
-    case Qt::Key_C:
+    case Qt::Key_W:
 
         force++;
         break;
@@ -159,7 +211,7 @@ void FenetreTerrain::keyPressEvent(QKeyEvent* event)
 
     // Ensure that strength is within a valid range
     force = qBound(0.0, force, 20.0);
-    direction = qBound(1.0, direction, 360.0);
+    direction = qBound(-360.0, direction, 360.0);
 
     // Update the strength label
     forceText->setText("Force du coup: " + QString::number(force));

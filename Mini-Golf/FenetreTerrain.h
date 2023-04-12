@@ -17,6 +17,11 @@
 #include <Terrain.h>
 #include <QThread>
 #include <Windows.h>
+#include <QGraphicsDropShadowEffect>
+#include <QGraphicsView>
+#include <QGraphicsScene>
+#include <QGraphicsLineItem>
+#include <QTransform>
 
 class FenetreTerrain : public QMainWindow
 {
@@ -44,6 +49,22 @@ private:
     QString nom_fichier_terrain;
     QLabel* balle;
     Terrain* terrain1;
+    QLabel* etiquette_force;
+    QLabel* etiquette_direction;
+    QGraphicsDropShadowEffect* effect_etiquette_force;
+    QGraphicsDropShadowEffect* effect_etiquette_direction;
+
+    QLabel* point;
+    QTransform ninetydeg;
+    QTransform onedeg;
+    QTransform angleFleche;
+
+    int transformIndex;
+
+
+    double xPoint;
+    double yPoint;
+
     double xTrans;
     double yTrans;
     double direction;
