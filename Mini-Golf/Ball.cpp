@@ -6,6 +6,7 @@ Ball::Ball()
     Ox = 0.0;
     Oy = 0.0;
     rayon = 0.5;
+    K = 0.1;
 }
 
 Ball::~Ball(){}

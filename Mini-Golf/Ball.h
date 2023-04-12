@@ -17,7 +17,7 @@ private:
 	double direction;	//direction de la balle
 	double amplitude;	//velocite XY combinee (in miles per hours)
 	double rayon;		//rayon de la balle
-	double K = 0.1;					//Facteur de friction	
+	double K;					//Facteur de friction	
 
 public:
 	Ball();								//Constructeur blank

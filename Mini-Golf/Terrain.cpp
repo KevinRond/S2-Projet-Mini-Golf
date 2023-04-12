@@ -114,11 +114,11 @@ Terrain* Terrain::OpenTerrain(std::string  terrain)
 				}
 				else if (lineContents[i] == 'S')
 				{
-					K = 0.30;									//Terrain de Sable
+					balle1->Set_K(0.3);								//Terrain de Sable
 				}
 				else if (lineContents[i] == 'G')
 				{
-					K = 0.05;									//Terrain de Glace
+					balle1->Set_K(0.02);									//Terrain de Glace
 				}
 				else
 				{
@@ -291,7 +291,7 @@ int Terrain::VerifierColision()
 	{
 		double direction = balle1->Get_Direction() + 1;
 		balle1->Set_Direction(direction);
-		VerifierColision();
+		return VerifierColision();
 	}
 	return IndexColision;
 }
