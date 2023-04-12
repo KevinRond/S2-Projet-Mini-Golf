@@ -114,7 +114,7 @@ Terrain* Terrain::OpenTerrain(std::string  terrain)
 				}
 				else if (lineContents[i] == 'S')
 				{
-					K = 0.20;									//Terrain de Sable
+					K = 0.30;									//Terrain de Sable
 				}
 				else if (lineContents[i] == 'G')
 				{
@@ -271,7 +271,7 @@ int Terrain::VerifierColision()
 	}
 																				//position de balle aura donc la meme que l'interaction calcule precedament
 	
-	distanceTrou = sqrt(pow((Ix - TrouX), 2) + pow((Iy - TrouY), 2));			//Calcul la distance du point d'intersection avec le trou
+	distanceTrou = sqrt(pow((Ox - TrouX), 2) + pow((Oy - TrouY), 2));			//Calcul la distance du point d'intersection avec le trou
 	if (distanceTrou < Plusproche && i != IndexColision)						//Si cette distance est sous le radius du trou il y a interraction
 	{
 		if (isBetween(Ix, hole1->Get_x() - hole1->Get_radius(), hole1->Get_x() + hole1->Get_radius()) && isBetween(Iy, hole1->Get_y() - hole1->Get_radius(), hole1->Get_y() + hole1->Get_radius()))

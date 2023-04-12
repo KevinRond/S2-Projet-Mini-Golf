@@ -37,7 +37,7 @@ private:
 	Parcours ParcoursTotal;
 	std::pair<double, double> pointIntersection;
 	int prevIndex = -2;
-	double K = 0.15;					//Facteur de friction	
+	double K = 0.20;					//Facteur de friction	
 	int nbCoup = 0;
 	int nbRicochet = 0;
 	bool terrainreussi = false;
