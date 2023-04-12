@@ -337,3 +337,13 @@ bool Terrain::isOnLine(double x0, double y0, double m, double b) {
 	double y = m * x0 + b;
 	return y == y0;
 }
+
+double Terrain::getOx()
+{
+	return balle1->Get_Ox();
+}
+
+double Terrain::getOy()
+{
+	return balle1->Get_Oy();
+}

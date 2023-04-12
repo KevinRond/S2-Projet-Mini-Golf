@@ -112,7 +112,8 @@ void MainMenu::action_scoreboard()
 
 void MainMenu::keyPressEvent(QKeyEvent* event)
 {
-    switch (event->key()) {
+    switch (event->key()) 
+    {
     case Qt::Key_Left:
         // Handle left arrow key press
         break;

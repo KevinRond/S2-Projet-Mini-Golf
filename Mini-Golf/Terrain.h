@@ -48,5 +48,7 @@ public:
 	int getCOup();
 	int getRicochet();
 	bool verifTrou();
+	double getOx();
+	double getOy();
 };
 #endif

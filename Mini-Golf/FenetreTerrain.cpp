@@ -40,7 +40,7 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
 
     //Initialisation des variables de force du coup et de la direction
     force_coup = 0;
-    direction_coup = 90;
+    direction_coup = 0;
 
 
     //Initialisation de leurs etiquettes
@@ -49,7 +49,7 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     etiquette_force->move(50, 100);
     etiquette_force->setFixedSize(200, 50);
 
-    etiquette_direction = new QLabel("Direction du coup: 90 degre", this);
+    etiquette_direction = new QLabel("Direction du coup: 0 degre", this);
     //etiquette_direction->setAlignment(Qt::AlignCenter);
     etiquette_direction->move(50, 150);
     etiquette_direction->setFixedSize(300, 50);
@@ -80,6 +80,29 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     etiquette_direction->setGraphicsEffect(effect_etiquette_direction);
 
 
+    balle = new QLabel("Balle", this);
+    terrain1 = new Terrain;
+    QPixmap pixmap("../Graphic/Ball.png");
+    balle->setPixmap(pixmap);
+    xTrans = pixmap.width() / 2;
+    yTrans = pixmap.height() / 2;
+
+    indexParcours = 0;
+
+    view = new QGraphicsView(this);
+    view->setGeometry(0, 0, 1280, 720);
+    view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    view->setStyleSheet("background: transparent;");
+
+    scene = new QGraphicsScene(view);
+    view->setScene(scene);
+
+    arrow = new QGraphicsLineItem(0, 0, 50, 0);
+    QPen pen(Qt::red);
+    pen.setWidth(2);
+    arrow->setPen(pen);
+    scene->addItem(arrow);
 
 }
 
@@ -92,6 +115,10 @@ FenetreTerrain::~FenetreTerrain()
     delete texteTitre;
     delete b_retour;
     delete nomfichier;
+    delete arrow;
+    delete scene;
+    delete view;
+
 }
 
 void FenetreTerrain::action_retour()
@@ -104,9 +131,29 @@ void FenetreTerrain::set_file_name(QString file_name)
     nom_fichier_terrain = file_name;
     QString terrainPNG = "../Terrain/" + nom_fichier_terrain + ".png";
     QString terrainTXTQ = "../Terrain/" + nom_fichier_terrain + ".txt";
-    string terrainTXT = terrainTXTQ.toStdString();
+    string terrainTXT = terrainTXTQ.toStdString(); 
 
     setStyleSheet(QString("QMainWindow{ background-image: url(%1); }").arg(terrainPNG));
+
+    terrain1->OpenTerrain(terrainTXT);
+    terrain1->Display();
+    std::string direction;
+    std::string force;
+    double Ox = round(terrain1->getOx() * 10 - xTrans);
+    double Oy = round(((72 - terrain1->getOy()) * 10) - yTrans);
+    balle->setGeometry(Ox, Oy, xTrans * 2, yTrans * 2);
+    balle->show();
+
+    //double ball_x = balle->x() + xTrans;
+    //double ball_y = balle->y() + yTrans;
+    double arrow_x = Ox + 50 * cos(direction_coup * M_PI / 180);
+    double arrow_y = Oy - 50 * sin(direction_coup * M_PI / 180);
+    arrow->setLine(Ox, Oy, arrow_x, arrow_y);
+    arrow->setRotation(-direction_coup);
+
+    qApp->processEvents();
+
+
 }
 
 QString FenetreTerrain::get_file_name()
@@ -121,8 +168,26 @@ void FenetreTerrain::affiche_nom_fichier()
 
 void FenetreTerrain::keyPressEvent(QKeyEvent* event)
 {
+    Coup coup1(direction_coup, force_coup);
+    Parcours parcours;
+    double Ox = round(terrain1->getOx() * 10 - xTrans);
+    double Oy = round(((72 - terrain1->getOy()) * 10) - yTrans);
+
     switch (event->key())
     {
+    case Qt::Key_R:
+        parcours = terrain1->CoupDonne(coup1);
+        for (indexParcours; indexParcours < parcours.GetCoorXY().size(); indexParcours++)
+        {
+            const auto& coord = parcours.GetCoorXY()[indexParcours];
+            int x = round(coord.first * 10 - xTrans);
+            int y = round(((72 - coord.second) * 10) - yTrans);
+            balle->move(x, y);
+            qApp->processEvents();
+            Sleep(50);
+
+        }
+
     case Qt::Key_W:
         // Increase strength by 1
         force_coup++;
@@ -145,12 +210,16 @@ void FenetreTerrain::keyPressEvent(QKeyEvent* event)
     }
 
     // Ensure that strength is within a valid range
-    force_coup = qBound(0, force_coup, 100);
-    direction_coup = qBound(0, direction_coup, 360);
+    force_coup = qBound(0.0, force_coup, 100.0);
+    //direction_coup = qBound(0.0, direction_coup, 360.0);
 
     // Update the strength label
     etiquette_force->setText("Force du coup: " + QString::number(force_coup));
     etiquette_direction->setText("Direction du coup: " + QString::number(direction_coup) + " degre");
+    double arrow_x = Ox + 50 * cos(direction_coup * M_PI / 180);
+    double arrow_y = Oy - 50 * sin(direction_coup * M_PI / 180);
+    arrow->setLine(Ox, Oy, arrow_x, arrow_y);
+    arrow->setRotation(-direction_coup);
 
     // Accept the key event
     event->accept();

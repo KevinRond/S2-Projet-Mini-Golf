@@ -12,10 +12,19 @@
 #include <QStackedWidget>
 #include <QLabel>
 #include <QKeyEvent>
-#include <QLabel>
 #include <QGraphicsDropShadowEffect>
+#include <QGraphicsProxyWidget>
+#include <QGraphicsLineItem>
+#include <QGraphicsScene>
+#include <QGraphicsView>
 
 #include <iostream>
+#include <conio.h>
+#include "Terrain.h"
+#include <Windows.h>
+#include <vector>
+#include <math.h>
+
 
 class FenetreTerrain : public QMainWindow
 {
@@ -32,8 +41,7 @@ signals:
 
 private slots:
     void action_retour();
-    void affiche_nom_fichier();
-    
+    void affiche_nom_fichier();  
 
 protected:
     void keyPressEvent(QKeyEvent* event) override;
@@ -48,7 +56,15 @@ private:
     QGraphicsDropShadowEffect* effect_etiquette_force;
     QGraphicsDropShadowEffect* effect_etiquette_direction;
 
-    int force_coup;
-    int direction_coup;
+    Terrain* terrain1;
+    QLabel* balle;
+    QGraphicsView* view;
+    QGraphicsScene* scene;
+    QGraphicsLineItem* arrow;
 
+    double force_coup;
+    double direction_coup;
+    double xTrans;
+    double yTrans;
+    int indexParcours;
 };
