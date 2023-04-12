@@ -33,23 +33,17 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
         "QPushButton:pressed { border-image: url(../Graphic/BoutonFermer1.png); }");
 
 
-    QString terrainPNG = "../Terrain/" + nom_fichier_terrain + ".png";
-    QString terrainTXT = "../Terrain/" + nom_fichier_terrain + ".txt";
-    
-    setStyleSheet(QString("QMainWindow{ background-image: url(%1); }").arg(terrainPNG));
-
 
     connect(b_retour, &QPushButton::clicked, this, &FenetreTerrain::action_retour);
 
     balle = new QLabel("Balle", this);
-    terrain1 = new Terrain;
     QPixmap pixmap("../Graphic/Ball.png");
     balle->setPixmap(pixmap);
     xTrans = pixmap.width() / 2;
     yTrans = pixmap.height() / 2;
 
     direction = 1;
-    force = 0;
+    force = 1;
 
     forceText = new QLabel("Force du coup: " + QString::number(force), this);
     forceText->move(50, 100);
@@ -83,13 +77,16 @@ void FenetreTerrain::action_retour()
 
 void FenetreTerrain::set_file_name(QString file_name)
 {
+    direction = 1;
+    force = 1;
+    indexParcours = 0;
     nom_fichier_terrain = file_name;
     QString terrainPNG = "../Terrain/" + nom_fichier_terrain + ".png";
     QString terrainTXTQ = "../Terrain/" + nom_fichier_terrain + ".txt";
     std::string terrainTXT = terrainTXTQ.toStdString();
 
     setStyleSheet(QString("QMainWindow{ background-image: url(%1); }").arg(terrainPNG));
-
+    terrain1 = new Terrain;
     terrain1->OpenTerrain(terrainTXT);
     terrain1->Display();
     std::string direction;
@@ -160,13 +157,14 @@ void FenetreTerrain::keyPressEvent(QKeyEvent* event)
     }
 
     // Ensure that strength is within a valid range
-    force = qBound(0.0, force, 20.0);
+    force = qBound(1.0, force, 20.0);
     direction = qBound(1.0, direction, 360.0);
 
     // Update the strength label
     forceText->setText("Force du coup: " + QString::number(force));
     directionText->setText("Direction du coup: " + QString::number(direction));
 
+    parcourVec.clear();
     // Accept the key event
     event->accept();
  

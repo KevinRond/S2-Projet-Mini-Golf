@@ -289,7 +289,9 @@ int Terrain::VerifierColision()
 
 	if (IndexColision == -2)
 	{
-		std::cout << "erreur" << std::endl;
+		double direction = balle1->Get_Direction() + 1;
+		balle1->Set_Direction(direction);
+		VerifierColision();
 	}
 	return IndexColision;
 }
