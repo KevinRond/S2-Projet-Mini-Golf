@@ -29,10 +29,10 @@ void Coup::setAmplitude(int lectureAmplitude)
 
 double Coup::Get_Direction()
 {
-	return direction;
+	return -direction;
 }
 double Coup::Get_Amplitude()
 {
-	return amplitude * 1.5;
+	return amplitude * 0.44704;
 }
 
