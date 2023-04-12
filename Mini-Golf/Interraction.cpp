@@ -27,7 +27,7 @@ Parcours Interraction::BalleMur(Ball* balle, Mur* mur, std::pair<double, double>
 	double Ox, Oy, Vxy, x, y, K, T, D, Dir;												//Definition des coor de balle et d'interaction
 	Ox = balle->Get_Ox();
 	Oy = balle->Get_Oy();
-	Vxy = balle->Get_Amplitude() * 0.44704;												//converti la vitesse de balle de mph to m/s
+	Vxy = balle->Get_Amplitude();												//converti la vitesse de balle de mph to m/s
 	Dir = balle->Get_Direction();
 	K = balle->Get_K();
 	distancetoHit = (sqrt(pow(inters.first - Ox, 2) + pow(inters.second - Oy, 2)));	//distance entre la balle et sa prochaine interraction
@@ -64,8 +64,7 @@ Parcours Interraction::BalleMur(Ball* balle, Mur* mur, std::pair<double, double>
 		x = (cos(Dir) * distanceItTraveled) + Ox;
 		y = (sin(Dir) * distanceItTraveled) + Oy;
 		balle->Set_Oxy(x, y);
-		std::cout << "Balle en position (" << x << "," << 720-y << ")." << std::endl;
-		std::cout << "Balle en position (" << x << "," << 720 - y << ")." << std::endl;
+		std::cout << "Balle en position (" << x << "," << y << ")." << std::endl;
 	}
 	return petitParcour;
 }
