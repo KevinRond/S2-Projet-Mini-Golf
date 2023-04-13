@@ -18,6 +18,7 @@
 #include <QThread>
 #include <Windows.h>
 #include <QDialog>
+#include <QGraphicsDropShadowEffect>
 
 class FenetreTerrain : public QMainWindow
 {
@@ -28,6 +29,8 @@ public:
     ~FenetreTerrain();
     void set_file_name(QString file_name);
     QString get_file_name();
+    double calculateX(double posBalleX);
+    double calculateY(double posBalley);
 
 signals:
     void b_retour_appuyer();
@@ -51,6 +54,13 @@ private:
     Terrain* terrain1;
     QDialog* reussi;
     QDialog* fin;
+    QLabel* point;
+    QGraphicsDropShadowEffect* effect_etiquette_force;
+    QGraphicsDropShadowEffect* effect_etiquette_direction;
+
+
+    double xPoint;
+    double yPoint;
     double xTrans;
     double yTrans;
     double direction;
