@@ -16,12 +16,12 @@ Coup::~Coup()
 {
 }
 
-void Coup::setDirection(int lectureJoystick)
+void Coup::setDirection(double lectureJoystick)
 {
 	direction = direction - lectureJoystick;
 }
 
-void Coup::setAmplitude(int lectureAmplitude)
+void Coup::setAmplitude(double lectureAmplitude)
 {
 	amplitude = lectureAmplitude;
 }
@@ -36,3 +36,13 @@ double Coup::Get_Amplitude()
 	return amplitude * 0.44704;
 }
 
+
+void Coup::setMumu(int lectureMumu)
+{
+	mumu = lectureMumu;
+}
+
+double Coup::Get_Mumu()
+{
+	return mumu;
+}

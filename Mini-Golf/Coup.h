@@ -13,6 +13,7 @@ private:
 
 	double vitesseX, vitesseY;					//Vitesse en X et Y
 	double accelerationX, accelerationY;		//Acceleration en X et Y
+	double mumu;
 
 public:
 	Coup();
@@ -20,12 +21,14 @@ public:
 	~Coup();
 
 	//Setter
-	void setDirection(int lectureJoystick);		//Direction choisie + random factor
-	void setAmplitude(int lectureAmplitude);
+	void setDirection(double lectureJoystick);		//Direction choisie + random factor
+	void setAmplitude(double lectureAmplitude);
+	void setMumu(int lectureMumu);
 
 	//Getter
 	double Get_Amplitude();
 	double Get_Direction();						//Lecture de la direction retour en rad
+	double Get_Mumu();
 
 };
 #endif

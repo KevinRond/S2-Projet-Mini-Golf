@@ -1,9 +1,13 @@
-#pragma once
+
 #ifndef MANETTE_H
 #define MANETTE_H
 #include <iostream>
 #include <string>
 #include <thread>
+#include <atomic>
+#include "Coup.h"
+
+
 /*-------------------------- Librairies externes ----------------------------*/
 #include "include/serial/SerialPort.hpp"
 #include "include/json.hpp"
@@ -15,6 +19,7 @@ using json = nlohmann::json;
 
 /*---------------------------- Variables globales ---------------------------*/
 //extern SerialPort* arduino; //doit etre un objet global!
+//bool mutex = 0;
 /*------------------------------ Constantes ---------------------------------*/
 //extern int cas, afficher;
 /*----------------------------- Fonction "Main" -----------------------------*/
@@ -22,14 +27,13 @@ using json = nlohmann::json;
 class Manette {
 private:
 	SerialPort* arduino;
-	int cas, afficher, amplitude, joyY, joyX;
-	bool button1, button2, button3, button4;
 	bool s_finished;
-
+	std::thread communicationThread;
 
 public:
 	Manette();
-	void communication();
+	~Manette();
+	int communication();
 	void demande(int NewCas, int NewAfficher);
 	void setup(std::string usbport);
 	bool SendToSerial(SerialPort* arduino, json j_msg);
@@ -42,17 +46,24 @@ public:
 	bool getButton2();
 	bool getButton3();
 	bool getButton4();
-	int getJoyX();
-	int getJoyY();
-
+	double getJoyX();
+	double getJoyY();
+	int getMumu();
+	double GetDirectionElec(class Coup);
+	double GetPuissanceElec(class Coup);
+	double getMumu(class Coup);
+	void SequenceCoup(class Coup);
 	void setCas(int nouveauCas);
 	void setAfficher(int nouvelAffichage);
-	void setState(bool nouveauState);
 	//void startThread();
-	friend std::ostream& operator << (std::ostream& o,  const Manette& m)
+	friend std::ostream& operator << (std::ostream& o, const Manette& m)
 	{
 		o << "Valeur Mesuree [" << m.amplitude << "," << m.joyX << "," << m.joyY << "]";
 		return o;
 	}
+
+	int cas, afficher, amplitude, mumu;
+	double joyX, joyY;
+	bool button1, button2, button3, button4;
 };
 #endif

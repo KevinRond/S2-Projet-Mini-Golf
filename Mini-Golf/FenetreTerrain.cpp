@@ -92,6 +92,7 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
 
     fin = new QDialog(this);
     fin->setFixedSize(640, 360);
+    fin->setStyleSheet("QDialog { background-image: url(../Graphic/NextLevel1.png); }");
 
     QPushButton* b_fin = new QPushButton("Retour a l'ecran d'acceuil", fin);
     b_fin->setGeometry(170, 105, 300, 150);
@@ -148,7 +149,6 @@ void FenetreTerrain::set_file_name(QString file_name)
     balle->setGeometry(Ox, Oy, xTrans*2, yTrans*2);
     balle->show();
     qApp->processEvents();
-    reussi->exec();
 }
 
 QString FenetreTerrain::get_file_name()
@@ -181,7 +181,7 @@ void FenetreTerrain::action_fin()
 void FenetreTerrain::keyPressEvent(QKeyEvent* event)
 {
     std::vector<std::pair<double, double>> parcourVec;
-    Coup coup1(direction, force);
+    Coup coup1(-direction, force);
     Parcours parcours;
     switch (event->key())
     {

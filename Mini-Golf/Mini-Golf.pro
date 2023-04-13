@@ -17,7 +17,8 @@ HEADERS     += \
 	MenuSelectionTerrain.h \ 
 	MenuScoreboard.h \
 	MenuReglements.h \
-	FenetreTerrain.h
+	FenetreTerrain.h  \
+	Manette.h
 SOURCES     += \
 	Ball.cpp \
 	Hole.cpp \
@@ -34,7 +35,8 @@ SOURCES     += \
 	MenuSelectionTerrain.cpp \ 
 	MenuScoreboard.cpp \
 	MenuReglements.cpp \
-	FenetreTerrain.cpp
+	FenetreTerrain.cpp \
+	Manette.cpp
 INCLUDEPATH += ../../Mini-Golf
 INCLUDEPATH += ../../Mini-Golf/include
 INCLUDEPATH += ../../Mini-Golf/Terrain
