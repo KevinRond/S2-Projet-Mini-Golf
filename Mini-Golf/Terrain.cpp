@@ -114,11 +114,11 @@ Terrain* Terrain::OpenTerrain(std::string  terrain)
 				}
 				else if (lineContents[i] == 'S')
 				{
-					balle1->Set_K(0.3);								//Terrain de Sable
+					balle1->Set_K(0.37);								//Terrain de Sable
 				}
 				else if (lineContents[i] == 'G')
 				{
-					balle1->Set_K(0.02);									//Terrain de Glace
+					balle1->Set_K(0.05);									//Terrain de Glace
 				}
 				else
 				{

@@ -194,7 +194,7 @@ void FenetreTerrain::set_file_name(QString file_name)
     point->show();
 
     qApp->processEvents();
-
+    jouer();
 }
 
 QString FenetreTerrain::get_file_name()
@@ -225,19 +225,88 @@ void FenetreTerrain::affiche_nom_fichier()
 
 void FenetreTerrain::action_trouSuivant()
 {
+    reussi->close();
     QString numtrou = nom_fichier_terrain.right(1)[0];
     int numeroTrou = numtrou.toInt();
     numeroTrou++;
     nom_fichier_terrain.chop(1);
     nom_fichier_terrain = nom_fichier_terrain + QString::number(numeroTrou);
     set_file_name(nom_fichier_terrain);
-    reussi->close();
+    
 }
 
 void FenetreTerrain::action_fin()
 {
     emit b_fin_appuyer();
     fin->close();
+}
+
+void FenetreTerrain::jouer()
+{
+    while (terrain1->TerrainReussi() == false)
+    {
+        std::vector<std::pair<double, double>> parcourVec;
+        Coup* coup1 = new Coup(direction, force);
+        Coup* coup = new Coup(90, 1);
+        Parcours parcours;
+
+        double Ox = terrain1->getOx() * 100 - xTrans;
+        double Oy = 720 - terrain1->getOy() * 100 - yTrans;
+        double arrowX = calculateX(Ox);
+        double arrowY = calculateY(Oy);
+        point->setGeometry((arrowX - (xPoint / 2) + 5), (arrowY - (yPoint / 2) + 5), xPoint, yPoint);
+        manette->setBouton();
+        while (!manette->getButton1())
+        {
+            double prevDirect = direction;
+            direction = manette->GetDirectionElec(coup);
+            directionText->setText("Direction du coup: " + QString::number(direction));
+            if (prevDirect < direction)
+            {
+                arrowX = calculateX(Ox);
+                arrowY = calculateY(Oy);
+                point->setGeometry((arrowX - (xPoint / 2) + 5), (arrowY - (yPoint / 2) + 5), xPoint, yPoint);
+            }
+            else
+            {
+                arrowX = calculateX(Ox);
+                arrowY = calculateY(Oy);
+                point->setGeometry((arrowX - (xPoint / 2) + 5), (arrowY - (yPoint / 2) + 5), xPoint, yPoint);
+            }
+            point->show();
+            qApp->processEvents();
+            Sleep(10);
+        }
+
+        manette->GetPuissanceElec(coup);
+        //manette->SequenceCoup(coup);
+        parcours = terrain1->CoupDonne(coup);
+        parcourVec = parcours.GetCoorXY();
+        point->setVisible(false);
+
+        for (indexParcours; indexParcours < parcourVec.size(); indexParcours++)
+        {
+            const auto& coord = parcourVec[indexParcours];
+            int x = (coord.first * 100) - xTrans;
+            int y = (720 - (coord.second * 100)) - yTrans;
+            balle->move(x, y);
+            qApp->processEvents();
+            Sleep(37);
+        }
+    }
+
+    QString numtrou = nom_fichier_terrain.right(1)[0];
+    int numeroTrou = numtrou.toInt();
+    balle->hide();
+    qApp->processEvents();
+    if (numeroTrou < 8)
+    {
+        reussi->exec();
+    }
+    else
+    {
+        fin->exec();
+    }
 }
 
 void FenetreTerrain::keyPressEvent(QKeyEvent* event)

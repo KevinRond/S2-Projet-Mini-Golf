@@ -44,6 +44,7 @@ private slots:
     void affiche_nom_fichier();
     void action_trouSuivant();
     void action_fin();
+    void jouer();
 
 private:
     QTextEdit* texteTitre;
