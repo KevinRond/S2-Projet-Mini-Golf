@@ -143,10 +143,9 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
 FenetreTerrain::~FenetreTerrain()
 {
     delete point;
-    delete balle;
     delete effect_etiquette_direction;
     delete effect_etiquette_force;
-    delete texteTitre;
+    //delete texteTitre;
     delete b_retour;
     delete balle;
     delete forceText;
