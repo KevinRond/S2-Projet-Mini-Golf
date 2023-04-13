@@ -212,6 +212,10 @@ int Manette::getCas()
 {
     return cas;
 }
+void Manette::setBouton()
+{
+    button1 = false;
+}
 int Manette::getAfficher()
 {
     return afficher;
@@ -269,15 +273,16 @@ void Manette::demande(int NewCas, int NewAfficher) {
 double Manette::GetDirectionElec(Coup* coup)
 {
     demande(2, 9);
-    button1 = false;
+    //button1 = false;
     communication();
     coup->setDirection(joyX - 2);
     std::cout << coup->Get_Direction() << std::endl;
-    Sleep(10);
+    Sleep(1);
     return coup->Get_Direction();
 }
 double  Manette::GetPuissanceElec(Coup* coup)
 {
+    demande(3, 9);
     amplitude = 0;
     coup->setAmplitude(0);
     int i = 0;

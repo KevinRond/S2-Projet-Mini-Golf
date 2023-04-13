@@ -40,6 +40,7 @@ public:
 	bool RcvFromSerial(SerialPort* arduino, std::string& msg);
 
 	int getCas();
+	void setBouton();
 	int getAfficher();
 	int getAmplitude();
 	bool getButton1();

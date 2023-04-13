@@ -183,8 +183,6 @@ void FenetreTerrain::set_file_name(QString file_name)
     terrain1 = new Terrain;
     terrain1->OpenTerrain(terrainTXT);
     terrain1->Display();
-    std::string direction;
-    std::string force;
     double Ox = terrain1->getOx()*100 - xTrans;
     double Oy = 720 - terrain1->getOy()*100- yTrans;
     balle->setGeometry(Ox, Oy, xTrans*2, yTrans*2);
@@ -196,6 +194,7 @@ void FenetreTerrain::set_file_name(QString file_name)
     point->show();
 
     qApp->processEvents();
+
 }
 
 QString FenetreTerrain::get_file_name()
@@ -254,21 +253,37 @@ void FenetreTerrain::keyPressEvent(QKeyEvent* event)
     double arrowY = calculateY(Oy);
 
     point->setGeometry((arrowX - (xPoint / 2) + 5), (arrowY - (yPoint / 2) + 5), xPoint, yPoint);
-    point->show();
 
     switch (event->key())
     {
     case Qt::Key_R:
-        while (1)
+
+        manette->setBouton();
+        while (!manette->getButton1())
         {
+            double prevDirect = direction;
             direction = - manette->GetDirectionElec(coup);
             directionText->setText("Direction du coup: " + QString::number(direction));
-            event->accept();
-            
-
+            if (prevDirect < direction)
+            {
+                arrowX = calculateX(Ox);
+                arrowY = calculateY(Oy);
+                point->setGeometry((arrowX - (xPoint / 2) + 5), (arrowY - (yPoint / 2) + 5), xPoint, yPoint);
+            }
+            else
+            {
+                arrowX = calculateX(Ox);
+                arrowY = calculateY(Oy);
+                point->setGeometry((arrowX - (xPoint / 2) + 5), (arrowY - (yPoint / 2) + 5), xPoint, yPoint);
+            }
+            point->show();
+            qApp->processEvents();
+            Sleep(10);
         }
+
+        manette->GetPuissanceElec(coup);
         //manette->SequenceCoup(coup);
-        parcours = terrain1->CoupDonne(coup1);
+        parcours = terrain1->CoupDonne(coup);
         parcourVec = parcours.GetCoorXY();
         point->setVisible(false);
 

@@ -20,7 +20,7 @@ Coup::~Coup()
 
 void Coup::setDirection(double lectureJoystick)
 {
-	direction = direction - lectureJoystick;
+	direction = direction - 2*lectureJoystick;
 }
 
 void Coup::setAmplitude(double lectureAmplitude)
