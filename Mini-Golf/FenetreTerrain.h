@@ -32,6 +32,8 @@ public:
     ~FenetreTerrain();
     void set_file_name(QString file_name);
     QString get_file_name();
+    double calculateX(double posBalleX);
+    double calculateY(double posBalley);
 
 signals:
     void b_retour_appuyer();
@@ -55,9 +57,10 @@ private:
     QGraphicsDropShadowEffect* effect_etiquette_direction;
 
     QLabel* point;
-    QTransform ninetydeg;
+    // QTransform ninetydeg;
     QTransform onedeg;
-    QTransform angleFleche;
+    QTransform minusonedeg;
+    //QTransform angleFleche;
 
     int transformIndex;
 

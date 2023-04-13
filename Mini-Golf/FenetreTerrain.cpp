@@ -84,17 +84,18 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     directionText->setGraphicsEffect(effect_etiquette_direction);
 
     indexParcours = 0;
-    transformIndex = 90;
+    transformIndex = 1;
 
-    ninetydeg.rotate(90);
+    //ninetydeg.rotate(90);
     onedeg.rotate(1);
-    angleFleche.rotate(transformIndex);
+    minusonedeg.rotate(-1);
+    //angleFleche.rotate(90);
 
     point = new QLabel(this);
-    QPixmap fleche("../Graphic/point.png");
-    point->setPixmap(fleche.transformed(angleFleche));
-    xPoint = fleche.height();
-    yPoint = fleche.width() / 2;
+    QPixmap fleche("../Graphic/crosshair.png");
+    point->setPixmap(fleche);
+    xPoint = fleche.width();
+    yPoint = fleche.height();
 
 }
 
@@ -131,8 +132,9 @@ void FenetreTerrain::set_file_name(QString file_name)
     double Oy = 720 - terrain1->getOy()*100- yTrans;
     balle->setGeometry(Ox, Oy, xTrans*2, yTrans*2);
     balle->show();
-
-    point->setGeometry(Ox, Oy-4, xPoint, yPoint+10);
+    double arrowX = calculateX(Ox);
+    double arrowY = calculateY(Oy);
+    point->setGeometry((arrowX - (xPoint / 2) + 5), (arrowY - (yPoint / 2) + 5), xPoint, yPoint);
     point->show();
    
     qApp->processEvents();
@@ -144,6 +146,23 @@ QString FenetreTerrain::get_file_name()
     return nom_fichier_terrain;
 }
 
+double FenetreTerrain::calculateX(double posBalleX)
+{
+    double angleInRad = direction * M_PI / 180.0;
+    double newX = posBalleX + 45 * cos(angleInRad);
+
+    return newX;
+}
+
+double FenetreTerrain::calculateY(double posBalleY)
+{
+    double angleInRad = direction * M_PI / 180.0;
+    double newY = posBalleY - 45 * sin(angleInRad);
+
+    return newY;
+}
+
+
 void FenetreTerrain::affiche_nom_fichier()
 {
     nomfichier->append(nom_fichier_terrain);
@@ -154,11 +173,16 @@ void FenetreTerrain::keyPressEvent(QKeyEvent* event)
     std::vector<std::pair<double, double>> parcourVec;
     Coup coup1(direction, force);
     Parcours parcours;
-    QPixmap fleche("../Graphic/point.png");
+    QPixmap fleche("../Graphic/crosshair.png");
     double Ox = terrain1->getOx() * 100 - xTrans;
     double Oy = 720 - terrain1->getOy() * 100 - yTrans;
-    point->setGeometry(Ox, Oy - 4, xPoint, yPoint + 10);
+    double arrowX = calculateX(Ox);
+    double arrowY = calculateY(Oy);
+
+    point->setGeometry((arrowX - (xPoint / 2) + 5), (arrowY - (yPoint / 2) + 5), xPoint, yPoint);
     point->show();
+
+    
 
     switch (event->key())
     {
@@ -183,13 +207,41 @@ void FenetreTerrain::keyPressEvent(QKeyEvent* event)
     case Qt::Key_A:
 
         direction--;
+        arrowX = calculateX(Ox);
+        arrowY = calculateY(Oy);
+
+        point->setGeometry((arrowX - (xPoint / 2) + 5), (arrowY - (yPoint / 2) + 5), xPoint, yPoint);
+        /*transformIndex--;
+        if (transformIndex > 0)
+        {
+            point->setPixmap(fleche.transformed(onedeg.rotate(transformIndex)));
+            transformIndex = 0;
+        }
+        point->setPixmap(fleche.transformed(onedeg.rotate(-1)));
+        xPoint = fleche.width();
+        yPoint = fleche.height();
+        point->setGeometry(Ox - (xPoint / 2), Oy - (yPoint / 2), xPoint, yPoint);
+        last_key = Qt::Key_A;*/
         break;
 
     case Qt::Key_D:
 
         direction++;
-        transformIndex--;
-        point->setPixmap(fleche.transformed(angleFleche.rotate(transformIndex))); 
+        arrowX = calculateX(Ox);
+        arrowY = calculateY(Oy);
+
+        point->setGeometry((arrowX - (xPoint / 2) + 5), (arrowY - (yPoint / 2) + 5), xPoint, yPoint);
+        /*transformIndex++;
+        if (transformIndex < 0)
+        {
+            point->setPixmap(fleche.transformed(onedeg.rotate(transformIndex)));
+            transformIndex = 0;
+        }
+        point->setPixmap(fleche.transformed(minusonedeg.rotate(1)));
+        xPoint = fleche.width();
+        yPoint = fleche.height();
+        point->setGeometry(Ox - (xPoint / 2), Oy - (yPoint / 2), xPoint, yPoint);
+        last_key = Qt::Key_D;*/
         break;
 
     case Qt::Key_S:
