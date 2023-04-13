@@ -8,7 +8,7 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     
 
    
-    texteTitre = new QTextEdit(this);
+    /*texteTitre = new QTextEdit(this);
     texteTitre->setGeometry(240, 100, 800, 400);
     texteTitre->setPlainText("Terrain");
     texteTitre->setReadOnly(true);
@@ -19,7 +19,7 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
         "border: none;"
         "}";
     texteTitre->setStyleSheet(style_titre);
-    texteTitre->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    texteTitre->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);*/
 
     b_retour = new QPushButton("Retour", this);
     b_retour->setGeometry(1080, 620, 200, 100);
@@ -52,6 +52,31 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     directionText = new QLabel("Direction du coup: " + QString::number(direction), this);
     directionText->move(50, 150);
     directionText->setFixedSize(300, 50);
+
+    QString style_etiquette = "QLabel {"
+        "font-family: Helvetica;"
+        "font-size: 24px;"
+        "color: white; "
+        "background-color: transparent;"
+        "border: none;"
+        "}";
+
+    forceText->setStyleSheet(style_etiquette);
+    directionText->setStyleSheet(style_etiquette);
+
+    //Design des effets des etiquettes
+    effect_etiquette_force = new QGraphicsDropShadowEffect;
+    effect_etiquette_force->setBlurRadius(5);
+    effect_etiquette_force->setColor(Qt::black);
+    effect_etiquette_force->setOffset(1, 1);
+    forceText->setGraphicsEffect(effect_etiquette_force);
+
+    effect_etiquette_direction = new QGraphicsDropShadowEffect;
+    effect_etiquette_direction->setBlurRadius(5);
+    effect_etiquette_direction->setColor(Qt::black);
+    effect_etiquette_direction->setOffset(1, 1);
+    directionText->setGraphicsEffect(effect_etiquette_direction);
+
 
     indexParcours = 0;
 
@@ -88,7 +113,7 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
 
     connect(b_trouSuivant, &QPushButton::released, this, &FenetreTerrain::action_trouSuivant);
 
-    //Création du widget lorsque tu as fini
+    //Creation du widget lorsque tu as fini
 
     fin = new QDialog(this);
     fin->setFixedSize(640, 360);
@@ -110,15 +135,28 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
 
     //creation de la mannette
     manette = new Manette("com3");
+
+    point = new QLabel(this);
+    QPixmap fleche("../Graphic/crosshair.png");
+    point->setPixmap(fleche);
+    xPoint = fleche.width();
+    yPoint = fleche.height();
+
+
 }
 
 FenetreTerrain::~FenetreTerrain()
 {
-    delete texteTitre;
+    delete point;
+    delete effect_etiquette_direction;
+    delete effect_etiquette_force;
+    //delete texteTitre;
     delete b_retour;
     delete balle;
     delete forceText;
     delete directionText;
+    delete fin;
+    delete reussi;
 }
 
 void FenetreTerrain::action_retour()
@@ -151,12 +189,34 @@ void FenetreTerrain::set_file_name(QString file_name)
     double Oy = 720 - terrain1->getOy()*100- yTrans;
     balle->setGeometry(Ox, Oy, xTrans*2, yTrans*2);
     balle->show();
+
+    double arrowX = calculateX(Ox);
+    double arrowY = calculateY(Oy);
+    point->setGeometry((arrowX - (xPoint / 2) + 5), (arrowY - (yPoint / 2) + 5), xPoint, yPoint);
+    point->show();
+
     qApp->processEvents();
 }
 
 QString FenetreTerrain::get_file_name()
 {
     return nom_fichier_terrain;
+}
+
+double FenetreTerrain::calculateX(double posBalleX)
+{
+    double angleInRad = direction * M_PI / 180.0;
+    double newX = posBalleX + 45 * cos(angleInRad);
+
+    return newX;
+}
+
+double FenetreTerrain::calculateY(double posBalleY)
+{
+    double angleInRad = direction * M_PI / 180.0;
+    double newY = posBalleY - 45 * sin(angleInRad);
+
+    return newY;
 }
 
 void FenetreTerrain::affiche_nom_fichier()
@@ -187,6 +247,15 @@ void FenetreTerrain::keyPressEvent(QKeyEvent* event)
     Coup* coup1 = new Coup(-direction, force);
     Coup *coup = new Coup(90, 1);
     Parcours parcours;
+
+    double Ox = terrain1->getOx() * 100 - xTrans;
+    double Oy = 720 - terrain1->getOy() * 100 - yTrans;
+    double arrowX = calculateX(Ox);
+    double arrowY = calculateY(Oy);
+
+    point->setGeometry((arrowX - (xPoint / 2) + 5), (arrowY - (yPoint / 2) + 5), xPoint, yPoint);
+    point->show();
+
     switch (event->key())
     {
     case Qt::Key_R:
@@ -201,6 +270,8 @@ void FenetreTerrain::keyPressEvent(QKeyEvent* event)
         //manette->SequenceCoup(coup);
         parcours = terrain1->CoupDonne(coup1);
         parcourVec = parcours.GetCoorXY();
+        point->setVisible(false);
+
         for (indexParcours; indexParcours < parcourVec.size(); indexParcours++)
         {
             const auto& coord = parcourVec[indexParcours];
@@ -230,19 +301,25 @@ void FenetreTerrain::keyPressEvent(QKeyEvent* event)
     case Qt::Key_A:
 
         direction--;
+        arrowX = calculateX(Ox);
+        arrowY = calculateY(Oy);
+        point->setGeometry((arrowX - (xPoint / 2) + 5), (arrowY - (yPoint / 2) + 5), xPoint, yPoint);
         break;
 
     case Qt::Key_D:
 
         direction++;
+        arrowX = calculateX(Ox);
+        arrowY = calculateY(Oy);
+        point->setGeometry((arrowX - (xPoint / 2) + 5), (arrowY - (yPoint / 2) + 5), xPoint, yPoint);
         break;
 
-    case Qt::Key_Z:
+    case Qt::Key_S:
 
         force--;
         break;
 
-    case Qt::Key_C:
+    case Qt::Key_W:
 
         force++;
         break;
@@ -255,8 +332,8 @@ void FenetreTerrain::keyPressEvent(QKeyEvent* event)
     }
 
     // Ensure that strength is within a valid range
-    force = qBound(1.0, force, 20.0);
-    direction = qBound(1.0, direction, 360.0);
+    force = qBound(0.0, force, 20.0);
+    direction = qBound(-360.0, direction, 360.0);
 
     // Update the strength label
     forceText->setText("Force du coup: " + QString::number(force));
