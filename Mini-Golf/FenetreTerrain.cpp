@@ -107,6 +107,9 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
 
     connect(b_fin, &QPushButton::released, this, &FenetreTerrain::action_fin);
 
+
+    //creation de la mannette
+    manette = new Manette("com3");
 }
 
 FenetreTerrain::~FenetreTerrain()
@@ -181,11 +184,21 @@ void FenetreTerrain::action_fin()
 void FenetreTerrain::keyPressEvent(QKeyEvent* event)
 {
     std::vector<std::pair<double, double>> parcourVec;
-    Coup coup1(-direction, force);
+    Coup* coup1 = new Coup(-direction, force);
+    Coup *coup = new Coup(90, 1);
     Parcours parcours;
     switch (event->key())
     {
     case Qt::Key_R:
+        while (1)
+        {
+            direction = - manette->GetDirectionElec(coup);
+            directionText->setText("Direction du coup: " + QString::number(direction));
+            event->accept();
+            
+
+        }
+        //manette->SequenceCoup(coup);
         parcours = terrain1->CoupDonne(coup1);
         parcourVec = parcours.GetCoorXY();
         for (indexParcours; indexParcours < parcourVec.size(); indexParcours++)

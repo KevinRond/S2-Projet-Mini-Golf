@@ -21,13 +21,13 @@ Terrain::~Terrain()
 {
 }
 
-Parcours Terrain::CoupDonne(Coup coup1)
+Parcours Terrain::CoupDonne(Coup* coup1)
 {
 	int indexColision = -2;																		//-1 pour un trou, et le reste pour l'index du mur
 	Parcours ParcoursSection;
 	Interraction Interaction1;
-	balle1->Set_Direction(coup1.Get_Direction() * 3.14159265358979323846 / 180);
-	balle1->Set_Amplitude(coup1.Get_Amplitude());
+	balle1->Set_Direction(coup1->Get_Direction() * 3.14159265358979323846 / 180);
+	balle1->Set_Amplitude(coup1->Get_Amplitude());
 
 	while ((balle1->Get_Amplitude() != 0 && hole1->Sitrou() != 1))
 	{

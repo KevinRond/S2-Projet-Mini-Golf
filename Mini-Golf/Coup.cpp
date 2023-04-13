@@ -4,12 +4,14 @@ Coup::Coup()				//Initialisation de l'objet
 {
 	direction = 45;
 	amplitude = 0;
+	mumu = 0;
 }
 
 Coup::Coup(double dir, double amp)
 {
 	direction = dir;
 	amplitude = amp;
+	mumu = 0;
 }
 
 Coup::~Coup()

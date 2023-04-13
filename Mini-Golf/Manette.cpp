@@ -5,10 +5,10 @@
 /*------------------------------ Constantes ---------------------------------*/
 //int cas, afficher;
 
-Manette::Manette()
+Manette::Manette(std::string comport)
 {
     //cout << "nouvelle manette" << endl;
-    setup("COM3");
+    setup(comport);
 }
 
 Manette::~Manette()
@@ -266,54 +266,52 @@ void Manette::demande(int NewCas, int NewAfficher) {
     return;
 }
 
-double Manette::GetDirectionElec(Coup coup)
+double Manette::GetDirectionElec(Coup* coup)
 {
+    demande(2, 9);
     button1 = false;
-    while (!button1)
-    {
-        communication();
-        coup.setDirection(joyX - 2);
-        std::cout << coup.Get_Direction() << std::endl;
-        Sleep(10);
-    }
-    return coup.Get_Direction();
+    communication();
+    coup->setDirection(joyX - 2);
+    std::cout << coup->Get_Direction() << std::endl;
+    Sleep(10);
+    return coup->Get_Direction();
 }
-double  Manette::GetPuissanceElec(Coup coup)
+double  Manette::GetPuissanceElec(Coup* coup)
 {
     amplitude = 0;
-    coup.setAmplitude(0);
+    coup->setAmplitude(0);
     int i = 0;
     while (1)
     {
         communication();
-        if (getAmplitude() > coup.Get_Amplitude())
+        if (getAmplitude() > coup->Get_Amplitude())
         {
-            coup.setAmplitude(getAmplitude());
+            coup->setAmplitude(getAmplitude());
         }
-        std::cout << coup.Get_Amplitude() << std::endl;
+        std::cout << coup->Get_Amplitude() << std::endl;
 
-        if (coup.Get_Amplitude() > 3)
+        if (coup->Get_Amplitude() > 3)
             break;
     }
-    return coup.Get_Amplitude();
+    return coup->Get_Amplitude();
 }
-double Manette::getMumu(Coup coup) {
+double Manette::getMumu(Coup* coup) {
     button1 = false;
     while (!button1)
     {
         communication();
-        coup.setMumu(mumu);
-        std::cout << coup.Get_Mumu() << std::endl;
+        coup->setMumu(mumu);
+        std::cout << coup->Get_Mumu() << std::endl;
     }
-    return coup.Get_Mumu();
+    return coup->Get_Mumu();
 }
-void Manette::SequenceCoup(Coup coup) {
+void Manette::SequenceCoup(Coup* coup) {
     demande(2, 9);
-    coup.setMumu(getMumu(coup));
-    Sleep(100);
-    coup.setDirection(GetDirectionElec(coup));
-    demande(3, 9);
-    coup.setAmplitude(GetPuissanceElec(coup));
+    //coup->setMumu(getMumu(coup));
+    //Sleep(100);
+    coup->setDirection(GetDirectionElec(coup));
+    //demande(3, 9);
+    //coup->setAmplitude(GetPuissanceElec(coup));
     //terrain->CoupDonne(coup);
 }
 //int main() {

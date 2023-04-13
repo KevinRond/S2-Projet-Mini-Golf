@@ -46,7 +46,7 @@ public:
 	Terrain();		
 	~Terrain();		
 	Terrain *OpenTerrain(std::string terrain);		//charge le terrain via fichier
-	Parcours CoupDonne(Coup coup1);					//Fonction principale, resoura le coup et retournera le parcours au GM
+	Parcours CoupDonne(Coup* coup1);					//Fonction principale, resoura le coup et retournera le parcours au GM
 	int VerifierColision();							//Doit virifie l'interaction avec son trou ou l'un de ses murs.
 	bool isBetween(double value, double bound1, double bound2);
 	void Display();

@@ -31,7 +31,7 @@ private:
 	std::thread communicationThread;
 
 public:
-	Manette();
+	Manette(std::string comport);
 	~Manette();
 	int communication();
 	void demande(int NewCas, int NewAfficher);
@@ -49,10 +49,10 @@ public:
 	double getJoyX();
 	double getJoyY();
 	int getMumu();
-	double GetDirectionElec(class Coup);
-	double GetPuissanceElec(class Coup);
-	double getMumu(class Coup);
-	void SequenceCoup(class Coup);
+	double GetDirectionElec(class Coup* coup);
+	double GetPuissanceElec(Coup* coup);
+	double getMumu(Coup* coup);
+	void SequenceCoup(Coup* coup);
 	void setCas(int nouveauCas);
 	void setAfficher(int nouvelAffichage);
 	//void startThread();

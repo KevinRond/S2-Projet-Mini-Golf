@@ -19,6 +19,8 @@
 #include <Windows.h>
 #include <QDialog>
 
+#include "Manette.h"
+
 class FenetreTerrain : public QMainWindow
 {
     Q_OBJECT
@@ -53,9 +55,11 @@ private:
     QDialog* fin;
     double xTrans;
     double yTrans;
-    double direction;
-    double force;
+    double direction = 1;
+    double force = 1;
     int indexParcours;
+    Manette* manette;
+    bool button1;
 
 protected:
     void keyPressEvent(QKeyEvent* event) override;
