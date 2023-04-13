@@ -29,6 +29,10 @@ void Coup::setDirection(int lectureJoystick)
 {
 	direction = direction - lectureJoystick;
 }
+void Coup::setMumu(int lectureMumu)
+{
+	mumu = lectureMumu;
+}
 
 void Coup::setAmplitude(int lectureAmplitude)
 {
@@ -43,6 +47,11 @@ double Coup::Get_Direction()
 double Coup::Get_Amplitude()
 {
 	return amplitude;
+}
+
+double Coup::Get_Mumu()
+{
+	return mumu;
 }
 
 void Coup::calculVitesseX()

@@ -58,36 +58,18 @@ int main()
 	Terrain* terrain = new Terrain;
 	terrain->OpenTerrain("Terrain3.txt");
 	terrain->Display();
+	/*manette->demande(2, 9);
+	int x = 0;
+	while (x < 100) {
+		cout << manette->getJoyY() << endl;
+		x = x + 1;
+		Sleep(100);
+	}
+	*/
 	Coup coup;
-	manette->demande(2, 9);
-	coup.setDirection(manette->GetDirectionElec(coup));
-	manette->demande(3, 9);
-	coup.setAmplitude(manette->GetPuissanceElec(coup));
-	coup.initcoup();
+	
+	manette->SequenceCoup(coup);
 	terrain->CoupDonne(coup);
-
-	manette->demande(2, 9);
-	coup.setDirection(manette->GetDirectionElec(coup));
-	manette->demande(3, 9);
-	coup.setAmplitude(manette->GetPuissanceElec(coup));
-	coup.initcoup();
-	terrain->CoupDonne(coup);
-
-	manette->demande(2, 9);
-	coup.setDirection(manette->GetDirectionElec(coup));
-	manette->demande(3, 9);
-	coup.setAmplitude(manette->GetPuissanceElec(coup));
-	coup.initcoup();
-	terrain->CoupDonne(coup);
-
-	manette->demande(2, 9);
-	coup.setDirection(manette->GetDirectionElec(coup));
-	manette->demande(3, 9);
-	coup.setAmplitude(manette->GetPuissanceElec(coup));
-	coup.initcoup();
-	terrain->CoupDonne(coup);
-
-
 	
 
 

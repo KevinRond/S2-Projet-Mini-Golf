@@ -7,6 +7,7 @@
 #include <atomic>
 #include "Coup.h"
 
+
 using namespace std;
 
 
@@ -51,9 +52,11 @@ public:
 	bool getButton4();
 	int getJoyX();
 	int getJoyY();
+	int getMumu();
 	double GetDirectionElec(class Coup);
 	double GetPuissanceElec(class Coup);
-
+	double getMumu(class Coup);
+	void SequenceCoup(class Coup);
 	void setCas(int nouveauCas);
 	void setAfficher(int nouvelAffichage);
 	//void startThread();
@@ -63,7 +66,7 @@ public:
 		return o;
 	}
 
-	int cas, afficher, amplitude, joyY, joyX;
+	int cas, afficher, amplitude, joyY, joyX, mumu;
 	bool button1, button2, button3, button4;
 };
 #endif

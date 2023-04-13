@@ -23,6 +23,7 @@ int Manette::communication() {
     // Boucle pour tester la communication bidirectionnelle Arduino-PC
         for (int i = 0; i < 1; i++) {
             // Envoie message Arduino
+            json mumuJson;
             json B1;
             json B2;
             json B3;
@@ -52,6 +53,8 @@ int Manette::communication() {
                 j_msg_rcv = json::parse(raw_msg);
                 switch (cas) {
                 case 1:
+                    mumuJson = j_msg_rcv["m"];
+                    mumu = mumuJson;
                     B1 = j_msg_rcv["b1"];
                     if (B1 == true)
                     {
@@ -94,6 +97,7 @@ int Manette::communication() {
                     break;
 
                 case 2:
+                    mumu = j_msg_rcv["m"];
                     B1 = j_msg_rcv["b1"];
                     if (B1 == true)
                     {
@@ -216,6 +220,9 @@ int Manette::getAmplitude()
 {
     return amplitude;
 }
+int Manette::getMumu(){
+    return mumu;
+}
 bool Manette::getButton1()
 {
 
@@ -289,6 +296,26 @@ double  Manette::GetPuissanceElec(Coup coup)
             break;
     }
     return coup.Get_Amplitude();
+}
+double Manette::getMumu(Coup coup) {
+    button1 = false;
+    while (!button1)
+    {
+        communication();
+        coup.setMumu(mumu);
+        cout << coup.Get_Mumu() << endl;
+    }
+    return coup.Get_Mumu();
+}
+void Manette::SequenceCoup(Coup coup) {
+    demande(2, 9);
+    coup.setMumu(getMumu(coup));
+    Sleep(100);
+    coup.setDirection(GetDirectionElec(coup));
+    demande(3, 9);
+    coup.setAmplitude(GetPuissanceElec(coup));
+    coup.initcoup();
+    //terrain->CoupDonne(coup);
 }
 //int main() {
 //    int donnee;

@@ -14,6 +14,7 @@ private:
 
 	double vitesseX, vitesseY;					//Vitesse en X et Y
 	double accelerationX, accelerationY;		//Acceleration en X et Y
+	double mumu;
 
 public:
 	Coup();
@@ -23,6 +24,7 @@ public:
 	void initcoup();	//Initialisation des parametres de ball depuis un coup
 	void setDirection(int lectureJoystick);				//Direction choisie + random factor
 	void setAmplitude(int lectureAmplitude);
+	void setMumu(int lectureMumu);
 
 	//updater
 	
@@ -35,6 +37,7 @@ public:
 
 	double Get_Amplitude();
 	double Get_Direction();						//Lecture de la direction retour en rad
+	double Get_Mumu();
 
 	double getVitesseX();						//Retourne vitesse en X
 	double getVitesseY();						//Retourne vitesse en Y
