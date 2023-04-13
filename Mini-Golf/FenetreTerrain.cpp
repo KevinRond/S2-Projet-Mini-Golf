@@ -7,7 +7,7 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     this->setFixedSize(1280, 720);
     
 
-    setStyleSheet("QMainWindow{ background-image: url(../Terrain/Terrain1.png); }");
+   
     texteTitre = new QTextEdit(this);
     texteTitre->setGeometry(240, 100, 800, 400);
     texteTitre->setPlainText("Terrain");
@@ -55,7 +55,56 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
 
     indexParcours = 0;
 
+    //Creation de la fenetre lorsque la balle arrive dans le trou
+    reussi = new QDialog(this);
+    reussi->setFixedSize(640, 360);
+    reussi->setStyleSheet("QDialog { background-image: url(../Graphic/NextLevel1.png); }");
 
+    QPushButton* b_retourTrou = new QPushButton("Retour", reussi);
+    b_retourTrou->setGeometry(220, 200, 200, 100);
+    b_retourTrou->setStyleSheet("QPushButton { border-image: url(../Graphic/BoutonOuvert1.png);"
+        "font-family: Helvetica; "
+        "font-weight: bold; "
+        "font-size: 16px; "
+        "color: white "
+        "}"
+        "QPushButton:hover { border-image: url(../Graphic/BoutonSelect.png); }"
+        "QPushButton:pressed { border-image: url(../Graphic/BoutonFermer1.png); }");
+
+
+    connect(b_retourTrou, &QPushButton::clicked, this, &FenetreTerrain::action_retour);
+
+
+    QPushButton* b_trouSuivant = new QPushButton("Trou Suivant", reussi);
+    b_trouSuivant->setGeometry(220, 100, 200, 100);
+    b_trouSuivant->setStyleSheet("QPushButton { border-image: url(../Graphic/BoutonOuvert1.png);"
+        "font-family: Helvetica; "
+        "font-weight: bold; "
+        "font-size: 16px; "
+        "color: white "
+        "}"
+        "QPushButton:hover { border-image: url(../Graphic/BoutonSelect.png); }"
+        "QPushButton:pressed { border-image: url(../Graphic/BoutonFermer1.png); }");
+
+    connect(b_trouSuivant, &QPushButton::released, this, &FenetreTerrain::action_trouSuivant);
+
+    //Création du widget lorsque tu as fini
+
+    fin = new QDialog(this);
+    fin->setFixedSize(640, 360);
+
+    QPushButton* b_fin = new QPushButton("Retour a l'ecran d'acceuil", fin);
+    b_fin->setGeometry(170, 105, 300, 150);
+    b_fin->setStyleSheet("QPushButton { border-image: url(../Graphic/BoutonOuvert1.png);"
+        "font-family: Helvetica; "
+        "font-weight: bold; "
+        "font-size: 16px; "
+        "color: white "
+        "}"
+        "QPushButton:hover { border-image: url(../Graphic/BoutonSelect.png); }"
+        "QPushButton:pressed { border-image: url(../Graphic/BoutonFermer1.png); }");
+
+    connect(b_fin, &QPushButton::released, this, &FenetreTerrain::action_fin);
 
 }
 
@@ -71,7 +120,7 @@ FenetreTerrain::~FenetreTerrain()
 void FenetreTerrain::action_retour()
 {
     emit b_retour_appuyer();
-    
+    reussi->close();
 }
 
 void FenetreTerrain::set_file_name(QString file_name)
@@ -99,6 +148,7 @@ void FenetreTerrain::set_file_name(QString file_name)
     balle->setGeometry(Ox, Oy, xTrans*2, yTrans*2);
     balle->show();
     qApp->processEvents();
+    reussi->exec();
 }
 
 QString FenetreTerrain::get_file_name()
@@ -109,6 +159,23 @@ QString FenetreTerrain::get_file_name()
 void FenetreTerrain::affiche_nom_fichier()
 {
     nomfichier->append(nom_fichier_terrain);
+}
+
+void FenetreTerrain::action_trouSuivant()
+{
+    QString numtrou = nom_fichier_terrain.right(1)[0];
+    int numeroTrou = numtrou.toInt();
+    numeroTrou++;
+    nom_fichier_terrain.chop(1);
+    nom_fichier_terrain = nom_fichier_terrain + QString::number(numeroTrou);
+    set_file_name(nom_fichier_terrain);
+    reussi->close();
+}
+
+void FenetreTerrain::action_fin()
+{
+    emit b_fin_appuyer();
+    fin->close();
 }
 
 void FenetreTerrain::keyPressEvent(QKeyEvent* event)
@@ -129,7 +196,22 @@ void FenetreTerrain::keyPressEvent(QKeyEvent* event)
             balle->move(x, y);
             qApp->processEvents();
             Sleep(37);
-
+        }
+        if (terrain1->TerrainReussi())
+        {
+            QString numtrou = nom_fichier_terrain.right(1)[0];
+            int numeroTrou = numtrou.toInt();
+            balle->hide();
+            qApp->processEvents();
+            if (numeroTrou < 8)
+            {
+                reussi->exec();
+            }
+            else
+            {
+                fin->exec();
+            }
+            
         }
 
     case Qt::Key_A:

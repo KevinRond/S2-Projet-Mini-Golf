@@ -17,6 +17,7 @@
 #include <Terrain.h>
 #include <QThread>
 #include <Windows.h>
+#include <QDialog>
 
 class FenetreTerrain : public QMainWindow
 {
@@ -30,10 +31,14 @@ public:
 
 signals:
     void b_retour_appuyer();
+    void b_trouSuivant_appuyer();
+    void b_fin_appuyer();
 
 private slots:
     void action_retour();
     void affiche_nom_fichier();
+    void action_trouSuivant();
+    void action_fin();
 
 private:
     QTextEdit* texteTitre;
@@ -44,6 +49,8 @@ private:
     QString nom_fichier_terrain;
     QLabel* balle;
     Terrain* terrain1;
+    QDialog* reussi;
+    QDialog* fin;
     double xTrans;
     double yTrans;
     double direction;

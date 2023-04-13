@@ -82,8 +82,10 @@ Interface::Interface(QWidget* parent)
     connect(fenetreTerrain, &FenetreTerrain::b_retour_appuyer, [this]() {
         listeMenus->setCurrentWidget(listeMenus->widget(2));
         });
-
-
+    
+    connect(fenetreTerrain, &FenetreTerrain::b_fin_appuyer, [this]() {
+        listeMenus->setCurrentWidget(listeMenus->widget(1));
+        });
 
     //Actions du menu scoreboard
     connect(menuScoreboard, &MenuScoreboard::b_retour_appuyer, [this]() {
@@ -95,10 +97,6 @@ Interface::Interface(QWidget* parent)
         listeMenus->setCurrentWidget(listeMenus->widget(1));
         });
 
-    //Actions du fenetre terrain 
-    connect(fenetreTerrain, &FenetreTerrain::b_retour_appuyer, [this]() {
-        listeMenus->setCurrentWidget(listeMenus->widget(2));
-        });
 
 
     setCentralWidget(listeMenus);
