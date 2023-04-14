@@ -1,88 +1,50 @@
 #include "Coup.h"
-using namespace std;
 
+Coup::Coup()				//Initialisation de l'objet
+{
+	direction = 45;
+	amplitude = 0;
+	mumu = 0;
+}
 
-Coup::Coup(double dir, double ampli)				//Initialisation de l'objet
+Coup::Coup(double dir, double amp)
 {
 	direction = dir;
-	amplitude = ampli;
-	calculVitesseX();
-	calculVitesseY();
-	calculAccelerationY();
-	calculAccelerationX();
+	amplitude = amp;
+	mumu = 0;
 }
 
 Coup::~Coup()
 {
 }
 
-
-void Coup::initcoup(double dir, double ampli)	//Lorsque les parametre d'un coup arrivent, ils update tout les attribues de la balle
+void Coup::setDirection(double lectureJoystick)
 {
-	direction = dir;
-	amplitude = ampli;
-	calculVitesseX();
-	calculVitesseY();
-	calculAccelerationY();
-	calculAccelerationX();
+	direction = direction - 2*lectureJoystick;
 }
 
-void Coup::setDirection(double dir)				//sauvegarde la direction en degre
+void Coup::setAmplitude(double lectureAmplitude)
 {
-	direction = dir;
+	amplitude = lectureAmplitude;
 }
 
-void Coup::setAmplitude(double ampli)
-{
-	amplitude = ampli;
-}
 
 double Coup::Get_Direction()
 {
-	return direction;
+	return -direction;
 }
 double Coup::Get_Amplitude()
 {
-	return amplitude;
-}
-
-void Coup::calculVitesseX()
-{
-	vitesseX = amplitude * cos(direction * 3.14159265 / 180);
-}
-
-void Coup::calculVitesseY()
-{
-	vitesseY = (amplitude * sin(direction * 3.14159265 / 180));
+	return amplitude * 0.44704;
 }
 
 
-void Coup::calculAccelerationY()
+void Coup::setMumu(int lectureMumu)
 {
-	accelerationY = -(vitesseY / amplitude);
+	mumu = lectureMumu;
 }
 
-void Coup::calculAccelerationX()
+double Coup::Get_Mumu()
 {
-	accelerationX = -(vitesseX / amplitude);
-}
-
-double Coup::getVitesseX()
-{
-	return vitesseX;
-}
-
-double Coup::getVitesseY()
-{
-	return vitesseY;
-}
-
-double Coup::getAccelerationY()
-{
-	return accelerationY;
-}
-
-double Coup::getAccelerationX()
-{
-	return accelerationX;
+	return mumu;
 }

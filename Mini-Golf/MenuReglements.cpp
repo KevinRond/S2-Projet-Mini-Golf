@@ -1,3 +1,19 @@
+/*****************************************************************************************************************************************
+
+Fichier: MenuReglements.cpp
+Auteurs:    Samuel Bilodeau – bils2704
+            Alexis Guérard – guea0902
+            Kevin Rondeau – ronk2602
+            Ali Sow – sowa0801
+Date: 13 Avril 2023
+
+Description: Fichier source de la classe MenuReglements. Cette classe affiche l'écran des règles du jeu
+
+Description des fonctions:
+action_retour(): Émet le signal b_retour_appuyer.
+
+*****************************************************************************************************************************************/
+
 #include "MenuReglements.h"
 
 MenuReglements::MenuReglements(QWidget* parent)
@@ -64,6 +80,14 @@ MenuReglements::MenuReglements(QWidget* parent)
 
     connect(b_retour, &QPushButton::clicked, this, &MenuReglements::action_retour);
 
+
+
+    //musique
+
+    back = new QMediaPlayer;
+    QString backFile = "../Son/Back.mp3";
+    back->setMedia(QUrl::fromLocalFile(backFile));
+    back->setVolume(100);
 }
 
 MenuReglements::~MenuReglements()
@@ -77,6 +101,12 @@ MenuReglements::~MenuReglements()
 }
 
 void MenuReglements::action_retour()
+/************************************
+Émet le signal b_retour_appuyer.
+
+:return:
+*************************************/
 {
+    back->play();
     emit b_retour_appuyer();
 }

@@ -12,8 +12,6 @@ Ses methodes:
 -Verifier la prochaine interaction
 -Compiler un parcours de location d'un coup
 */
-
-using namespace std;
 Terrain::Terrain()
 {
 	nbMur = 0;
@@ -23,13 +21,13 @@ Terrain::~Terrain()
 {
 }
 
-Parcours Terrain::CoupDonne(Coup coup1)
+Parcours Terrain::CoupDonne(Coup* coup1)
 {
 	int indexColision = -2;																		//-1 pour un trou, et le reste pour l'index du mur
 	Parcours ParcoursSection;
 	Interraction Interaction1;
-	balle1->Set_Direction(coup1.Get_Direction() * 3.14159265358979323846 / 180);
-	balle1->Set_Amplitude(coup1.Get_Amplitude());
+	balle1->Set_Direction(coup1->Get_Direction() * 3.14159265358979323846 / 180);
+	balle1->Set_Amplitude(coup1->Get_Amplitude());
 
 	while ((balle1->Get_Amplitude() != 0 && hole1->Sitrou() != 1))
 	{
@@ -38,7 +36,7 @@ Parcours Terrain::CoupDonne(Coup coup1)
 			break;
 		}
 		indexColision = VerifierColision();																		//Rapporte l'index de colision
-		cout << "Index: " << indexColision << endl;
+		std::cout << "Index: " << indexColision << std::endl;
 		if (indexColision == -1)																				//Si interraction avec un trou (-1)
 		{
 			ParcoursSection = Interaction1.BalleTrou(balle1, hole1, pointIntersection);							//Retourne le parcours jusqua la prochaine interaction
@@ -51,12 +49,11 @@ Parcours Terrain::CoupDonne(Coup coup1)
 	}
 	if (hole1->Sitrou() == 1) {
 		terrainreussi = true;
-		cout << "Trou Reussi!!! en " << nbCoup + 1 << " coups." << endl;
-	}
-	else {
+		std::cout << "Trou Reussi!!! en " << nbCoup + 1 << " coups." << std::endl;
+	}else{
 
 		nbCoup++;
-		cout << "Nombre de coup: " << nbCoup << " essaie encore!" << endl;
+		std::cout << "Nombre de coup: " << nbCoup << " essaie encore!" << std::endl;
 	}
 
 	return ParcoursTotal;
@@ -65,14 +62,14 @@ Parcours Terrain::CoupDonne(Coup coup1)
 
 Terrain* Terrain::OpenTerrain(std::string  terrain)
 {
-	ifstream myFile;								//Creation de l'objet fichier
-	myFile.open(terrain, ios_base::in);				//ouveture du fichier
+	std::ifstream myFile;								//Creation de l'objet fichier
+	myFile.open(terrain, std::ios_base::in);				//ouveture du fichier
 	bool Coor = false;								//Operateur inverseur qui determinera si 0=X ou 1=Y
-	string lineContents;							//Contenu de la ligne lu complete
+	std::string lineContents;							//Contenu de la ligne lu complete
 	char separatorXY = ',';							//separateur d'axe XY (X,Y)
 	char separatorCoor = ';';						//separateur de coordonnees (X,Y);(X,Y)
 	int i = 0;										//Index de ligne de lecture
-	string ptt;										//Pour accumulation des nombres a double digit
+	std::string ptt;										//Pour accumulation des nombres a double digit
 	double Coor1[2];								//Premiere coordonnee
 	double Coor2[2];								//Deuxiere coordonnee
 	Coor2[0] = -1.0;									//initialise a 0 pour savoir si premiere lecture
@@ -95,8 +92,8 @@ Terrain* Terrain::OpenTerrain(std::string  terrain)
 					ptt.clear();												//Vide l'accumulateur
 					if (Coor2[0] != -1.0)										//Verifie si c'est la premiere coor (besoin de 2 pour un mur)
 					{
-						Mur* MurTemp = new Mur;											//Creation d'un objet Mur
-						MurTemp->Set(Coor1[0], 720 - Coor1[1], Coor2[0], 720 - Coor2[1]);	//Attribution de ses 2 coor
+						Mur *MurTemp = new Mur;											//Creation d'un objet Mur
+						MurTemp->Set(Coor1[0]/100, (720-Coor1[1])/100, Coor2[0]/100, (720-Coor2[1])/100);	//Attribution de ses 2 coor
 						vecteurMur1.push_back(MurTemp->Get());							//Assignation au TableauMur de notre terrain
 						nbMur++;														//Incremenation du nombre de Murs
 					}
@@ -106,22 +103,22 @@ Terrain* Terrain::OpenTerrain(std::string  terrain)
 				else if (lineContents[i] == 'B')				//Verification si dernier point est la balle
 				{
 					Ball* balletemp = new Ball;					//Assignation du pointeur de l'objet creer a son attribu balle1
-					balletemp->Set_Oxy(Coor1[0], 720 - Coor1[1]);
+					balletemp->Set_Oxy(Coor1[0]/100, (720-Coor1[1])/100);
 					balle1 = balletemp->Get();
 				}
 				else if (lineContents[i] == 'T')				//Verification si dernier point est un trou
 				{
 					Hole* HoleTemp = new Hole;					//Creation objet Hole
-					HoleTemp->Set_xy(Coor1[0], 720 - Coor1[1]);	//Son emplacement
+					HoleTemp->Set_xy(Coor1[0]/100, (720-Coor1[1])/100);	//Son emplacement
 					hole1 = HoleTemp->Get();					//Assignation du pointeur de l'objet creer a son attribu hole1
 				}
 				else if (lineContents[i] == 'S')
 				{
-					K = 0.40;									//Terrain de Sable
+					balle1->Set_K(0.37);								//Terrain de Sable
 				}
 				else if (lineContents[i] == 'G')
 				{
-					K = -0.2;									//Terrain de Glace
+					balle1->Set_K(0.05);									//Terrain de Glace
 				}
 				else
 				{
@@ -135,7 +132,7 @@ Terrain* Terrain::OpenTerrain(std::string  terrain)
 		myFile.close();						//Ferme le fichier
 		return this;						//Retourne le ponteur du terrain
 	}
-	cout << "File not found" << endl;
+	std::cout << "File not found" << std::endl;
 	return nullptr;
 }
 
@@ -179,7 +176,7 @@ int Terrain::VerifierColision()
 			Ix = Ox;
 			Iy = Mmx * Ix + Mb;
 		}
-		else if (abs(Mmx) > 1000000)					//Si les droites ne sont pas paralleles
+		else if (abs(Mmx) >1000000)					//Si les droites ne sont pas paralleles
 		{
 			Mb = 0;
 			Ix = Hx;
@@ -232,7 +229,7 @@ int Terrain::VerifierColision()
 				pointIntersection.first = Ix;
 				pointIntersection.second = Iy;
 				prevIndex = i;
-				cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(pointIntersection.first) << "," << 720 - round(Iy) << ")" << " a une distance de " << round(distance) << endl;
+				std::cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(pointIntersection.first) << "," << 720-round(Iy) << ")" << " a une distance de " << round(distance) << std::endl;
 			}
 		}
 		i++;
@@ -272,35 +269,42 @@ int Terrain::VerifierColision()
 			Iy = INFINITY;
 		}
 	}
-	//position de balle aura donc la meme que l'interaction calcule precedament
-
-	distanceTrou = sqrt(pow((Ix - TrouX), 2) + pow((Iy - TrouY), 2));			//Calcul la distance du point d'intersection avec le trou
+																				//position de balle aura donc la meme que l'interaction calcule precedament
+	
+	distanceTrou = sqrt(pow((Ox - TrouX), 2) + pow((Oy - TrouY), 2));			//Calcul la distance du point d'intersection avec le trou
 	if (distanceTrou < Plusproche && i != IndexColision)						//Si cette distance est sous le radius du trou il y a interraction
 	{
 		if (isBetween(Ix, hole1->Get_x() - hole1->Get_radius(), hole1->Get_x() + hole1->Get_radius()) && isBetween(Iy, hole1->Get_y() - hole1->Get_radius(), hole1->Get_y() + hole1->Get_radius()))
 		{
-			distanceTrou = sqrt(pow((Ix - TrouX), 2) + pow((Iy - TrouY), 2));		//Calcul la distance de la balle du point d'intersection
+			distanceTrou = sqrt(pow((Ix - TrouX),2) + pow((Iy - TrouY),2));		//Calcul la distance de la balle du point d'intersection
 			if (distanceTrou < hole1->Get_radius())								//Si c'est la distance est plus proche change l'index
 			{
 				IndexColision = -1;												//Definit l'index a Trou
 				pointIntersection.first = Ix;
 				pointIntersection.second = Iy;
-				cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(Ix) << "," << 720 - round(Iy) << ") a une distance de " << round(distanceTrou) << endl;;
+				std::cout << "colision avec l'objet " << IndexColision << " a la coor (" << round(Ix) << "," << round(Iy) << ") a une distance de " << round(distanceTrou) << std::endl;;
 			}
 		}
+	}
+
+	if (IndexColision == -2)
+	{
+		double direction = balle1->Get_Direction() + 1;
+		balle1->Set_Direction(direction);
+		return VerifierColision();
 	}
 	return IndexColision;
 }
 
 void Terrain::Display()
 {
-	int i = 0;
+	int i =0;
 	balle1->Display();
 	hole1->Display();
 	std::vector<Mur>::iterator it;
 	for (auto it = vecteurMur1.begin(); it != vecteurMur1.end(); ++it)
 	{
-		cout << "Mur # " << i << " ";
+		std::cout << "Mur # " << i << " ";
 		(*it)->Display();
 		i++;
 	}

@@ -1,5 +1,18 @@
-// Mini-Golf.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+/*****************************************************************************************************************************************
+
+Fichier: Mini-Golf.cpp
+Auteurs:    Samuel Bilodeau – bils2704
+			Alexis Guérard – guea0902
+			Kevin Rondeau – ronk2602
+			Ali Sow – sowa0801
+Date: 13 Avril 2023
+
+Description: Main
+
+Description des fonctions:
+Execute linterface graphique
+
+*****************************************************************************************************************************************/
 
 #include <iostream>
 
@@ -14,9 +27,6 @@
 #include "Interface.h"
 #include "MainMenu.h"
 //#include "Manette.h"
-
-using namespace std;
-
 
 int main(int argc, char* argv[])
 {

@@ -1,3 +1,21 @@
+/*****************************************************************************************************************************************
+
+Fichier: MainMenu.h
+Auteurs:    Samuel Bilodeau – bils2704
+            Alexis Guérard – guea0902
+            Kevin Rondeau – ronk2602
+            Ali Sow – sowa0801
+Date: 13 Avril 2023
+
+Description: Fichier d'entête de la classe MainMenu. Cette classe affiche l'écran principal du jeu
+
+Description des fonctions:
+action_jouer(): Émet le signal b_jouer_appuyer.
+action_regle(): Émet le signal b_regle_appuyer.
+action_scoreboard(): Émet le signal b_scoreboard_appuyer.
+
+*****************************************************************************************************************************************/
+
 #ifndef MENUSELECTIONTERRAIN_H
 #define MENUSELECTIONTERRAIN_H
 
@@ -11,6 +29,9 @@
 #include <QTextEdit>
 #include <QTextBrowser>
 #include <QStackedWidget>
+#include <QGraphicsDropShadowEffect>
+#include <QMediaPlayer>
+#include <QTimer>
 
 
 class MainMenu : public QMainWindow
@@ -32,11 +53,14 @@ private slots:
     void action_scoreboard();
 
 private:
-    QVBoxLayout* layout;
-    QPushButton* b_jouer;
-    QPushButton* b_regle;
-    QPushButton* b_scoreboard;
-    QPushButton* b_quit;
+    QTextEdit* texteTitre;                          //Zone de texte du titre
+    QPushButton* b_jouer;                           //Bouton jouer
+    QPushButton* b_regle;                           //Bouton reglements
+    QPushButton* b_scoreboard;                      //Bouton Scoreboard
+    QPushButton* b_quit;                            //Bouton quitter
+    QGraphicsDropShadowEffect* effectTitre;         //Effet du titre
+    QMediaPlayer* boutonSon;
+
 };
 
 #endif

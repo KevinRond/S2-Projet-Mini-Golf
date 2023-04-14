@@ -1,3 +1,19 @@
+/*****************************************************************************************************************************************
+
+Fichier: MenuReglements.h
+Auteurs:    Samuel Bilodeau – bils2704
+            Alexis Guérard – guea0902
+            Kevin Rondeau – ronk2602
+            Ali Sow – sowa0801
+Date: 13 Avril 2023
+
+Description: Fichier d'entête de la classe MenuReglements. Cette classe affiche l'écran des règles du jeu
+
+Description des fonctions:
+action_retour(): Émet le signal b_retour_appuyer.
+
+*****************************************************************************************************************************************/
+
 #pragma once
 
 #include <QtWidgets/QMainWindow>
@@ -12,6 +28,7 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QPushButton>
+#include <QMediaPlayer>
 
 
 
@@ -43,10 +60,11 @@ private slots:
     void action_retour();
 
 private:
-    QTextEdit* texteTitre;
-    QTextEdit* texteReglements;
-    QPushButton* b_retour;
-    QGraphicsDropShadowEffect* effectTitre;
-    QGraphicsDropShadowEffect* effectReglements;
+    QTextEdit* texteTitre;                              //Zone de texte du titre
+    QTextEdit* texteReglements;                         //Zone de texte pour les reglements
+    QPushButton* b_retour;                              //Bouton de retour
+    QGraphicsDropShadowEffect* effectTitre;             //Effet du titre
+    QGraphicsDropShadowEffect* effectReglements;        //Effet du texte des reglements
+    QMediaPlayer* back;
 
 };

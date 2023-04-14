@@ -1,3 +1,19 @@
+/*****************************************************************************************************************************************
+
+Fichier: TitleScreen.cpp
+Auteurs:    Samuel Bilodeau – bils2704
+            Alexis Guérard – guea0902
+            Kevin Rondeau – ronk2602
+            Ali Sow – sowa0801
+Date: 13 Avril 2023
+
+Description: Fichier source de la classe TitleScreen. Cette classe affiche l'écran titre du jeu.
+
+Description des fonctions:
+switchMenus(): Émet le signal buttonClicked.
+
+*****************************************************************************************************************************************/
+
 #include "TitleScreen.h"
 
 TitleScreen::TitleScreen(QWidget* parent)
@@ -6,16 +22,16 @@ TitleScreen::TitleScreen(QWidget* parent)
     //ui.setupUi(this);
 
     this->setFixedSize(1280, 720);
-    setStyleSheet("QMainWindow{ background-image: url(../Graphic/Acceuil.png); }");
+    setStyleSheet("QMainWindow{ background-image: url(../Graphic/TitleScreen.png); }");
 
     //Texte du titre
     texteTitre = new QTextEdit(this);
-    texteTitre->setGeometry(460, 200, 360, 80);
+    texteTitre->setGeometry(440, 150, 360, 120);
     texteTitre->setPlainText("Mini-G");
     texteTitre->setReadOnly(true);
     QString style_titre = "QTextEdit {"
         "font-family: Helvetica;"
-        "font-size: 60px;"
+        "font-size: 90px;"
         "color: white;"
         "background-color: transparent;"
         "border: none;"
@@ -27,7 +43,7 @@ TitleScreen::TitleScreen(QWidget* parent)
 
     //Texte du sous-titre
     soustitre = new QTextEdit(this);
-    soustitre->setGeometry(460, 280, 360, 60);
+    soustitre->setGeometry(440, 250, 360, 60);
     soustitre->setPlainText("par R2P2");
     soustitre->setReadOnly(true);
     QString style_soustitre = "QTextEdit {"
@@ -39,6 +55,20 @@ TitleScreen::TitleScreen(QWidget* parent)
         "}";
     soustitre->setStyleSheet(style_soustitre);
     soustitre->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+
+    //Effet du titre
+    effectTitre = new QGraphicsDropShadowEffect;
+    effectTitre->setBlurRadius(5);
+    effectTitre->setColor(Qt::black);
+    effectTitre->setOffset(4, 4);
+    texteTitre->setGraphicsEffect(effectTitre);
+
+    //Effet du sous-titre
+    effectSousTitre = new QGraphicsDropShadowEffect;
+    effectSousTitre->setBlurRadius(5);
+    effectSousTitre->setColor(Qt::black);
+    effectSousTitre->setOffset(3, 3);
+    soustitre->setGraphicsEffect(effectSousTitre);
 
 
     //Set up du bouton
@@ -54,17 +84,51 @@ TitleScreen::TitleScreen(QWidget* parent)
         "QPushButton:pressed { border-image: url(../Graphic/BoutonFermer1.png); }");
     //MainButton->setStyleSheet(buttonStyle);
 
+    //Actions du bouton
     connect(MainButton, &QPushButton::clicked, this, &TitleScreen::switchMenus);
+
+    //musiques
+
+    titleScreen = new QMediaPlayer;
+    QString titleScreenFile = "../Son/TitleScreen.mp3";
+    titleScreen->setMedia(QUrl::fromLocalFile(titleScreenFile));
+    titleScreen->setVolume(50);
+    titleScreen->play();
+
+    boutonSon = new QMediaPlayer;
+    QString boutonSonFile = "../Son/ButtonTitreEffect.mp3";
+    boutonSon->setMedia(QUrl::fromLocalFile(boutonSonFile));
+    boutonSon->setVolume(70);
 }
 
 TitleScreen::~TitleScreen()
 {
+    delete effectTitre;
+    delete effectSousTitre;
     delete MainButton;
     delete texteTitre;
 }
 
 
 void TitleScreen::switchMenus() 
+/*
+Émet le signal buttonClicked.
+
+:return:
+*/
 {
+    boutonSon->play();
+    titleScreen->setVolume(40);
+    Sleep(100);
+    titleScreen->setVolume(35);
+    Sleep(100);
+    titleScreen->setVolume(30);
+    Sleep(100);
+    titleScreen->setVolume(25);
+    Sleep(100);
+    titleScreen->setVolume(20);
+    Sleep(100);
+    titleScreen->stop();
     emit buttonClicked();
+
 }

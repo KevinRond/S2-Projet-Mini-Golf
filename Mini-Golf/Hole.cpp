@@ -1,6 +1,4 @@
 #include "Hole.h"
-using namespace std;
-
 Hole::Hole()
 {
 	Tx = 0.0;
@@ -50,5 +48,5 @@ bool Hole::Sitrou()
 }
 void Hole::Display()
 {
-	cout << "Trou location : (" << Tx << "," << Ty << ")" << endl;
+	std::cout << "Trou location : (" << Tx << "," << Ty << ")" << std::endl;
 }
