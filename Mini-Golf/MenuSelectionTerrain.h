@@ -1,3 +1,30 @@
+/*****************************************************************************************************************************************
+
+Fichier: MenuSelectionTerrain.h
+Auteurs:    Samuel Bilodeau – bils2704
+            Charles Eliot Boudjack – bouc1516
+            David Ferron – ferd1901
+            Alexis Guérard – guea0902
+            Kevin Rondeau – ronk2602
+            Benjamin Labelle – labb1904
+            Ali Sow – sowa0801
+Date: 13 Avril 2023
+
+Description: Fichier d'entête de la classe MenuSelectionTerrain. Cette classe affiche l'écran de sélection des différents terrains.
+
+Description des fonctions:
+action_terrain1(): Émet le signal b_terrain1_appuyer.
+action_terrain2(): Émet le signal b_terrain2_appuyer.
+action_terrain3(): Émet le signal b_terrain3_appuyer.
+action_terrain4(): Émet le signal b_terrain4_appuyer.
+action_terrain5(): Émet le signal b_terrain5_appuyer.
+action_terrain6(): Émet le signal b_terrain6_appuyer.
+action_terrain7(): Émet le signal b_terrain7_appuyer.
+action_terrain8(): Émet le signal b_terrain8_appuyer.
+action_retour(): Émet le signal b_retour_appuyer.
+
+*****************************************************************************************************************************************/
+
 #pragma once
 
 #include <iostream>

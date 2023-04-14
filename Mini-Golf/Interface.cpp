@@ -1,3 +1,21 @@
+
+/*****************************************************************************************************************************************
+
+Fichier: Interface.cpp
+Auteurs:    Samuel Bilodeau – bils2704
+            Charles Eliot Boudjack – bouc1516
+            David Ferron – ferd1901
+            Alexis Guérard – guea0902
+            Kevin Rondeau – ronk2602
+            Benjamin Labelle – labb1904
+            Ali Sow – sowa0801
+Date: 13 Avril 2023
+
+Description: Fichier source de la classe Interface. Cette classe gère les différents widget qui compose l'interface graphique du jeu.
+Cette classe reçoit les signaux de chaque widget afin d'afficher les interfaces désirés.
+
+*****************************************************************************************************************************************/
+
 #include "Interface.h"
 
 Interface::Interface(QWidget* parent)
@@ -16,12 +34,12 @@ Interface::Interface(QWidget* parent)
     menuReglements = new MenuReglements(this);
     fenetreTerrain = new FenetreTerrain(this);
 
-    listeMenus->addWidget(titleScreen);
-    listeMenus->addWidget(menuPrincipal);
-    listeMenus->addWidget(menuSelectionTerrain);
-    listeMenus->addWidget(menuScoreboard);
-    listeMenus->addWidget(menuReglements);
-    listeMenus->addWidget(fenetreTerrain);
+    listeMenus->addWidget(titleScreen);                 //titleScreen est le widget a l'index 0
+    listeMenus->addWidget(menuPrincipal);               //menuPrincipal est le widget a l'index 1
+    listeMenus->addWidget(menuSelectionTerrain);        //menuSelectionTerrain est le widget a l'index 2
+    listeMenus->addWidget(menuScoreboard);              //menuScoreboard est le widget a l'index 3
+    listeMenus->addWidget(menuReglements);              //menuReglements est le widget a l'index 4
+    listeMenus->addWidget(fenetreTerrain);              //fenetreTerrain est le widget a l'index 5
 
     listeMenus->setCurrentWidget(titleScreen);
     
@@ -47,35 +65,35 @@ Interface::Interface(QWidget* parent)
         });
     connect(menuSelectionTerrain, &MenuSelectionTerrain::b_terrain1_appuyer, [this]() {
         listeMenus->setCurrentWidget(listeMenus->widget(5));
-        fenetreTerrain->set_file_name("Terrain1");
+        fenetreTerrain->set_terrain("Terrain1");
         });
     connect(menuSelectionTerrain, &MenuSelectionTerrain::b_terrain2_appuyer, [this]() {
         listeMenus->setCurrentWidget(listeMenus->widget(5));
-        fenetreTerrain->set_file_name("Terrain2");
+        fenetreTerrain->set_terrain("Terrain2");
         });
     connect(menuSelectionTerrain, &MenuSelectionTerrain::b_terrain3_appuyer, [this]() {
         listeMenus->setCurrentWidget(listeMenus->widget(5));
-        fenetreTerrain->set_file_name("Terrain3");
+        fenetreTerrain->set_terrain("Terrain3");
         });
     connect(menuSelectionTerrain, &MenuSelectionTerrain::b_terrain4_appuyer, [this]() {
         listeMenus->setCurrentWidget(listeMenus->widget(5));
-        fenetreTerrain->set_file_name("Terrain4");
+        fenetreTerrain->set_terrain("Terrain4");
         });
     connect(menuSelectionTerrain, &MenuSelectionTerrain::b_terrain5_appuyer, [this]() {
         listeMenus->setCurrentWidget(listeMenus->widget(5));
-        fenetreTerrain->set_file_name("Terrain5");
+        fenetreTerrain->set_terrain("Terrain5");
         });
     connect(menuSelectionTerrain, &MenuSelectionTerrain::b_terrain6_appuyer, [this]() {
         listeMenus->setCurrentWidget(listeMenus->widget(5));
-        fenetreTerrain->set_file_name("Terrain6");
+        fenetreTerrain->set_terrain("Terrain6");
         });
     connect(menuSelectionTerrain, &MenuSelectionTerrain::b_terrain7_appuyer, [this]() {
         listeMenus->setCurrentWidget(listeMenus->widget(5));
-        fenetreTerrain->set_file_name("Terrain7");
+        fenetreTerrain->set_terrain("Terrain7");
         });
     connect(menuSelectionTerrain, &MenuSelectionTerrain::b_terrain8_appuyer, [this]() {
         listeMenus->setCurrentWidget(listeMenus->widget(5));
-        fenetreTerrain->set_file_name("Terrain8");
+        fenetreTerrain->set_terrain("Terrain8");
         });
 
     //Actions du menu de fenetre terrain
@@ -96,8 +114,6 @@ Interface::Interface(QWidget* parent)
     connect(menuReglements, &MenuReglements::b_retour_appuyer, [this]() {
         listeMenus->setCurrentWidget(listeMenus->widget(1));
         });
-
-
 
     setCentralWidget(listeMenus);
 }

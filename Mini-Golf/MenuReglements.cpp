@@ -1,3 +1,22 @@
+/*****************************************************************************************************************************************
+
+Fichier: MenuReglements.cpp
+Auteurs:    Samuel Bilodeau – bils2704
+            Charles Eliot Boudjack – bouc1516
+            David Ferron – ferd1901
+            Alexis Guérard – guea0902
+            Kevin Rondeau – ronk2602
+            Benjamin Labelle – labb1904
+            Ali Sow – sowa0801
+Date: 13 Avril 2023
+
+Description: Fichier source de la classe MenuReglements. Cette classe affiche l'écran des règles du jeu
+
+Description des fonctions:
+action_retour(): Émet le signal b_retour_appuyer.
+
+*****************************************************************************************************************************************/
+
 #include "MenuReglements.h"
 
 MenuReglements::MenuReglements(QWidget* parent)
@@ -77,6 +96,11 @@ MenuReglements::~MenuReglements()
 }
 
 void MenuReglements::action_retour()
+/************************************
+Émet le signal b_retour_appuyer.
+
+:return:
+*************************************/
 {
     emit b_retour_appuyer();
 }

@@ -1,3 +1,22 @@
+/*****************************************************************************************************************************************
+
+Fichier: TitleScreen.cpp
+Auteurs:    Samuel Bilodeau – bils2704
+            Charles Eliot Boudjack – bouc1516
+            David Ferron – ferd1901
+            Alexis Guérard – guea0902
+            Kevin Rondeau – ronk2602
+            Benjamin Labelle – labb1904
+            Ali Sow – sowa0801
+Date: 13 Avril 2023
+
+Description: Fichier source de la classe TitleScreen. Cette classe affiche l'écran titre du jeu.
+
+Description des fonctions:
+switchMenus(): Émet le signal buttonClicked.
+
+*****************************************************************************************************************************************/
+
 #include "TitleScreen.h"
 
 TitleScreen::TitleScreen(QWidget* parent)
@@ -82,6 +101,11 @@ TitleScreen::~TitleScreen()
 
 
 void TitleScreen::switchMenus() 
+/*
+Émet le signal buttonClicked.
+
+:return:
+*/
 {
     emit buttonClicked();
 }

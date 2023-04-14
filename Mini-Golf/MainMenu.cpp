@@ -1,9 +1,29 @@
+/*****************************************************************************************************************************************
+
+Fichier: MainMenu.cpp
+Auteurs:    Samuel Bilodeau – bils2704
+            Charles Eliot Boudjack – bouc1516
+            David Ferron – ferd1901
+            Alexis Guérard – guea0902
+            Kevin Rondeau – ronk2602
+            Benjamin Labelle – labb1904
+            Ali Sow – sowa0801
+Date: 13 Avril 2023
+
+Description: Fichier source de la classe MainMenu. Cette classe affiche l'écran principal du jeu
+
+Description des fonctions:
+action_jouer(): Émet le signal b_jouer_appuyer.
+action_regle(): Émet le signal b_regle_appuyer.
+action_scoreboard(): Émet le signal b_scoreboard_appuyer.
+
+*****************************************************************************************************************************************/
+
 #include "MainMenu.h"
 
 MainMenu::MainMenu(QWidget* parent)
     : QMainWindow(parent)
 {
-    //ui.setupUi(this);
 
     this->setFixedSize(1280, 720);
     setStyleSheet("QMainWindow{ background-image: url(../Graphic/BeauFond3.png); }");
@@ -93,16 +113,31 @@ MainMenu::~MainMenu()
 }
 
 void MainMenu::action_jouer()
+/*
+Émet le signal b_jouer_appuyer.
+
+:return:
+*/
 {
     emit b_jouer_appuyer();
 }
 
 void MainMenu::action_regle()
+/*
+Émet le signal b_regle_appuyer.
+
+:return:
+*/
 {
     emit b_regle_appuyer();
 }
 
 void MainMenu::action_scoreboard()
+/*
+Émet le signal b_scoreboard_appuyer.
+
+:return:
+*/
 {
     emit b_scoreboard_appuyer();
 }

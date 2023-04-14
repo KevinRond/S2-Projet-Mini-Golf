@@ -1,3 +1,48 @@
+/*********************************************************************************************************
+
+Fichier: FenetreTerrain.h
+Auteurs:    Samuel Bilodeau – bils2704
+            Charles Eliot Boudjack – bouc1516
+            David Ferron – ferd1901
+            Alexis Guérard – guea0902
+            Kevin Rondeau – ronk2602
+            Benjamin Labelle – labb1904
+            Ali Sow – sowa0801
+Date: 13 Avril 2023
+
+Description: Fichier d'entête de la classe FenetreTerrain. Cette classe affiche le jeu.
+
+Description des fonctions:
+
+set_terrain(QString file_name): Cette fonction est responsable de créer un objet terrain avec le nom de 
+fichier qu'elle reçoit en paramètre. Ce nom de fichier lui permet d'aller ouvrir les fichiers lui donnant
+pour le fond d'écran ainsi que pour la position des murs et de la balle. La fonction affiche également le
+terrain, la balle, ainsi que la cible qui permet de viser.
+
+get_file_name(): Fonction permettant de retourner le nom de fichier du terrain actuel.
+
+calculateX(double posBalleX): Cette fonction calcule la position en X de la cible en prenant la position 
+de la balle en X comme paramètre.
+
+calculateY(double posBalley): Cette fonction calcule la position en Y de la cible en prenant la position 
+de la balle en Y comme paramètre.
+
+action_retour(): Émet le signal b_retour_appuyer.
+
+affiche_nom_fichier(): Permet d'afficher le nom de fichier dans une zone de texte.
+
+action_trouSuivant(): Met à jour le terrain actuel si le joueur choisi cette action.
+
+action_fin(): Emet le signal b_fin_appuyer. Ferme le jeu.
+
+jouer(): Cette fonction permet d'exécuter le jeu. Tant que le trou n'est pas réussi, elle prendra les coups
+du joueur et déplacera la balle dans le terrain. Si le trou est est réussi, l'usager peut quitter ou jouer
+le prochain trou.
+
+keyPressEvent(QKeyEvent* event): Gère les entrées de l'usager avec manette ou clavier.
+
+************************************************************************************************************/
+
 #pragma once
 
 #include <QtWidgets/QMainWindow>
@@ -29,7 +74,7 @@ class FenetreTerrain : public QMainWindow
 public:
     FenetreTerrain(QWidget* parent = nullptr);
     ~FenetreTerrain();
-    void set_file_name(QString file_name);
+    void set_terrain(QString file_name);
     QString get_file_name();
     double calculateX(double posBalleX);
     double calculateY(double posBalley);

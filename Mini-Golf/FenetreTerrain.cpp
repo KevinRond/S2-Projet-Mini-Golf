@@ -1,8 +1,55 @@
+/*********************************************************************************************************
+
+Fichier: FenetreTerrain.cpp
+Auteurs:    Samuel Bilodeau – bils2704
+            Charles Eliot Boudjack – bouc1516
+            David Ferron – ferd1901
+            Alexis Guérard – guea0902
+            Kevin Rondeau – ronk2602
+            Benjamin Labelle – labb1904
+            Ali Sow – sowa0801
+Date: 13 Avril 2023
+
+Description: Fichier source de la classe FenetreTerrain. Cette classe affiche le jeu.
+
+Description des fonctions:
+
+set_terrain(QString file_name): Cette fonction est responsable de créer un objet terrain avec le nom de
+fichier qu'elle reçoit en paramètre. Ce nom de fichier lui permet d'aller ouvrir les fichiers lui donnant
+pour le fond d'écran ainsi que pour la position des murs et de la balle. La fonction affiche également le
+terrain, la balle, ainsi que la cible qui permet de viser.
+
+get_file_name(): Fonction permettant de retourner le nom de fichier du terrain actuel.
+
+calculateX(double posBalleX): Cette fonction calcule la position en X de la cible en prenant la position
+de la balle en X comme paramètre.
+
+calculateY(double posBalley): Cette fonction calcule la position en Y de la cible en prenant la position
+de la balle en Y comme paramètre.
+
+action_retour(): Émet le signal b_retour_appuyer.
+
+affiche_nom_fichier(): Permet d'afficher le nom de fichier dans une zone de texte.
+
+action_trouSuivant(): Met à jour le terrain actuel si le joueur choisi cette action.
+
+action_fin(): Emet le signal b_fin_appuyer. Ferme le jeu.
+
+jouer(): Cette fonction permet d'exécuter le jeu. Tant que le trou n'est pas réussi, elle prendra les coups
+du joueur et déplacera la balle dans le terrain. Si le trou est est réussi, l'usager peut quitter ou jouer
+le prochain trou.
+
+keyPressEvent(QKeyEvent* event): Gère les entrées de l'usager avec manette ou clavier.
+
+************************************************************************************************************/
+
+
 #include "FenetreTerrain.h"
+
 FenetreTerrain::FenetreTerrain(QWidget* parent)
     : QMainWindow(parent)
 {
-    //ui.setupUi(this);
+
 
     this->setFixedSize(1280, 720);
     
@@ -160,15 +207,30 @@ FenetreTerrain::~FenetreTerrain()
 }
 
 void FenetreTerrain::action_retour()
+/*******************************************
+Émet le signal b_retour_appuyer.
+
+:return:
+********************************************/
 {
     emit b_retour_appuyer();
     reussi->close();
 }
 
-void FenetreTerrain::set_file_name(QString file_name)
+void FenetreTerrain::set_terrain(QString file_name)
+/********************************************************************************************************
+Cette fonction est responsable de créer un objet terrain avec le nom de
+fichier qu'elle reçoit en paramètre. Ce nom de fichier lui permet d'aller ouvrir les fichiers lui donnant
+pour le fond d'écran ainsi que pour la position des murs et de la balle. La fonction affiche également le
+terrain, la balle, ainsi que la cible qui permet de viser.
+
+:param file_name: Nom du fichier avec lequel le terrain est choisi
+
+:return:
+*********************************************************************************************************/
 {
-    direction = 1;
-    force = 1;
+    direction = 0;
+    force = 0;
     indexParcours = 0;
     // Update the strength label
     forceText->setText("Force du coup: " + QString::number(force));
@@ -198,11 +260,24 @@ void FenetreTerrain::set_file_name(QString file_name)
 }
 
 QString FenetreTerrain::get_file_name()
+/********************************************************************************************************
+Fonction permettant de retourner le nom de fichier du terrain actuel.
+
+:return: Le nom du fichier terrain
+*********************************************************************************************************/
 {
     return nom_fichier_terrain;
 }
 
 double FenetreTerrain::calculateX(double posBalleX)
+/********************************************************************************************************
+Cette fonction calcule la position en X de la cible en prenant la position
+de la balle en X comme paramètre.
+
+:param posBalleX: Position de la balle en X. La cible est placer par rapport à la balle.
+
+:return: Valeur en X qui sert a positionner la cible
+*********************************************************************************************************/
 {
     double angleInRad = direction * M_PI / 180.0;
     double newX = posBalleX + 45 * cos(angleInRad);
@@ -211,6 +286,14 @@ double FenetreTerrain::calculateX(double posBalleX)
 }
 
 double FenetreTerrain::calculateY(double posBalleY)
+/********************************************************************************************************
+Cette fonction calcule la position en Y de la cible en prenant la position
+de la balle en Y comme paramètre.
+
+:param posBalleY: Position de la balle en Y. La cible est placer par rapport à la balle.
+
+:return: Valeur en Y qui sert a positionner la cible
+*********************************************************************************************************/
 {
     double angleInRad = direction * M_PI / 180.0;
     double newY = posBalleY - 45 * sin(angleInRad);
@@ -219,11 +302,21 @@ double FenetreTerrain::calculateY(double posBalleY)
 }
 
 void FenetreTerrain::affiche_nom_fichier()
+/********************************************************************************************************
+Permet d'afficher le nom de fichier dans une zone de texte.
+
+:return:
+*********************************************************************************************************/
 {
     nomfichier->append(nom_fichier_terrain);
 }
 
 void FenetreTerrain::action_trouSuivant()
+/********************************************************************************************************
+Met à jour le terrain actuel si le joueur choisi cette action.
+
+:return:
+*********************************************************************************************************/
 {
     reussi->close();
     QString numtrou = nom_fichier_terrain.right(1)[0];
@@ -231,17 +324,29 @@ void FenetreTerrain::action_trouSuivant()
     numeroTrou++;
     nom_fichier_terrain.chop(1);
     nom_fichier_terrain = nom_fichier_terrain + QString::number(numeroTrou);
-    set_file_name(nom_fichier_terrain);
+    set_terrain(nom_fichier_terrain);
     
 }
 
 void FenetreTerrain::action_fin()
+/********************************************************************************************************
+Emet le signal b_fin_appuyer. Ferme le jeu.
+
+:return:
+*********************************************************************************************************/
 {
     emit b_fin_appuyer();
     fin->close();
 }
 
 void FenetreTerrain::jouer()
+/********************************************************************************************************
+Cette fonction permet d'exécuter le jeu. Tant que le trou n'est pas réussi, elle prendra les coups
+du joueur et déplacera la balle dans le terrain. Si le trou est est réussi, l'usager peut quitter ou jouer
+le prochain trou.
+
+:return:
+*********************************************************************************************************/
 {
     while (terrain1->TerrainReussi() == false)
     {
@@ -310,6 +415,11 @@ void FenetreTerrain::jouer()
 }
 
 void FenetreTerrain::keyPressEvent(QKeyEvent* event)
+/********************************************************************************************************
+Gère les entrées de l'usager avec manette ou clavier.
+
+:return:
+*********************************************************************************************************/
 {
     std::vector<std::pair<double, double>> parcourVec;
     Coup* coup1 = new Coup(-direction, force);

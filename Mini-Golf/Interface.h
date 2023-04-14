@@ -1,5 +1,22 @@
 #pragma once
 
+/*****************************************************************************************************************************************
+
+Fichier: Interface.h
+Auteurs:    Samuel Bilodeau – bils2704
+            Charles Eliot Boudjack – bouc1516
+            David Ferron – ferd1901
+            Alexis Guérard – guea0902
+            Kevin Rondeau – ronk2602
+            Benjamin Labelle – labb1904
+            Ali Sow – sowa0801
+Date: 13 Avril 2023
+
+Description: Fichier d'entête de la classe Interface. Cette classe gère les différents widget qui compose l'interface graphique du jeu.
+Cette classe reçoit les signaux de chaque widget afin d'afficher les interfaces désirés.
+
+*****************************************************************************************************************************************/
+
 
 #include <iostream>
 #include <string>
@@ -44,5 +61,4 @@ private:
     MenuScoreboard* menuScoreboard;                 //Menu de scoreboard
     MenuReglements* menuReglements;                 //Menu des reglements
     FenetreTerrain* fenetreTerrain;                 //Menu d'affichage du terrain
-    //Il faudrait ajouter un menu pause et un menu de reussite apres le trou
 };
