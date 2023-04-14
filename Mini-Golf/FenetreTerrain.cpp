@@ -2,11 +2,8 @@
 
 Fichier: FenetreTerrain.cpp
 Auteurs:    Samuel Bilodeau – bils2704
-            Charles Eliot Boudjack – bouc1516
-            David Ferron – ferd1901
             Alexis Guérard – guea0902
             Kevin Rondeau – ronk2602
-            Benjamin Labelle – labb1904
             Ali Sow – sowa0801
 Date: 13 Avril 2023
 
@@ -180,9 +177,6 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     connect(b_fin, &QPushButton::released, this, &FenetreTerrain::action_fin);
 
 
-    //creation de la mannette
-    manette = new Manette("com3");
-
     point = new QLabel(this);
     QPixmap fleche("../Graphic/crosshair.png");
     point->setPixmap(fleche);
@@ -256,7 +250,6 @@ terrain, la balle, ainsi que la cible qui permet de viser.
     point->show();
 
     qApp->processEvents();
-    jouer();
 }
 
 QString FenetreTerrain::get_file_name()
@@ -339,80 +332,7 @@ Emet le signal b_fin_appuyer. Ferme le jeu.
     fin->close();
 }
 
-void FenetreTerrain::jouer()
-/********************************************************************************************************
-Cette fonction permet d'exécuter le jeu. Tant que le trou n'est pas réussi, elle prendra les coups
-du joueur et déplacera la balle dans le terrain. Si le trou est est réussi, l'usager peut quitter ou jouer
-le prochain trou.
 
-:return:
-*********************************************************************************************************/
-{
-    while (terrain1->TerrainReussi() == false)
-    {
-        std::vector<std::pair<double, double>> parcourVec;
-        Coup* coup1 = new Coup(direction, force);
-        Coup* coup = new Coup(90, 1);
-        Parcours parcours;
-
-        double Ox = terrain1->getOx() * 100 - xTrans;
-        double Oy = 720 - terrain1->getOy() * 100 - yTrans;
-        double arrowX = calculateX(Ox);
-        double arrowY = calculateY(Oy);
-        point->setGeometry((arrowX - (xPoint / 2) + 5), (arrowY - (yPoint / 2) + 5), xPoint, yPoint);
-        manette->setBouton();
-        while (!manette->getButton1())
-        {
-            double prevDirect = direction;
-            direction = manette->GetDirectionElec(coup);
-            directionText->setText("Direction du coup: " + QString::number(direction));
-            if (prevDirect < direction)
-            {
-                arrowX = calculateX(Ox);
-                arrowY = calculateY(Oy);
-                point->setGeometry((arrowX - (xPoint / 2) + 5), (arrowY - (yPoint / 2) + 5), xPoint, yPoint);
-            }
-            else
-            {
-                arrowX = calculateX(Ox);
-                arrowY = calculateY(Oy);
-                point->setGeometry((arrowX - (xPoint / 2) + 5), (arrowY - (yPoint / 2) + 5), xPoint, yPoint);
-            }
-            point->show();
-            qApp->processEvents();
-            Sleep(10);
-        }
-
-        manette->GetPuissanceElec(coup);
-        //manette->SequenceCoup(coup);
-        parcours = terrain1->CoupDonne(coup);
-        parcourVec = parcours.GetCoorXY();
-        point->setVisible(false);
-
-        for (indexParcours; indexParcours < parcourVec.size(); indexParcours++)
-        {
-            const auto& coord = parcourVec[indexParcours];
-            int x = (coord.first * 100) - xTrans;
-            int y = (720 - (coord.second * 100)) - yTrans;
-            balle->move(x, y);
-            qApp->processEvents();
-            Sleep(37);
-        }
-    }
-
-    QString numtrou = nom_fichier_terrain.right(1)[0];
-    int numeroTrou = numtrou.toInt();
-    balle->hide();
-    qApp->processEvents();
-    if (numeroTrou < 8)
-    {
-        reussi->exec();
-    }
-    else
-    {
-        fin->exec();
-    }
-}
 
 void FenetreTerrain::keyPressEvent(QKeyEvent* event)
 /********************************************************************************************************
@@ -437,32 +357,7 @@ Gère les entrées de l'usager avec manette ou clavier.
     {
     case Qt::Key_R:
 
-        manette->setBouton();
-        while (!manette->getButton1())
-        {
-            double prevDirect = direction;
-            direction = - manette->GetDirectionElec(coup);
-            directionText->setText("Direction du coup: " + QString::number(direction));
-            if (prevDirect < direction)
-            {
-                arrowX = calculateX(Ox);
-                arrowY = calculateY(Oy);
-                point->setGeometry((arrowX - (xPoint / 2) + 5), (arrowY - (yPoint / 2) + 5), xPoint, yPoint);
-            }
-            else
-            {
-                arrowX = calculateX(Ox);
-                arrowY = calculateY(Oy);
-                point->setGeometry((arrowX - (xPoint / 2) + 5), (arrowY - (yPoint / 2) + 5), xPoint, yPoint);
-            }
-            point->show();
-            qApp->processEvents();
-            Sleep(10);
-        }
-
-        manette->GetPuissanceElec(coup);
-        //manette->SequenceCoup(coup);
-        parcours = terrain1->CoupDonne(coup);
+        parcours = terrain1->CoupDonne(coup1);
         parcourVec = parcours.GetCoorXY();
         point->setVisible(false);
 
@@ -534,6 +429,8 @@ Gère les entrées de l'usager avec manette ou clavier.
     directionText->setText("Direction du coup: " + QString::number(direction));
 
     parcourVec.clear();
+    point->show();
+    qApp->processEvents();
     // Accept the key event
     event->accept();
  

@@ -2,11 +2,8 @@
 
 Fichier: FenetreTerrain.h
 Auteurs:    Samuel Bilodeau – bils2704
-            Charles Eliot Boudjack – bouc1516
-            David Ferron – ferd1901
             Alexis Guérard – guea0902
             Kevin Rondeau – ronk2602
-            Benjamin Labelle – labb1904
             Ali Sow – sowa0801
 Date: 13 Avril 2023
 
@@ -89,7 +86,6 @@ private slots:
     void affiche_nom_fichier();
     void action_trouSuivant();
     void action_fin();
-    void jouer();
 
 private:
     QTextEdit* texteTitre;
@@ -114,7 +110,6 @@ private:
     double direction = 1;
     double force = 1;
     int indexParcours;
-    Manette* manette;
     bool button1;
 
 protected:

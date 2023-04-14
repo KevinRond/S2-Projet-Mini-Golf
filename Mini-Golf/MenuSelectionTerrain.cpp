@@ -2,11 +2,8 @@
 
 Fichier: MenuSelectionTerrain.cpp
 Auteurs:    Samuel Bilodeau – bils2704
-            Charles Eliot Boudjack – bouc1516
-            David Ferron – ferd1901
             Alexis Guérard – guea0902
             Kevin Rondeau – ronk2602
-            Benjamin Labelle – labb1904
             Ali Sow – sowa0801
 Date: 13 Avril 2023
 
