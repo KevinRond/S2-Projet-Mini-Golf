@@ -40,6 +40,7 @@ action_retour(): Émet le signal b_retour_appuyer.
 #include <QLabel>
 #include <QGraphicsDropShadowEffect>
 #include <QMediaPlayer>
+#include <QKeyEvent>
 
 class MenuSelectionTerrain : public QMainWindow
 {
@@ -84,5 +85,8 @@ private:
     QPushButton* b_terrain8;
     QGraphicsDropShadowEffect* effectTitre;
     QMediaPlayer* back;
+
+protected:
+    void keyPressEvent(QKeyEvent* event) override;
     
 };

@@ -31,6 +31,7 @@ switchMenus(): Émet le signal buttonClicked.
 #include <QGraphicsDropShadowEffect>
 #include <QMediaPlayer>
 #include <Windows.h>
+#include <QKeyEvent>
 
 
 class TitleScreen : public QMainWindow
@@ -47,6 +48,9 @@ signals:
 
 private slots:
     void switchMenus();
+
+protected:
+    void keyPressEvent(QKeyEvent* event) override;
 
 private:
     //Ui::QTLabo1Class ui;

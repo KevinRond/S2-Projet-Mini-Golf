@@ -165,7 +165,7 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
         "font-size: 16px; "
         "color: white "
         "}"
-        "QPushButton:hover { border-image: url(../Graphic/BoutonSelect.png); }"
+        "QPushButton:hover, QPushButton:focus { border-image: url(../Graphic/BoutonSelect.png); }"
         "QPushButton:pressed { border-image: url(../Graphic/BoutonFermer1.png); }");
 
 
@@ -180,7 +180,7 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
         "font-size: 16px; "
         "color: white "
         "}"
-        "QPushButton:hover { border-image: url(../Graphic/BoutonSelect.png); }"
+        "QPushButton:hover, QPushButton:focus { border-image: url(../Graphic/BoutonSelect.png); }"
         "QPushButton:pressed { border-image: url(../Graphic/BoutonFermer1.png); }");
 
     connect(b_trouSuivant, &QPushButton::released, this, &FenetreTerrain::action_trouSuivant);
@@ -199,7 +199,7 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
         "font-size: 16px; "
         "color: white "
         "}"
-        "QPushButton:hover { border-image: url(../Graphic/BoutonSelect.png); }"
+        "QPushButton:hover, QPushButton:focus { border-image: url(../Graphic/BoutonSelect.png); }"
         "QPushButton:pressed { border-image: url(../Graphic/BoutonFermer1.png); }");
 
     connect(b_fin, &QPushButton::released, this, &FenetreTerrain::action_fin);
@@ -473,6 +473,7 @@ Gère les entrées de l'usager avec manette ou clavier.
             {
                 if (couptxt == 1)
                 {
+                    finalCoupText->move(175, 50);
                     finalCoupText->setText("BRAVO!! Trou en " + QString::number(couptxt) + " !!");  
                 }
                 else
@@ -517,6 +518,16 @@ Gère les entrées de l'usager avec manette ou clavier.
 
         force++;
         break;
+
+    case Qt::Key_Backspace:
+
+        // Handle enter key press
+        back->play();
+        desert->stop();
+        snow->stop();
+        green->stop();
+        emit b_retour_appuyer();
+        reussi->close();
 
     default:
 

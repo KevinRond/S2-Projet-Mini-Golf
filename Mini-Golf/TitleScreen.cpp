@@ -132,3 +132,24 @@ void TitleScreen::switchMenus()
     emit buttonClicked();
 
 }
+
+
+void TitleScreen::keyPressEvent(QKeyEvent* event)
+{
+    if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return) {
+        // Handle enter key press
+        boutonSon->play();
+        titleScreen->setVolume(40);
+        Sleep(100);
+        titleScreen->setVolume(35);
+        Sleep(100);
+        titleScreen->setVolume(30);
+        Sleep(100);
+        titleScreen->setVolume(25);
+        Sleep(100);
+        titleScreen->setVolume(20);
+        Sleep(100);
+        titleScreen->stop();
+        emit buttonClicked();
+    }
+}

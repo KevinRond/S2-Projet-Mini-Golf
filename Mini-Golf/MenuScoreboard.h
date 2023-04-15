@@ -28,6 +28,7 @@ action_retour(): Émet le signal b_retour_appuyer.
 #include <QStackedWidget>
 #include <QLabel>
 #include <QGraphicsDropShadowEffect>
+#include <QKeyEvent>
 
 class MenuScoreboard : public QMainWindow
 {
@@ -42,6 +43,9 @@ signals:
 
 private slots:
     void action_retour();
+
+protected:
+    void keyPressEvent(QKeyEvent* event) override;
 
 private:
     QTextEdit* texteTitre;
