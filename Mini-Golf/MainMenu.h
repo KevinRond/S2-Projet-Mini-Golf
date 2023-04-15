@@ -34,6 +34,8 @@ action_scoreboard(): Émet le signal b_scoreboard_appuyer.
 #include <QTimer>
 #include <QKeyEvent>
 
+#include "Manette.h"
+
 
 class MainMenu : public QMainWindow
 {
@@ -42,6 +44,7 @@ class MainMenu : public QMainWindow
 public:
     MainMenu(QWidget* parent = nullptr);
     ~MainMenu();
+    void launch_Manette();
 
 signals:
     void b_jouer_appuyer();
@@ -52,6 +55,7 @@ private slots:
     void action_jouer();
     void action_regle();
     void action_scoreboard();
+    
 
 protected:
     void keyPressEvent(QKeyEvent* event) override;

@@ -99,6 +99,9 @@ TitleScreen::TitleScreen(QWidget* parent)
     QString boutonSonFile = "../Son/ButtonTitreEffect.mp3";
     boutonSon->setMedia(QUrl::fromLocalFile(boutonSonFile));
     boutonSon->setVolume(70);
+
+    //manette = new Manette("com3");
+
 }
 
 TitleScreen::~TitleScreen()
@@ -107,7 +110,19 @@ TitleScreen::~TitleScreen()
     delete effectSousTitre;
     delete MainButton;
     delete texteTitre;
+    //delete manette;
 }
+
+//void TitleScreen::launchManette()
+//{
+//    manette->setBouton();
+//    while (!manette->getButton1())
+//    {
+//
+//    }
+//
+//    switchMenus();
+//}
 
 
 void TitleScreen::switchMenus() 
@@ -153,3 +168,9 @@ void TitleScreen::keyPressEvent(QKeyEvent* event)
         emit buttonClicked();
     }
 }
+
+//void TitleScreen::showEvent(QShowEvent* event)
+//{
+//    launchManette();
+//    QMainWindow::showEvent(event);
+//}

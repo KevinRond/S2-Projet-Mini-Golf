@@ -43,6 +43,7 @@ Interface::Interface(QWidget* parent)
     //Actions de l'ecran d'accueil
     connect(titleScreen, &TitleScreen::buttonClicked, [this]() {
         listeMenus->setCurrentWidget(listeMenus->widget(1));
+        //menuPrincipal->launch_Manette();
         });
 
     //Actions du menu principal
@@ -160,5 +161,6 @@ Interface::~Interface()
     delete fenetreTerrain;
     delete listeMenus;
 }
+
 
 

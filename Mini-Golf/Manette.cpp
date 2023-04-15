@@ -285,7 +285,6 @@ double  Manette::GetPuissanceElec(Coup* coup)
     demande(3, 9);
     amplitude = 0;
     coup->setAmplitude(0);
-    int i = 0;
     while (1)
     {
         communication();

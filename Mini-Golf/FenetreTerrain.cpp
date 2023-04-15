@@ -86,8 +86,8 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     xTrans = pixmap.width() / 2;
     yTrans = pixmap.height() / 2;
 
-    direction = 1;
-    force = 1;
+    direction = 0;
+    force = 0;
 
     forceText = new QLabel("Force du coup: " + QString::number(force), this);
     forceText->move(50, 100);
@@ -244,7 +244,7 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
 
     //manette
 
-    //manette = new Manette("com3");
+    
 
 
 }
@@ -334,6 +334,7 @@ terrain, la balle, ainsi que la cible qui permet de viser.
     }
 
     qApp->processEvents();
+    jouer();
 }
 
 QString FenetreTerrain::get_file_name()
@@ -561,11 +562,13 @@ le prochain trou.
 :return:
 *********************************************************************************************************/
 {
+
+    Manette *manette = new Manette("com3");
     while (terrain1->TerrainReussi() == false)
     {
         std::vector<std::pair<double, double>> parcourVec;
         Coup* coup1 = new Coup(direction, force);
-        Coup* coup = new Coup(90, 1);
+        Coup* coup = new Coup(0, 0);
         Parcours parcours;
 
         double Ox = terrain1->getOx() * 100 - xTrans;

@@ -33,6 +33,8 @@ switchMenus(): Émet le signal buttonClicked.
 #include <Windows.h>
 #include <QKeyEvent>
 
+#include "Manette.h"
+
 
 class TitleScreen : public QMainWindow
 {
@@ -41,6 +43,7 @@ class TitleScreen : public QMainWindow
 public:
     TitleScreen(QWidget* parent = nullptr);
     ~TitleScreen();
+    void launchManette();
 
 signals:
     void buttonClicked();
@@ -51,6 +54,7 @@ private slots:
 
 protected:
     void keyPressEvent(QKeyEvent* event) override;
+   // void showEvent(QShowEvent* event) override;
 
 private:
     //Ui::QTLabo1Class ui;
@@ -61,4 +65,6 @@ private:
     QGraphicsDropShadowEffect* effectSousTitre;
     QMediaPlayer* titleScreen;
     QMediaPlayer* boutonSon;
+
+    //Manette* manette;
 };

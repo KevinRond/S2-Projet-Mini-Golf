@@ -127,7 +127,6 @@ private:
     int couptxt = 0;
     int indexParcours;
     Manette* manette;
-    bool button1;
     void jouer();
 
 protected:

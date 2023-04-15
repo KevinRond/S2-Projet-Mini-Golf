@@ -52,6 +52,7 @@ private slots:
     
     void changeMusic();
 
+
 private:
     //Ui::QTLabo1Class ui;
     QStackedWidget* listeMenus;                     //Liste des menus

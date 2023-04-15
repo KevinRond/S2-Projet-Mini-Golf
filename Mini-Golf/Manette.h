@@ -51,7 +51,7 @@ public:
 	double getJoyY();
 	int getMumu();
 	double GetDirectionElec(class Coup* coup);
-	double GetPuissanceElec(Coup* coup);
+	double GetPuissanceElec(class Coup* coup);
 	double getMumu(Coup* coup);
 	void SequenceCoup(Coup* coup);
 	void setCas(int nouveauCas);
