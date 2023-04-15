@@ -62,4 +62,5 @@ private:
     MenuReglements* menuReglements;                 //Menu des reglements
     FenetreTerrain* fenetreTerrain;                 //Menu d'affichage du terrain
     QMediaPlayer* menuSon;
+    QMediaPlayer* selectSon;
 };

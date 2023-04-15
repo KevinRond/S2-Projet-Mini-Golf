@@ -124,6 +124,11 @@ Interface::Interface(QWidget* parent)
     menuSon->setMedia(QUrl::fromLocalFile(menuSonFile));
     menuSon->setVolume(40);
 
+    selectSon = new QMediaPlayer;
+    QString selectSonFile = "../Son/ButtonTitreEffect.mp3";
+    selectSon->setMedia(QUrl::fromLocalFile(selectSonFile));
+    selectSon->setVolume(40);
+
 }
 
 void Interface::changeMusic()
@@ -140,6 +145,8 @@ void Interface::changeMusic()
     }
     else if (index == 5)
     {
+        selectSon->play();
+        Sleep(200);
         menuSon->stop();
     }
 }

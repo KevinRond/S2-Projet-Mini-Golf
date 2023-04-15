@@ -102,10 +102,15 @@ private:
     QDialog* reussi;
     QDialog* fin;
     QLabel* point;
+
     QGraphicsDropShadowEffect* effect_etiquette_force;
     QGraphicsDropShadowEffect* effect_etiquette_direction;
     QMediaPlayer* connard;
     QMediaPlayer* back;
+    QMediaPlayer* desert;
+    QMediaPlayer* snow;
+    QMediaPlayer* green;
+    QMediaPlayer* birdie;
 
     double xPoint;
     double yPoint;
@@ -114,7 +119,9 @@ private:
     double direction = 1;
     double force = 1;
     int indexParcours;
+    Manette* manette;
     bool button1;
+    void jouer();
 
 protected:
     void keyPressEvent(QKeyEvent* event) override;

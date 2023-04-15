@@ -193,6 +193,32 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     QString backFile = "../Son/Back.mp3";
     back->setMedia(QUrl::fromLocalFile(backFile));
     back->setVolume(100);
+
+    desert = new QMediaPlayer;
+    QString desertFile = "../Son/Desert.mp3";
+    desert->setMedia(QUrl::fromLocalFile(desertFile));
+    desert->setVolume(40);
+
+    snow = new QMediaPlayer;
+    QString snowFile = "../Son/Snow.mp3";
+    snow->setMedia(QUrl::fromLocalFile(snowFile));
+    snow->setVolume(40);
+
+    green = new QMediaPlayer;
+    QString greenFile = "../Son/Green.mp3";
+    green->setMedia(QUrl::fromLocalFile(greenFile));
+    green->setVolume(40);
+
+    birdie = new QMediaPlayer;
+    QString birdieFile = "../Son/Birdie.mp3";
+    birdie->setMedia(QUrl::fromLocalFile(birdieFile));
+    birdie->setVolume(100);
+
+    //manette
+
+    manette = new Manette("com3");
+
+
 }
 
 FenetreTerrain::~FenetreTerrain()
@@ -217,6 +243,9 @@ void FenetreTerrain::action_retour()
 ********************************************/
 {
     back->play();
+    desert->stop();
+    snow->stop();
+    green->stop();
     emit b_retour_appuyer();
     reussi->close();
 }
@@ -258,6 +287,22 @@ terrain, la balle, ainsi que la cible qui permet de viser.
     double arrowY = calculateY(Oy);
     point->setGeometry((arrowX - (xPoint / 2) + 5), (arrowY - (yPoint / 2) + 5), xPoint, yPoint);
     point->show();
+
+    //changement de music
+    QString numtrou = nom_fichier_terrain.right(1)[0];
+    int numeroTrou = numtrou.toInt();
+    if (0 < numeroTrou && numeroTrou < 5)
+    {
+        green->play();
+    }
+    else if (4 < numeroTrou && numeroTrou < 7)
+    {
+        desert->play();
+    }
+    else if(6 < numeroTrou && numeroTrou < 9)
+    {
+        snow->play();
+    }
 
     qApp->processEvents();
 }
@@ -321,6 +366,7 @@ Met à jour le terrain actuel si le joueur choisi cette action.
 :return:
 *********************************************************************************************************/
 {
+    back->play();
     reussi->close();
     QString numtrou = nom_fichier_terrain.right(1)[0];
     int numeroTrou = numtrou.toInt();
@@ -338,6 +384,10 @@ Emet le signal b_fin_appuyer. Ferme le jeu.
 :return:
 *********************************************************************************************************/
 {
+    back->play();
+    desert->stop();
+    snow->stop();
+    green->stop();
     emit b_fin_appuyer();
     fin->close();
 }
@@ -382,6 +432,7 @@ Gère les entrées de l'usager avec manette ou clavier.
         }
         if (terrain1->TerrainReussi())
         {
+            birdie->play();
             QString numtrou = nom_fichier_terrain.right(1)[0];
             int numeroTrou = numtrou.toInt();
             balle->hide();
@@ -448,5 +499,80 @@ Gère les entrées de l'usager avec manette ou clavier.
     // Accept the key event
     event->accept();
  
+}
+
+
+void FenetreTerrain::jouer()
+/********************************************************************************************************
+Cette fonction permet d'exécuter le jeu. Tant que le trou n'est pas réussi, elle prendra les coups
+du joueur et déplacera la balle dans le terrain. Si le trou est est réussi, l'usager peut quitter ou jouer
+le prochain trou.
+:return:
+*********************************************************************************************************/
+{
+    while (terrain1->TerrainReussi() == false)
+    {
+        std::vector<std::pair<double, double>> parcourVec;
+        Coup* coup1 = new Coup(direction, force);
+        Coup* coup = new Coup(90, 1);
+        Parcours parcours;
+
+        double Ox = terrain1->getOx() * 100 - xTrans;
+        double Oy = 720 - terrain1->getOy() * 100 - yTrans;
+        double arrowX = calculateX(Ox);
+        double arrowY = calculateY(Oy);
+        point->setGeometry((arrowX - (xPoint / 2) + 5), (arrowY - (yPoint / 2) + 5), xPoint, yPoint);
+        manette->setBouton();
+        while (!manette->getButton1())
+        {
+            double prevDirect = direction;
+            direction = manette->GetDirectionElec(coup);
+            directionText->setText("Direction du coup: " + QString::number(direction));
+            if (prevDirect < direction)
+            {
+                arrowX = calculateX(Ox);
+                arrowY = calculateY(Oy);
+                point->setGeometry((arrowX - (xPoint / 2) + 5), (arrowY - (yPoint / 2) + 5), xPoint, yPoint);
+            }
+            else
+            {
+                arrowX = calculateX(Ox);
+                arrowY = calculateY(Oy);
+                point->setGeometry((arrowX - (xPoint / 2) + 5), (arrowY - (yPoint / 2) + 5), xPoint, yPoint);
+            }
+            point->show();
+            qApp->processEvents();
+            Sleep(10);
+        }
+
+        manette->GetPuissanceElec(coup);
+        //manette->SequenceCoup(coup);
+        parcours = terrain1->CoupDonne(coup);
+        parcourVec = parcours.GetCoorXY();
+        point->setVisible(false);
+
+        for (indexParcours; indexParcours < parcourVec.size(); indexParcours++)
+        {
+            const auto& coord = parcourVec[indexParcours];
+            int x = (coord.first * 100) - xTrans;
+            int y = (720 - (coord.second * 100)) - yTrans;
+            balle->move(x, y);
+            qApp->processEvents();
+            Sleep(37);
+        }
+    }
+
+    QString numtrou = nom_fichier_terrain.right(1)[0];
+    int numeroTrou = numtrou.toInt();
+    balle->hide();
+    qApp->processEvents();
+    if (numeroTrou < 8)
+    {
+        reussi->exec();
+    }
+    else
+    {
+        fin->exec();
+    }
 }
 
