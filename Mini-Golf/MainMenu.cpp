@@ -28,7 +28,7 @@ MainMenu::MainMenu(QWidget* parent)
     //Texte du titre
     texteTitre = new QTextEdit(this);
     texteTitre->setGeometry(240, 100, 800, 200);
-    texteTitre->setPlainText("Menu Principale");
+    texteTitre->setPlainText("Menu Principal");
     texteTitre->setReadOnly(true);
     QString style_titre = "QTextEdit {"
         "font-family: Helvetica;"

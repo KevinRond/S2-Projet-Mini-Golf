@@ -95,6 +95,8 @@ private:
     QTextEdit* nomfichier;
     QLabel* forceText;
     QLabel* directionText;
+    QLabel* coupText;
+    QLabel* finalCoupText;
     QPushButton* b_retour;
     QString nom_fichier_terrain;
     QLabel* balle;
@@ -105,6 +107,10 @@ private:
 
     QGraphicsDropShadowEffect* effect_etiquette_force;
     QGraphicsDropShadowEffect* effect_etiquette_direction;
+    QGraphicsDropShadowEffect* effect_etiquette_coup;
+    
+
+
     QMediaPlayer* connard;
     QMediaPlayer* back;
     QMediaPlayer* desert;
@@ -118,6 +124,7 @@ private:
     double yTrans;
     double direction = 1;
     double force = 1;
+    int couptxt = 0;
     int indexParcours;
     Manette* manette;
     bool button1;

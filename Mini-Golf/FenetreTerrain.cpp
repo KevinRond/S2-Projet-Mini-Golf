@@ -52,18 +52,18 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     
 
    
-    /*texteTitre = new QTextEdit(this);
-    texteTitre->setGeometry(240, 100, 800, 400);
-    texteTitre->setPlainText("Terrain");
-    texteTitre->setReadOnly(true);
-    QString style_titre = "QTextEdit {"
-        "font-family: Helvetica;"
-        "font-size: 60px;"
-        "background-color: transparent;"
-        "border: none;"
-        "}";
-    texteTitre->setStyleSheet(style_titre);
-    texteTitre->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);*/
+    //texteTitre = new QTextEdit(reussi);
+    //texteTitre->setGeometry(240, 100, 800, 400);
+    ////texteTitre->setPlainText("Terrain");
+    //texteTitre->setReadOnly(true);
+    //QString style_titre = "QTextEdit {"
+    //    "font-family: Helvetica;"
+    //    "font-size: 60px;"
+    //    "background-color: transparent;"
+    //    "border: none;"
+    //    "}";
+    //texteTitre->setStyleSheet(style_titre);
+    //texteTitre->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
     b_retour = new QPushButton("Retour", this);
     b_retour->setGeometry(1080, 620, 200, 100);
@@ -97,6 +97,12 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     directionText->move(50, 150);
     directionText->setFixedSize(300, 50);
 
+    coupText = new QLabel("Nombre de coup: " + QString::number(couptxt), this);
+    coupText->move(50, 200);
+    coupText->setFixedSize(300, 50);
+
+    
+
     QString style_etiquette = "QLabel {"
         "font-family: Helvetica;"
         "font-size: 24px;"
@@ -107,6 +113,7 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
 
     forceText->setStyleSheet(style_etiquette);
     directionText->setStyleSheet(style_etiquette);
+    coupText->setStyleSheet(style_etiquette);
 
     //Design des effets des etiquettes
     effect_etiquette_force = new QGraphicsDropShadowEffect;
@@ -121,13 +128,34 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     effect_etiquette_direction->setOffset(1, 1);
     directionText->setGraphicsEffect(effect_etiquette_direction);
 
+    effect_etiquette_coup = new QGraphicsDropShadowEffect;
+    effect_etiquette_coup->setBlurRadius(5);
+    effect_etiquette_coup->setColor(Qt::black);
+    effect_etiquette_coup->setOffset(1, 1);
+    coupText->setGraphicsEffect(effect_etiquette_coup);
 
+
+    couptxt = 0;
     indexParcours = 0;
 
     //Creation de la fenetre lorsque la balle arrive dans le trou
     reussi = new QDialog(this);
     reussi->setFixedSize(640, 360);
     reussi->setStyleSheet("QDialog { background-image: url(../Graphic/NextLevel1.png); }");
+
+    finalCoupText = new QLabel("Nombre de coup: " + QString::number(couptxt), reussi);
+    finalCoupText->move(125, 50);
+    finalCoupText->setFixedSize(400, 50);
+    QGraphicsDropShadowEffect* effect_etiquette_finalCoup;
+
+    finalCoupText->setStyleSheet(style_etiquette);
+
+
+    effect_etiquette_finalCoup = new QGraphicsDropShadowEffect;
+    effect_etiquette_finalCoup->setBlurRadius(7);
+    effect_etiquette_finalCoup->setColor(Qt::black);
+    effect_etiquette_finalCoup->setOffset(1, 1);
+    finalCoupText->setGraphicsEffect(effect_etiquette_finalCoup);
 
     QPushButton* b_retourTrou = new QPushButton("Retour", reussi);
     b_retourTrou->setGeometry(220, 200, 200, 100);
@@ -210,13 +238,13 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     green->setVolume(40);
 
     birdie = new QMediaPlayer;
-    QString birdieFile = "../Son/Birdie.mp3";
+    QString birdieFile = "../Son/Birdie.wav";
     birdie->setMedia(QUrl::fromLocalFile(birdieFile));
     birdie->setVolume(100);
 
     //manette
 
-    manette = new Manette("com3");
+    //manette = new Manette("com3");
 
 
 }
@@ -264,6 +292,7 @@ terrain, la balle, ainsi que la cible qui permet de viser.
 {
     direction = 0;
     force = 0;
+    couptxt = 0;
     indexParcours = 0;
     // Update the strength label
     forceText->setText("Force du coup: " + QString::number(force));
@@ -430,6 +459,8 @@ Gère les entrées de l'usager avec manette ou clavier.
             qApp->processEvents();
             Sleep(37);
         }
+        couptxt++;
+        coupText->setText("Nombre de coup: " + QString::number(couptxt));
         if (terrain1->TerrainReussi())
         {
             birdie->play();
@@ -437,8 +468,17 @@ Gère les entrées de l'usager avec manette ou clavier.
             int numeroTrou = numtrou.toInt();
             balle->hide();
             qApp->processEvents();
+            Sleep(2000);
             if (numeroTrou < 8)
             {
+                if (couptxt == 1)
+                {
+                    finalCoupText->setText("BRAVO!! Trou en " + QString::number(couptxt) + " !!");  
+                }
+                else
+                {
+                    finalCoupText->setText("BRAVO!! Trou reussi en " + QString::number(couptxt) + " coups !!");
+                }
                 reussi->exec();
             }
             else
