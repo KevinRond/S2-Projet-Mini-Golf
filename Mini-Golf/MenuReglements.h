@@ -31,9 +31,7 @@ action_retour(): Émet le signal b_retour_appuyer.
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QPushButton>
-
-
-
+#include <QKeyEvent>
 #include <QtWidgets/QMainWindow>
 #include <QApplication>
 #include <QPushButton>
@@ -60,6 +58,9 @@ signals:
 
 private slots:
     void action_retour();
+
+protected:
+    void keyPressEvent(QKeyEvent* event) override;
 
 private:
     QTextEdit* texteTitre;                              //Zone de texte du titre

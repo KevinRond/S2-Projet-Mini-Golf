@@ -66,7 +66,7 @@ MenuSelectionTerrain::MenuSelectionTerrain(QWidget* parent)
         "font-size: 16px; "
         "color: white "
         "}"
-        "QPushButton:hover { border-image: url(../Graphic/BoutonSelect.png); }"
+        "QPushButton:hover, QPushButton:focus { border-image: url(../Graphic/BoutonSelect.png); }"
         "QPushButton:pressed { border-image: url(../Graphic/BoutonFermer1.png); }");
 
 
@@ -86,7 +86,7 @@ MenuSelectionTerrain::MenuSelectionTerrain(QWidget* parent)
         "font-size: 16px; "
         "color: white "
         "}"
-        "QPushButton:hover { border: 15px solid white;  border-radius: 15px; }");
+        "QPushButton:hover, QPushButton:focus { border: 15px solid white;  border-radius: 15px; }");
     b_terrain2->setGeometry(512, 140, 256, 152);
     b_terrain2->setStyleSheet("QPushButton { border-image: url(../Terrain/Terrain2.png);"
         "font-family: Helvetica; "
@@ -94,7 +94,7 @@ MenuSelectionTerrain::MenuSelectionTerrain(QWidget* parent)
         "font-size: 16px; "
         "color: white "
         "}"
-        "QPushButton:hover { border: 15px solid white;  border-radius: 15px; }");
+        "QPushButton:hover, QPushButton:focus { border: 15px solid white;  border-radius: 15px; }");
     b_terrain3->setGeometry(818, 140, 256, 152);
     b_terrain3->setStyleSheet("QPushButton { border-image: url(../Terrain/Terrain3.png);"
         "font-family: Helvetica; "
@@ -102,7 +102,7 @@ MenuSelectionTerrain::MenuSelectionTerrain(QWidget* parent)
         "font-size: 16px; "
         "color: white "
         "}"
-        "QPushButton:hover { border: 15px solid white;  border-radius: 15px; }");
+        "QPushButton:hover, QPushButton:focus { border: 15px solid white;  border-radius: 15px; }");
     b_terrain4->setGeometry(206, 342, 256, 152);
     b_terrain4->setStyleSheet("QPushButton { border-image: url(../Terrain/Terrain4.png);"
         "font-family: Helvetica; "
@@ -110,7 +110,7 @@ MenuSelectionTerrain::MenuSelectionTerrain(QWidget* parent)
         "font-size: 16px; "
         "color: white "
         "}"
-        "QPushButton:hover { border: 15px solid white;  border-radius: 15px; }");
+        "QPushButton:hover, QPushButton:focus { border: 15px solid white;  border-radius: 15px; }");
     b_terrain5->setGeometry(512, 342, 256, 152);
     b_terrain5->setStyleSheet("QPushButton { border-image: url(../Terrain/Terrain5.png);"
         "font-family: Helvetica; "
@@ -118,7 +118,7 @@ MenuSelectionTerrain::MenuSelectionTerrain(QWidget* parent)
         "font-size: 16px; "
         "color: white "
         "}"
-        "QPushButton:hover { border: 15px solid white;  border-radius: 15px; }");
+        "QPushButton:hover, QPushButton:focus { border: 15px solid white;  border-radius: 15px; }");
     b_terrain6->setGeometry(818, 342, 256, 152);
     b_terrain6->setStyleSheet("QPushButton { border-image: url(../Terrain/Terrain6.png);"
         "font-family: Helvetica; "
@@ -126,7 +126,7 @@ MenuSelectionTerrain::MenuSelectionTerrain(QWidget* parent)
         "font-size: 16px; "
         "color: white "
         "}"
-        "QPushButton:hover { border: 15px solid white;  border-radius: 15px; }");
+        "QPushButton:hover, QPushButton:focus { border: 15px solid white;  border-radius: 15px; }");
     b_terrain7->setGeometry(359, 544, 256, 152);
     b_terrain7->setStyleSheet("QPushButton { border-image: url(../Terrain/Terrain7.png);"
         "font-family: Helvetica; "
@@ -134,7 +134,7 @@ MenuSelectionTerrain::MenuSelectionTerrain(QWidget* parent)
         "font-size: 16px; "
         "color: white "
         "}"
-        "QPushButton:hover { border: 15px solid white;  border-radius: 15px; }");
+        "QPushButton:hover, QPushButton:focus { border: 15px solid white;  border-radius: 15px; }");
     b_terrain8->setGeometry(665, 544, 256, 152);
     b_terrain8->setStyleSheet("QPushButton { border-image: url(../Terrain/Terrain8.png);"
         "font-family: Helvetica; "
@@ -142,7 +142,7 @@ MenuSelectionTerrain::MenuSelectionTerrain(QWidget* parent)
         "font-size: 16px; "
         "color: white "
         "}"
-        "QPushButton:hover { border: 15px solid white;  border-radius: 15px; }");
+        "QPushButton:hover, QPushButton:focus { border: 15px solid white;  border-radius: 15px; }");
 
 
     //Actions des boutons
@@ -156,7 +156,8 @@ MenuSelectionTerrain::MenuSelectionTerrain(QWidget* parent)
     connect(b_terrain7, &QPushButton::clicked, this, &MenuSelectionTerrain::action_terrain7);
     connect(b_terrain8, &QPushButton::clicked, this, &MenuSelectionTerrain::action_terrain8);
 
-
+    // Set the focus policy of the widget to accept keyboard focus
+    setFocusPolicy(Qt::StrongFocus);
 }
 
 MenuSelectionTerrain::~MenuSelectionTerrain()
@@ -262,5 +263,46 @@ void MenuSelectionTerrain::action_terrain8()
 ********************************************/
 {
     emit b_terrain8_appuyer();
+}
+
+void MenuSelectionTerrain::keyPressEvent(QKeyEvent* event)
+{
+    if (event->key() == Qt::Key_W || event->key() == Qt::Key_S) {
+        // Find the currently focused button
+        QPushButton* currentButton = qobject_cast<QPushButton*>(focusWidget());
+        if (currentButton == nullptr) {
+            // If no button is focused, set focus to the first button
+            QWidget* firstChild = findChild<QPushButton*>(); // Find the first QPushButton child
+            if (firstChild != nullptr) {
+                firstChild->setFocus();
+            }
+        }
+        else {
+            // Find the next or previous button depending on the key press
+            QPushButton* nextButton = nullptr;
+            if (event->key() == Qt::Key_S) {
+                nextButton = qobject_cast<QPushButton*>(currentButton->nextInFocusChain());
+            }
+            else {
+                nextButton = qobject_cast<QPushButton*>(currentButton->previousInFocusChain());
+            }
+            if (nextButton != nullptr) {
+                // Set focus to the next or previous button
+                nextButton->setFocus();
+            }
+        }
+    }
+    else if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return) {
+        // Handle enter key press
+        QPushButton* currentButton = qobject_cast<QPushButton*>(focusWidget());
+        if (currentButton != nullptr) {
+            // Trigger the clicked signal of the currently focused button
+            QMetaObject::invokeMethod(currentButton, "click", Qt::QueuedConnection);
+        }
+    }
+    else if (event->key() == Qt::Key_Backspace) {
+        // Handle enter key press
+        emit b_retour_appuyer();
+    }
 }
 

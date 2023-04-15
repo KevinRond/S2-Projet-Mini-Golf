@@ -45,9 +45,11 @@ public:
 signals:
     void buttonClicked();
 
-
 private slots:
     void switchMenus();
+
+protected:
+    void keyPressEvent(QKeyEvent* event) override;
 
 private:
     //Ui::QTLabo1Class ui;

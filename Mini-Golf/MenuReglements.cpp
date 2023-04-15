@@ -95,6 +95,14 @@ MenuReglements::~MenuReglements()
     
 }
 
+void MenuReglements::keyPressEvent(QKeyEvent* event)
+{
+    if (event->key() == Qt::Key_Backspace) {
+        // Handle enter key press
+        emit b_retour_appuyer();
+    }
+}
+
 void MenuReglements::action_retour()
 /************************************
 Émet le signal b_retour_appuyer.

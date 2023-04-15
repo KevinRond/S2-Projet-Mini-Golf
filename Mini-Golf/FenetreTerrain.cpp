@@ -181,7 +181,7 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
 
 
     //creation de la mannette
-    manette = new Manette("com3");
+    //manette = new Manette("com3");
 
     point = new QLabel(this);
     QPixmap fleche("../Graphic/crosshair.png");
@@ -256,7 +256,7 @@ terrain, la balle, ainsi que la cible qui permet de viser.
     point->show();
 
     qApp->processEvents();
-    jouer();
+    //jouer();
 }
 
 QString FenetreTerrain::get_file_name()
@@ -437,7 +437,7 @@ Gère les entrées de l'usager avec manette ou clavier.
     {
     case Qt::Key_R:
 
-        manette->setBouton();
+        /*manette->setBouton();
         while (!manette->getButton1())
         {
             double prevDirect = direction;
@@ -460,7 +460,7 @@ Gère les entrées de l'usager avec manette ou clavier.
             Sleep(10);
         }
 
-        manette->GetPuissanceElec(coup);
+        manette->GetPuissanceElec(coup);*/
         //manette->SequenceCoup(coup);
         parcours = terrain1->CoupDonne(coup);
         parcourVec = parcours.GetCoorXY();
@@ -518,6 +518,11 @@ Gère les entrées de l'usager avec manette ou clavier.
         force++;
         break;
 
+    case Qt::Key_Backspace:
+        
+        // Handle enter key press
+        emit b_retour_appuyer();
+
     default:
 
         QMainWindow::keyPressEvent(event);
@@ -535,6 +540,8 @@ Gère les entrées de l'usager avec manette ou clavier.
 
     parcourVec.clear();
     // Accept the key event
+    point->show();
+    qApp->processEvents();
     event->accept();
  
 }

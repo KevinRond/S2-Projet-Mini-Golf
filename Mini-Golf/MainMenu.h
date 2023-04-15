@@ -33,6 +33,7 @@ action_scoreboard(): Émet le signal b_scoreboard_appuyer.
 #include <QTextBrowser>
 #include <QStackedWidget>
 #include <QGraphicsDropShadowEffect>
+#include <QKeyEvent>
 
 
 class MainMenu : public QMainWindow
@@ -52,6 +53,9 @@ private slots:
     void action_jouer();
     void action_regle();
     void action_scoreboard();
+
+protected:
+    void keyPressEvent(QKeyEvent* event) override;
 
 private:
     QTextEdit* texteTitre;                          //Zone de texte du titre

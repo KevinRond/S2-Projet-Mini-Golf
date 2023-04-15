@@ -42,6 +42,7 @@ action_retour(): Émet le signal b_retour_appuyer.
 #include <QStackedWidget>
 #include <QLabel>
 #include <QGraphicsDropShadowEffect>
+#include <QKeyEvent>
 
 class MenuSelectionTerrain : public QMainWindow
 {
@@ -72,6 +73,9 @@ private slots:
     void action_terrain6();
     void action_terrain7();
     void action_terrain8();
+
+protected:
+    void keyPressEvent(QKeyEvent* event) override;
 
 private:
     QTextEdit* texteTitre;
