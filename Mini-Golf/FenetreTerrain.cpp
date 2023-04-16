@@ -42,8 +42,8 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     xTrans = pixmap.width() / 2;
     yTrans = pixmap.height() / 2;
 
-    direction = 1;
-    force = 1;
+    direction = 0;
+    force = 0;
 
     forceText = new QLabel("Force du coup: " + QString::number(force), this);
     forceText->move(50, 100);
@@ -52,6 +52,10 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     directionText = new QLabel("Direction du coup: " + QString::number(direction), this);
     directionText->move(50, 150);
     directionText->setFixedSize(300, 50);
+
+    coupText = new QLabel("Nombre de coup: " + QString::number(couptxt), this);
+    coupText->move(50, 200);
+    coupText->setFixedSize(300, 50);
 
     QString style_etiquette = "QLabel {"
         "font-family: Helvetica;"
@@ -63,6 +67,7 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
 
     forceText->setStyleSheet(style_etiquette);
     directionText->setStyleSheet(style_etiquette);
+    coupText->setStyleSheet(style_etiquette);
 
     //Design des effets des etiquettes
     effect_etiquette_force = new QGraphicsDropShadowEffect;
@@ -77,13 +82,33 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     effect_etiquette_direction->setOffset(1, 1);
     directionText->setGraphicsEffect(effect_etiquette_direction);
 
+    effect_etiquette_coup = new QGraphicsDropShadowEffect;
+    effect_etiquette_coup->setBlurRadius(5);
+    effect_etiquette_coup->setColor(Qt::black);
+    effect_etiquette_coup->setOffset(1, 1);
+    coupText->setGraphicsEffect(effect_etiquette_coup);
 
+    couptxt = 0;
     indexParcours = 0;
 
     //Creation de la fenetre lorsque la balle arrive dans le trou
     reussi = new QDialog(this);
     reussi->setFixedSize(640, 360);
     reussi->setStyleSheet("QDialog { background-image: url(../Graphic/NextLevel1.png); }");
+
+    finalCoupText = new QLabel("Nombre de coup: " + QString::number(couptxt), reussi);
+    finalCoupText->move(125, 50);
+    finalCoupText->setFixedSize(400, 50);
+    QGraphicsDropShadowEffect* effect_etiquette_finalCoup;
+
+    finalCoupText->setStyleSheet(style_etiquette);
+
+    effect_etiquette_finalCoup = new QGraphicsDropShadowEffect;
+    effect_etiquette_finalCoup->setBlurRadius(7);
+    effect_etiquette_finalCoup->setColor(Qt::black);
+    effect_etiquette_finalCoup->setOffset(1, 1);
+    finalCoupText->setGraphicsEffect(effect_etiquette_finalCoup);
+
 
     QPushButton* b_retourTrou = new QPushButton("Retour", reussi);
     b_retourTrou->setGeometry(220, 200, 200, 100);
@@ -119,6 +144,12 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     fin->setFixedSize(640, 360);
     fin->setStyleSheet("QDialog { background-image: url(../Graphic/NextLevel1.png); }");
 
+    finCoupText = new QLabel("Nombre de coup: " + QString::number(couptxt), fin);
+    finCoupText->move(125, 50);
+    finCoupText->setFixedSize(400, 50);
+
+    finalCoupText->setStyleSheet(style_etiquette);
+
     QPushButton* b_fin = new QPushButton("Retour a l'ecran d'acceuil", fin);
     b_fin->setGeometry(170, 105, 300, 150);
     b_fin->setStyleSheet("QPushButton { border-image: url(../Graphic/BoutonOuvert1.png);"
@@ -134,7 +165,7 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
 
 
     //creation de la mannette
-    //manette = new Manette("com7");
+    manette = new Manette("com7");
 
     point = new QLabel(this);
     QPixmap fleche("../Graphic/crosshair.png");
@@ -163,6 +194,7 @@ FenetreTerrain::~FenetreTerrain()
     delete directionText;
     delete fin;
     delete reussi;
+    delete manette;
 }
 
 void FenetreTerrain::action_retour()
@@ -171,14 +203,16 @@ void FenetreTerrain::action_retour()
     reussi->close();
 }
 
-void FenetreTerrain::set_file_name(QString file_name)
+void FenetreTerrain::set_terrain(QString file_name)
 {
     direction = 0;
     force = 0;
+    couptxt = 0;
     indexParcours = 0;
     // Update the strength label
     forceText->setText("Force du coup: " + QString::number(force));
     directionText->setText("Direction du coup: " + QString::number(direction));
+    coupText->setText("Nombre de coup: " + QString::number(couptxt));
 
     nom_fichier_terrain = file_name;
     QString terrainPNG = "../Terrain/" + nom_fichier_terrain + ".png";
@@ -238,7 +272,7 @@ void FenetreTerrain::action_trouSuivant()
     numeroTrou++;
     nom_fichier_terrain.chop(1);
     nom_fichier_terrain = nom_fichier_terrain + QString::number(numeroTrou);
-    set_file_name(nom_fichier_terrain);
+    set_terrain(nom_fichier_terrain);
     
 }
 
@@ -250,10 +284,11 @@ void FenetreTerrain::action_fin()
 
 void FenetreTerrain::jouer()
 {
-    Manette* manette = new Manette("com7");
+    //Manette* manette = new Manette("com7");
+    std::vector<std::pair<double, double>> parcourVec;
     while (terrain1->TerrainReussi() == false)
     {
-        std::vector<std::pair<double, double>> parcourVec;
+        
         Parcours parcours;
 
         double Ox = terrain1->getOx() * 100 - xTrans;
@@ -264,6 +299,9 @@ void FenetreTerrain::jouer()
         manette->setBouton();
         while (!manette->getButton1())
         {
+  
+           // manette->button2 = false;
+            
             double prevDirect = direction;
             direction = manette->GetDirectionElec(coup);
             directionText->setText("Direction du coup: " + QString::number(direction));
@@ -284,6 +322,7 @@ void FenetreTerrain::jouer()
             Sleep(10);
         }
 
+        
         force = manette->GetPuissanceElec(coup);
         forceText->setText("Force du coup: " + QString::number(force));
         //qApp->processEvents();
@@ -301,21 +340,35 @@ void FenetreTerrain::jouer()
             qApp->processEvents();
             Sleep(37);
         }
+        couptxt++;
+        coupText->setText("Nombre de coup: " + QString::number(couptxt));
+        direction = 0;
     }
 
+    parcourVec.clear();
     QString numtrou = nom_fichier_terrain.right(1)[0];
     int numeroTrou = numtrou.toInt();
     balle->hide();
     qApp->processEvents();
     if (numeroTrou < 8)
     {
+        if (couptxt == 1)
+        {
+            finalCoupText->move(200, 50);
+            finalCoupText->setText("BRAVO!! Trou en " + QString::number(couptxt) + "!!");
+        }
+        else
+        {
+            finalCoupText->setText("BRAVO!! Trou reussi en " + QString::number(couptxt) + " coups !!");
+        }
         reussi->exec();
     }
+   
     else
     {
         fin->exec();
     }
-    delete manette;
+    //delete manette;
 }
 
 void FenetreTerrain::keyPressEvent(QKeyEvent* event)

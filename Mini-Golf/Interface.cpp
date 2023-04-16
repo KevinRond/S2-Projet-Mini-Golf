@@ -49,35 +49,35 @@ Interface::Interface(QWidget* parent)
         });
     connect(menuSelectionTerrain, &MenuSelectionTerrain::b_terrain1_appuyer, [this]() {
         listeMenus->setCurrentWidget(listeMenus->widget(5));
-        fenetreTerrain->set_file_name("Terrain1");
+        fenetreTerrain->set_terrain("Terrain1");
         });
     connect(menuSelectionTerrain, &MenuSelectionTerrain::b_terrain2_appuyer, [this]() {
         listeMenus->setCurrentWidget(listeMenus->widget(5));
-        fenetreTerrain->set_file_name("Terrain2");
+        fenetreTerrain->set_terrain("Terrain2");
         });
     connect(menuSelectionTerrain, &MenuSelectionTerrain::b_terrain3_appuyer, [this]() {
         listeMenus->setCurrentWidget(listeMenus->widget(5));
-        fenetreTerrain->set_file_name("Terrain3");
+        fenetreTerrain->set_terrain("Terrain3");
         });
     connect(menuSelectionTerrain, &MenuSelectionTerrain::b_terrain4_appuyer, [this]() {
         listeMenus->setCurrentWidget(listeMenus->widget(5));
-        fenetreTerrain->set_file_name("Terrain4");
+        fenetreTerrain->set_terrain("Terrain4");
         });
     connect(menuSelectionTerrain, &MenuSelectionTerrain::b_terrain5_appuyer, [this]() {
         listeMenus->setCurrentWidget(listeMenus->widget(5));
-        fenetreTerrain->set_file_name("Terrain5");
+        fenetreTerrain->set_terrain("Terrain5");
         });
     connect(menuSelectionTerrain, &MenuSelectionTerrain::b_terrain6_appuyer, [this]() {
         listeMenus->setCurrentWidget(listeMenus->widget(5));
-        fenetreTerrain->set_file_name("Terrain6");
+        fenetreTerrain->set_terrain("Terrain6");
         });
     connect(menuSelectionTerrain, &MenuSelectionTerrain::b_terrain7_appuyer, [this]() {
         listeMenus->setCurrentWidget(listeMenus->widget(5));
-        fenetreTerrain->set_file_name("Terrain7");
+        fenetreTerrain->set_terrain("Terrain7");
         });
     connect(menuSelectionTerrain, &MenuSelectionTerrain::b_terrain8_appuyer, [this]() {
         listeMenus->setCurrentWidget(listeMenus->widget(5));
-        fenetreTerrain->set_file_name("Terrain8");
+        fenetreTerrain->set_terrain("Terrain8");
         });
 
     //Actions du menu de fenetre terrain

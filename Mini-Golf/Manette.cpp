@@ -228,6 +228,8 @@ int Manette::getAmplitude()
     return amplitude;
 }
 int Manette::getMumu() {
+    communication();
+    std::cout << "MUMU = " << mumu << std::endl;
     return mumu;
 }
 bool Manette::getButton1()
@@ -278,6 +280,13 @@ double Manette::GetDirectionElec(Coup* coup)
     demande(2, 9);
     //button1 = false;
     communication();
+    if (button2 == true)
+    {
+        int mumu = getMumu();
+        coup->setDirection(mumu*10);
+        return coup->Get_Direction();
+
+    }
     coup->setDirection(joyX - 2);
     std::cout << coup->Get_Direction() << std::endl;
     Sleep(1);
@@ -288,6 +297,7 @@ double  Manette::GetPuissanceElec(Coup* coup)
     demande(3, 9);
     amplitude = 0;
     coup->setAmplitude(0);
+    button3 = false;
     int i = 0;
     while (1)
     {

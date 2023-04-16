@@ -6,12 +6,12 @@ MenuScoreboard::MenuScoreboard(QWidget* parent)
     //ui.setupUi(this);
 
     this->setFixedSize(1280, 720);
-    setStyleSheet("QMainWindow{ background-image: url(../Graphic/BeauFond3.png); }");
+    setStyleSheet("QMainWindow{ background-image: url(../Graphic/Commande.png); }");
 
     //Texte du titre
     texteTitre = new QTextEdit(this);
     texteTitre->setGeometry(240, 100, 800, 400);
-    texteTitre->setPlainText("Gagnants du prix Carl Carmoni: ");
+    texteTitre->setPlainText("Instructions des commandes ");
     texteTitre->setReadOnly(true);
     QString style_titre = "QTextEdit {"
         "font-family: Helvetica;"

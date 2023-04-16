@@ -31,7 +31,7 @@ class FenetreTerrain : public QMainWindow
 public:
     FenetreTerrain(QWidget* parent = nullptr);
     ~FenetreTerrain();
-    void set_file_name(QString file_name);
+    void set_terrain(QString file_name);
     QString get_file_name();
     double calculateX(double posBalleX);
     double calculateY(double posBalley);
@@ -53,6 +53,9 @@ private:
     QTextEdit* nomfichier;
     QLabel* forceText;
     QLabel* directionText;
+    QLabel* finalCoupText;
+    QLabel* finCoupText;
+    QLabel* coupText;
     QPushButton* b_retour;
     QString nom_fichier_terrain;
     QLabel* balle;
@@ -60,15 +63,18 @@ private:
     QDialog* reussi;
     QDialog* fin;
     QLabel* point;
+
     QGraphicsDropShadowEffect* effect_etiquette_force;
     QGraphicsDropShadowEffect* effect_etiquette_direction;
+    QGraphicsDropShadowEffect* effect_etiquette_coup;
 
     double xPoint;
     double yPoint;
     double xTrans;
     double yTrans;
-    double direction = 1;
-    double force = 1;
+    double direction = 0;
+    double force = 0;
+    int couptxt = 0;
     int indexParcours;
     Manette* manette;
     Coup* coup;

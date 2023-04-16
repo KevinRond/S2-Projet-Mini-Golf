@@ -33,7 +33,7 @@ MainMenu::MainMenu(QWidget* parent)
     //Set up des boutons
     b_jouer = new QPushButton("Jouer", this);
     b_regle = new QPushButton("Regles", this);
-    b_scoreboard = new QPushButton("Gagnant du prix Carl Carmoni", this);
+    b_scoreboard = new QPushButton("Commandes", this);
     b_quit = new QPushButton("Quitter l'application", this);
 
 
@@ -59,7 +59,7 @@ MainMenu::MainMenu(QWidget* parent)
     b_scoreboard->setStyleSheet("QPushButton { border-image: url(../Graphic/BoutonOuvert1.png);"
         "font-family: Helvetica; "
         "font-weight: bold; "
-        "font-size: 14px; "
+        "font-size: 24px; "
         "color: white "
         "}"
         "QPushButton:hover, QPushButton:focus { border-image: url(../Graphic/BoutonSelect.png); }"
