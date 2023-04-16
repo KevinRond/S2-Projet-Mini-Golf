@@ -97,6 +97,7 @@ private:
     QLabel* directionText;
     QLabel* coupText;
     QLabel* finalCoupText;
+    QLabel* finCoupText;
     QPushButton* b_retour;
     QString nom_fichier_terrain;
     QLabel* balle;

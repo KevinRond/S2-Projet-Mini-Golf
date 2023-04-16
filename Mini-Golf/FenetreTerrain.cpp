@@ -115,6 +115,7 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     directionText->setStyleSheet(style_etiquette);
     coupText->setStyleSheet(style_etiquette);
 
+
     //Design des effets des etiquettes
     effect_etiquette_force = new QGraphicsDropShadowEffect;
     effect_etiquette_force->setBlurRadius(5);
@@ -180,7 +181,7 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
         "font-size: 16px; "
         "color: white "
         "}"
-        "QPushButton:hover, QPushButton:focus { border-image: url(../Graphic/BoutonSelect.png); }"
+        "QPushButton:hover { border-image: url(../Graphic/BoutonSelect.png); }"
         "QPushButton:pressed { border-image: url(../Graphic/BoutonFermer1.png); }");
 
     connect(b_trouSuivant, &QPushButton::released, this, &FenetreTerrain::action_trouSuivant);
@@ -191,6 +192,15 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     fin->setFixedSize(640, 360);
     fin->setStyleSheet("QDialog { background-image: url(../Graphic/NextLevel1.png); }");
 
+    finCoupText = new QLabel("Nombre de coup: " + QString::number(couptxt), reussi);
+    finCoupText->move(125, 50);
+    finCoupText->setFixedSize(400, 50);
+
+    finalCoupText->setStyleSheet(style_etiquette);
+
+
+
+
     QPushButton* b_fin = new QPushButton("Retour a l'ecran d'acceuil", fin);
     b_fin->setGeometry(170, 105, 300, 150);
     b_fin->setStyleSheet("QPushButton { border-image: url(../Graphic/BoutonOuvert1.png);"
@@ -199,7 +209,7 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
         "font-size: 16px; "
         "color: white "
         "}"
-        "QPushButton:hover, QPushButton:focus { border-image: url(../Graphic/BoutonSelect.png); }"
+        "QPushButton:hover { border-image: url(../Graphic/BoutonSelect.png); }"
         "QPushButton:pressed { border-image: url(../Graphic/BoutonFermer1.png); }");
 
     connect(b_fin, &QPushButton::released, this, &FenetreTerrain::action_fin);
@@ -297,6 +307,7 @@ terrain, la balle, ainsi que la cible qui permet de viser.
     // Update the strength label
     forceText->setText("Force du coup: " + QString::number(force));
     directionText->setText("Direction du coup: " + QString::number(direction));
+    coupText->setText("Nombre de coup: " + QString::number(couptxt));
 
     nom_fichier_terrain = file_name;
     QString terrainPNG = "../Terrain/" + nom_fichier_terrain + ".png";
@@ -323,18 +334,24 @@ terrain, la balle, ainsi que la cible qui permet de viser.
     if (0 < numeroTrou && numeroTrou < 5)
     {
         green->play();
+        desert->stop();
+        snow->stop();
     }
     else if (4 < numeroTrou && numeroTrou < 7)
     {
         desert->play();
+        snow->stop();
+        green->stop();
     }
     else if(6 < numeroTrou && numeroTrou < 9)
     {
         snow->play();
+        desert->stop();
+        green->stop();
     }
 
     qApp->processEvents();
-    jouer();
+    //jouer();
 }
 
 QString FenetreTerrain::get_file_name()
@@ -474,8 +491,8 @@ Gère les entrées de l'usager avec manette ou clavier.
             {
                 if (couptxt == 1)
                 {
-                    finalCoupText->move(175, 50);
-                    finalCoupText->setText("BRAVO!! Trou en " + QString::number(couptxt) + " !!");  
+                    finalCoupText->move(200, 50);
+                    finalCoupText->setText("BRAVO!! Trou en " + QString::number(couptxt) + "!!");  
                 }
                 else
                 {
@@ -491,7 +508,10 @@ Gère les entrées de l'usager avec manette ou clavier.
         }
         else
         {
-            connard->play();
+            if (couptxt % 4 == 0)
+            {
+                connard->play();
+            }
         }
 
     case Qt::Key_A:
