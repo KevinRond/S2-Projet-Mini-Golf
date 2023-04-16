@@ -61,6 +61,11 @@ MenuScoreboard::MenuScoreboard(QWidget* parent)
     //Action du bouton
     connect(b_retour, &QPushButton::clicked, this, &MenuScoreboard::action_retour);
 
+    back = new QMediaPlayer;
+    QString backFile = "../Son/Back.mp3";
+    back->setMedia(QUrl::fromLocalFile(backFile));
+    back->setVolume(100);
+
 }
 
 MenuScoreboard::~MenuScoreboard()
@@ -74,6 +79,7 @@ void MenuScoreboard::keyPressEvent(QKeyEvent* event)
 {
     if (event->key() == Qt::Key_Backspace) {
         // Handle enter key press
+        back->play();
         emit b_retour_appuyer();
     }
 }
@@ -85,6 +91,7 @@ void MenuScoreboard::action_retour()
 :return:
 *************************************/
 {
+    back->play();
     emit b_retour_appuyer();
 }
 

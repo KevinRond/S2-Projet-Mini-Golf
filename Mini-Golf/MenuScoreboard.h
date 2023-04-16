@@ -29,6 +29,7 @@ action_retour(): Émet le signal b_retour_appuyer.
 #include <QLabel>
 #include <QGraphicsDropShadowEffect>
 #include <QKeyEvent>
+#include <QMediaPlayer>
 
 class MenuScoreboard : public QMainWindow
 {
@@ -51,5 +52,6 @@ private:
     QTextEdit* texteTitre;
     QPushButton* b_retour;
     QGraphicsDropShadowEffect* effect;
+    QMediaPlayer* back;
 
 };

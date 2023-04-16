@@ -62,6 +62,7 @@ keyPressEvent(QKeyEvent* event): Gère les entrées de l'usager avec manette ou cl
 #include <QDialog>
 #include <QGraphicsDropShadowEffect>
 #include <QMediaPlayer>
+#include <random>
 
 #include "Manette.h"
 
@@ -118,6 +119,14 @@ private:
     QMediaPlayer* snow;
     QMediaPlayer* green;
     QMediaPlayer* birdie;
+    QMediaPlayer* boo;
+    QMediaPlayer* bruh;
+    QMediaPlayer* pourris;
+    QMediaPlayer* crowd;
+    QMediaPlayer* legitness;
+    QMediaPlayer* damn;
+    QMediaPlayer* coupSon;
+
 
     double xPoint;
     double yPoint;

@@ -192,11 +192,12 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     fin->setFixedSize(640, 360);
     fin->setStyleSheet("QDialog { background-image: url(../Graphic/NextLevel1.png); }");
 
-    finCoupText = new QLabel("Nombre de coup: " + QString::number(couptxt), reussi);
+    finCoupText = new QLabel("Nombre de coup: " + QString::number(couptxt), fin);
     finCoupText->move(125, 50);
     finCoupText->setFixedSize(400, 50);
 
-    finalCoupText->setStyleSheet(style_etiquette);
+    finCoupText->setStyleSheet(style_etiquette);
+    finalCoupText->setGraphicsEffect(effect_etiquette_finalCoup);
 
 
 
@@ -251,6 +252,41 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     QString birdieFile = "../Son/Birdie.wav";
     birdie->setMedia(QUrl::fromLocalFile(birdieFile));
     birdie->setVolume(100);
+
+    boo = new QMediaPlayer;
+    QString booFile = "../Son/Boo.wav";
+    boo->setMedia(QUrl::fromLocalFile(booFile));
+    boo->setVolume(100);
+
+    bruh = new QMediaPlayer;
+    QString bruhFile = "../Son/bruh.wav";
+    bruh->setMedia(QUrl::fromLocalFile(bruhFile));
+    bruh->setVolume(100);
+
+    pourris = new QMediaPlayer;
+    QString pourrisFile = "../Son/Pourris.wav";
+    pourris->setMedia(QUrl::fromLocalFile(pourrisFile));
+    pourris->setVolume(100);
+
+    crowd = new QMediaPlayer;
+    QString crowdFile = "../Son/crowd.wav";
+    crowd->setMedia(QUrl::fromLocalFile(crowdFile));
+    crowd->setVolume(100);
+
+    damn = new QMediaPlayer;
+    QString damnFile = "../Son/Damn.wav";
+    damn->setMedia(QUrl::fromLocalFile(damnFile));
+    damn->setVolume(100);
+
+    legitness = new QMediaPlayer;
+    QString legitnessFile = "../Son/Legitness.wav";
+    legitness->setMedia(QUrl::fromLocalFile(legitnessFile));
+    legitness->setVolume(100);
+
+    coupSon = new QMediaPlayer;
+    QString coupFile = "../Son/coup.mp3";
+    coupSon->setMedia(QUrl::fromLocalFile(coupFile));
+    coupSon->setVolume(100);
 
     //manette
 
@@ -467,7 +503,7 @@ Gère les entrées de l'usager avec manette ou clavier.
         parcours = terrain1->CoupDonne(coup1);
         parcourVec = parcours.GetCoorXY();
         point->setVisible(false);
-
+        coupSon->play();
         for (indexParcours; indexParcours < parcourVec.size(); indexParcours++)
         {
             const auto& coord = parcourVec[indexParcours];
@@ -481,7 +517,31 @@ Gère les entrées de l'usager avec manette ou clavier.
         coupText->setText("Nombre de coup: " + QString::number(couptxt));
         if (terrain1->TerrainReussi())
         {
-            birdie->play();
+            std::random_device rd;
+            std::mt19937 gen(rd());
+            std::uniform_int_distribution<int> distribution(1, 4);
+
+            int trouRd = distribution(gen);
+            if (trouRd == 1)
+            {
+                birdie->play();
+            }
+
+            else if (trouRd == 2)
+            {
+                crowd->play();
+            }
+
+            else if (trouRd == 3)
+            {
+                damn->play();
+            }
+
+            else
+            {
+                legitness->play();
+            }
+            
             QString numtrou = nom_fichier_terrain.right(1)[0];
             int numeroTrou = numtrou.toInt();
             balle->hide();
@@ -496,21 +556,57 @@ Gère les entrées de l'usager avec manette ou clavier.
                 }
                 else
                 {
+                    finalCoupText->move(125, 50);
                     finalCoupText->setText("BRAVO!! Trou reussi en " + QString::number(couptxt) + " coups !!");
                 }
                 reussi->exec();
             }
             else
             {
+                if (couptxt == 1)
+                {
+                    finCoupText->move(200, 50);
+                    finCoupText->setText("BRAVO!! Trou en " + QString::number(couptxt) + "!!");
+                }
+                else
+                {
+                    finCoupText->move(125, 50);
+                    finCoupText->setText("BRAVO!! Trou reussi en " + QString::number(couptxt) + " coups !!");
+                }
                 fin->exec();
             }
             
         }
         else
         {
-            if (couptxt % 4 == 0)
+            std::random_device rd;
+            std::mt19937 gen(rd());
+            std::uniform_int_distribution<int> distribution(1, 4);
+
+            int sonRd = distribution(gen);
+
+            if (couptxt % 3 == 0)
             {
-                connard->play();
+                if (sonRd == 1)
+                {
+                    connard->play();
+                }
+
+                else if (sonRd == 2)
+                {
+                    boo->play();
+                }
+
+                else if (sonRd == 3)
+                {
+                    pourris->play();
+                }
+
+                else
+                {
+                    bruh->play();
+                }
+                
             }
         }
 
