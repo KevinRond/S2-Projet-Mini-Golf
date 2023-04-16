@@ -28,11 +28,13 @@ Interface::Interface(QWidget* parent)
     //Actions de l'ecran d'accueil
     connect(titleScreen, &TitleScreen::buttonClicked, [this]() {
         listeMenus->setCurrentWidget(listeMenus->widget(1));
+        //menuPrincipal->launch_Manette();
         });
 
     //Actions du menu principal
     connect(menuPrincipal, &MainMenu::b_jouer_appuyer, [this]() {
         listeMenus->setCurrentWidget(listeMenus->widget(2));
+        //menuSelectionTerrain->launch_Manette();
         });
     connect(menuPrincipal, &MainMenu::b_scoreboard_appuyer, [this]() {
         listeMenus->setCurrentWidget(listeMenus->widget(3));

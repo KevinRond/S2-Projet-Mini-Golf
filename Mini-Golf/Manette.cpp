@@ -215,6 +215,9 @@ int Manette::getCas()
 void Manette::setBouton()
 {
     button1 = false;
+    /*button2 = false;
+    button3 = false;
+    button4 = false;*/
 }
 int Manette::getAfficher()
 {
@@ -295,7 +298,7 @@ double  Manette::GetPuissanceElec(Coup* coup)
         }
         std::cout << coup->Get_Amplitude() << std::endl;
 
-        if (coup->Get_Amplitude() > 3)
+        if (coup->Get_Amplitude() > 1.5)
             break;
     }
     return coup->Get_Amplitude();

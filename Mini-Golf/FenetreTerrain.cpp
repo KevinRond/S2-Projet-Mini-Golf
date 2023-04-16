@@ -134,7 +134,7 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
 
 
     //creation de la mannette
-    manette = new Manette("com3");
+    //manette = new Manette("com7");
 
     point = new QLabel(this);
     QPixmap fleche("../Graphic/crosshair.png");
@@ -142,6 +142,11 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     xPoint = fleche.width();
     yPoint = fleche.height();
 
+    coup = new Coup(0, 0);
+
+    /*son = new QMediaPlayer;
+    QString sontxt = "son.mp3";
+    son->setMedia(QUrl::fromLocalFile(sontxt));*/
 
 }
 
@@ -153,6 +158,7 @@ FenetreTerrain::~FenetreTerrain()
     //delete texteTitre;
     delete b_retour;
     delete balle;
+    delete coup;
     delete forceText;
     delete directionText;
     delete fin;
@@ -167,8 +173,8 @@ void FenetreTerrain::action_retour()
 
 void FenetreTerrain::set_file_name(QString file_name)
 {
-    direction = 1;
-    force = 1;
+    direction = 0;
+    force = 0;
     indexParcours = 0;
     // Update the strength label
     forceText->setText("Force du coup: " + QString::number(force));
@@ -183,9 +189,9 @@ void FenetreTerrain::set_file_name(QString file_name)
     terrain1 = new Terrain;
     terrain1->OpenTerrain(terrainTXT);
     terrain1->Display();
-    double Ox = terrain1->getOx()*100 - xTrans;
-    double Oy = 720 - terrain1->getOy()*100- yTrans;
-    balle->setGeometry(Ox, Oy, xTrans*2, yTrans*2);
+    double Ox = terrain1->getOx() * 100 - xTrans;
+    double Oy = 720 - terrain1->getOy() * 100 - yTrans;
+    balle->setGeometry(Ox, Oy, xTrans * 2, yTrans * 2);
     balle->show();
 
     double arrowX = calculateX(Ox);
@@ -194,6 +200,7 @@ void FenetreTerrain::set_file_name(QString file_name)
     point->show();
 
     qApp->processEvents();
+    /*son->play();*/
     jouer();
 }
 
@@ -243,11 +250,10 @@ void FenetreTerrain::action_fin()
 
 void FenetreTerrain::jouer()
 {
+    Manette* manette = new Manette("com7");
     while (terrain1->TerrainReussi() == false)
     {
         std::vector<std::pair<double, double>> parcourVec;
-        Coup* coup1 = new Coup(direction, force);
-        Coup* coup = new Coup(90, 1);
         Parcours parcours;
 
         double Ox = terrain1->getOx() * 100 - xTrans;
@@ -278,7 +284,9 @@ void FenetreTerrain::jouer()
             Sleep(10);
         }
 
-        manette->GetPuissanceElec(coup);
+        force = manette->GetPuissanceElec(coup);
+        forceText->setText("Force du coup: " + QString::number(force));
+        //qApp->processEvents();
         //manette->SequenceCoup(coup);
         parcours = terrain1->CoupDonne(coup);
         parcourVec = parcours.GetCoorXY();
@@ -307,13 +315,13 @@ void FenetreTerrain::jouer()
     {
         fin->exec();
     }
+    delete manette;
 }
 
 void FenetreTerrain::keyPressEvent(QKeyEvent* event)
 {
     std::vector<std::pair<double, double>> parcourVec;
-    Coup* coup1 = new Coup(-direction, force);
-    Coup *coup = new Coup(90, 1);
+    
     Parcours parcours;
 
     double Ox = terrain1->getOx() * 100 - xTrans;

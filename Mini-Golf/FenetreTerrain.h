@@ -22,6 +22,8 @@
 
 #include "Manette.h"
 
+#define M_PI 3.14159265
+
 class FenetreTerrain : public QMainWindow
 {
     Q_OBJECT
@@ -61,7 +63,6 @@ private:
     QGraphicsDropShadowEffect* effect_etiquette_force;
     QGraphicsDropShadowEffect* effect_etiquette_direction;
 
-
     double xPoint;
     double yPoint;
     double xTrans;
@@ -70,6 +71,7 @@ private:
     double force = 1;
     int indexParcours;
     Manette* manette;
+    Coup* coup;
     bool button1;
 
 protected:

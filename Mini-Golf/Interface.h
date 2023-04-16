@@ -22,6 +22,7 @@
 #include "MenuScoreboard.h"
 #include "MenuReglements.h"
 #include "FenetreTerrain.h"
+#include "Manette.h"
 
 
 class Interface : public QMainWindow
@@ -31,6 +32,7 @@ class Interface : public QMainWindow
 public:
     Interface(QWidget* parent = nullptr);
     ~Interface();
+
 
 private slots:
     

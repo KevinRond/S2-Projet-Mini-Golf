@@ -13,6 +13,8 @@
 #include <QStackedWidget>
 #include <QGraphicsDropShadowEffect>
 
+//#include "Manette.h"
+
 
 class MainMenu : public QMainWindow
 {
@@ -21,6 +23,7 @@ class MainMenu : public QMainWindow
 public:
     MainMenu(QWidget* parent = nullptr);
     ~MainMenu();
+    //void launch_Manette();
 
 signals:
     void b_jouer_appuyer();

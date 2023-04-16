@@ -47,4 +47,4 @@ INCLUDEPATH += ../Mini-Golf
 INCLUDEPATH += ../Mini-Golf/include
 INCLUDEPATH += ../Mini-Golf/Terrain
 INCLUDEPATH += ../Mini-Golf/include/serial
-QT          += widgets
+QT	+= widgets 
