@@ -101,13 +101,29 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
     finalCoupText->setFixedSize(400, 50);
     QGraphicsDropShadowEffect* effect_etiquette_finalCoup;
 
+    fin = new QDialog(this);
+    fin->setFixedSize(640, 360);
+    fin->setStyleSheet("QDialog { background-image: url(../Graphic/NextLevel1.png); }");
+
+    finiFinalText = new QLabel("Nombre de coup: " + QString::number(couptxt), fin);
+    finiFinalText->move(125, 50);
+    finiFinalText->setFixedSize(400, 50);
+    QGraphicsDropShadowEffect* effect_etiquette_finiFinal;
+
     finalCoupText->setStyleSheet(style_etiquette);
+    finiFinalText->setStyleSheet(style_etiquette);
 
     effect_etiquette_finalCoup = new QGraphicsDropShadowEffect;
     effect_etiquette_finalCoup->setBlurRadius(7);
     effect_etiquette_finalCoup->setColor(Qt::black);
     effect_etiquette_finalCoup->setOffset(1, 1);
     finalCoupText->setGraphicsEffect(effect_etiquette_finalCoup);
+
+    effect_etiquette_finiFinal = new QGraphicsDropShadowEffect;
+    effect_etiquette_finiFinal->setBlurRadius(7);
+    effect_etiquette_finiFinal->setColor(Qt::black);
+    effect_etiquette_finiFinal->setOffset(1, 1);
+    finiFinalText->setGraphicsEffect(effect_etiquette_finiFinal);
 
 
     QPushButton* b_retourTrou = new QPushButton("Retour", reussi);
@@ -140,9 +156,7 @@ FenetreTerrain::FenetreTerrain(QWidget* parent)
 
     //Creation du widget lorsque tu as fini
 
-    fin = new QDialog(this);
-    fin->setFixedSize(640, 360);
-    fin->setStyleSheet("QDialog { background-image: url(../Graphic/NextLevel1.png); }");
+    
 
     finCoupText = new QLabel("Nombre de coup: " + QString::number(couptxt), fin);
     finCoupText->move(125, 50);
@@ -291,6 +305,7 @@ void FenetreTerrain::jouer()
         
         Parcours parcours;
 
+
         double Ox = terrain1->getOx() * 100 - xTrans;
         double Oy = 720 - terrain1->getOy() * 100 - yTrans;
         double arrowX = calculateX(Ox);
@@ -366,6 +381,15 @@ void FenetreTerrain::jouer()
    
     else
     {
+        if (couptxt == 1)
+        {
+            finiFinalText->move(200, 50);
+            finiFinalText->setText("BRAVO!! Trou en " + QString::number(couptxt) + "!!");
+        }
+        else
+        {
+            finiFinalText->setText("BRAVO!! Trou reussi en " + QString::number(couptxt) + " coups !!");
+        }
         fin->exec();
     }
     //delete manette;

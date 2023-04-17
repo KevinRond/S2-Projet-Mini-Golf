@@ -63,6 +63,7 @@ private:
     QDialog* reussi;
     QDialog* fin;
     QLabel* point;
+    QLabel* finiFinalText;
 
     QGraphicsDropShadowEffect* effect_etiquette_force;
     QGraphicsDropShadowEffect* effect_etiquette_direction;
